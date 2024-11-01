@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Service\YahooWebScrapService;
 use App\Entity\Security;
 use App\Entity\CandleStick;
+use DateTime;
 use Symfony\Component\Dotenv\Dotenv;
 
 
@@ -46,7 +47,15 @@ class FetchDataCommand extends Command
         $stocksTickers = file($this->stocksFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
         $cryptosTicker = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
 
-        foreach ($stocksTickers as $ticker) {
+        $this->updateSecuritiesData($stocksTickers, $output);
+
+        return Command::SUCCESS;    
+    }
+
+    public function updateSecuritiesData(array $securityTickers, OutputInterface $output, bool $cryptos=false)
+    {
+        $index = 0;
+        foreach ($securityTickers as $ticker) {
             $testSecurity = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => strtoupper($ticker)]);
             if($testSecurity != null)
             {
@@ -54,14 +63,19 @@ class FetchDataCommand extends Command
                 continue;
             }
 
+            $output->writeln(sprintf('Processing: %s', $ticker));
             
+
             $data = $this->yahooWebScrapService->getStockDataByDatesByOlderDates($ticker, 
             self::OLDER_DATE_START, 
-            false);
+            $cryptos);
 
             $security = new Security();
             $security->setTicker($ticker);
-            $security->setIsCrypto(false);
+            $security->setIsCrypto($cryptos);
+
+            if(!$data['Open Price'][0])
+                $output->writeln(sprintf("Something is wrong with %s", $ticker));
 
             for ($i=0; $i < count($data['Volume']); $i++) { 
                 $candleStick = new CandleStick();
@@ -70,13 +84,22 @@ class FetchDataCommand extends Command
                 $candleStick->setHighestPrice($data['High Price'][$i]);
                 $candleStick->setLowestPrice($data['Low Price'][$i]);
                 $candleStick->setClosePrice($data['Close Price'][$i]);
-                // $candleStick->setDate()
+                $candleStick->setDate(new DateTime(($data['Dates'][$i])));
 
+                $security->addCandleStick($candleStick);
+                $this->entityManager->persist($candleStick);
             }
 
-            sleep(8);
-        }
+            $this->entityManager->persist($security);
 
-        return Command::SUCCESS;    
+            $index++;
+            if($index % 20 == 0)
+                $this->entityManager->flush();
+
+            sleep(3);
+
+        }
+        $this->entityManager->flush();
+
     }
 }

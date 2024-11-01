@@ -71,7 +71,7 @@ class MathService
         $dateTime = new \DateTime($date);
         while(true)
         {
-            if($currentDate < $dateTime)
+            if($currentDate <= $dateTime)
                 return $dates;
 
             // Check if the modified date is Saturday or Sunday

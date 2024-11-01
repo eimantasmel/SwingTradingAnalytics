@@ -31,20 +31,20 @@ class YahooWebScrapService
      */
     public function getStockData(string $ticker): array
     {
-        $url = $this->buildProfileUrl($ticker);
-        $html = $this->getContentFromYahoo($url);
+        $url = $this->buildProfileUrl($ticker); 
+        $html = $this->getContentFromUrl($url);
 
         return $this->parseStockData($html);
     }
 
-    private function getStockDataByDates(string $ticker, array $dates, string $endDate = null): array
+    private function getStockDataByDates(string $ticker, array $dates): array
     {
         $url = $this->buildHistoryUrl($ticker, $dates[0]);
-        $html = $this->getContentFromYahoo($url);
-    
+        $html = $this->getContentFromUrl($url);
+
         // Parse HTML with DOMDocument and XPath
         $xpath = $this->createXPathFromHtml($html);
-    
+
         $data = [];
 
         $data["Dates"] = $dates;
@@ -83,7 +83,9 @@ class YahooWebScrapService
     private function createXPathFromHtml(string $html): DOMXPath
     {
         $dom = new DOMDocument();
+        libxml_use_internal_errors(true); // Suppress HTML parsing warnings
         @$dom->loadHTML($html);  // Suppress warnings for invalid HTML
+        libxml_clear_errors();
         return new DOMXPath($dom);
     }
     
@@ -93,6 +95,7 @@ class YahooWebScrapService
         if ($row !== null 
                 && !in_array('Dividend', explode(' ', $row->nodeValue))
                 && !in_array('Splits', explode(' ', $row->nodeValue))) {
+
             return $this->extractColumnFromRow($row, $column);
         }
         return $this->getClosestNextPrice($xpath, $date, $column);
@@ -101,7 +104,11 @@ class YahooWebScrapService
     private function findRowByDate(DOMXPath $xpath, string $date): ?DOMNode
     {
         $query = sprintf("//tr[td[1][contains(text(), '%s')]]", $date);
+        // $query = sprintf("//tr[td[normalize-space(text())='%s']]", $date);
+
         $row = $xpath->query($query);
+
+
         return $row->length > 0 ? $row->item(0) : null;
     }
     
@@ -151,15 +158,50 @@ class YahooWebScrapService
         return sprintf("%s/%s/history/?p=%s&period1=%s&period2=%s", self::YAHOO_URL, $ticker, $ticker, strtotime($date), $endDate);
     }
 
+
+    // private function getContentFromUrl(string $url): string
+    // {
+    //     // Define the URL for the Express server
+    //     $url = $_ENV['EXPRESS_SERVER_URL'] . '?url=' . urlencode($url);
+
+    //     // Initialize cURL session
+    //     $ch = curl_init($url);
+
+    //     // Set cURL options
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
+    //     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects if any
+
+    //     // Execute the cURL request
+    //     $response = curl_exec($ch);
+
+    //     // Close cURL session
+    //     curl_close($ch);
+
+    //     // Return the response (optional)
+    //     return $response;
+    // }
     /**
      * Fetch the content from the Yahoo Finance page.
      */
-    private function getContentFromYahoo(string $url): string
+    private function getContentFromUrl(string $url): string
     {
+        $path = dirname(__DIR__, 2). '\cookies\exported-cookies.json';
+        $cookies = json_decode(file_get_contents($path), true);
+
+        // Prepare cookie string for cURL
+        $cookieString = '';
+        foreach ($cookies as $cookie) {
+            $cookieString .= $cookie['name'] . '=' . $cookie['value'] . '; ';
+        }
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+            "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
+            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "Accept-Language: en-US,en;q=0.5",
+            "Connection: keep-alive",
+            "Cookie: $cookieString" // Add cookies to the request
         ]);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 

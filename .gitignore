@@ -22,6 +22,9 @@
 ###< symfony/phpunit-bridge ###
 
 /notes.txt
+/problems.txt
+/gratitudes.txt
+/cookies
 
 # Created by https://www.toptal.com/developers/gitignore/api/symfony,phpstorm,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=symfony,phpstorm,visualstudiocode
