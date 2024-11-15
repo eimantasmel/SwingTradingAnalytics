@@ -17,16 +17,16 @@ class CandleStick
     #[ORM\Column(type: 'date', nullable: false)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(name: 'open_price', type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(name: 'open_price', type: 'decimal', precision: 10, scale: 6, nullable: true)]
     private ?string $openPrice = null;
 
-    #[ORM\Column(name: 'highest_price', type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(name: 'highest_price', type: 'decimal', precision: 10, scale: 6, nullable: true)]
     private ?string $highestPrice = null;
 
-    #[ORM\Column(name: 'lowest_price', type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(name: 'lowest_price', type: 'decimal', precision: 10, scale: 6, nullable: true)]
     private ?string $lowestPrice = null;
 
-    #[ORM\Column(name: 'close_price', type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(name: 'close_price', type: 'decimal', precision: 10, scale: 6, nullable: true)]
     private ?string $closePrice = null;
 
     #[ORM\Column(name: 'volume', type: 'decimal', precision: 14, scale: 2, nullable: true)]

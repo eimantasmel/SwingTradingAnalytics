@@ -21,12 +21,14 @@ use Symfony\Component\Dotenv\Dotenv;
 class FetchDataCommand extends Command
 {
     private const OLDER_DATE_START = 2020;
+    private const MIN_VOLUME = 300_000;
 
 
     private $stocksFilePath;
     private $cryptosFilePath;
     private $yahooWebScrapService;
     private $entityManager;
+    private $forexFilePath;
 
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
@@ -35,7 +37,8 @@ class FetchDataCommand extends Command
         parent::__construct();
         $this->yahooWebScrapService = $yahooWebScrapService;
         $this->stocksFilePath = dirname(__DIR__, 2) . '/data/stocks.txt';      
-        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/cryptos.txt';      
+        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/cryptos.txt';     
+        $this->forexFilePath = dirname(__DIR__, 2) . '/data/forex.txt';      
         $this->entityManager = $entityManager;
     }
 
@@ -45,14 +48,17 @@ class FetchDataCommand extends Command
         $dotenv->load(dirname(__DIR__, 2).'/.env');
 
         $stocksTickers = file($this->stocksFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
-        $cryptosTicker = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
-
+        $cryptosTickers = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  
+        $forexTickers = file($this->forexFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
+ 
         $this->updateSecuritiesData($stocksTickers, $output);
+        $this->updateSecuritiesData($cryptosTickers, $output, true, false);
+        $this->updateSecuritiesData($forexTickers, $output, false, true);
 
         return Command::SUCCESS;    
     }
 
-    public function updateSecuritiesData(array $securityTickers, OutputInterface $output, bool $cryptos=false)
+    public function updateSecuritiesData(array $securityTickers, OutputInterface $output, bool $cryptos=false, bool $forex=false)
     {
         $index = 0;
         foreach ($securityTickers as $ticker) {
@@ -68,14 +74,25 @@ class FetchDataCommand extends Command
 
             $data = $this->yahooWebScrapService->getStockDataByDatesByOlderDates($ticker, 
             self::OLDER_DATE_START, 
-            $cryptos);
+            $cryptos, $forex);
 
             $security = new Security();
             $security->setTicker($ticker);
             $security->setIsCrypto($cryptos);
+            $security->setIsForex($forex);
+
 
             if(!$data['Open Price'][0])
+            {
                 $output->writeln(sprintf("Something is wrong with %s", $ticker));
+                continue;
+            }
+
+            if($data['Volume'][0] < self::MIN_VOLUME && !$forex)
+            {
+                $output->writeln(sprintf("Too low volume of %s, the volume only: %s", $ticker, $data['Volume'][0]));
+                continue;
+            }
 
             for ($i=0; $i < count($data['Volume']); $i++) { 
                 $candleStick = new CandleStick();
@@ -93,10 +110,13 @@ class FetchDataCommand extends Command
             $this->entityManager->persist($security);
 
             $index++;
-            if($index % 20 == 0)
+            if($index % 5 == 0)
+            {
+                $output->writeln("Flushing to the database...");
                 $this->entityManager->flush();
+            }
 
-            sleep(3);
+            // sleep(3);
 
         }
         $this->entityManager->flush();

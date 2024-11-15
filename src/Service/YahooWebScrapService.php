@@ -37,9 +37,9 @@ class YahooWebScrapService
         return $this->parseStockData($html);
     }
 
-    private function getStockDataByDates(string $ticker, array $dates): array
+    private function getStockDataByDates(string $ticker, array $dates, bool $isCrypto = false, bool $isForex = false): array
     {
-        $url = $this->buildHistoryUrl($ticker, $dates[0]);
+        $url = $this->buildHistoryUrl($ticker, $dates[0], $isCrypto, $isForex);
         $html = $this->getContentFromUrl($url);
 
         // Parse HTML with DOMDocument and XPath
@@ -72,10 +72,10 @@ class YahooWebScrapService
         return $data;
     }
 
-    public function getStockDataByDatesByOlderDates($ticker, $startYear, $isCrypto = false)
+    public function getStockDataByDatesByOlderDates($ticker, $startYear, $isCrypto = false, $isForex = false)
     {
         $dates = $this->mathService->getDates($startYear, $isCrypto);
-        $data = $this->getStockDataByDates($ticker, $dates);
+        $data = $this->getStockDataByDates($ticker, $dates, $isCrypto, $isForex);
 
         return $data;
     }
@@ -126,6 +126,8 @@ class YahooWebScrapService
     
     private function extractColumnFromRow(DOMNode $row, int $column): float
     {
+        if(!isset(explode(' ', $row->nodeValue)[$column]))
+            return 0;
         $priceOfStock = explode(' ', $row->nodeValue)[$column]; // Adjust this if necessary
         return  (float) str_replace(',', '', $priceOfStock);
     }
@@ -149,37 +151,26 @@ class YahooWebScrapService
     /**
      * Build the historical data URL for the given stock ticker.
      */
-    private function buildHistoryUrl(string $ticker, string $date, string $endDate = null): string
+    private function buildHistoryUrl(string $ticker, 
+                                     string $date,
+                                     bool $isCrypto = false, 
+                                     bool $isForex = false, 
+                                     string $endDate = null): string
     {
         if(!$endDate)
             $endDate = time();
         else
             $endDate = strtotime($endDate);
+
+        if($isCrypto)
+            $ticker = $ticker . '-USD';
+
+        if($isForex)
+            return sprintf("%s/%s%%3DX/history?p=%s&period1=%s&period2=%s", self::YAHOO_URL, $ticker, $ticker, strtotime($date), $endDate);
+
         return sprintf("%s/%s/history/?p=%s&period1=%s&period2=%s", self::YAHOO_URL, $ticker, $ticker, strtotime($date), $endDate);
     }
 
-
-    // private function getContentFromUrl(string $url): string
-    // {
-    //     // Define the URL for the Express server
-    //     $url = $_ENV['EXPRESS_SERVER_URL'] . '?url=' . urlencode($url);
-
-    //     // Initialize cURL session
-    //     $ch = curl_init($url);
-
-    //     // Set cURL options
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
-    //     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects if any
-
-    //     // Execute the cURL request
-    //     $response = curl_exec($ch);
-
-    //     // Close cURL session
-    //     curl_close($ch);
-
-    //     // Return the response (optional)
-    //     return $response;
-    // }
     /**
      * Fetch the content from the Yahoo Finance page.
      */

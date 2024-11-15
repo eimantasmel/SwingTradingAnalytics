@@ -6,6 +6,7 @@ use App\Repository\SecurityRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: SecurityRepository::class)]
 #[ORM\Table(name: 'Securities')]
@@ -22,10 +23,13 @@ class Security
     #[ORM\Column(name: 'is_crypto', type: 'boolean', nullable: true)]
     private ?string $isCrypto = null;
 
+    #[ORM\Column(name: 'is_forex', type: 'boolean', nullable: true)]
+    private ?string $isForex = null;
+
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'stock', targetEntity: CandleStick::class, cascade: ['remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'security', targetEntity: CandleStick::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $candleSticks;
 
     
@@ -60,6 +64,18 @@ class Security
     public function setIsCrypto(?bool $isCrypto): self
     {
         $this->isCrypto = $isCrypto;
+        return $this;
+    }
+
+    // Getter and Setter for isCrypto
+    public function getIsForex(): ?bool
+    {
+        return $this->isForex;
+    }
+
+    public function setIsForex(?bool $isForex): self
+    {
+        $this->isForex = $isForex;
         return $this;
     }
 
@@ -99,5 +115,35 @@ class Security
             $candleStick->setSecurity(null);
         }
         return $this;
+    }
+
+    public function getLastNCandleSticks(DateTime $tradingDate, $amountOfCandleSticks) : array
+    {
+        $lastCandleSticks = [];
+        $candleSticks = $this->getCandleSticks();
+        foreach ($candleSticks as $candleStick) {
+            $date = $candleStick->getDate();
+            if($tradingDate->diff($date)->days < $amountOfCandleSticks && $tradingDate >= $date)
+            {
+                $lastCandleSticks[] = $candleStick;
+            }
+        }
+
+        return $lastCandleSticks;
+    }
+
+    public function getNextNCandleSticks(DateTime $tradingDate, $amountOfCandleSticks) : array
+    {
+        $nextCandleSticks = [];
+        $candleSticks = $this->getCandleSticks();
+        foreach ($candleSticks as $candleStick) {
+            $date = $candleStick->getDate();
+            if($date->diff($tradingDate)->days < $amountOfCandleSticks && $date >= $tradingDate)
+            {
+                $nextCandleSticks[] = $candleStick;
+            }
+        }
+
+        return $nextCandleSticks;
     }
 }
