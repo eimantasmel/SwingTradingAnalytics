@@ -117,6 +117,27 @@ class Security
         return $this;
     }
 
+    /**
+     * This method return candlestick by date or the next following candlestick if specific date is not found
+     */
+    public function getCandleStickByDate(DateTime $searchDate) : ?CandleStick
+    {
+        $candleSticks = $this->getCandleSticks();
+        foreach ($candleSticks as $candleStick) {
+            $date = $candleStick->getDate();
+            if($searchDate->diff($date)->days == 0)
+            {
+                return $candleStick;
+            }
+
+            if($date > $searchDate)
+                return $candleStick;
+
+        }
+
+        return null;
+    }
+
     public function getLastNCandleSticks(DateTime $tradingDate, $amountOfCandleSticks) : array
     {
         $lastCandleSticks = [];
@@ -145,5 +166,29 @@ class Security
         }
 
         return $nextCandleSticks;
+    }
+
+    public function getFirstCandleStick()
+    {
+        $candleStick = $this->getCandleSticks()[0];
+        return $candleStick;
+    }
+
+    public function getLastCandleStick()
+    {
+        $candleSticks = $this->getCandleSticks();
+        return $candleSticks[count($candleSticks) - 1];
+    }
+
+    public function isDateExist($date) : bool
+    {
+        $candleSticks = $this->getCandleSticks();
+        foreach ($candleSticks as $candleStick) {
+            $candleStickDate = $candleStick->getDate();
+            if($candleStickDate->diff($date)->days == 0)
+                return true;
+        }
+        
+        return false;
     }
 }

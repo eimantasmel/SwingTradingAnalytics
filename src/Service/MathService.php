@@ -95,4 +95,8 @@ class MathService
 
         return $date;
     }
+
+    function randomFloat($min, $max) {
+        return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+    }
 }

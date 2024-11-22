@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use App\Service\MontecarloSimulationService;
 
+
 class MontecarloSimulationCommand extends Command
 {
     protected static $defaultName = 'app:montecarlo-simulation';
@@ -31,18 +32,19 @@ class MontecarloSimulationCommand extends Command
         $dotenv = new Dotenv();
         $dotenv->load(dirname(__DIR__, 2) . '/.env');
 
-        $simulationAmount = 1; 
-        $startDate = '2022-06-01';
-        $endDate =  '2022-06-28';
-        $initialTradingCapita = 1000;
+        //At the end long not trading gap because your capital is almost 0
+        $simulationAmount = 100; 
+        $startDate = '2024-01-01';
+        $endDate =  '2024-10-21';   
+        $initialTradingCapita = 1000;   
 
-        $results = $this
-                        ->montecarloSimulationService
-                        ->runMontecarloSimulation($output, 
-                                                    $startDate, 
-                                                    $endDate, 
-                                                    $simulationAmount, 
-                                                    $initialTradingCapita);
+        $this
+        ->montecarloSimulationService
+        ->runMontecarloSimulation($output, 
+                                    $startDate, 
+                                    $endDate, 
+                                    $simulationAmount, 
+                                    $initialTradingCapita);
 
 
         return Command::SUCCESS;

@@ -170,7 +170,6 @@ class YahooWebScrapService
 
         return sprintf("%s/%s/history/?p=%s&period1=%s&period2=%s", self::YAHOO_URL, $ticker, $ticker, strtotime($date), $endDate);
     }
-
     /**
      * Fetch the content from the Yahoo Finance page.
      */

@@ -15,10 +15,10 @@ use Symfony\Component\Dotenv\Dotenv;
 
 
 #[AsCommand(
-    name: 'app:fetch-data',
-    description: 'This cron will fetch  data about stocks and cryptos in the database',
+    name: 'app:update-data',
+    description: 'This cron will  update data about stocks and cryptos in the database',
 )]
-class FetchDataCommand extends Command
+class UpdateDataCommand extends Command
 {
     private const OLDER_DATE_START = 2020;
     private const MIN_VOLUME = 300_000;
@@ -35,10 +35,7 @@ class FetchDataCommand extends Command
                                 EntityManagerInterface $entityManager)
     {
         parent::__construct();
-        $this->yahooWebScrapService = $yahooWebScrapService;
-        $this->stocksFilePath = dirname(__DIR__, 2) . '/data/stocks.txt';      
-        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/cryptos.txt';     
-        $this->forexFilePath = dirname(__DIR__, 2) . '/data/forex.txt';      
+        $this->yahooWebScrapService = $yahooWebScrapService;   
         $this->entityManager = $entityManager;
     }
 
@@ -47,27 +44,23 @@ class FetchDataCommand extends Command
         $dotenv = new Dotenv();
         $dotenv->load(dirname(__DIR__, 2).'/.env');
 
-        $stocksTickers = file($this->stocksFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
-        $cryptosTickers = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  
-        $forexTickers = file($this->forexFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
  
-        $this->updateSecuritiesData($stocksTickers, $output);
-        $this->updateSecuritiesData($cryptosTickers, $output, true, false);
-        $this->updateSecuritiesData($forexTickers, $output, false, true);
+        $this->updateSecuritiesData($output);
 
         return Command::SUCCESS;    
     }
 
-    public function updateSecuritiesData(array $securityTickers, OutputInterface $output, bool $cryptos=false, bool $forex=false)
+    public function updateSecuritiesData(OutputInterface $output)
     {
+        $securities = $this->entityManager->getRepository(Security::class)->findAll();
         $index = 0;
-        foreach ($securityTickers as $ticker) {
-            $testSecurity = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => strtoupper($ticker)]);
-            if($testSecurity != null)
-            {
-                $output->writeln(sprintf('%s stock already exist in the database', $ticker));
-                continue;
-            }
+        foreach ($securities as $security) {
+            /** @var Security $security */
+            $forex = $security->getIsForex();
+            $cryptos = $security->getIsCrypto();
+
+            $ticker = $security->getTicker();
+
 
             $output->writeln(sprintf('Processing: %s', $ticker));
             
