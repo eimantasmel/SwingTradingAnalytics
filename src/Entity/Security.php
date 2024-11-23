@@ -93,11 +93,11 @@ class Security
 
     // Getter and Setter for candleSticks
     /**
-     * @return Collection<int, CandleStick>
      */
-    public function getCandleSticks(): Collection
+    public function getCandleSticks(): array
     {
-        return $this->candleSticks;
+        $sortedCandleSticks = $this->sortCandleSticksByDate($this->candleSticks);
+        return $sortedCandleSticks;
     }
 
     public function addCandleStick(CandleStick $candleStick): self
@@ -190,5 +190,16 @@ class Security
         }
         
         return false;
+    }
+
+    private function sortCandleSticksByDate(Collection $candlesticks) : array
+    {
+        // Sorting the collection
+        $candleSticksArray = $candlesticks->toArray();
+        uasort($candleSticksArray, function (CandleStick $a, CandleStick $b) {
+            return $a->getDate() <=> $b->getDate();
+        });
+
+        return $candleSticksArray;
     }
 }

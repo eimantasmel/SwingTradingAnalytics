@@ -37,9 +37,9 @@ class YahooWebScrapService
         return $this->parseStockData($html);
     }
 
-    private function getStockDataByDates(string $ticker, array $dates, bool $isCrypto = false, bool $isForex = false): array
+    private function getStockDataByDates(string $ticker, array $dates, bool $isCrypto = false, bool $isForex = false, ?string $endDate = null): array
     {
-        $url = $this->buildHistoryUrl($ticker, $dates[0], $isCrypto, $isForex);
+        $url = $this->buildHistoryUrl($ticker, $dates[0], $isCrypto, $isForex, $endDate);
         $html = $this->getContentFromUrl($url);
 
         // Parse HTML with DOMDocument and XPath
@@ -72,10 +72,17 @@ class YahooWebScrapService
         return $data;
     }
 
-    public function getStockDataByDatesByOlderDates($ticker, $startYear, $isCrypto = false, $isForex = false)
+    public function getStockDataByDatesByOlderDates($ticker, $startYear, $isCrypto = false, $isForex = false, $endDate = null)
     {
-        $dates = $this->mathService->getDates($startYear, $isCrypto);
-        $data = $this->getStockDataByDates($ticker, $dates, $isCrypto, $isForex);
+        $endYear = null;
+        if($endDate)
+        {
+            $endYear = $endDate->format("Y");
+            $endDate = $endDate->format("Y-m-d");
+        }
+
+        $dates = $this->mathService->getDates($startYear, $isCrypto, $endYear);
+        $data = $this->getStockDataByDates($ticker, $dates, $isCrypto, $isForex, $endDate);
 
         return $data;
     }

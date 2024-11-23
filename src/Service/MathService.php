@@ -63,14 +63,19 @@ class MathService
         return $array;
     }
 
-    public function getDates($startYear, $includeWeekends = true)
+    public function getDates($startYear, $includeWeekends = true, ?int $endYear = null)
     {
         $dates = [];
         $date = "{$startYear}-01-01";
         $currentDate = new \DateTime();
         $dateTime = new \DateTime($date);
+
+        $endDate = $endYear ? new \DateTime("{$endYear}-01-01") : null;
         while(true)
         {
+            if($endDate && $endDate <= $dateTime)
+                return $dates;
+
             if($currentDate <= $dateTime)
                 return $dates;
 

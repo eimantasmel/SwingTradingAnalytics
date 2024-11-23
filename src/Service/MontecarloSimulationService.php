@@ -89,6 +89,9 @@ class MontecarloSimulationService
         $meanOfMaxDrawdown = $this->mathService->calculateMean($results[BaseConstants::MAX_DRAWDOWN]);
         $standartDeviationOfMaxDrawdown = $this->mathService->calculateStandardDeviation($results[BaseConstants::MAX_DRAWDOWN]);
 
+        $meanOfHighestCapital = $this->mathService->calculateMean($results[BaseConstants::HIGHEST_CAPITAL]);
+        $standartDeviationOfHighestCapital = $this->mathService->calculateStandardDeviation($results[BaseConstants::HIGHEST_CAPITAL]);
+
 
         echo "\r\n";
         echo "Final trading capital is:" . $results[BaseConstants::FINAL_TRADING_CAPITAL][0]. "\r\n";
@@ -97,6 +100,9 @@ class MontecarloSimulationService
         echo "Win percentage is: " . $this->calculateWinPercentage($results[BaseConstants::TRADES_INFORMATION][0]) . "\r\n";
         echo "Average fee: " . $this->calculateAverageFeeTax($results[BaseConstants::TRADES_INFORMATION][0]). "\r\n";
         echo "Average risk reward: " . $this->calculateAverageRiskRewardRatio($results[BaseConstants::TRADES_INFORMATION][0]). "\r\n";
+
+        echo "\r\n";
+        echo "\r\n";
 
         echo "General Information about the all iterations:" . "\r\n";
         echo "Number of iterations: "  . $amountOfIterations . "\r\n";
@@ -116,9 +122,13 @@ class MontecarloSimulationService
 
         echo "\r\n";
 
-        echo "Average of max drawdown".  $meanOfMaxDrawdown . "\r\n";
-        echo "Standart Deviation of max drawdown".  $standartDeviationOfMaxDrawdown . "\r\n";
+        echo "Average of max drawdown: ".  $meanOfMaxDrawdown . "\r\n";
+        echo "Standart Deviation of max drawdown: ".  $standartDeviationOfMaxDrawdown . "\r\n";
 
+        echo "\r\n";
+
+        echo "Average of highest capital: ".  $meanOfHighestCapital . "\r\n";
+        echo "Standart Deviation of highest capital: ".  $standartDeviationOfHighestCapital . "\r\n";
 
         return $results;
     }

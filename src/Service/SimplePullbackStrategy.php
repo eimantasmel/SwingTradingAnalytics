@@ -10,7 +10,13 @@ use App\Service\Nasdaq2000IndexService;
 use App\Service\TechnicalIndicatorsService;
 
 use DateTime;
-
+/** Strategy at first glance looks profitable and quite a good one, still too early to judge
+ * tends to win about 75 percent of trades with 0.39 risk reward according 2024 montecarlo simulation
+ * how does it work: you enter the trade when close is above sma200 and the close below sma10
+ * exit the trade when the price drops 10 percent from the entry price 
+ * or your close is higher than sma10 and previous candle close is higher than current candle close.
+ * as you see it look for pretty liquid stocks 2_000_000. It might be challenging to find this on 2016 
+ */
 class SimplePullbackStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
@@ -47,7 +53,6 @@ class SimplePullbackStrategy implements SwingTradingStrategyInterface
      * it would be like date_of_start_trade, ticker, traded sum, stop loss, exit loss
      * @param Security[] $securities
      * return this data in the assoc array.
-       TODO: another thing let's say if you trade 3 trades per day then your trading capital percentage on each trade must be the same.
      */
     public function getSimulationData(string $startDate, 
                                       string $endDate,
@@ -206,6 +211,7 @@ class SimplePullbackStrategy implements SwingTradingStrategyInterface
 
             if($closePrice <= $stopLoss)
             {
+                // so that means that you should leave your position 30 minutes before market close let's say
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
@@ -215,6 +221,7 @@ class SimplePullbackStrategy implements SwingTradingStrategyInterface
 
             if($closePrice >= $sma10 && $closePrice < $previousCandleStick->getClosePrice() && $closePrice > $enterPrice)
             {
+                // so that means that you should leave your position 30 minutes before market close let's say
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
 

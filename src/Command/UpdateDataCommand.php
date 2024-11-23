@@ -20,15 +20,13 @@ use Symfony\Component\Dotenv\Dotenv;
 )]
 class UpdateDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2020;
+    private const OLDER_DATE_START = 2016;  // in order to update only prices to the most current it's better to choose the last year then it will bring data much quicker
     private const MIN_VOLUME = 300_000;
 
+    
 
-    private $stocksFilePath;
-    private $cryptosFilePath;
     private $yahooWebScrapService;
     private $entityManager;
-    private $forexFilePath;
 
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
@@ -53,11 +51,42 @@ class UpdateDataCommand extends Command
     public function updateSecuritiesData(OutputInterface $output)
     {
         $securities = $this->entityManager->getRepository(Security::class)->findAll();
+
+        $earliestDate = $this->getEarliestDate($securities[0]);
+
+        // Check if older date is newer than earliest date from the database then it will update till today's date
+        // In other case it will update only till the earliest date from database in order to do not waste additional resources of calling yahoo finance service.
+        if((int)$earliestDate->format('Y') < self::OLDER_DATE_START)
+        {
+            $earliestDate = null;
+        }
+
         $index = 0;
         foreach ($securities as $security) {
+
+            $olderDateYear = self::OLDER_DATE_START;
+            /** Check does the candlestick with the older date exist */
+            /** I need to check three dates because it might be a weekend and that check would be inconclusive in order to skip data which already exist in DB */
+            $dateToCheck1 = new DateTime("{$olderDateYear}-01-01");
+            $dateToCheck2 = new DateTime("{$olderDateYear}-01-02");
+            $dateToCheck3 = new DateTime("{$olderDateYear}-01-03");
+
+            if($earliestDate && 
+                (
+                    $security->isDateExist($dateToCheck1) ||
+                    $security->isDateExist($dateToCheck2) ||
+                    $security->isDateExist($dateToCheck3) 
+                )
+              )
+                continue;
             /** @var Security $security */
             $forex = $security->getIsForex();
             $cryptos = $security->getIsCrypto();
+
+            if(!$forex)
+                $forex = false;
+            if($cryptos)
+                $cryptos = false;
 
             $ticker = $security->getTicker();
 
@@ -67,13 +96,7 @@ class UpdateDataCommand extends Command
 
             $data = $this->yahooWebScrapService->getStockDataByDatesByOlderDates($ticker, 
             self::OLDER_DATE_START, 
-            $cryptos, $forex);
-
-            $security = new Security();
-            $security->setTicker($ticker);
-            $security->setIsCrypto($cryptos);
-            $security->setIsForex($forex);
-
+            $cryptos, $forex, $earliestDate);
 
             if(!$data['Open Price'][0])
             {
@@ -88,13 +111,18 @@ class UpdateDataCommand extends Command
             }
 
             for ($i=0; $i < count($data['Volume']); $i++) { 
+                $date = new DateTime(($data['Dates'][$i]));
+
+                if($security->isDateExist($date) || !$data['Open Price'][$i])
+                    continue;
+                
                 $candleStick = new CandleStick();
                 $candleStick->setVolume($data['Volume'][$i]);
                 $candleStick->setOpenPrice($data['Open Price'][$i]);
                 $candleStick->setHighestPrice($data['High Price'][$i]);
                 $candleStick->setLowestPrice($data['Low Price'][$i]);
                 $candleStick->setClosePrice($data['Close Price'][$i]);
-                $candleStick->setDate(new DateTime(($data['Dates'][$i])));
+                $candleStick->setDate($date);
 
                 $security->addCandleStick($candleStick);
                 $this->entityManager->persist($candleStick);
@@ -103,7 +131,7 @@ class UpdateDataCommand extends Command
             $this->entityManager->persist($security);
 
             $index++;
-            if($index % 5 == 0)
+            if($index % 3 == 0)
             {
                 $output->writeln("Flushing to the database...");
                 $this->entityManager->flush();
@@ -114,5 +142,13 @@ class UpdateDataCommand extends Command
         }
         $this->entityManager->flush();
 
+    }
+
+    private function getEarliestDate(Security $security)
+    {
+        $firstCandleStick = $security->getFirstCandleStick();
+        $date = $firstCandleStick->getDate();
+
+        return $date;
     }
 }
