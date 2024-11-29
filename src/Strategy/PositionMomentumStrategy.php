@@ -25,8 +25,8 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 210;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 400;
-    private const MIN_VOLUME = 100_000_000;
-    private const CAPITAL_RISK = 0.1;
+    private const MIN_VOLUME = 500_000_000;
+    private const CAPITAL_RISK = 1;
     private const MAX_AMOUNT_TRADES_PER_DAY = 3;
 
     private const MIN_PRICE = 1;
@@ -37,6 +37,8 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
     private array $results = [];
     private float $maxDrawdown;
     private float $highestCapitalValue;
+
+    private DateTime $lastTradeDay;
 
     private Nasdaq2000IndexService $nasdaq2000IndexService;
     private TechnicalIndicatorsService $technicalIndicatorsService;
@@ -74,6 +76,9 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
 
+        $this->lastTradeDay = $startDate;
+
+
         while($startDate < $endDate)
         {
             // It's skips weekends because in our database there's only few cryptos.
@@ -84,7 +89,10 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
             }
             $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital);
 
-            $randomDateInterval = (int)mt_rand(3, 9);
+            if($startDate < $this->lastTradeDay)
+                $startDate = $this->lastTradeDay;
+
+            $randomDateInterval = (int)mt_rand(5, 9);
             $startDate->modify("+{$randomDateInterval} days");
 
             if($tradingCapital > $this->highestCapitalValue)
@@ -126,7 +134,7 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
                 $enterPrice = $lastCandleStick->getClosePrice();      // I'm do this because 
 
                 $sharesAmount = $this->getSharesAmount($tradingCapital,  $enterPrice);
-                $tradeCapital = $tradingCapital;
+                $tradeCapital = $tradingCapital * self::CAPITAL_RISK;
 
                 $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
 
@@ -167,6 +175,9 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
     {
         $period = $security->getIsCrypto() ? 7 : 5;
         $weeklyCandleSticks = $this->technicalIndicatorsService->convertDailyCandlesIntoPeriod($lastCandleSticks, $period);
+        if(!$weeklyCandleSticks || count($weeklyCandleSticks) < $period + 1)
+            return false;
+        
         $prices = $this->extractClosingPricesFromCandlesticks($weeklyCandleSticks);
         $ema20 = $this->technicalIndicatorsService->calculateEMA($prices, 20);
 
@@ -239,6 +250,8 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
 
                 $riskReward = abs($enterPrice - $closePrice);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+
+                $this->lastTradeDay = $exitDate;
                 return ($closePrice - $spread) * $sharesAmount;
             }
         }
@@ -248,6 +261,8 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
         $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
         $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice);
         $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+
+        $this->lastTradeDay = $exitDate;
 
         return $candleStick->getClosePrice() * $sharesAmount;
     }

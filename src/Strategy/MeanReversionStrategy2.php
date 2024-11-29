@@ -28,7 +28,7 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
     private const MIN_VOLUME = 2_000_000;
     private const CAPITAL_RISK = 0.1;
-    private const MAX_AMOUNT_TRADES_PER_DAY = 3;
+    private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
 
     private const MIN_PRICE = 1;
@@ -84,7 +84,7 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
             }
             $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital);
 
-            $randomDateInterval = (int)mt_rand(5, 9);
+            $randomDateInterval = (int)mt_rand(3, 7);
             $startDate->modify("+{$randomDateInterval} days");
 
             if($tradingCapital > $this->highestCapitalValue)
@@ -111,7 +111,6 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
     {
         shuffle($securities);
         $tradesCounter = 0;
-        $specificDayTradingCapital = $tradingCapital;
         foreach ($securities as $security) {
             // skips nasdaq2000 overall market security
             if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER)
@@ -212,8 +211,8 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
 
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
         $previousCandleStick = null;
-        $takeProfit = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
         $firstTargetReach = false;
+        $initialPrice = $enterPrice;
         foreach ($nextCandleSticks as $candleStick) {
             if($candleStick->getDate() == $tradingDate)
             {
@@ -224,18 +223,14 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
             /** @var CandleStick $candleStick */
             $closePrice = $candleStick->getClosePrice();
             $exitDate = $candleStick->getDate();
-
-            $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
-            $prices = $this->extractClosingPricesFromCandlesticks($last10CandleSticks);
-            // $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 10);
-
-            if($closePrice <= $stopLoss && $firstTargetReach)       // we can consider this as a winner 
+            // After every simulation take screenshot and update readme.md file.
+            if($closePrice <= $stopLoss && $firstTargetReach)       // we can consider this as a winner but it might a be a looser
             {
                 // so that means that you should leave your position 30 minutes before market close let's say
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
 
-                $riskReward = ($stopLoss  - $enterPrice) / ($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+                $riskReward = ($stopLoss  - $initialPrice) / ($initialPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
 
                 return ($stopLoss - $spread) * $sharesAmount;
@@ -257,7 +252,7 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
                 $enterPrice = $closePrice;
                 $last5CandleSticks = $security->getLastNCandleSticks($candleStick->getDate(), 5);
                 $atr5 = $this->technicalIndicatorsService->calculateATR($last5CandleSticks, 5);
-                $stopLoss = $closePrice - 2 * $atr5;
+                $stopLoss = $closePrice - 2 * $atr5;        // TODO: if the results will be poor this you can diminish the number of times of atr5
             }
 
             $previousCandleStick = $candleStick;

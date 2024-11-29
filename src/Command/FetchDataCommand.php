@@ -20,9 +20,7 @@ use Symfony\Component\Dotenv\Dotenv;
 )]
 class FetchDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2020;
-    private const MIN_VOLUME = 300_000;
-
+    private const OLDER_DATE_START = 2019;
 
     private $stocksFilePath;
     private $cryptosFilePath;
@@ -87,16 +85,9 @@ class FetchDataCommand extends Command
                 continue;
             }
 
-
             if(!$data['Open Price'][0] && !$data['Open Price'][count($data['Open Price']) - 1])
             {
                 $output->writeln(sprintf("Something is wrong with %s", $ticker));
-                continue;
-            }
-
-            if($data['Volume'][0] < self::MIN_VOLUME && !$forex)
-            {
-                $output->writeln(sprintf("Too low volume of %s, the volume only: %s", $ticker, $data['Volume'][0]));
                 continue;
             }
 

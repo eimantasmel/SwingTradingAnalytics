@@ -22,10 +22,7 @@ use App\Constants\BaseConstants;
 )]
 class UpdateDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2016;  // in order to update only prices to the most current it's better to choose the last year then it will bring data much quicker
-    private const MIN_VOLUME = 300_000;
-
-    
+    private const OLDER_DATE_START = 2017;  // in order to update only prices to the most current it's better to choose the last year then it will bring data much quicker
 
     private $yahooWebScrapService;
     private $entityManager;
@@ -65,6 +62,9 @@ class UpdateDataCommand extends Command
 
         $index = 0;
         foreach ($securities as $security) {
+            if($security->getTicker() != 'BTC')
+                continue;
+
             if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER)
                 continue;
             
@@ -74,14 +74,21 @@ class UpdateDataCommand extends Command
             $dateToCheck1 = new DateTime("{$olderDateYear}-01-01");
             $dateToCheck2 = new DateTime("{$olderDateYear}-01-02");
             $dateToCheck3 = new DateTime("{$olderDateYear}-01-03");
+            $dateToCheck4 = null;
+            $dateToCheck5 = null;
+            $dateToCheck6 = null;
             /*Those will check whether the earlier data of the last data is exists.
             because it might be situation where yahoo return only the last chunk of data...*/
-            $dateToCheck4 = new DateTime($earliestDate->format('Y-m-d'));
-            $dateToCheck4->modify('-20 days');
-            $dateToCheck5 = new DateTime($earliestDate->format('Y-m-d'));   
-            $dateToCheck5->modify('-21 days');
-            $dateToCheck6 = new DateTime($earliestDate->format('Y-m-d'));
-            $dateToCheck6->modify('-22 days');
+            if($earliestDate)
+            {
+                $dateToCheck4 = new DateTime($earliestDate->format('Y-m-d'));
+                $dateToCheck4->modify('-20 days');
+                $dateToCheck5 = new DateTime($earliestDate->format('Y-m-d'));   
+                $dateToCheck5->modify('-21 days');
+                $dateToCheck6 = new DateTime($earliestDate->format('Y-m-d'));
+                $dateToCheck6->modify('-22 days');
+            }
+
 
             if($earliestDate && 
                 (
@@ -128,6 +135,18 @@ class UpdateDataCommand extends Command
 
             for ($i=0; $i < count($data['Volume']); $i++) { 
                 $date = new DateTime(($data['Dates'][$i]));
+
+                // $tempCandleStick = $security->getCandleStickByDate($date);
+
+                // if($tempCandleStick && $tempCandleStick->getOpenPrice() == "9999.999999")
+                // {
+                //     $tempCandleStick->setOpenPrice($data['Open Price'][$i]);
+                //     $tempCandleStick->setHighestPrice($data['High Price'][$i]);
+                //     $tempCandleStick->setLowestPrice($data['Low Price'][$i]);
+                //     $tempCandleStick->setClosePrice($data['Close Price'][$i]);
+                //     continue;
+                // }
+
 
                 if($security->isDateExist($date) || !$data['Open Price'][$i])
                     continue;

@@ -34,7 +34,7 @@ class MontecarloSimulationCommand extends Command
 
         //At the end long not trading gap because your capital is almost 0
         $simulationAmount = 1; 
-        $startDate = '2017-02-01';
+        $startDate = '2023-04-01';
         $endDate =  '2024-10-21';   
         $initialTradingCapita = 1000;   
 

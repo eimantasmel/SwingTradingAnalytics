@@ -94,7 +94,7 @@ class Security
     // Getter and Setter for candleSticks
     /**
      */
-    public function getCandleSticks(): array
+    public function getCandleSticks(): ArrayCollection
     {
         $sortedCandleSticks = $this->sortCandleSticksByDate($this->candleSticks);
         return $sortedCandleSticks;
@@ -170,14 +170,14 @@ class Security
 
     public function getFirstCandleStick()
     {
-        $candleStick = $this->getCandleSticks()[0];
+        $candleStick = $this->getCandleSticks()->first();
         return $candleStick;
     }
 
     public function getLastCandleStick()
     {
-        $candleSticks = $this->getCandleSticks();
-        return $candleSticks[count($candleSticks) - 1];
+        $candleStick = $this->getCandleSticks()->last();
+        return $candleStick;
     }
 
     public function isDateExist($date) : bool
@@ -192,14 +192,15 @@ class Security
         return false;
     }
 
-    private function sortCandleSticksByDate(Collection $candlesticks) : array
+    private function sortCandleSticksByDate(Collection $candlesticks): Collection
     {
-        // Sorting the collection
         $candleSticksArray = $candlesticks->toArray();
-        uasort($candleSticksArray, function (CandleStick $a, CandleStick $b) {
+    
+        usort($candleSticksArray, function (CandleStick $a, CandleStick $b) {
             return $a->getDate() <=> $b->getDate();
         });
+    
+        return new ArrayCollection($candleSticksArray); 
 
-        return $candleSticksArray;
     }
 }

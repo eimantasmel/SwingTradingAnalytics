@@ -7,12 +7,13 @@ use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
 use App\Constants\BaseConstants;
-use App\Service\CandleSticksCacheService;
+use App\Service\Nasdaq2000IndexService;
+use App\Service\TechnicalIndicatorsService;
 
 use DateTime;
 /**
  * NOTES:
- * @drabacks - it finds only few trade within 4-5 months
+ * @drabacks - it finds only few trades within 4-5 months
  * strongly depends on market structure.
  * win percentage over 107 57/107 = 53.2% 
  * would be interesting to see how much i would receive with kelly strategy.
@@ -20,32 +21,35 @@ use DateTime;
 class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_LOWER_SHADOW_TO_BODY_RATIO = 3;
-    private const MIN_TOTAL_RANGE_RATIO = 1.5;
-    private const MIN_TOTAL_VOLUME_RATIO = 1.5;
+    private const MIN_TOTAL_VOLUME_RATIO = 1.2;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 5;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
-    private const MIN_VOLUME = 300_000;
+    private const MIN_VOLUME = 100_000;
     private const CAPITAL_RISK = 0.01;
     private const RISK_REWARD_RATIO = 1;
     private const TRADE_FEE = 1;
     private const MAX_AMOUNT_TRADES_PER_DAY = 5;
     private const AMOUNT_CANDLESTICK_TO_FORM_STOP_LOSS = 1;
 
+    private const MIN_AMOUNT_OF_MONEY = 20;
+
 
     private const MIN_PRICE = 0.1;
-    private const MAX_PRICE = 400;
-
 
     private array $trade_information = [];
     private array $results = [];
-    private CandleSticksCacheService $candleSticksCacheService;
+    private float $maxDrawdown;
+    private float $highestCapitalValue;
 
+    private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private TechnicalIndicatorsService $technicalIndicatorsService;
 
-    public function __construct(CandleSticksCacheService $candleSticksCacheService) {
-        $this->candleSticksCacheService = $candleSticksCacheService;
+    public function __construct(Nasdaq2000IndexService $nasdaq2000IndexService,
+                                TechnicalIndicatorsService $technicalIndicatorsService) {
+        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
+        $this->technicalIndicatorsService = $technicalIndicatorsService;
     }
-
     /**
      * This method should return:
      * the amount of trades, 
@@ -63,9 +67,11 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
                                       array $securities
                                      ) : array
     {
-        echo "NEW TRADE CYCLE -------------------------------------------------------\n\r";
-
         $this->results = [];
+        $this->maxDrawdown = 0;
+        $this->highestCapitalValue = $tradingCapital;
+        $this->results[BaseConstants::HIGHEST_CAPITAL] = $tradingCapital;
+        $this->results[BaseConstants::MAX_DRAWDOWN] = 0;
         $this->results[BaseConstants::AMOUNT_OF_TRADES] = 0;
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
@@ -79,7 +85,24 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
                 continue;
             }
             $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital);
-            $startDate->modify('+1 day');
+
+            $randomDateInterval = (int)mt_rand(2, 4);
+            $startDate->modify("+{$randomDateInterval} days");
+
+            if($tradingCapital > $this->highestCapitalValue)
+            {
+                $this->highestCapitalValue = $tradingCapital;
+                $this->results[BaseConstants::HIGHEST_CAPITAL] = $tradingCapital;
+            }
+
+            if($tradingCapital / $this->highestCapitalValue - 1 < $this->maxDrawdown)
+            {
+                $this->maxDrawdown = $tradingCapital / $this->highestCapitalValue - 1;
+                $this->results[BaseConstants::MAX_DRAWDOWN] = $this->maxDrawdown ;
+            }
+
+            if($tradingCapital < self::MIN_AMOUNT_OF_MONEY)
+                break;
         }
 
         $this->results[BaseConstants::FINAL_TRADING_CAPITAL] = $tradingCapital;
@@ -90,13 +113,14 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
     private function getTradingCapitalAfterDay(DateTime $tradingDate, array $securities, float $tradingCapital)
     {
         shuffle($securities);
-        echo "-----------------NEW DAY---------------" . "\n\r";
         $tradesCounter = 0;
         foreach ($securities as $security) {
-            // $lastCandleSticks = $this->getLastNCandleSticks($security, $tradingDate);
+            if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER)
+                continue;
+
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
             echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-            if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $tradingDate))
+            if($this->isSecurityEligibleForTrading($lastCandleSticks))
             {
                 echo "-----------------FOUND---------------" . "\n\r";
                 $lastCandleStick = $lastCandleSticks[count($lastCandleSticks) - 1];
@@ -141,6 +165,7 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
         $this->addTradingDataInformation(BaseConstants::TRADE_SECURITY_TICKER, $security->getTicker());
         $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
         $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $takeProfit);
+        $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
 
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
         foreach ($nextCandleSticks as $candleStick) {
@@ -152,6 +177,8 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
             $lowestPrice = $candleStick->getLowestPrice();
             $highestPrice = $candleStick->getHighestPrice();
             $exitDate = $candleStick->getDate()->format('Y-m-d');
+
+            // TODO: That's definetely the area which I would like to update the most. 
 
             if($lowestPrice <= $stopLoss)
             {
@@ -186,17 +213,19 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
         return $candleStick->getClosePrice() * $sharesAmount - self::TRADE_FEE;
     }
 
-    private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security, DateTime $tradingDate) : bool
+    private function isSecurityEligibleForTrading(array $lastCandleSticks) : bool
     {
         $lastCandleStick = $lastCandleSticks[count($lastCandleSticks) - 1];
         $volume = $lastCandleStick->getVolume();
 
+        if($lastCandleStick->getClosePrice() < self::MIN_PRICE || $volume < self::MIN_VOLUME)
+            return false;
+
+        $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
+        $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
+
         if($this->isCandlestickStrongHammerPattern($lastCandleStick, $lastCandleSticks) 
-            && ($volume > self::MIN_VOLUME || $security->getIsForex())
-            && $lastCandleStick->getClosePrice() != 0 
-            && $lastCandleStick->getClosePrice() != 1 
-            && $lastCandleStick->getClosePrice() > self::MIN_PRICE
-            && $lastCandleStick->getClosePrice() < self::MAX_PRICE
+            && $lastCandleStick->getClosePrice() > $sma200
           )
             return true;
 
@@ -228,7 +257,6 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
         if(!$totalRange || !$bodySize)
             return false;
 
-        $bodyToRangeRatio = $bodySize / $totalRange;
         $lowerShadowToBodyRatio = $lowerShadowSize / $bodySize;
     
         // Check if the candlestick meets the criteria for a strong hammer
@@ -236,7 +264,7 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
             $lowerShadowToBodyRatio >= self::MIN_LOWER_SHADOW_TO_BODY_RATIO &&          // Lower shadow should be at least twice the body size
             $upperShadowSize < $bodySize &&          // Upper shadow should be smaller than the body
             $closePrice > $openPrice     &&            // Close should be above or close to the open price
-            $totalRange > $averageCandleStickRange * self::MIN_TOTAL_RANGE_RATIO &&
+            $totalRange >= $averageCandleStickRange &&
             $volume > $averageCandleStickVolume * self::MIN_TOTAL_VOLUME_RATIO
         ) {
             return true;
@@ -296,50 +324,20 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
         $this->trade_information[$key] = $value;
     }
 
-
-
-
-    /** That shit tried because i hope to implement that with cache service, but it's even slower.
-     * @deprecated
-     * ------------------------------------------------------------------------------------------------------------------- */
-
-    private function getLastNCandleSticks(Security $security, DateTime $tradingDate)
+    private function extractClosingPricesFromCandlesticks(array $candleSticks) : array
     {
-        $candleSticks = $this->candleSticksCacheService->getCandlesticksBySecurityId($security->getId());
+        $prices = [];
         foreach ($candleSticks as $candleStick) {
-            $date = $candleStick->getDate();
-            if($tradingDate->diff($date)->days < self::AMOUNT_OF_PREVIOUS_CANDLESTICKS && $tradingDate->diff($date)->days >= 0)
-            {
-                $lastCandleSticks[] = $candleStick;
-            }
+            $prices[] = (float) $candleStick->getClosePrice();
         }
 
-        return $lastCandleSticks;
-    }
-
-    /**
-     * @deprecated
-     */
-    private function getNextNCandleSticks(Security $security, DateTime $tradingDate) : array
-    {
-        $nextCandleSticks = [];
-        $candleSticks = $this->candleSticksCacheService->getCandlesticksBySecurityId($security->getId());
-        foreach ($candleSticks as $candleStick) {
-            $date = $candleStick->getDate();
-            if($date->diff($tradingDate)->days < self::AMOUNT_OF_NEXT_CANDLESTICKS && $date->diff($tradingDate)->days >= 0)
-            {
-                $nextCandleSticks[] = $candleStick;
-            }
-        }
-
-        return $nextCandleSticks;
+        return $prices;
     }
 
     public function canITrade(Security $security, DateTime $tradingDate) : bool
     {
         $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-        // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $tradingDate))
+        if($this->isSecurityEligibleForTrading($lastCandleSticks))
         {
             return true;
         }
