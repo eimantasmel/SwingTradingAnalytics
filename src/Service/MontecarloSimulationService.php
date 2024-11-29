@@ -14,10 +14,13 @@ use App\Constants\BaseConstants;
 class MontecarloSimulationService
 {
     // When it will certain amount of attempts will come up with the same combination then it will consider that amount of simulations is insufficient
-    private const EXHAUSTION_AMOUNT = 5;    
     private const MIN_AMOUNT_OF_TRADES = 1;
     private array $combinations = []; 
     private const DECIMAL_PLACES_AMOUNT = 3;
+
+    private const MEDIUM_CAPITAL_GAIN_RATE = 1.2;
+    private const HIGH_CAPITAL_GAIN_RATE = 2;
+
     
     
     private EntityManagerInterface $entityManager;
@@ -48,6 +51,8 @@ class MontecarloSimulationService
         $results[BaseConstants::AMOUNT_OF_TRADES] = 0;
 
         for ($i=0; $i < $amountOfIterations; $i++) { 
+
+            echo "Iteration number: " . $i + 1 . "\r\n";
 
             $data = $this->swingTradingStrategy->getSimulationData($startDate,
                                             $endDate,
@@ -130,6 +135,9 @@ class MontecarloSimulationService
         echo "Average of highest capital: ".  $meanOfHighestCapital . "\r\n";
         echo "Standart Deviation of highest capital: ".  $standartDeviationOfHighestCapital . "\r\n";
 
+
+        $this->analyzeFinalCapitalGainDiversification($results[BaseConstants::FINAL_TRADING_CAPITAL], $initialTradingCapital);
+
         return $results;
     }
 
@@ -209,5 +217,31 @@ class MontecarloSimulationService
         }
 
         return  $riskRewardSum / $countOfValidRiskReward;
+    }
+
+    private function analyzeFinalCapitalGainDiversification(array $finalTradingCapitals, float $initialInvestment)
+    {
+        $amountOfMinimumGainCapital = 0;
+        $amountOfMediumGainCapitals = 0;
+        $amountOfHighGainCapitals = 0;
+        $amountOfLossCapitals = 0;
+        foreach ($finalTradingCapitals as $finalTradingCapital) {
+            if($finalTradingCapital >= $initialInvestment)
+                $amountOfMinimumGainCapital++;
+            if($finalTradingCapital > self::MEDIUM_CAPITAL_GAIN_RATE * $initialInvestment)
+                $amountOfMediumGainCapitals++;
+            if($finalTradingCapital > self::HIGH_CAPITAL_GAIN_RATE * $initialInvestment)
+                $amountOfHighGainCapitals++;
+            if($finalTradingCapital < $initialInvestment)
+                $amountOfLossCapitals++;
+        }
+
+        echo "\r\n";
+        echo "\r\n";
+        echo "Amount of simulations where final trading capital is high gain: " . $amountOfHighGainCapitals . "\r\n";
+        echo "Amount of simulations where final trading capital is medium gain: " . $amountOfMediumGainCapitals . "\r\n";
+        echo "Amount of simulations where final trading capital is minimum gain: " . $amountOfMinimumGainCapital . "\r\n";
+        echo "Amount of simulations where final trading capital is lower than initial investment: " . $amountOfLossCapitals . "\r\n";
+
     }
 }

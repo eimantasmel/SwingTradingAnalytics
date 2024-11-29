@@ -1,0 +1,119 @@
+Iteration number: 1
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-04-01 | 2024-04-02 |  FIL  |       9.391|       0.000|       0.000|       8.562|   No   |     906.541|   Long   | 0.004|
+| 2  | 2024-04-01 | 2024-04-02 | LRCX  |      98.180|       0.000|       0.000|      96.694|   No   |     869.245|   Long   | 0.036|
+| 3  | 2024-04-01 | 2024-04-05 |  MKR  |   3,749.490|       0.000|       0.000|   3,679.580|   No   |      -1.000|   Long   | 2.920|
+
+Final trading capital is:-1
+Highest Capital: 1000
+Max Drawdown :-1.001
+Win percentage is: 0
+Average fee: 1
+Average risk reward: 23.088666666667
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: -1
+Standart Deviation of final trading capital: 0
+\
+Average of risk reward ratio: 23.088666666667
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -1.001
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+
++----------------------------------------------------------------------------------------------------------------------------------+
+
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-04-01 | 2024-04-08 |  FIL  |       9.391|       0.000|       0.000|       6.162|   No   |-104,347.878|   Long   | 0.002|
+
+Final trading capital is:-104347.87816849
+Highest Capital: 1000
+Max Drawdown :-105.34787816849
+Win percentage is: 0
+Average fee: 1
+Average risk reward: 3.2276
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: -104347.87816849
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 3.2276
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -105.34787816849
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-04-01 | 2024-04-15 |  BCH  |     649.060|       0.000|       0.000|     502.268|   No   |     772.838|   Long   | 0.252|
+| 2  | 2024-04-01 | 2024-04-15 |  WDC  |      70.850|       0.000|       0.000|      66.007|   No   |     719.013|   Long   | 0.043|
+| 3  | 2024-04-01 | 2024-06-03 | SMTC  |      29.370|       0.000|       0.000|      31.078|  Yes   |     759.837|   Long   | 0.102|
+
+Final trading capital is:759.83702579448
+Highest Capital: 1000
+Max Drawdown :-0.24016297420552
+Win percentage is: 0.33333333333333
+Average fee: 1
+Average risk reward: 51.05
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 759.83702579448
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 51.05
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.33333333333333
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.24016297420552
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1

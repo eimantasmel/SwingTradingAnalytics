@@ -12,6 +12,8 @@ use App\Entity\Security;
 use App\Entity\CandleStick;
 use DateTime;
 use Symfony\Component\Dotenv\Dotenv;
+use App\Constants\BaseConstants;
+
 
 
 #[AsCommand(
@@ -63,19 +65,33 @@ class UpdateDataCommand extends Command
 
         $index = 0;
         foreach ($securities as $security) {
-
+            if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER)
+                continue;
+            
             $olderDateYear = self::OLDER_DATE_START;
             /** Check does the candlestick with the older date exist */
             /** I need to check three dates because it might be a weekend and that check would be inconclusive in order to skip data which already exist in DB */
             $dateToCheck1 = new DateTime("{$olderDateYear}-01-01");
             $dateToCheck2 = new DateTime("{$olderDateYear}-01-02");
             $dateToCheck3 = new DateTime("{$olderDateYear}-01-03");
+            /*Those will check whether the earlier data of the last data is exists.
+            because it might be situation where yahoo return only the last chunk of data...*/
+            $dateToCheck4 = new DateTime($earliestDate->format('Y-m-d'));
+            $dateToCheck4->modify('-20 days');
+            $dateToCheck5 = new DateTime($earliestDate->format('Y-m-d'));   
+            $dateToCheck5->modify('-21 days');
+            $dateToCheck6 = new DateTime($earliestDate->format('Y-m-d'));
+            $dateToCheck6->modify('-22 days');
 
             if($earliestDate && 
                 (
                     $security->isDateExist($dateToCheck1) ||
                     $security->isDateExist($dateToCheck2) ||
-                    $security->isDateExist($dateToCheck3) 
+                    $security->isDateExist($dateToCheck3) ||
+                    $security->isDateExist($dateToCheck4) ||
+                    $security->isDateExist($dateToCheck5) ||
+                    $security->isDateExist($dateToCheck6) 
+
                 )
               )
                 continue;
@@ -85,28 +101,28 @@ class UpdateDataCommand extends Command
 
             if(!$forex)
                 $forex = false;
-            if($cryptos)
+            if(!$cryptos)
                 $cryptos = false;
 
             $ticker = $security->getTicker();
 
-
             $output->writeln(sprintf('Processing: %s', $ticker));
-            
 
             $data = $this->yahooWebScrapService->getStockDataByDatesByOlderDates($ticker, 
             self::OLDER_DATE_START, 
             $cryptos, $forex, $earliestDate);
 
-            if(!$data['Open Price'][0])
+            
+
+            if(!$data['Open Price'])
             {
                 $output->writeln(sprintf("Something is wrong with %s", $ticker));
                 continue;
             }
 
-            if($data['Volume'][0] < self::MIN_VOLUME && !$forex)
+            if(!$data['Open Price'][0] && !$data['Open Price'][count($data['Open Price']) - 1])
             {
-                $output->writeln(sprintf("Too low volume of %s, the volume only: %s", $ticker, $data['Volume'][0]));
+                $output->writeln(sprintf("Something is wrong with %s", $ticker));
                 continue;
             }
 

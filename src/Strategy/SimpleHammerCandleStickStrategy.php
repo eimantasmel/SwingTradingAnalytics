@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Service;
+namespace App\Strategy;
+
 
 use App\Entity\Security;
 use App\Entity\CandleStick;
@@ -332,5 +333,17 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
         }
 
         return $nextCandleSticks;
+    }
+
+    public function canITrade(Security $security, DateTime $tradingDate) : bool
+    {
+        $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+        // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
+        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $tradingDate))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

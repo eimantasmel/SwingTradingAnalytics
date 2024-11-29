@@ -3,6 +3,7 @@
 namespace App\Interface;
 
 use App\Entity\Security;
+use DateTime;
 
 interface SwingTradingStrategyInterface
 {
@@ -22,4 +23,6 @@ interface SwingTradingStrategyInterface
                                     float $tradingCapital,
                                     array $securities
                                      ) : array;
+
+    public function canITrade(Security $security, DateTime $tradingDate) : bool;
 }

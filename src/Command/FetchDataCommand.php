@@ -81,8 +81,14 @@ class FetchDataCommand extends Command
             $security->setIsCrypto($cryptos);
             $security->setIsForex($forex);
 
+            if(!$data['Open Price'])
+            {
+                $output->writeln(sprintf("Something is wrong with %s", $ticker));
+                continue;
+            }
 
-            if(!$data['Open Price'][0])
+
+            if(!$data['Open Price'][0] && !$data['Open Price'][count($data['Open Price']) - 1])
             {
                 $output->writeln(sprintf("Something is wrong with %s", $ticker));
                 continue;

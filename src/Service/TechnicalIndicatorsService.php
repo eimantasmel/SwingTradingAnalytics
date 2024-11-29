@@ -4,7 +4,9 @@ namespace App\Service;
 
 use App\Service\MathService;
 use App\Service\Nasdaq2000IndexService;
+use App\Entity\CandleStick;
 
+use InvalidArgumentException;
 
 class TechnicalIndicatorsService
 {
@@ -36,16 +38,7 @@ class TechnicalIndicatorsService
 
     public function calculateSpread(array $candlesticks)
     {
-        $closePrices = [];
-        $highPrices = [];
-        $lowPrices = [];
-        foreach ($candlesticks as $candle) {
-            $closePrices[] = $candle->getClosePrice();
-            $highPrices[] = $candle->getHighestPrice();
-            $lowPrices[] = $candle->getLowestPrice();
-        }
-
-        $atr = $this->calculateATR($highPrices, $lowPrices, $closePrices);
+        $atr = $this->calculateATR($candlesticks);
         $averageVolume = $this->getAverageCandleStickVolume($candlesticks);
 
         if(!$averageVolume)
@@ -54,11 +47,15 @@ class TechnicalIndicatorsService
         return $this->mathService->randomFloat(0, (self::SCALING_CONSTANT/$averageVolume**0.5) * $atr);
     }
 
-    public function calculateATR($highPrices, $lowPrices, $closePrices)
+    public function calculateATR(array $candleSticks, $period = 14)
     {
         $trueRanges = [];
-        for ($i = 1; $i < count($highPrices); $i++) {
-            $trueRanges[] = max($highPrices[$i] - $lowPrices[$i], abs($highPrices[$i] - $closePrices[$i - 1]), abs($lowPrices[$i] - $closePrices[$i - 1]));
+        $lastCandleSticks = array_slice($candleSticks, -$period);
+
+        for ($i = 1; $i < count($lastCandleSticks); $i++) {
+            $trueRanges[] = max($lastCandleSticks[$i]->getHighestPrice() - $lastCandleSticks[$i]->getLowestPrice(), 
+                                abs($lastCandleSticks[$i]->getHighestPrice() - $lastCandleSticks[$i - 1]->getClosePrice()), 
+                                abs($lastCandleSticks[$i]->getLowestPrice() - $lastCandleSticks[$i - 1]->getClosePrice()));
         }
         return array_sum($trueRanges) / count($trueRanges);
     }
@@ -158,4 +155,173 @@ class TechnicalIndicatorsService
         return $sum / count($candleSticks);
     }
 
+    public function calculateRSI(array $candlesticks, int $period = 14): float
+    {
+        $candlesticksCount = count($candlesticks);
+
+        if ($candlesticksCount < $period + 1) {
+            throw new InvalidArgumentException("Not enough candlesticks to calculate RSI for the given period.");
+        }
+
+        $gains = [];
+        $losses = [];
+
+        // Calculate average gain/loss for the initial period
+        for ($i = $candlesticksCount - $period - 1; $i < $candlesticksCount - 1; $i++) {
+            $currentClose = $candlesticks[$i + 1]->getClosePrice();
+            $previousClose = $candlesticks[$i]->getClosePrice();
+            $change = $currentClose - $previousClose;
+
+            if ($change > 0) {
+                $gains[] = $change;
+                $losses[] = 0;
+            } else {
+                $gains[] = 0;
+                $losses[] = abs($change);
+            }
+        }
+
+        $averageGain = array_sum($gains) / $period;
+        $averageLoss = array_sum($losses) / $period;
+
+        // Calculate the last change (newest candlestick)
+        $lastClose = $candlesticks[$candlesticksCount - 1]->getClosePrice();
+        $secondLastClose = $candlesticks[$candlesticksCount - 2]->getClosePrice();
+        $lastChange = $lastClose - $secondLastClose;
+
+        $gain = $lastChange > 0 ? $lastChange : 0;
+        $loss = $lastChange < 0 ? abs($lastChange) : 0;
+
+        // Update average gain/loss using smoothing
+        $averageGain = (($averageGain * ($period - 1)) + $gain) / $period;
+        $averageLoss = (($averageLoss * ($period - 1)) + $loss) / $period;
+
+        // Calculate RSI
+        if ($averageLoss == 0) {
+            return 100; // RSI is 100 if there are no losses
+        }
+
+        $rs = $averageGain / $averageLoss;
+        return 100 - (100 / (1 + $rs));
+    }
+
+    /**
+     * @param CandleStick[] $candlesticks
+     */
+    public function calculateATROfTheCandleStick($candleStick, $previousCandleStick) : float
+    {
+        $highLow = (float)$candleStick->getHighestPrice() - (float)$candleStick->getLowestPrice();
+        $highPreviousClose = abs((float)$candleStick->getHighestPrice() - (float)$previousCandleStick->getClosePrice());
+        $previousCloseLow = abs((float)$previousCandleStick->getClosePrice() - (float)$candleStick->getLowestPrice());
+
+        return max($highLow, $highPreviousClose, $previousCloseLow);
+    }
+
+    public function convertDailyCandlesIntoPeriod(array $dailyCandlesticks, int $period = 5) : array
+    {
+        $weeklyCandlesticks = [];
+        $weeklyHigh = null;
+        $weeklyLow = null;
+        $weeklyOpen = null;
+        $weeklyClose = null;
+        $weeklyVolume = 0;
+        $weeklyDate = null;;
+
+
+        $counter = 0;
+        foreach ($dailyCandlesticks as $candlestick) {
+            /** @var CandleStick $candlestick */
+
+            if(!$weeklyHigh)        // Verify whether it is the first candlestick of the period.
+            {
+                $weeklyDate = $candlestick->getDate();
+                $weeklyHigh = (float)$candlestick->getHighestPrice();
+                $weeklyLow = (float)$candlestick->getLowestPrice();
+                $weeklyOpen = (float)$candlestick->getOpenPrice();
+                $weeklyClose = (float)$candlestick->getClosePrice();
+                $weeklyVolume = (float)$candlestick->getVolume();
+                $counter++;
+
+                continue;
+            }
+
+            if($candlestick->getHighestPrice() > $weeklyHigh)
+                $weeklyHigh > $candlestick->getHighestPrice();
+
+            if($candlestick->getLowestPrice() < $weeklyLow)
+                $weeklyLow = $candlestick->getLowestPrice();
+
+            $weeklyClose = (float)$candlestick->getClosePrice();
+            $weeklyVolume += (float)$candlestick->getVolume();
+
+
+            if(++$counter % $period == 0)
+            {
+                $tempCandlestick = new CandleStick();
+                $tempCandlestick->setHighestPrice((string)$weeklyHigh);
+                $tempCandlestick->setLowestPrice((string)$weeklyLow);
+                $tempCandlestick->setOpenPrice((string)$weeklyOpen);
+                $tempCandlestick->setClosePrice((string)$weeklyClose);
+                $tempCandlestick->setVolume((string)$weeklyVolume);
+                $tempCandlestick->setDate($weeklyDate);
+
+                $weeklyCandlesticks[] = $tempCandlestick;
+
+                $weeklyHigh = null;
+                $weeklyLow = null;
+                $weeklyOpen = null;
+                $weeklyClose = null;
+                $weeklyVolume = 0;
+            }
+        }
+
+        if($counter % $period != 0)
+        {
+            $tempCandlestick = new CandleStick();
+            $tempCandlestick->setHighestPrice((string)$weeklyHigh);
+            $tempCandlestick->setLowestPrice((string)$weeklyLow);
+            $tempCandlestick->setOpenPrice((string)$weeklyOpen);
+            $tempCandlestick->setClosePrice((string)$weeklyClose);
+            $tempCandlestick->setVolume((string)$weeklyVolume);
+            $tempCandlestick->setDate($weeklyDate);
+
+            $weeklyCandlesticks[] = $tempCandlestick;
+        }
+
+        return $weeklyCandlesticks;
+    }
+
+    public function getHighestPriceByPeriod(array $candleSticks, $period = 20)
+    {
+        $candlesticksCount = count($candleSticks);
+        $highestPrice = 0;
+
+        // Calculate average gain/loss for the initial period
+        for ($i = $candlesticksCount - $period - 1; $i < $candlesticksCount; $i++) {
+            $price = $candleSticks[$i]->getHighestPrice();
+
+            if($price > $highestPrice)
+                $highestPrice = $price;
+        }
+
+        return $highestPrice;
+    }
+
+    public function getLowestPriceByPeriod(array $candleSticks, $period = 20, $includeLastCandleStick = true)
+    {
+        $candlesticksCount = count($candleSticks);
+        $lowestPrice = 0;
+
+        $lastCandleStick = $includeLastCandleStick ? 0 : 1;
+
+        // Calculate average gain/loss for the initial period
+        for ($i = $candlesticksCount - $period - 1; $i < $candlesticksCount - $lastCandleStick; $i++) {
+            $price = $candleSticks[$i]->getLowestPrice();
+
+            if($price > $lowestPrice || !$lowestPrice)
+                $lowestPrice = $price;
+        }
+
+        return $lowestPrice;
+    }
 }
