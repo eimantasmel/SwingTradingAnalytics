@@ -54,11 +54,25 @@ php bin/console app:nasdaq-2000-analysis
 
 ## Results and Visuals
 
-#### Montecarlo simulation results:
-![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/DFM915.jpg)
+#### Montecarlo simulation results. These I generated to results directory. You can find each strategy montecarlo simulation results in the results directory. 
+#### Simple Pullback Strategy montecarlo simulation results: 
+![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/By3Nit.jpg)
+![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/h5ibX9.jpg)
 #### Finds trades for specific strategy:
-![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/pSzNr6.jpg)
+![Finds Trades](https://s3.amazonaws.com/i.snag.gy/7MPoA8.jpg)
+![Finds Trades](https://s3.amazonaws.com/i.snag.gy/hDOaP0.jpg)
 #### Nasdaq 2000 index analysis:
-![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/pSzNr6.jpg)
+#### Right here you can select what kind of trend and date interval analysis you are looking for:
+![Nasdaq 2000 market analysis](https://s3.amazonaws.com/i.snag.gy/fEqpDz.jpg)
+#### Yearly date interval nasdaq2000 bullish trend analysis:
+![Nasdaq 2000 market analysis](https://s3.amazonaws.com/i.snag.gy/zt2SHe.jpg)
+#### For day internval you must use this method: 
+![Nasdaq 2000 market analysis](https://s3.amazonaws.com/i.snag.gy/nv6rQS.jpg)
+
+#### Day date interval nasdaq2000 bearish trend analysis: 
+
 #### Right here you will update your strategy on services.yaml file:
-![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/pSzNr6.jpg)
+![Montecarlo simulation](https://s3.amazonaws.com/i.snag.gy/esjmoq.jpg)
+
+
+

@@ -25,4 +25,7 @@ interface SwingTradingStrategyInterface
                                      ) : array;
 
     public function canITrade(Security $security, DateTime $tradingDate) : bool;
+
+    public function shouldIExit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice, array $nextCandleSticks) : bool;
+
 }

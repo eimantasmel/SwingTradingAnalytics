@@ -10,7 +10,7 @@ use InvalidArgumentException;
 
 class TechnicalIndicatorsService
 {
-    private const SCALING_CONSTANT = 100;
+    private const SCALING_CONSTANT = 500;
     private const TAX_PER_SHARE = 0.005;
 
 

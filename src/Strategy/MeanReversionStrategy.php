@@ -15,7 +15,7 @@ class MeanReversionStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 210;
+    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 450;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
     private const MIN_VOLUME = 2_000_000;
     private const CAPITAL_RISK = 0.1;
@@ -31,6 +31,9 @@ class MeanReversionStrategy implements SwingTradingStrategyInterface
     private float $highestCapitalValue;
     private const RSI_OVERSOLD = 25;
     private const RSI_OVERBOUGHT = 75;
+
+    private const PYRAMIDING_TRADES_AMOUNT = 3;
+
 
     private Nasdaq2000IndexService $nasdaq2000IndexService;
     private TechnicalIndicatorsService $technicalIndicatorsService;
@@ -317,6 +320,11 @@ class MeanReversionStrategy implements SwingTradingStrategyInterface
             return true;
         }
 
+        return false;
+    }
+
+    public function shouldIExit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice, array $nextCandleSticks) : bool 
+    {
         return false;
     }
 }

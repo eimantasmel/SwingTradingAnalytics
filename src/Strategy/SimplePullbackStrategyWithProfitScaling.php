@@ -23,7 +23,7 @@ class SimplePullbackStrategyWithProfitScaling implements SwingTradingStrategyInt
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 210;
+    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 300;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
     private const MIN_VOLUME = 2_000_000;
     private const CAPITAL_RISK = 0.1;
@@ -310,6 +310,11 @@ class SimplePullbackStrategyWithProfitScaling implements SwingTradingStrategyInt
             return true;
         }
 
+        return false;
+    }
+
+    public function shouldIExit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice, array $nextCandleSticks) : bool 
+    {
         return false;
     }
 }

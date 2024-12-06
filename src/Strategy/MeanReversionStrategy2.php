@@ -9,6 +9,7 @@ use App\Interface\SwingTradingStrategyInterface;
 use App\Constants\BaseConstants;
 use App\Service\Nasdaq2000IndexService;
 use App\Service\TechnicalIndicatorsService;
+use Doctrine\ORM\EntityManagerInterface;
 
 use DateTime;
 /** Strategy at first glance looks profitable and quite a good one, still too early to judge
@@ -24,12 +25,15 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 210;
+    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 450;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
     private const MIN_VOLUME = 2_000_000;
     private const CAPITAL_RISK = 0.1;
     private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
+    private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
+
+    private const PYRAMIDING_TRADES_AMOUNT = 3;
 
     private const MIN_PRICE = 1;
 
@@ -40,11 +44,15 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
 
     private Nasdaq2000IndexService $nasdaq2000IndexService;
     private TechnicalIndicatorsService $technicalIndicatorsService;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(Nasdaq2000IndexService $nasdaq2000IndexService,
-                                TechnicalIndicatorsService $technicalIndicatorsService) {
+                                TechnicalIndicatorsService $technicalIndicatorsService,
+                                EntityManagerInterface $entityManager) {
+
         $this->nasdaq2000IndexService = $nasdaq2000IndexService;
         $this->technicalIndicatorsService = $technicalIndicatorsService;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -78,6 +86,20 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
         {
             // It's skips weekends because in our database there's only few cryptos.
             if($startDate->format('N') >= 6)
+            {
+                $startDate->modify('+1 day');
+                continue;
+            }
+
+            $nasdaqIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => BaseConstants::NASDAQ_2000_TICKER]);
+            $lastNasdaqMarketCandleSticks = $nasdaqIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            $lastNasdaqCandleStick = $this->getLastCandleStick($lastNasdaqMarketCandleSticks);
+    
+            $nasdaqMarketPrices = $this->extractClosingPricesFromCandlesticks($lastNasdaqMarketCandleSticks);
+            $sma200 = $this->technicalIndicatorsService->calculateSMA($nasdaqMarketPrices, 200);
+
+            // It means that crypto market has to be on the bull run.
+            if($lastNasdaqCandleStick->getClosePrice() <= $sma200)
             {
                 $startDate->modify('+1 day');
                 continue;
@@ -118,19 +140,20 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
             // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-            if($this->isSecurityEligibleForTrading($lastCandleSticks))
+            if($this->isSecurityEligibleForTrading($lastCandleSticks, $tradingDate))
             {
                 $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
                 $enterPrice = $lastCandleStick->getClosePrice();      // I'm do this because 
                 $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
-                $tradeCapital = $this->getTradeCapital($tradingCapital, $stopLoss, $enterPrice);
+                $sharesAmount = $this->getSharesAmount($tradingCapital, $stopLoss, $enterPrice);
+                $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
+                $enterPrice += $spread;
+                $tradeCapital = $this->getTradeCapital($tradingCapital, $enterPrice, $sharesAmount);
                 // Checks whether do we have enough money to afford this trade
                 if(!$tradeCapital)
                     continue;
 
-                $sharesAmount = $this->getSharesAmount($tradingCapital, $stopLoss, $enterPrice);
-
-                $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
+                $tradingCapitalBeforeTrade = $tradingCapital;
 
                 $tradingCapitalAfterTrade = $this->getProfit($security, 
                                                             $stopLoss, 
@@ -140,11 +163,6 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
                                                             $enterPrice);
 
                 $tradingCapital = $tradingCapital - $tradeCapital + $tradingCapitalAfterTrade;
-
-                if($tradingCapitalAfterTrade > $tradeCapital)
-                    $this->addTradingDataInformation(BaseConstants::IS_WINNER, true);
-                else 
-                    $this->addTradingDataInformation(BaseConstants::IS_WINNER, false);
 
                 $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $enterPrice);
                 $this->results[BaseConstants::AMOUNT_OF_TRADES]++;
@@ -156,6 +174,12 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
                 $tradingCapital -= $taxFee;
 
                 $this->addTradingDataInformation(BaseConstants::TRADING_CAPITAL, $tradingCapital);
+
+                if($tradingCapitalBeforeTrade < $tradingCapital)
+                    $this->addTradingDataInformation(BaseConstants::IS_WINNER, true);
+                else 
+                    $this->addTradingDataInformation(BaseConstants::IS_WINNER, false);
+
                 $this->results[BaseConstants::TRADES_INFORMATION][] = $this->trade_information;
 
                 if(++$tradesCounter >= self::MAX_AMOUNT_TRADES_PER_DAY || $tradingCapital < self::MIN_AMOUNT_OF_MONEY)
@@ -166,10 +190,14 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
         return $tradingCapital;
     }
     
-    private function isSecurityEligibleForTrading(array $lastCandleSticks) : bool
+    private function isSecurityEligibleForTrading(array $lastCandleSticks, $tradingDate) : bool
     {
+        if(count($lastCandleSticks) < self::MIN_AMOUNT_OF_CANDLESTICKS)    
+            return false;
+
         $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
         $closePrice = $lastCandleStick->getClosePrice();
+
         $volume = $lastCandleStick->getVolume();
 
         if($closePrice < self::MIN_PRICE || $volume < self::MIN_VOLUME)
@@ -222,21 +250,35 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
 
             /** @var CandleStick $candleStick */
             $closePrice = $candleStick->getClosePrice();
+            $lowestPrice = $candleStick->getLowestPrice();
+
+
             $exitDate = $candleStick->getDate();
             // After every simulation take screenshot and update readme.md file.
-            if($closePrice <= $stopLoss && $firstTargetReach)       // we can consider this as a winner but it might a be a looser
+            if($lowestPrice <= $stopLoss && $firstTargetReach)       // we can consider this as a winner but it might a be a looser
             {
                 // so that means that you should leave your position 30 minutes before market close let's say
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
 
-                $riskReward = ($stopLoss  - $initialPrice) / ($initialPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
-                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+                $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
+                $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
+
+                if($stopLoss > $initialPrice)
+                {
+                    $riskReward = ($stopLoss  - $initialPrice) / ($initialPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+                }
+                else 
+                {
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+                }
+   
 
                 return ($stopLoss - $spread) * $sharesAmount;
             }
 
-            if($closePrice <= $stopLoss)        // That's a looser.
+            if($lowestPrice <= $stopLoss)        // That's a looser.
             {
                 // so that means that you should leave your position 30 minutes before market close let's say
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
@@ -267,9 +309,8 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
         return $candleStick->getClosePrice() * $sharesAmount;
     }
 
-    private function getTradeCapital($tradingCapital, $stopLoss, $enterPrice)
+    private function getTradeCapital($tradingCapital, $enterPrice, $sharesAmount)
     {
-        $sharesAmount = $this->getSharesAmount($tradingCapital, $stopLoss, $enterPrice);
         if($enterPrice * $sharesAmount > $tradingCapital * 3)   // i will replace this at later point.
             return false;
 
@@ -303,11 +344,18 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
     {
         $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
         // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-        if($this->isSecurityEligibleForTrading($lastCandleSticks))
+        if($this->isSecurityEligibleForTrading($lastCandleSticks, $tradingDate))
         {
+            $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
+            echo "Stop loss is: " . $stopLoss  . "\n\r";
             return true;
         }
 
+        return false;
+    }
+
+    public function shouldIExit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice, array $nextCandleSticks) : bool 
+    {
         return false;
     }
 }

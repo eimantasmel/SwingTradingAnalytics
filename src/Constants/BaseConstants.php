@@ -11,9 +11,9 @@ use App\Service\MontecarloSimulationService;
 class BaseConstants 
 {
     public const NASDAQ_2000_TICKER = '%5EIXIC';
-    public const CRYPTO_MARKET_TICKER = '%5ECMC200';
+    public const CRYPTO_MARKET_TICKER = 'C20-USD';
 
-    
+
     public const AMOUNT_OF_TRADES = 'Amount of Trades';
     public const FINAL_TRADING_CAPITAL = 'Final Trading Capital';
     public const HIGHEST_CAPITAL = 'Highest Capital';

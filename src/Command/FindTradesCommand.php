@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\YahooWebScrapService;
+use App\Service\Nasdaq2000IndexService;
 use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
@@ -22,17 +23,19 @@ class FindTradesCommand extends Command
     private YahooWebScrapService $yahooWebScrapService;
     private EntityManagerInterface $entityManager;
     private SwingTradingStrategyInterface $swingTradingStrategy;
-
+    private Nasdaq2000IndexService $nasdaq2000IndexService;
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
                                 EntityManagerInterface $entityManager,
-                                SwingTradingStrategyInterface $swingTradingStrategy
+                                SwingTradingStrategyInterface $swingTradingStrategy,
+                                Nasdaq2000IndexService $nasdaq2000IndexService
                                 )
     {
         parent::__construct();
         $this->yahooWebScrapService = $yahooWebScrapService;
         $this->entityManager = $entityManager;
         $this->swingTradingStrategy = $swingTradingStrategy;
+        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -51,11 +54,17 @@ class FindTradesCommand extends Command
 
     private function findTrades(OutputInterface $output, $currentYear)
     {
+        $output->writeln(sprintf("Updating nasdaq index..."));
+        $this->nasdaq2000IndexService->updateNasdaqData();
         $securities = $this->entityManager->getRepository(Security::class)->findAll();
 
+        shuffle($securities);
+        
         foreach ($securities as $security) {
-
             $ticker = $security->getTicker();
+
+            if($security->getIsForex())
+                continue;
 
             $output->writeln(sprintf('Processing: %s', $ticker));
 
@@ -65,7 +74,7 @@ class FindTradesCommand extends Command
 
             if(!$forex)
                 $forex = false;
-            if($cryptos)
+            if(!$cryptos)
                 $cryptos = false;
 
             $data = $this->yahooWebScrapService->getStockDataByDatesByOlderDates($ticker, 
@@ -96,7 +105,6 @@ class FindTradesCommand extends Command
                 $security->addCandleStick($candleStick);
             }
 
-            //TODO: now we gonna use strategy service and will pas the current date and security as the parameters.
             $tradingDate = new DateTime();
 
             if($this->swingTradingStrategy->canITrade($security, $tradingDate))

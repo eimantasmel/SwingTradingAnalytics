@@ -26,11 +26,13 @@ class Nasdaq2000AnalysisCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $topN = 30;
-        $bearish = false;
-        $interval = 'year';
+        $topN = 10;
+        $bearish = true;
+        $interval = 'month';
 
-        $this->nasdaq2000IndexService->findMostBearishBullishDatesIntervalInHistory($topN, $interval, $bearish);
+        // $this->nasdaq2000IndexService->findMostBearishBullishDatesIntervalInHistory($topN, $interval, $bearish);
+
+        $this->nasdaq2000IndexService->findMostBearishBullishDayDatesInHistory($topN, $bearish);
 
         return Command::SUCCESS;
     }

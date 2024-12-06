@@ -16,7 +16,7 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 210;
+    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 450;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
     private const MIN_VOLUME = 100_000;
     private const CAPITAL_RISK = 0.1;
@@ -322,6 +322,11 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
             return true;
         }
 
+        return false;
+    }
+
+    public function shouldIExit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice, array $nextCandleSticks) : bool 
+    {
         return false;
     }
 }

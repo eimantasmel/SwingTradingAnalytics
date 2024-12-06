@@ -216,6 +216,9 @@ class MontecarloSimulationService
             }
         }
 
+        if(!$countOfValidRiskReward)
+            return 0;
+
         return  $riskRewardSum / $countOfValidRiskReward;
     }
 

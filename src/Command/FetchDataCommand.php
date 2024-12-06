@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\YahooWebScrapService;
+use App\Service\CryptoIndexService;
 use App\Entity\Security;
 use App\Entity\CandleStick;
 use DateTime;
@@ -20,14 +21,13 @@ use Symfony\Component\Dotenv\Dotenv;
 )]
 class FetchDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2019;
+    private const OLDER_DATE_START = 2020;
 
     private $stocksFilePath;
     private $cryptosFilePath;
     private $yahooWebScrapService;
     private $entityManager;
     private $forexFilePath;
-
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
                                 EntityManagerInterface $entityManager)
@@ -45,13 +45,14 @@ class FetchDataCommand extends Command
         $dotenv = new Dotenv();
         $dotenv->load(dirname(__DIR__, 2).'/.env');
 
+
         $stocksTickers = file($this->stocksFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
         $cryptosTickers = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  
         $forexTickers = file($this->forexFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
  
         $this->updateSecuritiesData($stocksTickers, $output);
-        $this->updateSecuritiesData($cryptosTickers, $output, true, false);
-        $this->updateSecuritiesData($forexTickers, $output, false, true);
+        // $this->updateSecuritiesData($cryptosTickers, $output, true, false);
+        // $this->updateSecuritiesData($forexTickers, $output, false, true);
 
         return Command::SUCCESS;    
     }

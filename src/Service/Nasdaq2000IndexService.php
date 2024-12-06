@@ -52,23 +52,33 @@ class Nasdaq2000IndexService
         return $cagr;
     }
 
-    private function updateNasdaqData()
+    public function updateNasdaqData()
     {
         $lastCandleStick = $this->nasdaq2000Data->getLastCandleStick();
         $lastYear = $lastCandleStick->getDate()->format("Y");
+        $date = new DateTime();
+
+        if($lastCandleStick->getDate()->diff($date)->days == 0)
+        {
+            return ;
+        }
 
         $data = $this
                     ->yahooWebScrapService
                     ->getStockDataByDatesByOlderDates(BaseConstants::NASDAQ_2000_TICKER, $lastYear);
 
+ 
         if(!$data['Open Price'][0])
+        {
+            echo "Something went wrong with retrieving nasdaq data \r\n";
             return null;
+        }
 
         $index = 0;
         for ($i=0; $i < count($data['Volume']); $i++) { 
             $date = new DateTime(($data['Dates'][$i]));
 
-            if($this->nasdaq2000Data->isDateExist($date))
+            if($this->nasdaq2000Data->isDateExist($date) || !$data['Close Price'][$i])
                 continue;
 
             $candleStick = new CandleStick();

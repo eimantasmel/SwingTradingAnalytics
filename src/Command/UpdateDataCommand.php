@@ -62,12 +62,6 @@ class UpdateDataCommand extends Command
 
         $index = 0;
         foreach ($securities as $security) {
-            if($security->getTicker() != 'BTC')
-                continue;
-
-            if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER)
-                continue;
-            
             $olderDateYear = self::OLDER_DATE_START;
             /** Check does the candlestick with the older date exist */
             /** I need to check three dates because it might be a weekend and that check would be inconclusive in order to skip data which already exist in DB */
