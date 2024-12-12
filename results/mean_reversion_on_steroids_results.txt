@@ -1136,3 +1136,136 @@ One of the ideas try to tweak this strategy but before that do a commit
 then your stop loss should be 1atr below sma200 take profit 2atr above entry price. And you let the trade slide until the will drop by 1 atr.
 
 one more thing nasdaq 2000 compare before day trade because it's gonna work way faster
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-11 | 2024-01-31 | AMZN  |     155.182|     127.352|     162.560|     156.168|  Yes   |   1,001.956|   Long   | 0.002|
+| 2  | 2024-01-17 | 2024-02-13 | NTRA  |      67.951|      47.581|      75.295|      67.821|   No   |   1,000.308|   Long   | 0.451|
+| 3  | 2024-01-01 | 2024-02-14 |  KHC  |      38.131|      35.147|      39.315|      35.041|   No   |     897.334|   Long   | 0.011|
+| 4  | 2024-01-31 | 2024-02-19 |  MA   |     450.869|     389.849|     468.475|     459.299|  Yes   |     904.764|   Long   | 1.639|
+| 5  | 2024-02-13 | 2024-03-05 | OCEAN |       0.500|       0.373|       0.541|       0.918|  Yes   |   1,233.328|   Long   | 0.001|
+| 6  | 2024-01-22 | 2024-03-11 |  MU   |      89.375|      67.781|      94.205|      94.129|  Yes   |   1,251.341|   Long   | 0.135|
+| 7  | 2024-02-22 | 2024-03-14 | TNDM  |      25.013|      22.436|      29.290|      27.705|  Yes   |   1,344.555|   Long   | 0.013|
+| 8  | 2024-02-19 | 2024-03-15 | QRTEA |       1.211|       0.668|       1.495|       1.132|   No   |   1,330.165|   Long   | 0.011|
+| 9  | 2024-03-11 | 2024-03-17 |  LRC  |       0.430|       0.182|       0.528|       0.413|   No   |   1,319.257|   Long   | 0.001|
+| 10 | 2024-03-14 | 2024-03-25 | MSFT  |     425.429|     349.525|     442.950|     423.308|   No   |   1,316.137|   Long   | 0.209|
+| 11 | 2024-03-21 | 2024-04-03 |  XRP  |       0.641|       0.511|       0.763|       0.511|   No   |   1,178.657|   Long   | 0.000|
+| 12 | 2024-01-08 | 2024-04-04 | ERIC  |       6.162|       5.084|       6.410|       5.074|   No   |   1,077.575|   Long   | 0.002|
+| 13 | 2024-04-03 | 2024-04-15 | GOOGL |     154.960|     131.799|     162.895|     154.400|   No   |   1,073.776|   Long   | 0.040|
+| 14 | 2024-03-25 | 2024-04-18 |  WDC  |      65.041|      45.166|      70.240|      68.514|  Yes   |   1,093.612|   Long   | 0.061|
+| 15 | 2024-04-15 | 2024-04-27 |  ONT  |       0.321|       0.157|       0.511|       0.358|  Yes   |   1,116.067|   Long   | 0.001|
+| 16 | 2024-04-09 | 2024-04-30 |  GEN  |      22.732|      20.170|      23.545|      20.125|   No   |   1,002.940|   Long   | 0.072|
+| 17 | 2024-05-03 | 2024-05-22 | TCOM  |      53.348|      37.186|      56.930|      53.487|   No   |   1,002.778|   Long   | 0.048|
+| 18 | 2024-04-22 | 2024-05-29 | TROW  |     111.767|     105.593|     116.785|     114.723|  Yes   |   1,054.980|   Long   | 0.267|
+| 19 | 2024-03-28 | 2024-05-30 |  MU   |     124.350|      69.813|     138.295|     127.398|  Yes   |   1,060.075|   Long   | 0.050|
+| 20 | 2024-05-22 | 2024-05-30 | QCOM  |     203.659|     136.646|     213.175|     201.348|   No   |   1,056.764|   Long   | 0.729|
+| 21 | 2024-03-05 | 2024-05-31 |  LSK  |       2.740|       0.599|       3.674|       0.591|   No   |     931.118|   Long   | 0.015|
+| 22 | 2024-04-29 | 2024-06-06 |  KHC  |      38.720|      34.364|      40.265|      34.262|   No   |     814.204|   Long   | 0.070|
+| 23 | 2024-05-29 | 2024-06-10 | TTWO  |     160.669|     146.142|     167.185|     161.700|  Yes   |     820.421|   Long   | 0.989|
+| 24 | 2024-06-07 | 2024-06-18 | GERN  |       4.617|       2.029|       5.540|       4.544|   No   |     817.152|   Long   | 0.027|
+| 25 | 2024-06-03 | 2024-06-21 | NVDA  |     115.026|      59.609|     125.950|     126.587|  Yes   |     827.713|   Long   | 0.026|
+| 26 | 2024-07-04 | 2024-07-19 | AGNC  |       9.763|       9.201|      10.050|      10.178|  Yes   |     889.032|   Long   | 0.013|
+| 27 | 2024-07-01 | 2024-07-22 | TGTX  |      18.278|      13.359|      20.290|      20.239|  Yes   |     921.373|   Long   | 0.128|
+| 28 | 2024-06-25 | 2024-07-29 | IONS  |      47.396|      43.289|      51.360|      49.766|  Yes   |     972.505|   Long   | 0.396|
+| 29 | 2024-07-29 | 2024-08-01 | MCHP  |      88.533|      84.227|      94.760|      83.610|   No   |     843.483|   Long   | 0.573|
+| 30 | 2024-06-21 | 2024-08-05 | NDAQ  |      60.361|      55.507|      62.450|      65.435|  Yes   |     928.743|   Long   | 0.111|
+| 31 | 2024-06-14 | 2024-08-27 |  CPB  |      44.140|      41.939|      45.835|      49.497|  Yes   |   1,136.682|   Long   | 0.150|
+| 32 | 2024-07-24 | 2024-09-05 | SGMO  |       0.574|       0.400|       0.880|       0.739|  Yes   |   1,228.944|   Long   | 0.014|
+| 33 | 2024-08-05 | 2024-09-05 | ALKS  |      28.173|      24.876|      30.345|      27.202|   No   |   1,197.848|   Long   | 0.323|
+| 34 | 2024-07-19 | 2024-09-11 | VIRT  |      29.539|      18.157|      33.465|      30.431|  Yes   |   1,203.091|   Long   | 0.059|
+| 35 | 2024-08-27 | 2024-09-12 | TCOM  |      46.225|      42.217|      49.380|      46.644|  Yes   |   1,214.651|   Long   | 0.255|
+| 36 | 2024-09-10 | 2024-09-18 | TMUS  |     196.712|     167.190|     203.290|     198.060|  Yes   |   1,219.044|   Long   | 0.212|
+| 37 | 2024-09-16 | 2024-09-25 | EXAS  |      69.865|      53.627|      79.315|      66.722|   No   |   1,196.042|   Long   | 0.385|
+| 38 | 2024-08-02 | 2024-10-01 |  KDP  |      35.157|      31.445|      36.480|      37.218|  Yes   |   1,242.434|   Long   | 0.087|
+| 39 | 2024-09-23 | 2024-10-01 |  GEN  |      26.897|      22.891|      27.995|      27.076|  Yes   |   1,246.982|   Long   | 0.087|
+| 40 | 2024-09-05 | 2024-10-02 | TSLA  |     230.579|     189.748|     254.050|     245.459|  Yes   |   1,275.743|   Long   | 0.409|
+| 41 | 2024-09-30 | 2024-10-03 |  PPC  |      46.064|      34.256|      49.455|      45.605|   No   |   1,270.155|   Long   | 0.014|
+| 42 | 2024-10-07 | 2024-10-19 |  TRX  |       0.156|       0.128|       0.160|       0.157|   No   |   1,268.827|   Long   | 0.000|
+| 43 | 2024-10-03 | 2024-10-22 |  CG   |      45.235|      41.408|      47.660|      49.521|  Yes   |   1,417.834|   Long   | 0.225|
+| 44 | 2024-09-19 | 2024-10-31 | NDAQ  |      74.543|      60.291|      76.770|      73.856|   No   |   1,411.342|   Long   | 0.253|
+| 45 | 2024-10-14 | 2024-11-01 | TEAM  |     195.057|     175.979|     212.025|     224.350|  Yes   |   1,615.392|   Long   | 1.057|
+
+Final trading capital is:1615.3922928814
+Highest Capital: 1344.554873753
+Max Drawdown :-0.39444310960451
+Win percentage is: 0.55555555555556
+Average fee: 1.3861989577849
+Average risk reward: 0.57060896644532
+
+
+General Information about the all iterations:
+Number of iterations: 10
+Average of final trading capital: 959.81199198994
+Standart Deviation of final trading capital: 636.90694728428
+
+Average of risk reward ratio: 0.44593785645477
+Standart Deviation of risk reward ratio: 0.16149576122325
+
+Average of risk win percentage: 0.45855144364715
+Standart Deviation of win percentage: 0.071517175038964
+
+Average of max drawdown: -0.41097610402529
+Standart Deviation of max drawdown: 0.13348749521185
+
+Average of highest capital: 1305.6143735921
+Standart Deviation of highest capital: 348.32935768043
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 2
+Amount of simulations where final trading capital is minimum gain: 4
+Amount of simulations where final trading capital is lower than initial investment: 6
+
++----------------------------------------------------------------------------------------------------------------------------------+
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-01 | 2024-01-03 | DASH  |      33.390|      27.806|      38.135|      27.746|   No   |     897.409|   Long   | 0.060|
+| 2  | 2024-01-05 | 2024-01-11 |  AMD  |     138.716|     106.017|     148.835|     143.855|  Yes   |     906.687|   Long   | 0.136|
+| 3  | 2024-01-11 | 2024-01-22 |  CVC  |       0.103|       0.084|       0.116|       0.084|   No   |     809.325|   Long   | 0.000|
+| 4  | 2024-01-22 | 2024-02-01 |   M   |      18.307|      14.290|      19.635|      18.242|   No   |     807.025|   Long   | 0.047|
+| 5  | 2024-02-05 | 2024-02-13 | AAPL  |     187.860|     178.830|     196.835|     185.907|   No   |     788.451|   Long   | 0.180|
+| 6  | 2024-01-18 | 2024-04-04 | ERIC  |       6.151|       5.112|       6.355|       5.085|   No   |     693.696|   Long   | 0.011|
+| 7  | 2024-04-29 | 2024-05-13 | AMZN  |     181.183|     145.524|     193.810|     185.361|  Yes   |     696.874|   Long   | 0.223|
+| 8  | 2024-05-06 | 2024-05-23 |  AMD  |     155.875|     130.934|     172.470|     160.603|  Yes   |     705.329|   Long   | 0.095|
+| 9  | 2024-04-17 | 2024-05-24 | JBLU  |       6.869|       5.425|       7.525|       5.418|   No   |     633.244|   Long   | 0.039|
+| 10 | 2024-04-24 | 2024-05-30 | MSFT  |     409.431|     363.067|     422.930|     423.674|  Yes   |     646.487|   Long   | 0.371|
+| 11 | 2024-06-04 | 2024-06-13 | AMZN  |     179.497|     154.491|     186.975|     183.813|  Yes   |     654.118|   Long   | 0.157|
+| 12 | 2024-06-24 | 2024-07-16 |  NOK  |       3.737|       3.463|       3.920|       3.865|  Yes   |     684.110|   Long   | 0.007|
+| 13 | 2024-07-29 | 2024-08-02 | GOOG  |     171.376|     148.754|     182.945|     168.361|   No   |     674.067|   Long   | 0.246|
+| 14 | 2024-07-22 | 2024-09-11 | GOOGL |     181.934|     147.823|     190.795|     147.741|   No   |     604.681|   Long   | 0.264|
+| 15 | 2024-09-11 | 2024-09-20 |  RUN  |      19.173|      13.276|      21.775|      18.729|   No   |     599.242|   Long   | 0.023|
+| 16 | 2024-09-05 | 2024-10-07 | AAPL  |     222.625|     188.493|     235.170|     222.436|   No   |     598.053|   Long   | 0.245|
+
+Final trading capital is:598.05283498866
+Highest Capital: 1000
+Max Drawdown :-0.40194716501134
+Win percentage is: 0.375
+Average fee: 1.2710274095156
+Average risk reward: 0.24361331495704
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 598.05283498866
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0.24361331495704
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.375
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.40194716501134
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1

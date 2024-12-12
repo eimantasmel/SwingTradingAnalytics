@@ -68,6 +68,8 @@ class MathService
         $dates = [];
         $date = "{$startYear}-01-01";
         $currentDate = new \DateTime();
+        // $currentDate->modify('-1 day'); # you will uncomment this line only if you will fetch data after the midnight.
+
         $dateTime = new \DateTime($date);
 
         $endDate = $endYear ? new \DateTime("{$endYear}-01-01") : null;

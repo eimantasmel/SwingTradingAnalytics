@@ -129,8 +129,12 @@ class SimplePullbackStrategy implements SwingTradingStrategyInterface
         $specificDayTradingCapital = $tradingCapital;
         foreach ($securities as $security) {
             // skips nasdaq2000 overall market security
-            if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER || !$this->isTradeable($security->getTicker()))
-            continue;
+            if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER 
+                || !$this->isTradeable($security->getTicker())
+                || $security->getIsForex()
+                || $security->getIsCrypto()
+              )
+                continue;
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
 
@@ -235,12 +239,13 @@ class SimplePullbackStrategy implements SwingTradingStrategyInterface
             /** @var CandleStick $candleStick */
             $closePrice = $candleStick->getClosePrice();
             $lowestPrice = $candleStick->getLowestPrice();
+            $highestPrice = $candleStick->getHighestPrice();
             $exitDate = $candleStick->getDate();
 
             $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
             $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
 
-            if($closePrice <= $stopLoss)
+            if($lowestPrice <= $stopLoss)
             {
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));

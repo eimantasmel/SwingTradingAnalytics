@@ -1,0 +1,55 @@
+de#changed-xdebug.remote_autostart (See: https://xdebug.org/docs/errors#CFG-C-CHANGED)
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-01 | 2024-05-30 | OCGN  |       0.665|       0.330|       1.320|       1.574|  Yes   |   1,383.372|   Long   | 0.005|
+| 2  | 2024-06-03 | 2024-07-02 | SPWH  |       4.310|       2.090|       8.360|       2.014|   No   |   1,171.107|   Long   | 0.130|
+| 3  | 2024-01-15 | 2024-08-14 | PBYI  |       5.745|       2.720|      10.880|       2.671|   No   |   1,013.358|   Long   | 0.305|
+| 4  | 2024-01-03 | 2024-11-01 | AKBA  |       1.380|       0.685|       2.740|       1.690|  Yes   |   1,075.628|   Long   | 0.010|
+| 5  | 2024-01-08 | 2024-11-01 | OCUL  |       4.827|       2.370|       9.480|      10.450|  Yes   |   1,406.381|   Long   | 0.087|
+| 6  | 2024-01-10 | 2024-11-01 | PGEN  |       1.382|       0.675|       2.700|       0.820|   No   |   1,288.929|   Long   | 0.032|
+| 7  | 2024-01-19 | 2024-11-01 | ARDX  |       8.322|       4.140|      16.560|       6.090|   No   |   1,214.271|   Long   | 0.042|
+| 8  | 2024-01-23 | 2024-11-01 | HRTX  |       2.212|       1.100|       4.400|       1.780|   No   |   1,158.409|   Long   | 0.012|
+| 9  | 2024-07-02 | 2024-11-01 | HIMX  |       7.896|       3.935|      15.740|       5.760|   No   |   1,069.818|   Long   | 0.026|
+| 10 | 2024-08-16 | 2024-11-01 | COMM  |       3.973|       1.980|       7.920|       6.990|  Yes   |   1,283.010|   Long   | 0.013|
+
+Final trading capital is:1283.0101588149
+Highest Capital: 1383.3719596192
+Max Drawdown :-0.26747226526843
+Win percentage is: 0.4
+Average fee: 1.1175
+Average risk reward: 2.766481958609
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 834.05258509166
+Standart Deviation of final trading capital: 298.87027001622
+
+Average of risk reward ratio: 0.55329639172181
+Standart Deviation of risk reward ratio: 1.1065927834436
+
+Average of risk win percentage: 0.24666666666667
+Standart Deviation of win percentage: 0.11012619024455
+
+Average of max drawdown: -0.21065202403947
+Standart Deviation of max drawdown: 0.070511281979106
+
+Average of highest capital: 1076.6743919238
+Standart Deviation of highest capital: 153.34878384767
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 2
+Amount of simulations where final trading capital is lower than initial investment: 3
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+The results are not satisfactory. too few trades and win percentage too low.

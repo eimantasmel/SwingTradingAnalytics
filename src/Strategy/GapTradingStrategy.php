@@ -172,6 +172,13 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
         return $tradingCapital;
     }
     
+
+    // TODO: gap strategy might be profitable but you need to tweak that to increase number of trades. 
+    // don't focus solely on lowest and highest instead focus on close and open price
+    // use only 2 last candlesticks.
+    // go long when nasdaq uptrending security previous candlestick price is under sma200
+    // go short when nasdaq is downtrend but previous candlestick price is above sma200
+    // My general advice create new strategy and delete this one. because implementing all that shit like pyramiding will take much more time.
     private function isSecurityEligibleForTrading(array $lastCandleSticks) : bool
     {
         $lastElementIndex = count($lastCandleSticks) - 1;

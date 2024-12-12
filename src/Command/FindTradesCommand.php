@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\YahooWebScrapService;
 use App\Service\Nasdaq2000IndexService;
+use App\Service\ChineseMarketIndexService;
 use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
@@ -24,11 +25,13 @@ class FindTradesCommand extends Command
     private EntityManagerInterface $entityManager;
     private SwingTradingStrategyInterface $swingTradingStrategy;
     private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private ChineseMarketIndexService $chineseMarketIndexService;
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
                                 EntityManagerInterface $entityManager,
                                 SwingTradingStrategyInterface $swingTradingStrategy,
-                                Nasdaq2000IndexService $nasdaq2000IndexService
+                                Nasdaq2000IndexService $nasdaq2000IndexService,
+                                ChineseMarketIndexService $chineseMarketIndexService
                                 )
     {
         parent::__construct();
@@ -36,6 +39,7 @@ class FindTradesCommand extends Command
         $this->entityManager = $entityManager;
         $this->swingTradingStrategy = $swingTradingStrategy;
         $this->nasdaq2000IndexService = $nasdaq2000IndexService;
+        $this->chineseMarketIndexService = $chineseMarketIndexService;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -56,6 +60,7 @@ class FindTradesCommand extends Command
     {
         $output->writeln(sprintf("Updating nasdaq index..."));
         $this->nasdaq2000IndexService->updateNasdaqData();
+        // $this->chineseMarketIndexService->updateChineseIndexData();  // TODO: uncomment this if you looking for chinese stocks.
         $securities = $this->entityManager->getRepository(Security::class)->findAll();
 
         shuffle($securities);

@@ -2,17 +2,11 @@
 
 namespace App\Constants;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Dotenv\Dotenv;
-use App\Service\MontecarloSimulationService;
-
 class BaseConstants 
 {
     public const NASDAQ_2000_TICKER = '%5EIXIC';
+    public const CHINESE_MARKET_TICKER = '000300.SS';
     public const CRYPTO_MARKET_TICKER = 'C20-USD';
-
 
     public const AMOUNT_OF_TRADES = 'Amount of Trades';
     public const FINAL_TRADING_CAPITAL = 'Final Trading Capital';
@@ -38,5 +32,4 @@ class BaseConstants
 
     public const AVERAGE_RISK_REWARD_RATIO = "Average Risk Reward Ratio";
     public const AVERAGE_WIN_PERCENTAGE = "Average Win Percentage";
-
 }
