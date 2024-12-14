@@ -14,6 +14,7 @@ use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
 use Symfony\Component\Console\Input\InputOption;
 use DateTime;
+use App\Interface\MarketIndexInterface;
 
 #[AsCommand(
     name: 'app:check-exit-position',
@@ -27,12 +28,12 @@ class CheckExitPositionCommand extends Command
     private YahooWebScrapService $yahooWebScrapService;
     private EntityManagerInterface $entityManager;
     private SwingTradingStrategyInterface $swingTradingStrategy;
-    private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private MarketIndexInterface $nasdaq2000IndexService;
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
                                 EntityManagerInterface $entityManager,
                                 SwingTradingStrategyInterface $swingTradingStrategy,
-                                Nasdaq2000IndexService $nasdaq2000IndexService
+                                MarketIndexInterface $nasdaq2000IndexService
                                 )
     {
         parent::__construct();
@@ -65,7 +66,7 @@ class CheckExitPositionCommand extends Command
         }
 
         $output->writeln(sprintf("Updating nasdaq index..."));
-        $this->nasdaq2000IndexService->updateNasdaqData();
+        $this->nasdaq2000IndexService->updateMarketData();
 
         if($this->checkWhetherToExit($ticker, $date, $stopLoss, $sharesAmount, $output))
         {

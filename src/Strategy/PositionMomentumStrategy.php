@@ -6,9 +6,9 @@ use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
 use App\Constants\BaseConstants;
-use App\Service\Nasdaq2000IndexService;
 use App\Service\TechnicalIndicatorsService;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Interface\MarketIndexInterface;
 
 use DateTime;
 /** I decided to make this strategy oriented only on crypto assets. 
@@ -19,7 +19,7 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const PYRAMIDING_TRADES_AMOUNT = 5;
+    private const PYRAMIDING_TRADES_AMOUNT = 8;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 400;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 600;
@@ -29,7 +29,6 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
     private const MIN_RSI = 80;
     private const RSI_TO_LEAVE = 40;
 
-
     private const MIN_PRICE = 0.0001;
 
     private array $trade_information = [];
@@ -38,14 +37,14 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
     private float $maxDrawdown;
     private float $highestCapitalValue;
 
-    private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private MarketIndexInterface $marketIndex;
     private TechnicalIndicatorsService $technicalIndicatorsService;
     private EntityManagerInterface $entityManager;
 
-    public function __construct(Nasdaq2000IndexService $nasdaq2000IndexService,
+    public function __construct(MarketIndexInterface $marketIndex,
                                 TechnicalIndicatorsService $technicalIndicatorsService,
                                 EntityManagerInterface $entityManager) {
-        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
+        $this->marketIndex = $marketIndex;
         $this->technicalIndicatorsService = $technicalIndicatorsService;
         $this->entityManager = $entityManager;
     }
@@ -67,6 +66,7 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
                                       array $securities
                                      ) : array
     {
+        $securities = $this->getOnlyCryptos($securities);
         $this->results = [];
         $this->maxDrawdown = 0;
         $this->highestCapitalValue = $tradingCapital;
@@ -95,7 +95,7 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
             }
 
 
-            $nasdaqIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => BaseConstants::NASDAQ_2000_TICKER]);
+            $nasdaqIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndex->getTicker()]);
             $lastNasdaqMarketCandleSticks = $nasdaqIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
             $lastNasdaqCandleStick = $this->getLastCandleStick($lastNasdaqMarketCandleSticks);
             $nasdaqMarketPrices = $this->extractClosingPricesFromCandlesticks($lastNasdaqMarketCandleSticks);
@@ -110,7 +110,7 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
 
             $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital);
 
-            $randomDateInterval = (int)mt_rand(10, 30);
+            $randomDateInterval = (int)mt_rand(1, 4);
             $startDate->modify("+{$randomDateInterval} days");
 
             if($tradingCapital > $this->highestCapitalValue)
@@ -142,7 +142,7 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
         $tradesCounter = 0;
         foreach ($securities as $security) {
             // skips nasdaq2000 overall market security
-            if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER 
+            if($security->getTicker() == $this->marketIndex->getTicker()
                 || !$this->isTradeable($security->getTicker())
                 || $security->getIsForex()
               )
@@ -210,8 +210,8 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
     private function isSecurityEligibleForTrading(array $lastCandleSticks, $security, $tradingDate) : bool
     {
         // Decided to go only with crypto because results wasn't satisfactory.
-        // if(!$security->getIsCrypto())
-        //     return false;
+        if(!$security->getIsCrypto())           // TODO: it was pretty good results when I let trade and not only cryptos. maybe you can instead increase volume and trade not only cryptos.
+            return false;
 
         $period = 5;
         if($security->getIsCrypto())
@@ -221,8 +221,10 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
         if(!$weeklyCandleSticks || count($weeklyCandleSticks) < 15)     // 15 is the minimum amount of candlesticks to calculate rsi
             return false;
         
-        $prices = $this->extractClosingPricesFromCandlesticks($weeklyCandleSticks);
+        $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
         $sma200 = $this->technicalIndicatorsService->calculatesma($prices, 200);
+
+        // TODO: I think you should consider about opportunity to going short on cryptos as well
 
         $lastWeeklyCandleStick = $this->getLastCandleStick($weeklyCandleSticks);
 
@@ -443,5 +445,17 @@ class PositionMomentumStrategy implements SwingTradingStrategyInterface
         });
 
         $this->results[BaseConstants::TRADES_INFORMATION] = $tradesInformation;
+    }
+
+    private function getOnlyCryptos($securities)
+    {
+        $cryptos = [];
+        foreach ($securities as $security) {
+            /** @var Security $security */
+            if($security->getIsCrypto())
+                $cryptos[] = $security;
+        }
+
+        return $cryptos;
     }
 }

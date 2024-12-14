@@ -8,9 +8,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Service\YahooWebScrapService;
+use App\Interface\MarketIndexInterface;
 
-
-class Nasdaq2000IndexService
+class Nasdaq2000IndexService implements MarketIndexInterface
 {
     private EntityManagerInterface $entityManager;
     private Security $nasdaq2000Data;
@@ -35,7 +35,7 @@ class Nasdaq2000IndexService
             if($isRecursion)
                 return null;
             
-            $this->updateNasdaqData();
+            $this->updateMarketData();
             return $this->getCagrOfDates($startDate, $endDate, true);
         }
 
@@ -52,7 +52,7 @@ class Nasdaq2000IndexService
         return $cagr;
     }
 
-    public function updateNasdaqData()
+    public function updateMarketData()
     {
         $lastCandleStick = $this->nasdaq2000Data->getLastCandleStick();
         $lastYear = $lastCandleStick->getDate()->format("Y");
@@ -226,6 +226,11 @@ class Nasdaq2000IndexService
             if($counter >= $topN)
                 break;
         }
+    }
+
+    public function getTicker() : string
+    {
+        return BaseConstants::NASDAQ_2000_TICKER;
     }
 
 }

@@ -3,8 +3,8 @@
 namespace App\Service;
 
 use App\Service\MathService;
-use App\Service\Nasdaq2000IndexService;
 use App\Entity\CandleStick;
+use App\Interface\MarketIndexInterface;
 
 use InvalidArgumentException;
 
@@ -13,13 +13,12 @@ class TechnicalIndicatorsService
     private const SCALING_CONSTANT = 500;
     private const TAX_PER_SHARE = 0.005;
 
-
-    private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private MarketIndexInterface $marketIndex;
     private MathService $mathService;
 
-    public function __construct(Nasdaq2000IndexService $nasdaq2000IndexService,
+    public function __construct(MarketIndexInterface $marketIndex,
                                 MathService $mathService) {
-        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
+        $this->marketIndex = $marketIndex;
         $this->mathService = $mathService;
     }
 

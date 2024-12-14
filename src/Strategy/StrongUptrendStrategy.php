@@ -20,7 +20,7 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 450;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 600;
-    private const MIN_VOLUME = 300_000;
+    private const MIN_VOLUME = 1_000_000;
     private const CAPITAL_RISK = 0.1;
     private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
@@ -44,7 +44,7 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
                                 EntityManagerInterface $entityManager) {
 
         $this->technicalIndicatorsService = $technicalIndicatorsService;
-    $this->entityManager = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -104,14 +104,30 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
             $sma50Nasdaq = $this->technicalIndicatorsService->calculateSMA($nasdaqMarketPrices, 50);
             $closePriceNasdaq = $lastNasdaqCandleStick->getClosePrice();
 
-            if($closePriceNasdaq < $sma200Nasdaq || $sma50Nasdaq < $sma200Nasdaq || $closePriceNasdaq < $sma50Nasdaq)
+            // if($closePriceNasdaq < $sma200Nasdaq || $sma50Nasdaq < $sma200Nasdaq || $closePriceNasdaq < $sma50Nasdaq)
+            // {
+            //     $startDate->modify('+1 day');
+            //     continue;
+            // }
+
+            $position = null;
+            if($closePriceNasdaq > $sma200Nasdaq && $sma50Nasdaq > $sma200Nasdaq && $closePriceNasdaq > $sma50Nasdaq)
+            {
+                $position = 'Long';
+            }
+            else if($closePriceNasdaq < $sma200Nasdaq && $sma50Nasdaq < $sma200Nasdaq && $closePriceNasdaq < $sma50Nasdaq)
+            {
+                $position = 'Short';
+
+            }
+            else
             {
                 $startDate->modify('+1 day');
                 continue;
             }
 
 
-            $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital);
+            $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital, $position);
 
             $randomDateInterval = (int)mt_rand(2, 4);
             $startDate->modify("+{$randomDateInterval} days");
@@ -140,12 +156,11 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
         return $this->results;
     }
 
-    private function getTradingCapitalAfterDay(DateTime $tradingDate, array $securities, float $tradingCapital)
+    private function getTradingCapitalAfterDay(DateTime $tradingDate, array $securities, float $tradingCapital, string $position)
     {
         shuffle($securities);
         $tradesCounter = 0;
         foreach ($securities as $security) {
-
             if($security->getTicker() == BaseConstants::NASDAQ_2000_TICKER 
             || !$this->isTradeable($security->getTicker())
             || $security->getIsForex())
@@ -153,7 +168,7 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
             echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-            if($this->isSecurityEligibleForTrading($lastCandleSticks, $security))
+            if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $position))
             {
                 $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
                 $enterPrice = $lastCandleStick->getClosePrice();      // I'm do this because 
@@ -177,7 +192,8 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
                                                             $stopLoss, 
                                                             $sharesAmount, 
                                                             $tradingDate, 
-                                                            $enterPrice);
+                                                            $enterPrice,
+                                                            $position);
 
 
                 if($this->trade_information[BaseConstants::TRADE_POSITION] == 'Long')
@@ -194,11 +210,7 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
 
                 $tradingCapital -= $taxFee;
 
-                $tradeIncome = null; 
-                if($this->trade_information[BaseConstants::TRADE_POSITION] == 'Long')
-                    $tradeIncome = $tradingCapital - $tradingCapitalBeforeTrade;
-                else 
-                    $tradeIncome = $tradingCapitalBeforeTrade - $tradeCapital;
+                $tradeIncome = $tradingCapital - $tradingCapitalBeforeTrade;
 
                 $this->addTradingDataInformation(BaseConstants::TRADING_CAPITAL, $tradeIncome);
 
@@ -220,7 +232,7 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
         return $tradingCapital;
     }
     
-    private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security) : bool
+    private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security, string $position) : bool
     {
         if(count($lastCandleSticks) < self::MIN_AMOUNT_OF_CANDLESTICKS)    
             return false;
@@ -236,10 +248,11 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
         $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
 
         $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
-        $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 50);
+        $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 10);
 
         if( $closePrice > $sma200 
             && $closePrice < $sma10
+            && $position == 'Long'
             && $this->checkWhetherIsStrongUptrend($security, $lastCandleSticks) 
           )
         {
@@ -251,6 +264,21 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
             return true;
         }
 
+
+        if( $closePrice < $sma200 
+            && $closePrice > $sma10
+            && $position == 'Short'
+            && $this->checkWhetherIsStrongDowntrend($security, $lastCandleSticks) 
+         )
+        {
+            $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
+            $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $sma200);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
+
+            return true;
+        }
+
+
         return false;
     }
 
@@ -259,7 +287,7 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
         return $lastCandleSticks[count($lastCandleSticks) - 1];
     }
 
-    private function getProfit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice) : float 
+    private function getProfit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice, string $position) : float 
     {
         $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $tradingDate->format('Y-m-d'));
         $this->addTradingDataInformation(BaseConstants::TRADE_SECURITY_TICKER, $security->getTicker());
@@ -275,53 +303,105 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
 
             $exitDate = $candleStick->getDate();
 
-            $lastCandleSticks = $security->getLastNCandleSticks($exitDate, 200);
+            $lastCandleSticks = $security->getLastNCandleSticks($exitDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
             $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
             $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
             $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 10);
             $sma20 = $this->technicalIndicatorsService->calculateSMA($prices, 20);
 
+            $atr20 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 20);
+
+
             
 
             $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
             $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
-        
-            if($closePrice < $sma200) // That's a looser.
+            $spread = $position == "Long" ? $spread : -1 * $spread;
+
+            if($position == 'Long')
             {
-                // so that means that you should leave your position 30 minutes before market close let's say
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
-                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
-                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
-                return ($closePrice - $spread) * $sharesAmount;
+                if($closePrice < $sma200) // That's a looser.
+                {
+                    // so that means that you should leave your position 30 minutes before market close let's say
+                    $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
+                    $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+                    return ($closePrice - $spread) * $sharesAmount;
+                }
+    
+                if($lowestPrice <= $stopLoss)        // That's a looser.
+                {
+                    // so that means that you should leave your position 30 minutes before market close let's say
+                    $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
+                    $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+    
+                    return ($stopLoss - $spread) * $sharesAmount;
+                }
+    
+                // if($closePrice > $sma10 && $sma10 > $sma20 && $closePrice > $enterPrice)  # TODO: old version
+                // {
+                //     $targetReached = true;
+                // }
+                  
+                if($closePrice > $sma10 && $closePrice > $enterPrice)   # new version 
+                {
+                    $targetReached = true;
+                }
+    
+                //TODO: in old version it supposed to < $sma20
+                if($targetReached && $closePrice > $enterPrice + $atr20 && $closePrice < $sma10)        // that's a winner
+                {
+                    // so that means that you should leave your position 30 minutes before market close let's say
+                    $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
+                    $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                    
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+    
+                    $riskReward = ($closePrice  - $enterPrice) / ($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+    
+                    return ($closePrice - $spread) * $sharesAmount;
+                }
             }
-
-            if($lowestPrice <= $stopLoss)        // That's a looser.
-            {
-                // so that means that you should leave your position 30 minutes before market close let's say
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
-                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
-                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
-
-                return ($stopLoss - $spread) * $sharesAmount;
-            }
-
-            if($closePrice > $sma10 && $sma10 > $sma20 && $closePrice > $enterPrice)  
-            {
-                $targetReached = true;
-            }
-
-            if($targetReached && $closePrice > $enterPrice && $closePrice < $sma20)        // that's a winner
-            {
-                // so that means that you should leave your position 30 minutes before market close let's say
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
-                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
-                
-                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
-
-                $riskReward = ($closePrice  - $enterPrice) / ($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
-                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
-
-                return ($closePrice - $spread) * $sharesAmount;
+            else {
+                if($closePrice > $sma200) // That's a looser.
+                {
+                    // so that means that you should leave your position 30 minutes before market close let's say
+                    $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
+                    $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+                    return ($closePrice - $spread) * $sharesAmount;
+                }
+    
+                if($lowestPrice >= $stopLoss)        // That's a looser.
+                {
+                    // so that means that you should leave your position 30 minutes before market close let's say
+                    $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
+                    $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+    
+                    return ($stopLoss - $spread) * $sharesAmount;
+                }
+    
+                if($closePrice < $sma10 && $sma10 < $sma20 && $closePrice < $enterPrice)  
+                {
+                    $targetReached = true;
+                }
+    
+                if($targetReached && $closePrice < $enterPrice && $closePrice > $sma20)        // that's a winner
+                {
+                    // so that means that you should leave your position 30 minutes before market close let's say
+                    $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
+                    $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                    
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+    
+                    $riskReward = abs($closePrice  - $enterPrice) / abs($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+    
+                    return ($closePrice - $spread) * $sharesAmount;
+                }
             }
         }
 
@@ -385,6 +465,25 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
         return true;
     }
 
+    private function checkWhetherIsStrongDowntrend(Security $security, array $candleSticks) : bool
+    {
+        for ($i=0; $i < count($candleSticks); $i++) { 
+            $candleStick = $candleSticks[$i];
+
+            if(count($candleSticks) - $i > self::AMOUNT_OF_TREND_DAYS)  
+                continue;
+
+            /** @var CandleStick $candleStick */
+            $lastCandleSticks = $security->getLastNCandleSticks($candleStick->getDate(), self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
+            $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
+
+            if($candleStick->getClosePrice() > $sma200)
+                return false;
+        }
+
+        return true;
+    }
     
     private function updateResultTradingInformation($tradingCapital, $tradeInformation)
     {
@@ -439,7 +538,8 @@ class StrongUptrendStrategy implements SwingTradingStrategyInterface
     {
         $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
         // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security))
+        // I will fix this later with position, because now Long position is hardcoded
+        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, "Long"))
         {
             $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
             echo "Stop loss is: " . $stopLoss  . "\n\r";

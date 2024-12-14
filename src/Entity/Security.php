@@ -32,6 +32,11 @@ class Security
     #[ORM\OneToMany(mappedBy: 'security', targetEntity: CandleStick::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $candleSticks;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $sector = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $industry = null;
     
     public function __construct()
     {
@@ -88,6 +93,28 @@ class Security
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getSector(): ?string
+    {
+        return $this->sector;
+    }
+
+    public function setSector(?string $sector): self
+    {
+        $this->sector = $sector;
+        return $this;
+    }
+
+    public function getIndustry(): ?string
+    {
+        return $this->industry;
+    }
+
+    public function setIndustry(?string $industry): self
+    {
+        $this->industry = $industry;
         return $this;
     }
 

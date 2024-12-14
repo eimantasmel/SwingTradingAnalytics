@@ -8,11 +8,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\YahooWebScrapService;
-use App\Service\Nasdaq2000IndexService;
-use App\Service\ChineseMarketIndexService;
 use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
+use App\Interface\MarketIndexInterface;
 use DateTime;
 
 #[AsCommand(
@@ -24,22 +23,19 @@ class FindTradesCommand extends Command
     private YahooWebScrapService $yahooWebScrapService;
     private EntityManagerInterface $entityManager;
     private SwingTradingStrategyInterface $swingTradingStrategy;
-    private Nasdaq2000IndexService $nasdaq2000IndexService;
-    private ChineseMarketIndexService $chineseMarketIndexService;
+    private MarketIndexInterface $marketIndex;
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
                                 EntityManagerInterface $entityManager,
                                 SwingTradingStrategyInterface $swingTradingStrategy,
-                                Nasdaq2000IndexService $nasdaq2000IndexService,
-                                ChineseMarketIndexService $chineseMarketIndexService
+                                MarketIndexInterface $marketIndex
                                 )
     {
         parent::__construct();
         $this->yahooWebScrapService = $yahooWebScrapService;
         $this->entityManager = $entityManager;
         $this->swingTradingStrategy = $swingTradingStrategy;
-        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
-        $this->chineseMarketIndexService = $chineseMarketIndexService;
+        $this->marketIndex = $marketIndex;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -59,8 +55,7 @@ class FindTradesCommand extends Command
     private function findTrades(OutputInterface $output, $currentYear)
     {
         $output->writeln(sprintf("Updating nasdaq index..."));
-        $this->nasdaq2000IndexService->updateNasdaqData();
-        // $this->chineseMarketIndexService->updateChineseIndexData();  // TODO: uncomment this if you looking for chinese stocks.
+        $this->marketIndex->updateMarketData();
         $securities = $this->entityManager->getRepository(Security::class)->findAll();
 
         shuffle($securities);

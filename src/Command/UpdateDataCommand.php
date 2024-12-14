@@ -14,8 +14,6 @@ use DateTime;
 use Symfony\Component\Dotenv\Dotenv;
 use App\Constants\BaseConstants;
 
-
-
 #[AsCommand(
     name: 'app:update-data',
     description: 'This cron will  update data about stocks and cryptos in the database',
@@ -61,7 +59,10 @@ class UpdateDataCommand extends Command
         }
 
         $index = 0;
+        $targetReached = false;
         foreach ($securities as $security) {
+
+            /** @var Security $security */
             $olderDateYear = self::OLDER_DATE_START;
             /** Check does the candlestick with the older date exist */
             /** I need to check three dates because it might be a weekend and that check would be inconclusive in order to skip data which already exist in DB */
@@ -129,18 +130,6 @@ class UpdateDataCommand extends Command
 
             for ($i=0; $i < count($data['Volume']); $i++) { 
                 $date = new DateTime(($data['Dates'][$i]));
-
-                // $tempCandleStick = $security->getCandleStickByDate($date);
-
-                // if($tempCandleStick && $tempCandleStick->getOpenPrice() == "9999.999999")
-                // {
-                //     $tempCandleStick->setOpenPrice($data['Open Price'][$i]);
-                //     $tempCandleStick->setHighestPrice($data['High Price'][$i]);
-                //     $tempCandleStick->setLowestPrice($data['Low Price'][$i]);
-                //     $tempCandleStick->setClosePrice($data['Close Price'][$i]);
-                //     continue;
-                // }
-
 
                 if($security->isDateExist($date) || !$data['Open Price'][$i])
                     continue;

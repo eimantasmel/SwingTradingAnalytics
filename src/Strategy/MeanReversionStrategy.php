@@ -6,8 +6,8 @@ use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
 use App\Constants\BaseConstants;
-use App\Service\Nasdaq2000IndexService;
 use App\Service\TechnicalIndicatorsService;
+use App\Interface\MarketIndexInterface;
 
 use DateTime;
 
@@ -35,12 +35,12 @@ class MeanReversionStrategy implements SwingTradingStrategyInterface
     private const PYRAMIDING_TRADES_AMOUNT = 3;
 
 
-    private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private MarketIndexInterface $marketIndex;
     private TechnicalIndicatorsService $technicalIndicatorsService;
 
-    public function __construct(Nasdaq2000IndexService $nasdaq2000IndexService,
+    public function __construct(MarketIndexInterface $marketIndex,
                                 TechnicalIndicatorsService $technicalIndicatorsService) {
-        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
+        $this->marketIndex = $marketIndex;
         $this->technicalIndicatorsService = $technicalIndicatorsService;
     }
 

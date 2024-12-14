@@ -10,31 +10,30 @@ use App\Constants\BaseConstants;
 use App\Service\TechnicalIndicatorsService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Interface\MarketIndexInterface;
+use App\Service\IndustryAnalysisService;
+
 
 use DateTime;
-/** this strategy checks whether nasdaqsma50 > nasdaqsma200 and nasdaqsma200 > closeprice
- * interesting
- * another thing exit point when closeprice is below sma50. So it's all about close price and not lowers price.
- * key considerations
- * it might be chalenging to find new trades because there's a bunch of conditions espesially the condition when lowestprice < sma20 && closeprice > sma20 and previous candle is bearish
- * and last candle is bullish
- * TODO: it's time to run montecarlo simulation on this straategy and figure out whether it's profitable or doesn't
+/**
+ * 
  */
-
-class TripleSMAStrategy implements SwingTradingStrategyInterface
+class NoStopLossStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 450;
-    private const AMOUNT_OF_NEXT_CANDLESTICKS = 600;
-    private const MIN_VOLUME = 1_000_000;
-    private const CAPITAL_RISK = 0.14;
+    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 720;
+    private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
+    private const MIN_VOLUME = 2_000_000;
+    private const CAPITAL_RISK = 0.5;
     private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
     private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
-    private const MIN_PRICE = 0.0001;
+    private const MIN_PRICE = 20;
+    private const AMOUNT_OF_TREND_DAYS = 100;
 
-    private const PYRAMIDING_TRADES_AMOUNT = 7;
+    private const PYRAMIDING_TRADES_AMOUNT = 6;
+
+    private const AMOUNT_OF_CANDLESTICKS_PER_TRADE = 10;
 
 
     private array $trade_information = [];
@@ -46,15 +45,18 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
     private TechnicalIndicatorsService $technicalIndicatorsService;
     private EntityManagerInterface $entityManager;
     private MarketIndexInterface $marketIndexInterface;
+    private IndustryAnalysisService $industryAnalysisService;
 
     public function __construct(TechnicalIndicatorsService $technicalIndicatorsService,
                                 EntityManagerInterface $entityManager,
-                                MarketIndexInterface $marketIndexInterface
+                                MarketIndexInterface $marketIndexInterface,
+                                IndustryAnalysisService $industryAnalysisService
                                ) 
     {
         $this->technicalIndicatorsService = $technicalIndicatorsService;
         $this->entityManager = $entityManager;
         $this->marketIndexInterface = $marketIndexInterface;
+        $this->industryAnalysisService = $industryAnalysisService;
     }
 
     /**
@@ -67,6 +69,8 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
      * it would be like date_of_start_trade, ticker, traded sum, stop loss, exit loss
      * @param Security[] $securities
      * return this data in the assoc array.
+     * TODO: So now you have to adapt this strategy on short usage as well, but firstly run montecarlo simulation on 5
+     * iterations and find out whether this strategy is profitable, because most of them are not.
      */
     public function getSimulationData(string $startDate, 
                                       string $endDate,
@@ -92,6 +96,9 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
                 $startDate->modify('+1 day');
                 continue;
             }
+            
+            // TODO: later i will test this right now there's problem with speed performance.
+            // $industry = $this->industryAnalysisService->getTopTrendingIndustry($startDate);
 
                         
             $tradingCapital = $this->processPyramidingTrades($startDate, $tradingCapital);
@@ -103,23 +110,49 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
             }
 
 
-            $nasdaqIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndexInterface->getTicker()]);
-            $lastNasdaqMarketCandleSticks = $nasdaqIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            $lastNasdaqCandleStick = $this->getLastCandleStick($lastNasdaqMarketCandleSticks);
+            // $nasdaqIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => BaseConstants::NASDAQ_2000_TICKER]);
+            // $lastNasdaqMarketCandleSticks = $nasdaqIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            // $lastNasdaqCandleStick = $this->getLastCandleStick($lastNasdaqMarketCandleSticks);
     
-            $nasdaqMarketPrices = $this->extractClosingPricesFromCandlesticks($lastNasdaqMarketCandleSticks);
-            $sma200Nasdaq = $this->technicalIndicatorsService->calculateSMA($nasdaqMarketPrices, 200);
-            $sma50Nasdaq = $this->technicalIndicatorsService->calculateSMA($nasdaqMarketPrices, 50);
-            $closePriceNasdaq = $lastNasdaqCandleStick->getClosePrice();
+            // $nasdaqMarketPrices = $this->extractClosingPricesFromCandlesticks($lastNasdaqMarketCandleSticks);
+            // $sma200Nasdaq = $this->technicalIndicatorsService->calculateSMA($nasdaqMarketPrices, 200);
+            // $sma50Nasdaq = $this->technicalIndicatorsService->calculateSMA($nasdaqMarketPrices, 50);
+            // $closePriceNasdaq = $lastNasdaqCandleStick->getClosePrice();
 
-            if($closePriceNasdaq < $sma200Nasdaq || $sma50Nasdaq < $sma200Nasdaq)
+
+            $marketIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndexInterface->getTicker()]);
+            $lastMarketIndexCandleSticks = $marketIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            $lastMarketCandleStick = $this->getLastCandleStick($lastMarketIndexCandleSticks);
+    
+            $marketIndexPrices = $this->extractClosingPricesFromCandlesticks($lastMarketIndexCandleSticks);
+            $sma200Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 200);
+            $sma50Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 50);
+            $closePriceMarket = $lastMarketCandleStick->getClosePrice();
+
+            // if($closePriceNasdaq < $sma200Nasdaq || $sma50Nasdaq < $sma200Nasdaq || $closePriceNasdaq < $sma50Nasdaq)
+            // {
+            //     $startDate->modify('+1 day');
+            //     continue;
+            // }
+
+            $position = null;
+            if($closePriceMarket > $sma200Market && $sma50Market > $sma200Market && $closePriceMarket > $sma50Market)
+            {
+                $position = 'Long';
+            }
+            else if($closePriceMarket < $sma200Market && $sma50Market < $sma200Market && $closePriceMarket < $sma50Market)
+            {
+                $position = 'Short';
+
+            }
+            else
             {
                 $startDate->modify('+1 day');
                 continue;
             }
 
 
-            $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital);
+            $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital, $position);
 
             $randomDateInterval = (int)mt_rand(2, 4);
             $startDate->modify("+{$randomDateInterval} days");
@@ -148,21 +181,19 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
         return $this->results;
     }
 
-    private function getTradingCapitalAfterDay(DateTime $tradingDate, array $securities, float $tradingCapital)
+    private function getTradingCapitalAfterDay(DateTime $tradingDate, array $securities, float $tradingCapital, string $position)
     {
         shuffle($securities);
         $tradesCounter = 0;
         foreach ($securities as $security) {
-            
-            if($security->getTicker() == $this->marketIndexInterface->getTicker() 
-                || !$this->isTradeable($security->getTicker())
-                || $security->getIsForex()
-              )
+            if($security->getTicker() == $this->marketIndexInterface->getTicker()
+            || !$this->isTradeable($security->getTicker())
+            || $security->getIsForex())
                 continue;
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-            if($this->isSecurityEligibleForTrading($lastCandleSticks, $tradingDate))
+            // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
+            if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $position))
             {
                 $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
                 $enterPrice = $lastCandleStick->getClosePrice();      // I'm do this because 
@@ -186,7 +217,8 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
                                                             $stopLoss, 
                                                             $sharesAmount, 
                                                             $tradingDate, 
-                                                            $enterPrice);
+                                                            $enterPrice,
+                                                            $position);
 
 
                 if($this->trade_information[BaseConstants::TRADE_POSITION] == 'Long')
@@ -203,11 +235,7 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
 
                 $tradingCapital -= $taxFee;
 
-                $tradeIncome = null; 
-                if($this->trade_information[BaseConstants::TRADE_POSITION] == 'Long')
-                    $tradeIncome = $tradingCapital - $tradingCapitalBeforeTrade;
-                else 
-                    $tradeIncome = $tradingCapitalBeforeTrade - $tradeCapital;
+                $tradeIncome = $tradingCapital - $tradingCapitalBeforeTrade;
 
                 $this->addTradingDataInformation(BaseConstants::TRADING_CAPITAL, $tradeIncome);
 
@@ -229,46 +257,53 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
         return $tradingCapital;
     }
     
-    private function isSecurityEligibleForTrading(array $lastCandleSticks, $tradingDate) : bool
+    private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security, string $position) : bool
     {
         if(count($lastCandleSticks) < self::MIN_AMOUNT_OF_CANDLESTICKS)    
             return false;
 
         $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
         $closePrice = $lastCandleStick->getClosePrice();
-        $openPrice = $lastCandleStick->getOpenPrice();
-        $lowestPrice = $lastCandleStick->getLowestPrice();
         $volume = $lastCandleStick->getVolume();
 
         if($closePrice < self::MIN_PRICE || $volume < self::MIN_VOLUME)
             return false;
 
-        $previousCandleStick = $lastCandleSticks[count($lastCandleSticks) - 2];
-
         $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
 
         $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
-        $sma50 = $this->technicalIndicatorsService->calculateSMA($prices, 50);
         $sma20 = $this->technicalIndicatorsService->calculateSMA($prices, 20);
 
-        $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
-
-        if($closePrice > $sma200 
-            && $sma200 < $sma50
-            && $sma20 > $sma50
-            && $closePrice > $openPrice
+        if( $closePrice > $sma200 
             && $closePrice > $sma20
-            && $lowestPrice < $sma20
-            && $previousCandleStick->getClosePrice() < $previousCandleStick->getOpenPrice()
-            && $volume > $previousCandleStick->getVolume()
+            && $position == 'Long'
+            && $this->checkWhetherIsStrongUptrend($security, $lastCandleSticks) 
           )
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
-            $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $sma50 - $atr14 * 2);
+            $stopLoss = $this->getLowestPrice($lastCandleSticks);
+            $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
+
+
+            return true;
+        }
+
+
+        if( $closePrice < $sma200 
+            && $closePrice < $sma20
+            && $position == 'Short'
+            && $this->checkWhetherIsStrongDowntrend($security, $lastCandleSticks) 
+         )
+        {
+            $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
+            $stopLoss = $this->getHighestPrice($lastCandleSticks);
+            $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
             $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
 
             return true;
         }
+
 
         return false;
     }
@@ -278,71 +313,69 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
         return $lastCandleSticks[count($lastCandleSticks) - 1];
     }
 
-    private function getProfit(Security $security, $stopLoss, $sharesAmount, DateTime $tradingDate, float $enterPrice) : float 
+    private function getProfit(Security $security, $stopLoss, float $sharesAmount, DateTime $tradingDate, float $enterPrice, string $position) : float 
     {
         $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $tradingDate->format('Y-m-d'));
         $this->addTradingDataInformation(BaseConstants::TRADE_SECURITY_TICKER, $security->getTicker());
         $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
 
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
+        $counter = 0;
         foreach ($nextCandleSticks as $candleStick) {
+
             if($candleStick->getDate() == $tradingDate)
             {
-                $previousCandleStick = $candleStick;
                 continue;
             }
+
 
             /** @var CandleStick $candleStick */
             $closePrice = $candleStick->getClosePrice();
             $lowestPrice = $candleStick->getLowestPrice();
-
-
             $exitDate = $candleStick->getDate();
-
-            $lastCandleSticks = $security->getLastNCandleSticks($exitDate, 200);
-            $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
-            $sma50 = $this->technicalIndicatorsService->calculateSMA($prices, 50);
-            
 
             $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
             $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
-        
-            if($lowestPrice <= $stopLoss)        // That's a looser.
-            {
-                // so that means that you should leave your position 30 minutes before market close let's say
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
-                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
-                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+            $spread = $position == "Long" ? $spread : -1 * $spread;
 
+
+            if($lowestPrice < $stopLoss && $position == "Long")
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $closePrice = $candleStick->getClosePrice();
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+        
                 return ($stopLoss - $spread) * $sharesAmount;
             }
 
-            if($closePrice < $sma50)        // it might be a winner
+            if($lowestPrice > $stopLoss && $position == "Short")
             {
-                // so that means that you should leave your position 30 minutes before market close let's say
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
-                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate->format('Y-m-d'));
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $closePrice = $candleStick->getClosePrice();
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
-
-                if($closePrice > $enterPrice)
-                {
-                    // TODO: risk reward gonna be pesimistic so you should not pay attention into risk reward. 
-                    // if montecarlo simulation show that it's profitable it's profitable despite poor riskreward performance.
-                    $riskReward = ($closePrice  - $enterPrice) / ($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
-                    $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
-                }
-
-                return ($closePrice - $spread) * $sharesAmount;
+        
+                return ($stopLoss - $spread) * $sharesAmount;
             }
+
+            if($counter == self::AMOUNT_OF_CANDLESTICKS_PER_TRADE)
+            {
+                break;
+            }
+
+            $counter++;
         }
 
         $exitDate = $candleStick->getDate()->format('Y-m-d');
         $closePrice = $candleStick->getClosePrice();
         $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
-        $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice);
+        $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
         $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
 
-        return $candleStick->getClosePrice() * $sharesAmount;
+        return ($candleStick->getClosePrice() - $spread) * $sharesAmount;
     }
 
     private function getTradeCapital($tradingCapital, $enterPrice, $sharesAmount)
@@ -353,10 +386,10 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
         return $sharesAmount * $enterPrice;
     }
 
-    private function getSharesAmount($tradingCapital, $stopLoss, $enterPrice) : int
+    private function getSharesAmount($tradingCapital, $stopLoss, $enterPrice) : float
     {
         $riskCapital = $tradingCapital * self::CAPITAL_RISK;
-        $sharesAmount = (int)($riskCapital / (abs($enterPrice - $stopLoss)));
+        $sharesAmount = (float)($riskCapital / (abs($enterPrice - $stopLoss)));
 
         return $sharesAmount;
     }
@@ -376,6 +409,67 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
         return $prices;
     }
 
+    private function checkWhetherIsStrongUptrend(Security $security, array $candleSticks) : bool
+    {
+        for ($i=0; $i < count($candleSticks); $i++) { 
+            $candleStick = $candleSticks[$i];
+
+            if(count($candleSticks) - $i > self::AMOUNT_OF_TREND_DAYS)  
+                continue;
+
+            /** @var CandleStick $candleStick */
+            $lastCandleSticks = $security->getLastNCandleSticks($candleStick->getDate(), self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
+            $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
+
+            if($candleStick->getClosePrice() < $sma200)
+                return false;
+        }
+
+        return true;
+    }
+
+    private function checkWhetherIsStrongDowntrend(Security $security, array $candleSticks) : bool
+    {
+        for ($i=0; $i < count($candleSticks); $i++) { 
+            $candleStick = $candleSticks[$i];
+
+            if(count($candleSticks) - $i > self::AMOUNT_OF_TREND_DAYS)  
+                continue;
+
+            /** @var CandleStick $candleStick */
+            $lastCandleSticks = $security->getLastNCandleSticks($candleStick->getDate(), self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
+            $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
+
+            if($candleStick->getClosePrice() > $sma200)
+                return false;
+        }
+
+        return true;
+    }
+
+    private function getLowestPrice(array $candleSticks)
+    {
+        $lowestPrice = (float)$candleSticks[0]->getLowestPrice();
+        foreach ($candleSticks as $candleStick) {
+            if((float)$candleStick->getLowestPrice() < $lowestPrice)
+                $lowestPrice = (float)$candleStick->getLowestPrice();
+        }
+
+        return (float)$lowestPrice;
+    }
+
+    private function getHighestPrice(array $candleSticks)
+    {
+        $highestPrice = (float)$candleSticks[0]->getHighestPrice();
+        foreach ($candleSticks as $candleStick) {
+            if((float)$candleStick->getHighestPrice() > $highestPrice)
+                $highestPrice = (float)$candleStick->getHighestPrice();
+        }
+
+        return (float)$highestPrice;
+    }
     
     private function updateResultTradingInformation($tradingCapital, $tradeInformation)
     {
@@ -430,7 +524,8 @@ class TripleSMAStrategy implements SwingTradingStrategyInterface
     {
         $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
         // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-        if($this->isSecurityEligibleForTrading($lastCandleSticks, $tradingDate))
+        // I will fix this later with position, because now Long position is hardcoded
+        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, "Long"))
         {
             $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
             echo "Stop loss is: " . $stopLoss  . "\n\r";

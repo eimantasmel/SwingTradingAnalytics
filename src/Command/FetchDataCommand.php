@@ -80,6 +80,11 @@ class FetchDataCommand extends Command
             $security->setIsCrypto($cryptos);
             $security->setIsForex($forex);
 
+            sleep(5);
+            $data = $this->yahooWebScrapService->getStockData($security->getTicker());
+            $security->setIndustry($data['industry']);
+            $security->setSector($data['sector']);
+
             if(!$data['Open Price'])
             {
                 $output->writeln(sprintf("Something is wrong with %s", $ticker));
@@ -93,6 +98,10 @@ class FetchDataCommand extends Command
             }
 
             for ($i=0; $i < count($data['Volume']); $i++) { 
+                
+                if(!$data['Open Price'][$i])
+                    continue;
+
                 $candleStick = new CandleStick();
                 $candleStick->setVolume($data['Volume'][$i]);
                 $candleStick->setOpenPrice($data['Open Price'][$i]);
@@ -114,7 +123,7 @@ class FetchDataCommand extends Command
                 $this->entityManager->flush();
             }
 
-            // sleep(3);
+            sleep(5);
 
         }
         $this->entityManager->flush();

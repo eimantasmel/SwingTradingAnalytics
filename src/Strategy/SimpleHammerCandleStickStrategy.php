@@ -7,9 +7,9 @@ use App\Entity\Security;
 use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
 use App\Constants\BaseConstants;
-use App\Service\Nasdaq2000IndexService;
 use App\Service\TechnicalIndicatorsService;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Interface\MarketIndexInterface;
 
 use DateTime;
 /**
@@ -47,15 +47,15 @@ class SimpleHammerCandleStickStrategy implements SwingTradingStrategyInterface
     private float $maxDrawdown;
     private float $highestCapitalValue;
 
-    private Nasdaq2000IndexService $nasdaq2000IndexService;
+    private MarketIndexInterface $marketIndex;
     private TechnicalIndicatorsService $technicalIndicatorsService;
     private EntityManagerInterface $entityManager;
 
-    public function __construct(Nasdaq2000IndexService $nasdaq2000IndexService,
+    public function __construct(MarketIndexInterface $marketIndex,
                                 TechnicalIndicatorsService $technicalIndicatorsService,
                                 EntityManagerInterface $entityManager) {
 
-        $this->nasdaq2000IndexService = $nasdaq2000IndexService;
+        $this->marketIndex = $marketIndex;
         $this->technicalIndicatorsService = $technicalIndicatorsService;
         $this->entityManager = $entityManager;
     }
