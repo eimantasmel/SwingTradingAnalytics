@@ -21,7 +21,7 @@ use Symfony\Component\Dotenv\Dotenv;
 )]
 class FetchDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2016;
+    private const OLDER_DATE_START = 2020;
 
     private $stocksFilePath;
     private $cryptosFilePath;
@@ -35,7 +35,7 @@ class FetchDataCommand extends Command
         parent::__construct();
         $this->yahooWebScrapService = $yahooWebScrapService;
         $this->stocksFilePath = dirname(__DIR__, 2) . '/data/stocks.txt';      
-        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/test.txt';     
+        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/cryptos.txt';         
         $this->forexFilePath = dirname(__DIR__, 2) . '/data/forex.txt';      
         $this->entityManager = $entityManager;
     }

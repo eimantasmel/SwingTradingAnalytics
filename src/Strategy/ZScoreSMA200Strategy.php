@@ -27,8 +27,8 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
     private const CAPITAL_RISK = 0.1;
     private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
-    private const Z_SCORE_UPPER = 3;
-    private const Z_SCORE_LOWER = -3;
+    private const Z_SCORE_UPPER = 2;
+    private const Z_SCORE_LOWER = -2;
 
 
     private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
@@ -178,7 +178,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
                 continue;
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
+            echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
             if($this->isSecurityEligibleForTrading($lastCandleSticks, $security))
             {
                 $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
@@ -268,8 +268,8 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
         $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
 
         $zScore = $this->technicalIndicatorsService->calculateZScore($lastCandleSticks, 200, $sma200);
+        $previousCandleSticks = array_slice($lastCandleSticks, 0, count($lastCandleSticks) - self::DIP_LENGTH);
 
-        $previousCandleSticks = array_slice($lastCandleSticks, count($lastCandleSticks) - self::DIP_LENGTH);
         $previousZScore = $this->technicalIndicatorsService->calculateZScore($lastCandleSticks, 200, $sma200);
 
 
@@ -281,7 +281,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
 
         if(
             $zScore <= self::Z_SCORE_LOWER       // 100% percent more than average atr.
-            && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
+            // && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
             && $previousZScore > 0
           )
         {
@@ -296,7 +296,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
 
         if(
             $zScore >= self::Z_SCORE_UPPER       // 100% percent more than average atr.
-            && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
+            // && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
             && $previousZScore < 0
           )
         {
