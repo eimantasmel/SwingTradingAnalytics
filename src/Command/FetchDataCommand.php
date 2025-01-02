@@ -21,7 +21,7 @@ use Symfony\Component\Dotenv\Dotenv;
 )]
 class FetchDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2020;
+    private const OLDER_DATE_START = 2016;
 
     private $stocksFilePath;
     private $cryptosFilePath;
@@ -35,7 +35,7 @@ class FetchDataCommand extends Command
         parent::__construct();
         $this->yahooWebScrapService = $yahooWebScrapService;
         $this->stocksFilePath = dirname(__DIR__, 2) . '/data/stocks.txt';      
-        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/cryptos.txt';     
+        $this->cryptosFilePath = dirname(__DIR__, 2) . '/data/test.txt';     
         $this->forexFilePath = dirname(__DIR__, 2) . '/data/forex.txt';      
         $this->entityManager = $entityManager;
     }
@@ -50,8 +50,8 @@ class FetchDataCommand extends Command
         $cryptosTickers = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  
         $forexTickers = file($this->forexFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
  
-        $this->updateSecuritiesData($stocksTickers, $output);
-        // $this->updateSecuritiesData($cryptosTickers, $output, true, false);
+        // $this->updateSecuritiesData($stocksTickers, $output);
+        $this->updateSecuritiesData($cryptosTickers, $output, true, false);
         // $this->updateSecuritiesData($forexTickers, $output, false, true);
 
         return Command::SUCCESS;    
@@ -79,11 +79,6 @@ class FetchDataCommand extends Command
             $security->setTicker($ticker);
             $security->setIsCrypto($cryptos);
             $security->setIsForex($forex);
-
-            sleep(5);
-            $data = $this->yahooWebScrapService->getStockData($security->getTicker());
-            $security->setIndustry($data['industry']);
-            $security->setSector($data['sector']);
 
             if(!$data['Open Price'])
             {
@@ -113,6 +108,11 @@ class FetchDataCommand extends Command
                 $security->addCandleStick($candleStick);
                 $this->entityManager->persist($candleStick);
             }
+
+            sleep(5);
+            $data = $this->yahooWebScrapService->getStockData($security->getTicker());
+            $security->setIndustry($data['industry']);
+            $security->setSector($data['sector']);
 
             $this->entityManager->persist($security);
 

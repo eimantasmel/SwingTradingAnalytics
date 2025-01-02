@@ -17,7 +17,7 @@ use DateTime;
 /**
  * 
  */
-class GapTradingStrategy implements SwingTradingStrategyInterface
+class SimpleATRDoubleRewardStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
@@ -25,11 +25,13 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 100;
     private const MIN_VOLUME = 500_000;
     private const CAPITAL_RISK = 0.13;
-    private const MAX_AMOUNT_TRADES_PER_DAY = 10;
-
-    private const MIN_GAP_PERCENTAGE = 0.08;
+    private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
     private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
+
+    private const ATR_GROWTH_PERCENTAGE = 1.1;    // Default is 100 percent 
+    private const TARGET_PERCENTAGE = 2;      // Target is 200 percent from the stop loss
+    private const STOP_LOSS_PERCENTAGE = 1;      // Target is 25 percent from the stop loss
 
     private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
     private const MIN_PRICE = 20;
@@ -246,10 +248,9 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
     private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security, string $position) : bool
     {
         if(count($lastCandleSticks) < self::MIN_AMOUNT_OF_CANDLESTICKS)    
-            return false; 
+            return false;
 
         $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
-        $oneBeforeLastCandleSticks = $lastCandleSticks[count($lastCandleSticks) - 2];
 
         $closePrice = $lastCandleStick->getClosePrice();
         $openPrice = $lastCandleStick->getOpenPrice();
@@ -272,23 +273,29 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
 
         // if results will be poor try to use sma200 indicator
 
-        if(($oneBeforeLastCandleSticks->getClosePrice() / $lastCandleStick->getOpenPrice()) - 1 >= self::MIN_GAP_PERCENTAGE)       // 100% percent more than average atr.
+        if($closePrice > $openPrice
+            && $range  > $atr14 * (1 + self::ATR_GROWTH_PERCENTAGE
+            && $closePrice > $sma200)       // 100% percent more than average atr.
+          )
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
-            $stopLoss =  $closePrice - 1.5 * $atr14;
+            $stopLoss =  $closePrice - abs($closePrice - $lowestPrice) * self::STOP_LOSS_PERCENTAGE;
             $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
-            $target =  $closePrice + 1.5 * $atr14;
+            $target = $closePrice + abs($closePrice - $lowestPrice) * self::TARGET_PERCENTAGE;
             $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
 
             return true;
         }
 
-        if(($lastCandleStick->getOpenPrice() / $oneBeforeLastCandleSticks->getClosePrice()) - 1 >= self::MIN_GAP_PERCENTAGE)       // 100% percent more than average atr.
+        if($closePrice < $openPrice
+            && $range  > $atr14 * (1 + self::ATR_GROWTH_PERCENTAGE
+            && $closePrice < $sma200)       // 100% percent more than average atr.
+          )
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
-            $stopLoss =  $closePrice + 0.7 * $atr14;
+            $stopLoss =  $closePrice + abs($closePrice - $highestPrice) * self::STOP_LOSS_PERCENTAGE;
             $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
-            $target =  $closePrice - 0.7 * $atr14;
+            $target = $closePrice - abs($closePrice - $highestPrice) * self::TARGET_PERCENTAGE;
             $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
 
             return true;
@@ -660,5 +667,133 @@ class GapTradingStrategy implements SwingTradingStrategyInterface
         }
 
         return false;
+    }
+
+    private function getProfitAndScale(Security $security, $stopLoss, float $sharesAmount, DateTime $tradingDate, float $enterPrice, string $position) : float 
+    {
+        $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $tradingDate->format('Y-m-d'));
+        $this->addTradingDataInformation(BaseConstants::TRADE_SECURITY_TICKER, $security->getTicker());
+        $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+
+        $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
+        $target = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
+
+        $profit = 0;
+        foreach ($nextCandleSticks as $candleStick) {
+
+            if($candleStick->getDate() == $tradingDate)
+            {
+                continue;
+            }
+
+            $exitDate = $candleStick->getDate();
+            $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
+            $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks, false, self::UNFORTUNATE_SPREAD_PROBABILITY, $position);
+
+            /*--------------------------------GAP SIMULATION-------------------------*/
+            $openPrice = $candleStick->getOpenPrice();
+            if($openPrice < $stopLoss && $position == "Long")
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $openPrice - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+        
+                return ($openPrice - $spread) * $sharesAmount;
+            }
+
+            if($openPrice > $stopLoss && $position == "Short")
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $openPrice - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+        
+                return ($openPrice - $spread) * $sharesAmount;
+            }
+
+            if($openPrice > $target && $position == "Long")
+            {
+                $sharesAmount /= 2.0;
+                $profit += ($openPrice - $spread) * $sharesAmount;
+                $stopLoss = $openPrice - $this->trade_information[BaseConstants::TRADE_ENTER_PRICE] - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
+                $target = $openPrice +  $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE] - $this->trade_information[BaseConstants::TRADE_ENTER_PRICE];
+            }
+
+            if($openPrice < $target && $position == "Short")
+            {
+                $sharesAmount /= 2.0;
+                $profit += ($openPrice - $spread) * $sharesAmount;
+                $stopLoss = $openPrice + abs($this->trade_information[BaseConstants::TRADE_ENTER_PRICE] - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+                $target = $openPrice + abs($this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE] - $this->trade_information[BaseConstants::TRADE_ENTER_PRICE]);
+            }
+            /*--------------------------------GAP SIMULATION-------------------------*/
+
+
+            /** @var CandleStick $candleStick */
+            $closePrice = $candleStick->getClosePrice();
+            $lowestPrice = $candleStick->getLowestPrice();
+            $highestPrice = $candleStick->getHighestPrice();
+
+            if($lowestPrice < $stopLoss && $position == "Long")
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $closePrice = $candleStick->getClosePrice();
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+
+                $riskReward = null;
+                if($stopLoss > $enterPrice)
+                    $riskReward = ($stopLoss  - $enterPrice) / ($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+        
+                return $profit + ($stopLoss - $spread) * $sharesAmount;
+            }
+
+            if($position == "Long" && $highestPrice > $target)
+            {
+                $sharesAmount /= 2.0;
+                $profit += ($target - $spread) * $sharesAmount;
+                $stopLoss = $target - $this->trade_information[BaseConstants::TRADE_ENTER_PRICE] - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
+                $target += $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE] - $this->trade_information[BaseConstants::TRADE_ENTER_PRICE];
+            }
+
+
+
+            if($highestPrice > $stopLoss && $position == "Short")
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $closePrice = $candleStick->getClosePrice();
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+
+                $riskReward = null;
+                if($stopLoss < $enterPrice)
+                    $riskReward = abs($stopLoss  - $enterPrice) / abs($enterPrice - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, $riskReward);
+
+                return $profit + ($stopLoss - $spread) * $sharesAmount;
+            }
+
+            if($position == "Short" && $lowestPrice < $target)
+            {
+                $sharesAmount /= 2.0;
+                $profit += ($target - $spread) * $sharesAmount;
+                $stopLoss = $target + abs($this->trade_information[BaseConstants::TRADE_ENTER_PRICE] - $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE]);
+                $target -= abs($this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE] - $this->trade_information[BaseConstants::TRADE_ENTER_PRICE]);
+            }
+        }
+
+        $exitDate = $candleStick->getDate()->format('Y-m-d');
+        $closePrice = $candleStick->getClosePrice();
+        $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+        $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
+        $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+
+        return $profit + ($candleStick->getClosePrice() - $spread) * $sharesAmount;
     }
 }

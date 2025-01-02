@@ -10,7 +10,7 @@ use App\Entity\CandleStick;
 use App\Service\YahooWebScrapService;
 use App\Interface\MarketIndexInterface;
 
-class ChineseMarketIndexService implements MarketIndexInterface
+class SMP500IndexService implements MarketIndexInterface
 {
     private EntityManagerInterface $entityManager;
     private Security $nasdaq2000Data;
@@ -22,7 +22,7 @@ class ChineseMarketIndexService implements MarketIndexInterface
         $this->yahooWebScrapService = $yahooWebScrapService;
         $this->nasdaq2000Data = $this->entityManager
         ->getRepository(Security::class)
-        ->findOneBy(['ticker' => BaseConstants::CHINESE_MARKET_TICKER]);
+        ->findOneBy(['ticker' => BaseConstants::SMP500_TICKER]);
     }
 
     public function getCagrOfDates(DateTime $startDate, DateTime $endDate, bool $isRecursion = false) : ?float
@@ -65,7 +65,7 @@ class ChineseMarketIndexService implements MarketIndexInterface
 
         $data = $this
                     ->yahooWebScrapService
-                    ->getStockDataByDatesByOlderDates(BaseConstants::CHINESE_MARKET_TICKER, $lastYear);
+                    ->getStockDataByDatesByOlderDates(BaseConstants::SMP500_TICKER, $lastYear);
 
  
         if(!$data['Open Price'][0])
@@ -230,6 +230,7 @@ class ChineseMarketIndexService implements MarketIndexInterface
 
     public function getTicker() : string
     {
-        return BaseConstants::CHINESE_MARKET_TICKER;
+        return BaseConstants::SMP500_TICKER;
     }
+
 }

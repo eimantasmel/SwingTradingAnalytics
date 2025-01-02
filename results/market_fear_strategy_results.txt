@@ -1,0 +1,2169 @@
+
++----------------------------------------------------------------------------------------------------------------------------------+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-06-20 | AMZN  |      91.144|       0.000|       0.000|      95.899|  Yes   |   1,009.436|   Long   | 0.014|
+| 2  | 2019-05-13 | 2019-06-20 |  AMD  |      26.241|       0.000|       0.000|      30.004|  Yes   |   1,037.115|   Long   | 0.001|
+| 3  | 2019-05-13 | 2019-06-20 | ERIC  |       9.051|       0.000|       0.000|      10.038|  Yes   |   1,057.912|   Long   | 0.001|
+| 4  | 2019-05-13 | 2019-06-20 | QCOM  |      83.923|       0.000|       0.000|      72.707|   No   |   1,030.172|   Long   | 0.033|
+| 5  | 2019-05-13 | 2019-06-20 | AMAT  |      39.093|       0.000|       0.000|      43.205|  Yes   |   1,050.213|   Long   | 0.003|
+| 6  | 2019-08-05 | 2019-09-12 |  ADI  |     107.769|       0.000|       0.000|     116.024|  Yes   |   1,065.323|   Long   | 0.139|
+| 7  | 2019-08-05 | 2019-09-12 | LRCX  |      19.361|       0.000|       0.000|      23.478|  Yes   |   1,109.018|   Long   | 0.011|
+| 8  | 2019-08-05 | 2019-09-12 | PANW  |      71.551|       0.000|       0.000|      69.693|   No   |   1,102.561|   Long   | 0.041|
+| 9  | 2019-08-05 | 2019-09-12 | WDAY  |     188.180|       0.000|       0.000|     170.363|   No   |   1,081.637|   Long   | 0.340|
+| 10 | 2019-08-05 | 2019-09-12 | FSLR  |      62.047|       0.000|       0.000|      62.159|   No   |   1,081.018|   Long   | 0.037|
+| 11 | 2019-10-01 | 2019-10-28 | MRVL  |      24.021|       0.000|       0.000|      25.125|  Yes   |   1,089.965|   Long   | 0.021|
+| 12 | 2019-10-01 | 2019-10-28 | GOOGL |      60.313|       0.000|       0.000|      64.444|  Yes   |   1,103.777|   Long   | 0.013|
+| 13 | 2019-10-01 | 2019-10-28 | QCOM  |      75.478|       0.000|       0.000|      83.041|  Yes   |   1,124.441|   Long   | 0.008|
+| 14 | 2019-10-01 | 2019-10-28 | GOOG  |      60.273|       0.000|       0.000|      64.499|  Yes   |   1,138.605|   Long   | 0.013|
+| 15 | 2019-10-01 | 2019-10-28 |  CSX  |      22.344|       0.000|       0.000|      23.834|  Yes   |   1,152.030|   Long   | 0.004|
+| 16 | 2020-02-24 | 2020-04-23 |  ADP  |     174.693|       0.000|       0.000|     135.627|   No   |   1,099.459|   Long   | 0.153|
+| 17 | 2020-02-24 | 2020-04-23 |  STX  |      52.102|       0.000|       0.000|      47.788|   No   |   1,079.356|   Long   | 0.062|
+| 18 | 2020-02-24 | 2020-04-23 | ADSK  |     194.385|       0.000|       0.000|     175.217|   No   |   1,055.635|   Long   | 0.015|
+| 19 | 2020-02-24 | 2020-04-23 | PANW  |      79.156|       0.000|       0.000|      63.993|   No   |   1,010.473|   Long   | 0.046|
+| 20 | 2020-02-24 | 2020-04-23 | FSLR  |      51.343|       0.000|       0.000|      42.190|   No   |     968.293|   Long   | 0.133|
+| 21 | 2020-09-21 | 2020-10-13 | PARA  |      29.018|       0.000|       0.000|      27.435|   No   |     956.715|   Long   | 0.028|
+| 22 | 2020-09-21 | 2020-10-13 | MSFT  |     202.647|       0.000|       0.000|     222.788|  Yes   |     974.973|   Long   | 0.107|
+| 23 | 2020-09-21 | 2020-10-13 |  NOK  |       3.962|       0.000|       0.000|       4.039|  Yes   |     977.714|   Long   | 0.002|
+| 24 | 2020-09-21 | 2020-10-13 | CHRD  |       0.441|       0.000|       0.000|       0.120|   No   |     834.354|   Long   | 0.001|
+| 25 | 2020-09-21 | 2020-10-13 | FTNT  |      23.588|       0.000|       0.000|      26.102|  Yes   |     854.010|   Long   | 0.018|
+| 26 | 2020-10-28 | 2020-11-19 | CSCO  |      35.727|       0.000|       0.000|      41.167|  Yes   |     879.031|   Long   | 0.017|
+| 27 | 2020-10-28 | 2020-11-19 |  TXN  |     143.136|       0.000|       0.000|     157.147|  Yes   |     894.766|   Long   | 0.136|
+| 28 | 2020-10-28 | 2020-11-19 | GPRO  |       6.099|       0.000|       0.000|       6.889|  Yes   |     915.941|   Long   | 0.019|
+| 29 | 2020-10-28 | 2020-11-19 |  APA  |       7.793|       0.000|       0.000|      11.340|  Yes   |     992.706|   Long   | 0.003|
+| 30 | 2020-10-28 | 2020-11-19 | PANW  |      75.343|       0.000|       0.000|      95.677|  Yes   |   1,037.824|   Long   | 0.033|
+| 31 | 2021-02-25 | 2021-04-13 | MSFT  |     229.054|       0.000|       0.000|     258.469|  Yes   |   1,063.487|   Long   | 0.064|
+| 32 | 2021-02-25 | 2021-04-13 | INTC  |      60.424|       0.000|       0.000|      65.196|  Yes   |   1,078.886|   Long   | 0.024|
+| 33 | 2021-02-25 | 2021-04-13 | HBAN  |      15.703|       0.000|       0.000|      16.139|  Yes   |   1,083.645|   Long   | 0.003|
+| 34 | 2021-02-25 | 2021-04-13 |  ADI  |     156.021|       0.000|       0.000|     159.046|  Yes   |   1,086.675|   Long   | 0.201|
+| 35 | 2021-02-25 | 2021-04-13 | AMAT  |     114.061|       0.000|       0.000|     134.993|  Yes   |   1,123.811|   Long   | 0.131|
+| 36 | 2021-05-12 | 2021-06-01 | META  |     302.693|       0.000|       0.000|     329.022|  Yes   |   1,142.370|   Long   | 0.143|
+| 37 | 2021-05-12 | 2021-06-01 |  ADI  |     146.125|       0.000|       0.000|     163.560|  Yes   |   1,168.202|   Long   | 0.075|
+| 38 | 2021-05-12 | 2021-06-01 | FLEX  |      12.610|       0.000|       0.000|      13.868|  Yes   |   1,189.639|   Long   | 0.010|
+| 39 | 2021-05-12 | 2021-06-01 | CTSH  |      70.821|       0.000|       0.000|      71.181|  Yes   |   1,189.786|   Long   | 0.091|
+| 40 | 2021-05-12 | 2021-06-01 | ADBE  |     472.240|       0.000|       0.000|     495.694|  Yes   |   1,199.952|   Long   | 0.150|
+| 41 | 2021-09-17 | 2021-10-25 | WDAY  |     268.705|       0.000|       0.000|     282.132|  Yes   |   1,210.953|   Long   | 0.195|
+| 42 | 2021-09-17 | 2021-10-25 | MDLZ  |      60.959|       0.000|       0.000|      60.329|   No   |   1,207.471|   Long   | 0.019|
+| 43 | 2021-09-17 | 2021-10-25 |  KDP  |      34.914|       0.000|       0.000|      34.417|   No   |   1,203.056|   Long   | 0.004|
+| 44 | 2021-09-17 | 2021-10-25 | ERIC  |      11.286|       0.000|       0.000|      11.030|   No   |   1,196.611|   Long   | 0.006|
+| 45 | 2021-09-17 | 2021-10-25 |  XRX  |      20.999|       0.000|       0.000|      20.563|   No   |   1,190.624|   Long   | 0.019|
+| 46 | 2021-11-25 | 2022-03-04 | PYPL  |     187.820|       0.000|       0.000|      99.799|   No   |   1,078.010|   Long   | 0.030|
+| 47 | 2021-11-25 | 2022-03-04 | AAPL  |     156.838|       0.000|       0.000|     163.147|  Yes   |   1,086.590|   Long   | 0.028|
+| 48 | 2021-11-25 | 2022-03-04 |  WDC  |      57.828|       0.000|       0.000|      50.147|   No   |   1,053.923|   Long   | 0.068|
+| 49 | 2021-11-25 | 2022-03-04 | AMAT  |     143.443|       0.000|       0.000|     125.571|   No   |   1,023.222|   Long   | 0.153|
+| 50 | 2021-11-25 | 2022-03-04 | PLUG  |      40.291|       0.000|       0.000|      23.062|   No   |     920.297|   Long   | 0.041|
+| 51 | 2022-03-07 | 2022-04-01 | AAPL  |     159.318|       0.000|       0.000|     174.310|  Yes   |     936.620|   Long   | 0.018|
+| 52 | 2022-03-07 | 2022-04-01 | COMM  |       7.653|       0.000|       0.000|       7.679|   No   |     936.244|   Long   | 0.033|
+| 53 | 2022-03-07 | 2022-04-01 | MDLZ  |      62.571|       0.000|       0.000|      63.517|  Yes   |     938.028|   Long   | 0.041|
+| 54 | 2022-03-07 | 2022-04-01 | INTU  |     438.423|       0.000|       0.000|     483.182|  Yes   |     955.863|   Long   | 1.033|
+| 55 | 2022-03-07 | 2022-04-01 | OCGN  |       2.500|       0.000|       0.000|       3.296|  Yes   |   1,013.470|   Long   | 0.000|
+| 56 | 2022-04-18 | 2022-07-20 | AGNC  |      12.288|       0.000|       0.000|      12.114|   No   |   1,009.607|   Long   | 0.008|
+| 57 | 2022-04-18 | 2022-07-20 | PYPL  |     100.611|       0.000|       0.000|      80.199|   No   |     967.472|   Long   | 0.031|
+| 58 | 2022-04-18 | 2022-07-20 | PLUG  |      25.570|       0.000|       0.000|      18.093|   No   |     907.152|   Long   | 0.020|
+| 59 | 2022-04-18 | 2022-07-20 |  APA  |      43.997|       0.000|       0.000|      34.950|   No   |     864.457|   Long   | 0.017|
+| 60 | 2022-04-18 | 2022-07-20 | QCOM  |     139.436|       0.000|       0.000|     151.519|  Yes   |     881.036|   Long   | 0.116|
+| 61 | 2022-08-30 | 2022-12-07 |  WBD  |      13.298|       0.000|       0.000|      10.733|   No   |     846.033|   Long   | 0.008|
+| 62 | 2022-08-30 | 2022-12-07 | PANW  |     186.776|       0.000|       0.000|     164.583|   No   |     824.072|   Long   | 0.216|
+| 63 | 2022-08-30 | 2022-12-07 | INTC  |      32.262|       0.000|       0.000|      28.321|   No   |     801.544|   Long   | 0.002|
+| 64 | 2022-08-30 | 2022-12-07 | ERIC  |       7.251|       0.000|       0.000|       6.325|   No   |     778.052|   Long   | 0.001|
+| 65 | 2022-08-30 | 2022-12-07 | NEOG  |      21.241|       0.000|       0.000|      15.351|   No   |     728.029|   Long   | 0.071|
+| 66 | 2022-12-20 | 2023-01-13 | FCEL  |       2.656|       0.000|       0.000|       3.237|  Yes   |     758.962|   Long   | 0.006|
+| 67 | 2022-12-20 | 2023-01-13 | PARA  |      16.884|       0.000|       0.000|      20.038|  Yes   |     785.171|   Long   | 0.004|
+| 68 | 2022-12-20 | 2023-01-13 |  ON   |      64.119|       0.000|       0.000|      65.039|  Yes   |     786.263|   Long   | 0.089|
+| 69 | 2022-12-20 | 2023-01-13 | CMCSA |      34.411|       0.000|       0.000|      38.925|  Yes   |     804.365|   Long   | 0.001|
+| 70 | 2022-12-20 | 2023-01-13 | AVGO  |      54.401|       0.000|       0.000|      57.887|  Yes   |     812.698|   Long   | 0.001|
+| 71 | 2023-03-07 | 2023-03-30 | MARA  |       6.100|       0.000|       0.000|       7.826|  Yes   |     857.760|   Long   | 0.010|
+| 72 | 2023-03-07 | 2023-03-30 | MRVL  |      41.142|       0.000|       0.000|      43.200|  Yes   |     864.895|   Long   | 0.032|
+| 73 | 2023-03-07 | 2023-03-30 | AVGO  |      62.535|       0.000|       0.000|      63.376|  Yes   |     866.082|   Long   | 0.025|
+| 74 | 2023-03-07 | 2023-03-30 | LRCX  |      47.991|       0.000|       0.000|      53.103|  Yes   |     882.402|   Long   | 0.021|
+| 75 | 2023-03-07 | 2023-03-30 | FTNT  |      60.415|       0.000|       0.000|      65.792|  Yes   |     895.879|   Long   | 0.045|
+| 76 | 2023-08-16 | 2023-11-14 | FCEL  |       1.701|       0.000|       0.000|       1.239|   No   |     846.180|   Long   | 0.001|
+| 77 | 2023-08-16 | 2023-11-14 |  KDP  |      33.862|       0.000|       0.000|      31.869|   No   |     834.628|   Long   | 0.012|
+| 78 | 2023-08-16 | 2023-11-14 | CMCSA |      46.355|       0.000|       0.000|      41.854|   No   |     816.224|   Long   | 0.015|
+| 79 | 2023-08-16 | 2023-11-14 | FLEX  |      19.335|       0.000|       0.000|      20.187|  Yes   |     823.131|   Long   | 0.015|
+| 80 | 2023-08-16 | 2023-11-14 | GOOGL |     128.707|       0.000|       0.000|     133.615|  Yes   |     828.964|   Long   | 0.007|
+| 81 | 2024-04-17 | 2024-05-09 | PACB  |       1.402|       0.000|       0.000|       1.718|  Yes   |     865.354|   Long   | 0.002|
+| 82 | 2024-04-17 | 2024-05-09 | AAPL  |     168.024|       0.000|       0.000|     184.528|  Yes   |     880.641|   Long   | 0.024|
+| 83 | 2024-04-17 | 2024-05-09 | LPSN  |       0.584|       0.000|       0.000|       0.577|   No   |     877.158|   Long   | 0.004|
+| 84 | 2024-04-17 | 2024-05-09 | SEDG  |      59.827|       0.000|       0.000|      52.666|   No   |     856.284|   Long   | 0.087|
+| 85 | 2024-04-17 | 2024-05-09 | CMCSA |      38.994|       0.000|       0.000|      38.534|   No   |     853.330|   Long   | 0.004|
+| 86 | 2024-07-24 | 2024-08-23 | COMM  |       1.654|       0.000|       0.000|       4.360|  Yes   |   1,132.231|   Long   | 0.004|
+| 87 | 2024-07-24 | 2024-08-23 | LPSN  |       1.264|       0.000|       0.000|       1.376|  Yes   |   1,146.354|   Long   | 0.004|
+| 88 | 2024-07-24 | 2024-08-23 | INFN  |       5.901|       0.000|       0.000|       6.068|  Yes   |   1,150.193|   Long   | 0.001|
+| 89 | 2024-07-24 | 2024-08-23 |  WBA  |      11.163|       0.000|       0.000|      10.296|   No   |   1,135.932|   Long   | 0.003|
+| 90 | 2024-07-24 | 2024-08-23 | TSEM  |      43.040|       0.000|       0.000|      41.259|   No   |   1,127.868|   Long   | 0.010|
+| 91 | 2024-09-06 | 2024-09-26 | LRCX  |      73.427|       0.000|       0.000|      84.678|  Yes   |   1,161.453|   Long   | 0.047|
+| 92 | 2024-09-06 | 2024-09-26 |  NOK  |       4.240|       0.000|       0.000|       4.360|  Yes   |   1,166.816|   Long   | 0.000|
+| 93 | 2024-09-06 | 2024-09-26 | FTNT  |      75.216|       0.000|       0.000|      77.148|  Yes   |   1,171.614|   Long   | 0.056|
+| 94 | 2024-09-06 | 2024-09-26 |  AMD  |     134.403|       0.000|       0.000|     167.407|  Yes   |   1,226.028|   Long   | 0.053|
+| 95 | 2024-09-06 | 2024-09-26 | JBLU  |       5.306|       0.000|       0.000|       6.427|  Yes   |   1,272.762|   Long   | 0.006|
+
+Final trading capital is:1272.7617805012
+Highest Capital: 1199.9519518436
+Max Drawdown :-0.39328525757172
+Win percentage is: 0.61052631578947
+Average fee: 1.0144164610664
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1272.7617805012
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.61052631578947
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.39328525757172
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1199.9519518436
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
++----------------------------------------------------------------------------------------------------------------------------------+
+Iteration number: 1
+Date: 2019-05-13VC
+Date: 2019-05-13TCPC
+Date: 2019-05-13COMM
+Date: 2019-05-13CDNS
+Date: 2019-05-13MU
+Date: 2019-05-13SGMO
+Date: 2019-05-13VRSN
+Date: 2019-05-13PULM
+Date: 2019-05-13EXPE
+Date: 2019-05-13DLTR
+Date: 2019-05-13MRVL
+Date: 2019-05-13BIIB
+Date: 2019-05-13SFNC
+Date: 2019-05-13SEIC
+Date: 2019-05-13FIZZ
+Date: 2019-05-13MNST
+Date: 2019-05-13HCSG
+Date: 2019-05-13CZR
+Date: 2019-05-13HON
+Date: 2019-05-13ZUMZ
+Date: 2019-05-13MOMO
+Date: 2019-05-13NTES
+Date: 2019-05-13NWBI
+Date: 2019-05-13GLPI
+Date: 2019-05-13HUBG
+Date: 2019-05-13SNBR
+Date: 2019-05-13CROX
+Date: 2019-05-13ECPG
+Date: 2019-05-13VRTX
+Date: 2019-05-13NBIX
+Date: 2019-05-13SSNC
+Date: 2019-05-13AZTA
+Date: 2019-05-13COLL
+Date: 2019-05-13IDXX
+Date: 2019-05-13CFFN
+Date: 2019-05-13SWKS
+Date: 2019-05-13XEL
+Date: 2019-05-13FTNT
+Date: 2019-08-05UAL
+Date: 2019-08-05CHDN
+Date: 2019-08-05QCOM
+Date: 2019-08-05MCD
+Date: 2019-08-05AMZN
+Date: 2019-08-05HOLX
+Date: 2019-08-05GT
+Date: 2019-08-05HAIN
+Date: 2019-08-05MSFT
+Date: 2019-08-05CERS
+Date: 2019-08-05RGP
+Date: 2019-08-05WTFC
+Date: 2019-08-05MA
+Date: 2019-08-05ARDX
+Date: 2019-08-05NFLX
+Date: 2019-08-05ISRG
+Date: 2019-08-05COMM
+Date: 2019-08-05FULT
+Date: 2019-08-05QRVO
+Date: 2019-08-05KHC
+Date: 2019-08-05CAR
+Date: 2019-08-05DHC
+Date: 2019-08-05FIVE
+Date: 2019-08-05VRNS
+Date: 2019-08-05LXRX
+Date: 2019-08-05PANW
+Date: 2020-02-25FLEX
+Date: 2020-02-25BRKR
+Date: 2020-02-25ALKS
+Date: 2020-02-25MA
+Date: 2020-02-25SSRM
+Date: 2020-02-25WWD
+Date: 2020-02-25SABR
+Date: 2020-02-25SOHU
+Date: 2020-02-25MYGN
+Date: 2020-02-25VICR
+Date: 2020-02-25JBHT
+Date: 2020-02-25SIRI
+Date: 2020-02-25PRDO
+Date: 2020-02-25DENN
+Date: 2020-02-25CHKP
+Date: 2020-02-25SNBR
+Date: 2020-02-25QCOM
+Date: 2020-10-30RVNC
+Date: 2020-10-30TEAM
+Date: 2020-10-30NOK
+Date: 2020-10-30MGNX
+Date: 2020-10-30INVA
+Date: 2020-10-30LRCX
+Date: 2020-10-30AMBA
+Date: 2020-10-30KLAC
+Date: 2020-10-30RUN
+Date: 2020-10-30UPBD
+Date: 2020-10-30ASRT
+Date: 2020-10-30COMM
+Date: 2021-02-25PLUG
+Date: 2021-02-25HALO
+Date: 2021-02-25NEOG
+Date: 2021-02-25PLAB
+Date: 2021-02-25APA
+Date: 2021-02-25VC
+Date: 2021-02-25NWSA
+Date: 2021-02-25LBTYA
+Date: 2021-02-25SLM
+Date: 2021-02-25CMCSA
+Date: 2021-02-25GPRE
+Date: 2021-02-25NVAX
+Date: 2021-02-25DENN
+Date: 2021-02-25CSGP
+Date: 2021-02-25AMKR
+Date: 2021-02-25MNKD
+Date: 2021-02-25WERN
+Date: 2021-02-25HAS
+Date: 2021-02-25ENTG
+Date: 2021-02-25PRDO
+Date: 2021-02-25REG
+Date: 2021-02-25VRNT
+Date: 2021-02-25SFNC
+Date: 2021-02-25NTRS
+Date: 2021-02-25PENN
+Date: 2021-02-25MSFT
+Date: 2021-02-25PLAY
+Date: 2021-02-25COLL
+Date: 2021-02-25QRTEA
+Date: 2021-02-25BIIB
+Date: 2021-02-25ADAP
+Date: 2021-02-25PARA
+Date: 2021-05-12QRVO
+Date: 2021-05-12GPRO
+Date: 2021-05-12AMD
+Date: 2021-05-12SMCI
+Date: 2021-05-12LITE
+Iteration number: 1
+Date: 2019-05-13DIOD
+Date: 2019-05-13MCRB
+Date: 2019-05-13WBD
+Date: 2019-05-13CPRT
+Date: 2019-05-13TROW
+Date: 2019-05-13FFIN
+Date: 2019-05-13COOP
+Date: 2019-05-13XEL
+Date: 2019-05-13PANW
+Date: 2019-05-13SLM
+Date: 2019-05-13OLED
+Date: 2019-05-13FANG
+Date: 2019-05-13AAL
+Date: 2019-05-13RYAAY
+Date: 2019-05-13CZR
+Date: 2019-05-13ICLR
+Date: 2019-05-13COMM
+Date: 2019-05-13SSNC
+Date: 2019-05-13VC
+Date: 2019-05-13CHTR
+Date: 2019-05-13PSEC
+Date: 2019-05-13INSM
+Date: 2019-05-13ECPG
+Date: 2019-05-13CGNX
+Date: 2019-05-13UFPI
+Date: 2019-05-13SGRY
+Date: 2019-05-13LNW
+Date: 2019-05-13APA
+Date: 2019-05-13WDAY
+Date: 2019-05-13STX
+Date: 2019-05-13NBIX
+Date: 2019-05-13FFBC
+Date: 2019-05-13CSIQ
+Date: 2019-05-13IDXX
+Date: 2019-05-13WW
+Date: 2019-05-13NVAX
+Date: 2019-05-13FAST
+Date: 2019-05-13CHDN
+Date: 2019-05-13UTHR
+Date: 2019-05-13IOVA
+Date: 2019-05-13CTXR
+Date: 2019-05-13PYPL
+Date: 2019-05-13ACIW
+Date: 2019-05-13HPQ
+Date: 2019-05-13SHEN
+Date: 2019-05-13IRWD
+Date: 2019-05-13GPRE
+Date: 2019-05-13CDW
+Date: 2019-05-13NMFC
+Date: 2019-05-13WTFC
+Date: 2019-05-13ON
+Date: 2020-02-27WSC
+Date: 2020-02-27MTCH
+Date: 2020-02-27OPK
+Date: 2020-02-27COLL
+Date: 2020-02-27PRDO
+Date: 2020-02-27PAGP
+Date: 2020-02-27NWBI
+Date: 2020-02-27HBAN
+Date: 2020-02-27WTFC
+Date: 2020-02-27HST
+Date: 2020-02-27IBTX
+Date: 2020-02-27CBRL
+Date: 2020-02-27YY
+Date: 2020-02-27TXRH
+Date: 2020-02-27FANG
+Date: 2020-02-27EXEL
+Date: 2020-02-27SLM
+Date: 2020-02-27CINF
+Date: 2020-02-27SWBI
+Date: 2020-02-27SSYS
+Date: 2020-02-27OMER
+Date: 2020-02-27DLTH
+Date: 2020-02-27LOCO
+Date: 2020-02-27PTC
+Date: 2020-02-27LKQ
+Date: 2020-02-27CVBF
+Date: 2020-02-27DLTR
+Date: 2020-02-27AKAM
+Date: 2020-02-27ROST
+Date: 2020-02-27REG
+Date: 2020-02-27LULU
+Date: 2020-02-27CTSH
+Date: 2020-02-27AMCX
+Date: 2020-02-27VTRS
+Date: 2020-02-27SBRA
+Date: 2020-02-27FCEL
+Date: 2020-02-27CRUS
+Date: 2020-02-27QRVO
+Date: 2020-10-30PODD
+Date: 2020-10-30VRTX
+Date: 2020-10-30HQY
+Date: 2020-10-30META
+Date: 2020-10-30HST
+Date: 2020-10-30CAR
+Date: 2020-10-30FCFS
+Date: 2020-10-30MBOT
+Date: 2020-10-30LBRDK
+Date: 2020-10-30DXCM
+Date: 2020-10-30GT
+Date: 2020-10-30GERN
+Date: 2020-10-30RYAAY
+Date: 2020-10-30LBTYK
+Date: 2020-10-30LPSN
+Date: 2020-10-30ROP
+Date: 2020-10-30NVAX
+Date: 2020-10-30GEN
+Date: 2021-02-25TRUE
+Date: 2021-02-25LULU
+Date: 2021-02-25AKBA
+Date: 2021-02-25TBPH
+Date: 2021-02-25CLNE
+Date: 2021-02-25LIN
+Date: 2021-02-25CSCO
+Date: 2021-02-25LXRX
+Date: 2021-02-25SCVL
+Date: 2021-02-25LSCC
+Date: 2021-02-25SHEN
+Date: 2021-02-25AZN
+Date: 2021-02-25ASML
+Date: 2021-02-25RYAAY
+Date: 2021-02-25HALO
+Date: 2021-02-25COOP
+Date: 2021-02-25LBTYA
+Date: 2021-02-25PANW
+Date: 2021-02-25CYBR
+Date: 2021-02-25OCFC
+Date: 2021-02-25ADSK
+Date: 2021-02-25IART
+Date: 2021-02-25RGEN
+Date: 2021-02-25NTRA
+Date: 2021-02-25SBAC
+Date: 2021-02-25SABR
+Date: 2021-02-25SWBI
+Date: 2021-02-25TCOM
+Date: 2021-02-25TXRH
+Date: 2021-02-25LNW
+Date: 2021-02-25HLIT
+Date: 2021-02-25WYNN
+Date: 2021-02-25FOSL
+Date: 2021-02-25MYGN
+Date: 2021-02-25BGC
+Date: 2021-02-25APO
+Date: 2021-02-25ALKS
+Date: 2021-02-25TMUS
+Date: 2021-09-20MU
+Date: 2021-09-20SBGI
+Date: 2021-09-20INTU
+Date: 2021-09-20NTAP
+Date: 2021-09-20CSGP
+Date: 2021-09-20MIDD
+Date: 2021-09-20ASTE
+Date: 2021-09-20MFIC
+Date: 2021-09-20AGNC
+Date: 2021-09-20JKHY
+Date: 2021-09-20TECH
+Date: 2021-09-20XRAY
+Date: 2021-09-20WIX
+Date: 2021-09-20EXAS
+Date: 2021-09-20WB
+Date: 2021-09-20BKNG
+Date: 2021-09-20TRMB
+Date: 2021-09-20AXON
+Date: 2021-09-20SSYS
+Date: 2021-09-20REG
+Date: 2021-09-20TTWO
+Date: 2021-09-20CTAS
+Date: 2021-09-20IRDM
+Date: 2021-09-20JBLU
+Date: 2021-09-20CYBR
+Date: 2021-09-20BRKR
+Date: 2021-09-20TRIP
+Date: 2021-09-20GLPI
+Date: 2021-09-20HCSG
+Date: 2021-09-20CZR
+Date: 2021-09-20CENX
+Date: 2021-09-20ANGI
+Date: 2021-09-20BB
+Date: 2021-09-20NMIH
+Date: 2021-09-20LBRDK
+Date: 2021-09-20ALKS
+Date: 2021-09-20HST
+Date: 2021-09-20LRCX
+Date: 2021-09-20XRX
+Date: 2021-09-20EA
+Date: 2021-09-20MLKN
+Date: 2021-09-20RGNX
+Date: 2021-09-20HSIC
+Date: 2021-09-20EQIX
+Date: 2021-09-20FIVE
+Date: 2021-09-20PZZA
+Date: 2021-09-20LE
+Date: 2021-09-20MTCH
+Date: 2021-09-20NBIX
+Date: 2021-09-20HUBG
+Date: 2021-09-20LILA
+Date: 2021-09-20OLED
+Date: 2021-09-20CTSH
+Date: 2022-01-13EDIT
+Date: 2022-01-13RGEN
+Date: 2022-01-13SEDG
+Date: 2022-01-13FIVE
+Date: 2022-01-13PLCE
+Date: 2022-01-13IBKR
+Date: 2022-01-13ADAP
+Date: 2022-01-13CPB
+Date: 2022-01-13ACIW
+Date: 2022-01-13LAB
+Date: 2022-01-13TTWO
+Date: 2022-01-13LRCX
+Date: 2022-01-13BMRN
+Date: 2022-01-13FOLD
+Date: 2022-01-13FOSL
+Date: 2022-01-13MSFT
+Date: 2022-01-13RGLD
+Date: 2022-01-13SAGE
+Date: 2022-01-13LOCO
+Date: 2022-01-13M
+Date: 2022-01-13UFPI
+Date: 2022-01-13TCOM
+Date: 2022-01-13COLL
+Date: 2022-01-13ARLP
+Date: 2022-01-13AGIO
+Date: 2022-01-13SPWH
+Date: 2022-01-13FAST
+Date: 2022-01-13TSEM
+Date: 2022-01-13VRNS
+Date: 2022-01-13HLIT
+Date: 2022-01-13CCEP
+Date: 2022-01-13FTNT
+Date: 2022-01-13SSNC
+Date: 2022-01-13SVC
+Date: 2022-01-13PTEN
+Date: 2022-01-13ADP
+Date: 2022-01-13MA
+Date: 2022-01-13REG
+Date: 2022-01-13RUN
+Date: 2022-01-13TGTX
+Date: 2022-01-13VBTX
+Date: 2022-01-13TCBI
+Date: 2022-01-13GIII
+Date: 2022-01-13IBRX
+Date: 2022-01-13XRAY
+Date: 2022-01-13HRTX
+Date: 2022-01-13OMER
+Date: 2022-01-13REGN
+Date: 2022-01-13HCSG
+Date: 2022-01-13TEAM
+Date: 2022-04-22MOMO
+Date: 2022-04-22WERN
+Date: 2022-04-22NWBI
+Date: 2022-04-22SRPT
+Date: 2022-04-22BIIB
+Date: 2022-04-22LILA
+Date: 2022-04-22EXLS
+Date: 2022-04-22NTES
+Date: 2022-04-22PTC
+Date: 2022-04-22QCOM
+Date: 2022-04-22ETSY
+Date: 2022-04-22RPD
+Date: 2022-04-22FANG
+Date: 2022-04-22CSCO
+Date: 2022-04-22ZG
+Date: 2022-04-22SABR
+Date: 2022-04-22BLMN
+Date: 2022-04-22NTGR
+Date: 2022-04-22INTC
+Date: 2022-04-22UBSI
+Date: 2022-04-22MNKD
+Date: 2022-04-22LBTYK
+Date: 2022-04-22MMSI
+Date: 2022-04-22CSGP
+Date: 2022-04-22BB
+Date: 2022-09-01NYMT
+Date: 2022-09-01GNTX
+Date: 2022-09-01CME
+Date: 2022-09-01SFM
+Date: 2022-09-01DHC
+Date: 2022-09-01JKHY
+Date: 2022-09-01UFPI
+Date: 2022-09-01EA
+Date: 2022-09-01MNKD
+Date: 2022-09-01INFN
+Date: 2022-09-01IBTX
+Date: 2022-09-01ALGN
+Date: 2022-09-01PTEN
+Date: 2022-09-01PANW
+Date: 2022-09-01OCGN
+Date: 2022-09-01SBAC
+Date: 2022-09-01DENN
+Date: 2022-09-01NBIX
+Date: 2022-09-01DXCM
+Date: 2022-09-01COMM
+Date: 2022-09-01ARDX
+Date: 2022-09-01MMYT
+Date: 2022-09-01COLL
+Date: 2022-09-01GLPI
+Date: 2022-09-01TSLA
+Date: 2022-09-01ESPR
+Date: 2022-09-01EXAS
+Date: 2022-09-01TRUE
+Date: 2022-09-01MDLZ
+Date: 2022-09-01ODP
+Date: 2022-09-01XNCR
+Date: 2022-09-01IART
+Date: 2022-09-01DIOD
+Date: 2022-09-01FCFS
+Date: 2022-09-01TGTX
+Date: 2022-09-01INCY
+Date: 2022-09-01ROST
+Date: 2022-09-01%5EGSPC
+Date: 2023-08-17AVT
+Date: 2023-08-17TRUE
+Date: 2023-08-17TECH
+Date: 2023-08-17CHTR
+Date: 2023-08-17CINF
+Date: 2023-08-17HPQ
+Date: 2023-08-17LAB
+Date: 2023-08-17BPMC
+Date: 2023-08-17RBBN
+Date: 2023-08-17NDAQ
+Date: 2023-08-17BB
+Date: 2023-08-17SNPS
+Date: 2023-08-17EQIX
+Date: 2023-08-17CYTK
+Date: 2023-08-17SEIC
+Date: 2023-08-17DOX
+Date: 2023-08-17APA
+Date: 2023-08-17TER
+Date: 2023-08-17IRDM
+Date: 2023-08-17AAL
+Date: 2023-08-17VRTX
+Date: 2023-08-17WERN
+Date: 2023-08-17ASML
+Date: 2023-08-17MNKD
+Date: 2023-08-17YY
+Date: 2023-08-17MRVL
+Date: 2023-08-17WTFC
+Date: 2023-08-17NVCR
+Date: 2023-08-17STAA
+Date: 2023-08-17ZG
+Date: 2023-08-17DLTR
+Date: 2023-08-17NXPI
+Date: 2023-08-17AGNC
+Date: 2024-08-05STX
+Date: 2024-08-05PCTY
+Date: 2024-08-05AAOI
+Date: 2024-08-05ZUMZ
+Date: 2024-08-05M
+Date: 2024-08-05IOVA
+Date: 2024-08-05BKR
+Date: 2024-08-05FSV
+Date: 2024-08-05ALKS
+Date: 2024-08-05GPRE
+Date: 2024-08-05COLL
+Date: 2024-08-05TMUS
+Date: 2024-08-05CYTK
+Date: 2024-08-05HST
+Date: 2024-08-05LSCC
+Date: 2024-08-05STAA
+Date: 2024-08-05LXRX
+Date: 2024-08-05HOLX
+Date: 2024-08-05CSIQ
+Date: 2024-08-05CROX
+Date: 2024-08-05HWC
+Date: 2024-08-05CSX
+Date: 2024-08-05AMBA
+Date: 2024-08-05OTEX
+Date: 2024-08-05PZZA
+Date: 2024-08-05AMGN
+Date: 2024-08-05SIRI
+Date: 2024-08-05WB
+Date: 2024-08-05FULT
+Date: 2024-08-05SBGI
+Date: 2024-08-05WDC
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 | PANW  |      74.839|       0.000|       0.000|      66.459|   No   |     976.604|   Long   | 0.009|
+| 2  | 2019-05-13 | 2019-08-20 | COMM  |      18.338|       0.000|       0.000|      10.955|   No   |     894.826|   Long   | 0.058|
+| 3  | 2019-05-13 | 2019-08-20 |  STX  |      44.046|       0.000|       0.000|      46.332|  Yes   |     904.207|   Long   | 0.006|
+| 4  | 2019-05-13 | 2019-08-20 |  HPQ  |      18.283|       0.000|       0.000|      18.902|  Yes   |     909.987|   Long   | 0.013|
+| 5  | 2019-05-13 | 2019-08-20 |  ON   |      19.635|       0.000|       0.000|      18.135|   No   |     893.680|   Long   | 0.035|
+| 6  | 2020-02-27 | 2020-06-05 | HBAN  |      12.355|       0.000|       0.000|      10.986|   No   |     872.872|   Long   | 0.005|
+| 7  | 2020-02-27 | 2020-06-05 |  HST  |      14.789|       0.000|       0.000|      13.992|   No   |     862.225|   Long   | 0.009|
+| 8  | 2020-02-27 | 2020-06-05 | CTSH  |      62.374|       0.000|       0.000|      57.747|   No   |     847.955|   Long   | 0.054|
+| 9  | 2020-02-27 | 2020-06-05 | FCEL  |       1.942|       0.000|       0.000|       2.615|  Yes   |     908.902|   Long   | 0.002|
+| 10 | 2020-02-27 | 2020-06-05 | QRVO  |      95.073|       0.000|       0.000|     115.419|  Yes   |     946.261|   Long   | 0.273|
+| 11 | 2020-10-30 | 2020-12-08 | META  |     263.196|       0.000|       0.000|     283.229|  Yes   |     959.670|   Long   | 0.086|
+| 12 | 2020-10-30 | 2020-12-08 |  HST  |      10.487|       0.000|       0.000|      15.128|  Yes   |   1,042.465|   Long   | 0.007|
+| 13 | 2020-10-30 | 2020-12-08 |  GT   |       8.288|       0.000|       0.000|      10.813|  Yes   |   1,099.186|   Long   | 0.008|
+| 14 | 2020-10-30 | 2020-12-08 | LPSN  |      53.708|       0.000|       0.000|      56.461|  Yes   |   1,107.931|   Long   | 0.248|
+| 15 | 2020-10-30 | 2020-12-08 |  GEN  |      20.585|       0.000|       0.000|      19.276|   No   |   1,094.884|   Long   | 0.015|
+| 16 | 2021-02-25 | 2021-06-04 | AKBA  |       3.483|       0.000|       0.000|       3.357|   No   |   1,085.950|   Long   | 0.013|
+| 17 | 2021-02-25 | 2021-06-04 | CSCO  |      45.537|       0.000|       0.000|      54.055|  Yes   |   1,125.923|   Long   | 0.017|
+| 18 | 2021-02-25 | 2021-06-04 | PANW  |     120.173|       0.000|       0.000|     119.086|   No   |   1,122.939|   Long   | 0.163|
+| 19 | 2021-02-25 | 2021-06-04 | SABR  |      13.876|       0.000|       0.000|      13.880|   No   |   1,122.001|   Long   | 0.006|
+| 20 | 2021-02-25 | 2021-06-04 | TMUS  |     120.916|       0.000|       0.000|     144.459|  Yes   |   1,163.646|   Long   | 0.026|
+| 21 | 2021-09-20 | 2021-11-01 |  MU   |      72.396|       0.000|       0.000|      70.691|   No   |   1,157.163|   Long   | 0.026|
+| 22 | 2021-09-20 | 2021-11-01 |  BB   |       9.433|       0.000|       0.000|      11.365|  Yes   |   1,203.842|   Long   | 0.003|
+| 23 | 2021-09-20 | 2021-11-01 | LRCX  |      59.013|       0.000|       0.000|      57.262|   No   |   1,195.934|   Long   | 0.023|
+| 24 | 2021-09-20 | 2021-11-01 |  XRX  |      20.912|       0.000|       0.000|      18.566|   No   |   1,168.793|   Long   | 0.022|
+| 25 | 2021-09-20 | 2021-11-01 | CTSH  |      75.104|       0.000|       0.000|      77.875|  Yes   |   1,176.386|   Long   | 0.044|
+| 26 | 2022-01-13 | 2022-04-22 | LRCX  |      68.698|       0.000|       0.000|      46.291|   No   |   1,098.627|   Long   | 0.018|
+| 27 | 2022-01-13 | 2022-04-22 | MSFT  |     304.861|       0.000|       0.000|     273.978|   No   |   1,073.788|   Long   | 0.061|
+| 28 | 2022-01-13 | 2022-04-22 | FTNT  |      61.679|       0.000|       0.000|      60.718|   No   |   1,069.116|   Long   | 0.099|
+| 29 | 2022-01-13 | 2022-04-22 |  RUN  |      32.824|       0.000|       0.000|      20.298|   No   |     978.158|   Long   | 0.064|
+| 30 | 2022-01-13 | 2022-04-22 | TEAM  |     299.843|       0.000|       0.000|     244.035|   No   |     933.192|   Long   | 1.193|
+| 31 | 2022-04-22 | 2022-07-29 | QCOM  |     132.906|       0.000|       0.000|     144.901|  Yes   |     949.050|   Long   | 0.096|
+| 32 | 2022-04-22 | 2022-07-29 | CSCO  |      51.378|       0.000|       0.000|      45.367|   No   |     926.206|   Long   | 0.018|
+| 33 | 2022-04-22 | 2022-07-29 | SABR  |      10.745|       0.000|       0.000|       6.147|   No   |     845.302|   Long   | 0.005|
+| 34 | 2022-04-22 | 2022-07-29 | INTC  |      46.555|       0.000|       0.000|      36.304|   No   |     803.192|   Long   | 0.015|
+| 35 | 2022-04-22 | 2022-07-29 |  BB   |       6.061|       0.000|       0.000|       6.127|  Yes   |     804.206|   Long   | 0.001|
+| 36 | 2022-09-01 | 2022-12-09 | INFN  |       5.122|       0.000|       0.000|       6.923|  Yes   |     859.905|   Long   | 0.012|
+| 37 | 2022-09-01 | 2022-12-09 | PANW  |     181.793|       0.000|       0.000|     158.785|   No   |     838.541|   Long   | 0.073|
+| 38 | 2022-09-01 | 2022-12-09 | COMM  |      12.030|       0.000|       0.000|       7.735|   No   |     780.024|   Long   | 0.020|
+| 39 | 2022-09-01 | 2022-12-09 | TSLA  |     277.211|       0.000|       0.000|     178.985|   No   |     722.021|   Long   | 0.051|
+| 40 | 2022-09-01 | 2022-12-09 |%5EGSPC|   3,966.894|       0.000|       0.000|   3,934.340|   No   |     719.701|   Long   | 0.044|
+| 41 | 2023-08-17 | 2023-11-15 |  HPQ  |      30.972|       0.000|       0.000|      28.457|   No   |     707.007|   Long   | 0.012|
+| 42 | 2023-08-17 | 2023-11-15 |  BB   |       4.363|       0.000|       0.000|       3.663|   No   |     682.913|   Long   | 0.003|
+| 43 | 2023-08-17 | 2023-11-15 |  AAL  |      15.050|       0.000|       0.000|      12.419|   No   |     656.743|   Long   | 0.000|
+| 44 | 2023-08-17 | 2023-11-15 | MRVL  |      57.614|       0.000|       0.000|      57.129|   No   |     654.531|   Long   | 0.054|
+| 45 | 2023-08-17 | 2023-11-15 | AGNC  |       9.452|       0.000|       0.000|       8.667|   No   |     641.570|   Long   | 0.002|
+| 46 | 2024-08-05 | 2024-11-01 |  STX  |      92.699|       0.000|       0.000|      99.097|  Yes   |     649.441|   Long   | 0.159|
+| 47 | 2024-08-05 | 2024-11-01 |  HST  |      15.920|       0.000|       0.000|      17.369|  Yes   |     660.115|   Long   | 0.000|
+| 48 | 2024-08-05 | 2024-11-01 | LSCC  |      44.471|       0.000|       0.000|      52.171|  Yes   |     681.357|   Long   | 0.051|
+| 49 | 2024-08-05 | 2024-11-01 |  CSX  |      33.023|       0.000|       0.000|      33.390|  Yes   |     681.784|   Long   | 0.023|
+| 50 | 2024-08-05 | 2024-11-01 |  WDC  |      57.077|       0.000|       0.000|      66.253|  Yes   |     701.443|   Long   | 0.087|
+
+Final trading capital is:701.44252730833
+Highest Capital: 1176.3857216228
+Max Drawdown :-0.4546263852985
+Win percentage is: 0.4
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 701.44252730833
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.4
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.4546263852985
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1176.3857216228
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Date: 2019-05-13PARA
+Date: 2019-05-13DIOD
+Date: 2019-05-13HBAN
+Date: 2019-05-13WTW
+Date: 2019-05-13CAKE
+Date: 2019-05-13SKYW
+Date: 2019-05-13SNBR
+Date: 2019-05-13AAOI
+Date: 2019-05-13OCUL
+Date: 2019-05-13SGRY
+Date: 2019-05-13PBYI
+Date: 2019-05-13OMER
+Date: 2019-05-13BIIB
+Date: 2019-05-13PAGP
+Date: 2019-05-13PPC
+Date: 2019-05-13MLKN
+Date: 2019-05-13CSX
+Date: 2019-05-13SNPS
+Date: 2019-05-13STX
+Date: 2019-05-13SBUX
+Date: 2019-05-13WBA
+Date: 2019-05-13NXPI
+Date: 2019-05-13AGIO
+Date: 2019-05-13ADSK
+Date: 2019-05-13VICR
+Date: 2019-05-13SABR
+Date: 2019-05-13HALO
+Date: 2019-05-13AZN
+Date: 2019-05-13VRNT
+Date: 2019-05-13XRAY
+Date: 2019-05-13TSEM
+Date: 2019-05-13LIN
+Date: 2019-05-13EXEL
+Date: 2019-05-13MELI
+Date: 2019-05-13TBPH
+Date: 2019-05-13LAMR
+Date: 2019-05-13TEAM
+Date: 2019-05-13IRBT
+Date: 2019-05-13NVAX
+Date: 2019-05-13MDXG
+Date: 2019-05-13CYTK
+Date: 2019-05-13FANG
+Date: 2019-05-13NVCR
+Date: 2019-05-13OCFC
+Date: 2019-05-13CHKP
+Date: 2019-05-13HLIT
+Date: 2019-05-13MRVL
+Date: 2020-02-27TSCO
+Date: 2020-02-27TXRH
+Date: 2020-02-27SBGI
+Date: 2020-02-27INSM
+Date: 2020-02-27CGNX
+Date: 2020-02-27FLWS
+Date: 2020-02-27CG
+Date: 2020-02-27XEL
+Date: 2020-02-27AMCX
+Date: 2020-02-27HUBG
+Date: 2020-02-27GIII
+Date: 2020-02-27DXCM
+Date: 2020-02-27INTU
+Date: 2020-02-27FCFS
+Date: 2020-02-27NVDA
+Date: 2020-02-27ACGL
+Date: 2020-02-27ACAD
+Date: 2020-02-27HOPE
+Date: 2020-02-27MAR
+Date: 2020-02-27FOSL
+Date: 2020-02-27CYBR
+Date: 2020-02-27ROP
+Date: 2020-02-27IBTX
+Date: 2020-02-27LAB
+Date: 2020-02-27FIVE
+Date: 2020-02-27MMYT
+Date: 2020-02-27KPTI
+Date: 2020-02-27MTSI
+Date: 2020-02-27PLAB
+Date: 2020-02-27UBSI
+Date: 2020-02-27TRUE
+Date: 2020-02-27WDAY
+Date: 2020-02-27SEDG
+Date: 2020-02-27MCD
+Date: 2020-02-27LGND
+Date: 2020-02-27COOP
+Date: 2020-02-27CAKE
+Date: 2020-02-27CTMX
+Date: 2020-02-27LXRX
+Date: 2020-02-27GOGO
+Date: 2020-02-27MBOT
+Date: 2020-02-27MCRB
+Date: 2020-02-27RUN
+Date: 2020-10-30DOX
+Date: 2020-10-30UAL
+Date: 2020-10-30IBKR
+Date: 2020-10-30RARE
+Date: 2020-10-30PYPL
+Date: 2020-10-30GOGO
+Date: 2020-10-30VIAV
+Date: 2020-10-30AKAM
+Date: 2020-10-30TTMI
+Date: 2020-10-30BRKR
+Date: 2020-10-30EXTR
+Date: 2020-10-30JBLU
+Date: 2020-10-30FIVN
+Date: 2020-10-30SWBI
+Date: 2020-10-30SASR
+Date: 2020-10-30CBSH
+Date: 2020-10-30ARAY
+Date: 2020-10-30PEGA
+Date: 2020-10-30Z
+Date: 2020-10-30ASTE
+Date: 2020-10-30COLM
+Date: 2020-10-30MAT
+Date: 2020-10-30AXON
+Date: 2020-10-30PLAB
+Date: 2020-10-30MA
+Date: 2020-10-30ARCC
+Date: 2020-10-30XBIT
+Date: 2020-10-30STAA
+Date: 2020-10-30ILMN
+Date: 2020-10-30UTHR
+Date: 2020-10-30CSIQ
+Date: 2020-10-30EXAS
+Date: 2020-10-30CAKE
+Date: 2020-10-30QRVO
+Date: 2020-10-30HCSG
+Date: 2020-10-30REG
+Date: 2020-10-30EXC
+Date: 2020-10-30ZION
+Date: 2020-10-30HST
+Date: 2020-10-30VRTX
+Date: 2020-10-30CCEP
+Date: 2020-10-30BGNE
+Date: 2020-10-30NMIH
+Date: 2020-10-30VLY
+Date: 2020-10-30CHKP
+Date: 2020-10-30JAZZ
+Date: 2020-10-30INCY
+Date: 2020-10-30FSLR
+Date: 2021-02-25SIRI
+Date: 2021-02-25NXST
+Date: 2021-02-25CSIQ
+Date: 2021-02-25HUBG
+Date: 2021-02-25CYTK
+Date: 2021-02-25APO
+Date: 2021-02-25UTHR
+Date: 2021-02-25REGN
+Date: 2021-02-25WDAY
+Date: 2021-02-25EDIT
+Date: 2021-02-25COST
+Date: 2021-02-25IOVA
+Date: 2021-02-25NWBI
+Date: 2021-02-25KLAC
+Date: 2021-02-25PAGP
+Date: 2021-02-25ESPR
+Date: 2021-02-25PYPL
+Date: 2021-02-25INCY
+Date: 2021-02-25RBBN
+Date: 2021-02-25HAIN
+Date: 2021-02-25XEL
+Date: 2021-02-25AZTA
+Date: 2021-02-25BGC
+Date: 2021-02-25QRVO
+Date: 2021-02-25VRTX
+Date: 2021-02-25STAA
+Date: 2021-02-25BLMN
+Date: 2021-02-25LBTYA
+Date: 2021-02-25OCUL
+Date: 2021-02-25FIZZ
+Date: 2021-02-25MLKN
+Date: 2021-02-25NBIX
+Date: 2021-02-25AGIO
+Date: 2021-02-25SUPN
+Date: 2021-02-25CHKP
+Date: 2021-02-25AZN
+Date: 2021-02-25SBAC
+Date: 2021-02-25ICLR
+Date: 2021-02-25WING
+Date: 2021-02-25JAZZ
+Date: 2021-02-25ARAY
+Date: 2021-02-25XNCR
+Date: 2021-02-25NXPI
+Date: 2021-02-25SBUX
+Date: 2021-02-25UAL
+Date: 2021-02-25VBTX
+Date: 2021-02-25ECPG
+Date: 2021-02-25AMKR
+Date: 2021-02-25INFN
+Date: 2021-09-20SBAC
+Date: 2021-09-20ODFL
+Date: 2021-09-20XRX
+Date: 2021-09-20AMD
+Date: 2021-09-20FIVN
+Date: 2021-09-20IRBT
+Date: 2021-09-20JKHY
+Date: 2021-09-20CTMX
+Date: 2021-09-20CTSH
+Date: 2021-09-20ADEA
+Date: 2021-09-20TSLA
+Date: 2022-01-13MMYT
+Date: 2022-01-13CHDN
+Date: 2022-01-13NEO
+Date: 2022-01-13SNPS
+Date: 2022-01-13CSCO
+Date: 2022-01-13ECPG
+Date: 2022-01-13WTW
+Date: 2022-01-13SWKS
+Date: 2022-01-13GOGO
+Date: 2022-01-13EQIX
+Date: 2022-01-13TGTX
+Date: 2022-01-13MRNS
+Date: 2022-01-13NVCR
+Date: 2022-01-13PENN
+Date: 2022-01-13WIX
+Date: 2022-01-13FCFS
+Date: 2022-01-13AMKR
+Date: 2022-01-13BPMC
+Date: 2022-01-13NWSA
+Date: 2022-01-13PULM
+Date: 2022-01-13%5EGSPC
+Date: 2022-01-13ONB
+Date: 2022-01-13FIZZ
+Date: 2022-01-13PACB
+Date: 2022-01-13IRDM
+Date: 2022-01-13ZG
+Date: 2022-01-13EXEL
+Date: 2022-01-13GNTX
+Date: 2022-01-13ACRS
+Date: 2022-01-13PLAY
+Date: 2022-01-13GOOGL
+Date: 2022-01-13PINC
+Date: 2022-01-13IONS
+Date: 2022-01-13SRPT
+Date: 2022-01-13TCBI
+Date: 2022-01-13NTAP
+Date: 2022-01-13CNSL
+Date: 2022-01-13SMCI
+Date: 2022-01-13VTRS
+Date: 2022-01-13PEGA
+Date: 2022-01-13BGNE
+Date: 2022-01-13TRUE
+Date: 2022-01-13ZBRA
+Date: 2022-01-13BKR
+Date: 2022-01-13SASR
+Date: 2022-01-13NTRA
+Date: 2022-01-13FLWS
+Date: 2022-01-13FAST
+Date: 2022-01-13LITE
+Date: 2022-01-13COOP
+Date: 2022-01-13CROX
+Date: 2022-01-13FSV
+Date: 2022-01-13QRVO
+Date: 2022-01-13ILMN
+Date: 2022-01-13ALKS
+Date: 2022-01-13SIRI
+Date: 2022-01-13SUPN
+Date: 2022-01-13GPRO
+Date: 2022-01-13PZZA
+Date: 2022-01-13RARE
+Date: 2022-01-13CASH
+Date: 2022-01-13PFG
+Date: 2022-01-13INTU
+Date: 2022-01-13HCSG
+Date: 2022-01-13ASRT
+Date: 2022-01-13SEIC
+Date: 2022-01-13SNY
+Date: 2022-01-13MIDD
+Date: 2022-01-13CPRT
+Date: 2022-01-13SFM
+Date: 2022-01-13PTC
+Date: 2022-01-13GILD
+Date: 2022-01-13LGND
+Date: 2022-01-13VRNT
+Date: 2022-01-13MGNI
+Date: 2022-01-13OCUL
+Date: 2022-01-13KDP
+Date: 2022-01-13NWL
+Date: 2022-01-13OCFC
+Date: 2022-01-13GERN
+Date: 2022-01-13RPD
+Date: 2022-01-13NBIX
+Date: 2022-01-13MXL
+Date: 2022-01-13ACHC
+Date: 2022-01-13ERIC
+Date: 2022-01-13EBAY
+Date: 2022-01-13HALO
+Date: 2022-01-13ZION
+Date: 2022-01-13CENTA
+Date: 2022-01-13WING
+Date: 2022-01-13AMCX
+Date: 2022-01-13UPBD
+Date: 2022-01-13EA
+Date: 2022-01-13BIIB
+Date: 2022-01-13VICR
+Date: 2022-01-13CSX
+Date: 2022-01-13EXPO
+Date: 2022-01-13MRVL
+Date: 2022-04-22SBUX
+Date: 2022-04-22ADAP
+Date: 2022-04-22NVDA
+Date: 2022-04-22ADEA
+Date: 2022-04-22GERN
+Date: 2022-04-22HALO
+Date: 2022-04-22LITE
+Date: 2022-04-22ASML
+Date: 2022-04-22EDIT
+Date: 2022-04-22NXST
+Date: 2022-04-22PCRX
+Date: 2022-04-22NXPI
+Date: 2022-04-22GILD
+Date: 2022-04-22CPRT
+Date: 2022-04-22ROIC
+Date: 2022-04-22GIII
+Date: 2022-04-22TER
+Date: 2022-04-22ADP
+Date: 2022-04-22CROX
+Date: 2022-04-22HLIT
+Date: 2022-04-22NMIH
+Date: 2022-04-22FCEL
+Date: 2022-04-22NTCT
+Date: 2022-04-22XRX
+Date: 2022-04-22APO
+Date: 2022-04-22LAB
+Date: 2022-04-22SNY
+Date: 2022-04-22EVRG
+Date: 2022-04-22BGC
+Date: 2022-04-22NVAX
+Date: 2022-04-22TRIP
+Date: 2022-04-22ZUMZ
+Date: 2022-04-22CBRL
+Date: 2022-04-22VRSK
+Date: 2022-04-22TCBI
+Date: 2022-04-22MARA
+Date: 2022-04-22TSCO
+Date: 2022-04-22ESPR
+Date: 2022-04-22CLNE
+Date: 2022-04-22DIOD
+Date: 2022-04-22TCOM
+Date: 2022-04-22CSGP
+Date: 2022-04-22LKQ
+Date: 2022-04-22APA
+Date: 2022-04-22GOOG
+Date: 2022-04-22COST
+Date: 2022-04-22UBSI
+Date: 2022-04-22AAOI
+Date: 2022-04-22TECH
+Date: 2022-04-22HST
+Date: 2022-04-22FLEX
+Date: 2022-09-01SSNC
+Date: 2022-09-01CENTA
+Date: 2022-09-01CTAS
+Date: 2022-09-01NMIH
+Date: 2022-09-01ACGL
+Date: 2022-09-01MAR
+Date: 2022-09-01WING
+Date: 2022-09-01COMM
+Date: 2022-09-01RGEN
+Date: 2022-09-01WSC
+Date: 2022-09-01HQY
+Date: 2022-09-01LPSN
+Date: 2022-09-01ISRG
+Date: 2022-09-01AAOI
+Date: 2022-09-01ACIW
+Date: 2022-09-01SGRY
+Date: 2022-09-01JAZZ
+Date: 2022-09-01MSFT
+Date: 2022-09-01LOCO
+Date: 2022-09-01COLL
+Date: 2022-09-01FIVN
+Date: 2022-09-01COST
+Date: 2022-09-01REGN
+Date: 2022-09-01DLTH
+Date: 2022-09-01TCOM
+Date: 2022-09-01XRAY
+Date: 2022-09-01LECO
+Date: 2022-09-01STAA
+Date: 2022-09-01ROST
+Date: 2022-09-01CAR
+Date: 2022-09-01WWD
+Date: 2022-09-01UTHR
+Date: 2022-09-01ORLY
+Date: 2022-09-01SIRI
+Date: 2022-09-01AMKR
+Date: 2022-09-01OLED
+Date: 2022-09-01NXPI
+Date: 2022-09-01QRTEA
+Date: 2022-09-01CORT
+Date: 2022-09-01ADAP
+Date: 2022-09-01HOPE
+Date: 2022-09-01INFN
+Date: 2022-09-01LBTYK
+Date: 2022-09-01RUN
+Date: 2023-08-17FFIN
+Date: 2023-08-17FTNT
+Date: 2023-08-17FANG
+Date: 2023-08-17PENN
+Date: 2023-08-17RPD
+Date: 2023-08-17ARDX
+Date: 2023-08-17SMTC
+Date: 2023-08-17WING
+Date: 2023-08-17SGRY
+Date: 2023-08-17GGAL
+Date: 2023-08-17LNT
+Date: 2023-08-17ROIC
+Date: 2023-08-17EBAY
+Date: 2023-08-17TCPC
+Date: 2023-08-17GLPI
+Date: 2023-08-17MIDD
+Date: 2023-08-17LITE
+Date: 2023-08-17SGMO
+Date: 2023-08-17DHC
+Date: 2023-08-17CORT
+Date: 2023-08-17EWBC
+Date: 2023-08-17SYNA
+Date: 2023-08-17AMZN
+Date: 2023-08-17NAVI
+Date: 2023-08-17MASI
+Date: 2023-08-17MAT
+Date: 2023-08-17PFG
+Date: 2023-08-17CPB
+Date: 2023-08-17PLUG
+Date: 2023-08-17IRWD
+Date: 2023-08-17GIII
+Date: 2023-08-17CFFN
+Date: 2023-08-17MA
+Date: 2023-08-17SPWH
+Date: 2023-08-17MSFT
+Date: 2023-08-17CDW
+Date: 2023-08-17XNCR
+Date: 2023-08-17IDXX
+Date: 2023-08-17OLED
+Date: 2023-08-17HCSG
+Date: 2023-08-17TBPH
+Date: 2023-08-17SHEN
+Date: 2023-08-17KLAC
+Date: 2023-08-17BGC
+Date: 2023-08-17CHKP
+Date: 2023-08-17CLNE
+Date: 2023-08-17PDCO
+Date: 2023-08-17HON
+Date: 2023-08-17ZION
+Date: 2023-08-17LAMR
+Date: 2023-08-17SVC
+Date: 2023-08-17PCAR
+Date: 2023-08-17WTW
+Date: 2023-08-17SKYW
+Date: 2023-08-17ALGN
+Date: 2023-08-17LGND
+Date: 2023-08-17META
+Date: 2023-08-17HUBG
+Date: 2023-08-17GBDC
+Date: 2023-08-17DOX
+Date: 2023-08-17FOSL
+Date: 2023-08-17MAR
+Date: 2023-08-17Z
+Date: 2023-08-17VIAV
+Date: 2024-08-05DIOD
+Date: 2024-08-05WDC
+Date: 2024-08-05DENN
+Date: 2024-08-05DVAX
+Date: 2024-08-05VRNT
+Date: 2024-08-05SFM
+Date: 2024-08-05FOLD
+Date: 2024-08-05GOOGL
+Date: 2024-08-05LULU
+Date: 2024-08-05EXAS
+Date: 2024-08-05CTSH
+Date: 2024-08-05OCUL
+Date: 2024-08-05SBGI
+Date: 2024-08-05NMFC
+Date: 2024-08-05BB
+Date: 2024-08-05IBKR
+Date: 2024-08-05VBTX
+Date: 2024-08-05ADEA
+Date: 2024-08-05ANGI
+Date: 2024-08-05ALKS
+Date: 2024-08-05STLD
+Date: 2024-08-05IRWD
+Date: 2024-08-05LOCO
+Date: 2024-08-05C20-USD
+Date: 2024-08-05AKAM
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 |  STX  |      44.119|       0.000|       0.000|      46.291|  Yes   |   1,008.863|   Long   | 0.079|
+| 2  | 2019-05-13 | 2019-08-20 | NXPI  |      93.250|       0.000|       0.000|     102.695|  Yes   |   1,028.150|   Long   | 0.130|
+| 3  | 2019-05-13 | 2019-08-20 | SABR  |      20.009|       0.000|       0.000|      23.684|  Yes   |   1,063.947|   Long   | 0.039|
+| 4  | 2019-05-13 | 2019-08-20 | TEAM  |     120.936|       0.000|       0.000|     142.137|  Yes   |   1,098.053|   Long   | 0.156|
+| 5  | 2019-05-13 | 2019-08-20 | MRVL  |      22.164|       0.000|       0.000|      24.913|  Yes   |   1,121.883|   Long   | 0.024|
+| 6  | 2020-02-27 | 2020-06-05 | INTU  |     269.101|       0.000|       0.000|     287.661|  Yes   |   1,136.377|   Long   | 0.331|
+| 7  | 2020-02-27 | 2020-06-05 | NVDA  |       6.751|       0.000|       0.000|       8.920|  Yes   |   1,207.473|   Long   | 0.001|
+| 8  | 2020-02-27 | 2020-06-05 | WDAY  |     171.339|       0.000|       0.000|     178.417|  Yes   |   1,215.748|   Long   | 0.139|
+| 9  | 2020-02-27 | 2020-06-05 | SEDG  |     126.703|       0.000|       0.000|     147.396|  Yes   |   1,251.614|   Long   | 0.753|
+| 10 | 2020-02-27 | 2020-06-05 |  RUN  |      20.272|       0.000|       0.000|      18.622|   No   |   1,232.354|   Long   | 0.002|
+| 11 | 2020-10-30 | 2020-12-08 | VIAV  |      12.370|       0.000|       0.000|      13.736|  Yes   |   1,258.624|   Long   | 0.020|
+| 12 | 2020-10-30 | 2020-12-08 | AKAM  |      95.202|       0.000|       0.000|     104.029|  Yes   |   1,280.498|   Long   | 0.082|
+| 13 | 2020-10-30 | 2020-12-08 | TTMI  |      11.892|       0.000|       0.000|      13.556|  Yes   |   1,314.058|   Long   | 0.022|
+| 14 | 2020-10-30 | 2020-12-08 | CSIQ  |      36.489|       0.000|       0.000|      39.959|  Yes   |   1,336.586|   Long   | 0.139|
+| 15 | 2020-10-30 | 2020-12-08 | FSLR  |      87.267|       0.000|       0.000|      89.768|  Yes   |   1,342.667|   Long   | 0.217|
+| 16 | 2021-02-25 | 2021-06-04 | CSIQ  |      45.802|       0.000|       0.000|      38.741|   No   |   1,300.100|   Long   | 0.182|
+| 17 | 2021-02-25 | 2021-06-04 | WDAY  |     251.641|       0.000|       0.000|     223.275|   No   |   1,268.776|   Long   | 0.451|
+| 18 | 2021-02-25 | 2021-06-04 | CHKP  |     111.282|       0.000|       0.000|     119.796|  Yes   |   1,288.329|   Long   | 0.042|
+| 19 | 2021-02-25 | 2021-06-04 | NXPI  |     178.655|       0.000|       0.000|     201.836|  Yes   |   1,322.197|   Long   | 0.135|
+| 20 | 2021-02-25 | 2021-06-04 | INFN  |       9.445|       0.000|       0.000|      10.226|  Yes   |   1,343.457|   Long   | 0.025|
+| 21 | 2021-09-20 | 2021-11-01 |  XRX  |      20.923|       0.000|       0.000|      18.556|   No   |   1,312.023|   Long   | 0.033|
+| 22 | 2021-09-20 | 2021-11-01 |  AMD  |     101.575|       0.000|       0.000|     125.176|  Yes   |   1,373.468|   Long   | 0.025|
+| 23 | 2021-09-20 | 2021-11-01 | FIVN  |     171.668|       0.000|       0.000|     159.486|   No   |   1,353.392|   Long   | 0.078|
+| 24 | 2021-09-20 | 2021-11-01 | CTSH  |      75.078|       0.000|       0.000|      77.984|  Yes   |   1,362.797|   Long   | 0.018|
+| 25 | 2021-09-20 | 2021-11-01 | TSLA  |     243.397|       0.000|       0.000|     402.768|  Yes   |   1,537.735|   Long   | 0.007|
+| 26 | 2022-01-13 | 2022-04-22 | CSCO  |      61.505|       0.000|       0.000|      51.339|   No   |   1,485.896|   Long   | 0.005|
+| 27 | 2022-01-13 | 2022-04-22 |%5EGSPC|   4,659.094|       0.000|       0.000|   4,271.743|   No   |   1,459.326|   Long   | 0.064|
+| 28 | 2022-01-13 | 2022-04-22 | NTAP  |      95.495|       0.000|       0.000|      75.892|   No   |   1,395.183|   Long   | 0.015|
+| 29 | 2022-01-13 | 2022-04-22 | ERIC  |      11.364|       0.000|       0.000|       8.524|   No   |   1,317.289|   Long   | 0.004|
+| 30 | 2022-01-13 | 2022-04-22 | MRVL  |      78.719|       0.000|       0.000|      58.433|   No   |   1,236.965|   Long   | 0.069|
+| 31 | 2022-04-22 | 2022-07-29 | NVDA  |      19.515|       0.000|       0.000|      18.158|   No   |   1,218.758|   Long   | 0.005|
+| 32 | 2022-04-22 | 2022-07-29 | NXPI  |     170.843|       0.000|       0.000|     183.737|  Yes   |   1,236.439|   Long   | 0.093|
+| 33 | 2022-04-22 | 2022-07-29 |  XRX  |      17.149|       0.000|       0.000|      17.085|   No   |   1,234.525|   Long   | 0.019|
+| 34 | 2022-04-22 | 2022-07-29 | GOOG  |     119.618|       0.000|       0.000|     116.578|   No   |   1,227.236|   Long   | 0.008|
+| 35 | 2022-04-22 | 2022-07-29 | FLEX  |      12.465|       0.000|       0.000|      12.645|  Yes   |   1,229.819|   Long   | 0.005|
+| 36 | 2022-09-01 | 2022-12-09 | COMM  |      12.018|       0.000|       0.000|       7.741|   No   |   1,141.228|   Long   | 0.008|
+| 37 | 2022-09-01 | 2022-12-09 | MSFT  |     260.415|       0.000|       0.000|     245.368|   No   |   1,126.015|   Long   | 0.015|
+| 38 | 2022-09-01 | 2022-12-09 | NXPI  |     164.687|       0.000|       0.000|     169.586|  Yes   |   1,132.345|   Long   | 0.287|
+| 39 | 2022-09-01 | 2022-12-09 | INFN  |       5.121|       0.000|       0.000|       6.906|  Yes   |   1,217.255|   Long   | 0.011|
+| 40 | 2022-09-01 | 2022-12-09 |  RUN  |      32.172|       0.000|       0.000|      28.648|   No   |   1,189.259|   Long   | 0.062|
+| 41 | 2023-08-17 | 2023-11-15 | FTNT  |      57.430|       0.000|       0.000|      51.026|   No   |   1,161.729|   Long   | 0.020|
+| 42 | 2023-08-17 | 2023-11-15 | LITE  |      46.391|       0.000|       0.000|      44.991|   No   |   1,153.518|   Long   | 0.191|
+| 43 | 2023-08-17 | 2023-11-15 | AMZN  |     133.983|       0.000|       0.000|     143.177|  Yes   |   1,168.840|   Long   | 0.003|
+| 44 | 2023-08-17 | 2023-11-15 | MSFT  |     316.947|       0.000|       0.000|     376.167|  Yes   |   1,212.292|   Long   | 0.067|
+| 45 | 2023-08-17 | 2023-11-15 | VIAV  |      10.146|       0.000|       0.000|       8.241|   No   |   1,166.614|   Long   | 0.006|
+| 46 | 2024-08-05 | 2024-11-01 |  WDC  |      57.063|       0.000|       0.000|      66.308|  Yes   |   1,203.464|   Long   | 0.073|
+| 47 | 2024-08-05 | 2024-11-01 | GOOGL |     159.282|       0.000|       0.000|     171.272|  Yes   |   1,220.030|   Long   | 0.032|
+| 48 | 2024-08-05 | 2024-11-01 | CTSH  |      71.730|       0.000|       0.000|      74.555|  Yes   |   1,228.217|   Long   | 0.000|
+| 49 | 2024-08-05 | 2024-11-01 |  BB   |       2.164|       0.000|       0.000|       2.288|  Yes   |   1,240.663|   Long   | 0.004|
+| 50 | 2024-08-05 | 2024-11-01 | AKAM  |      91.420|       0.000|       0.000|     100.483|  Yes   |   1,262.817|   Long   | 0.100|
+
+Final trading capital is:1262.817287681
+Highest Capital: 1537.7353962432
+Max Drawdown :-0.24134310424629
+Win percentage is: 0.62
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1262.817287681
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.62
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.24134310424629
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1537.7353962432
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-06-20 |  MU   |      37.388|       0.000|       0.000|      34.128|   No   |     981.553|   Long   | 0.008|
+| 2  | 2019-05-13 | 2019-06-20 |  TER  |      45.829|       0.000|       0.000|      46.124|  Yes   |     981.839|   Long   | 0.069|
+| 3  | 2019-05-13 | 2019-06-20 | TSLA  |      15.131|       0.000|       0.000|      14.635|   No   |     974.286|   Long   | 0.001|
+| 4  | 2019-05-13 | 2019-06-20 | PAYX  |      83.611|       0.000|       0.000|      87.514|  Yes   |     982.630|   Long   | 0.051|
+| 5  | 2019-05-13 | 2019-06-20 | NTAP  |      66.017|       0.000|       0.000|      62.642|   No   |     971.400|   Long   | 0.037|
+| 6  | 2019-08-05 | 2019-11-12 |%5EIXIC|   7,726.254|       0.000|       0.000|   8,486.002|  Yes   |     989.504|   Long   | 0.214|
+| 7  | 2019-08-05 | 2019-11-12 |  AMD  |      27.992|       0.000|       0.000|      36.698|  Yes   |   1,048.934|   Long   | 0.002|
+| 8  | 2019-08-05 | 2019-11-12 | FLEX  |       7.789|       0.000|       0.000|       8.992|  Yes   |   1,077.967|   Long   | 0.009|
+| 9  | 2019-08-05 | 2019-11-12 | SWKS  |      75.978|       0.000|       0.000|     101.491|  Yes   |   1,142.339|   Long   | 0.158|
+| 10 | 2019-08-05 | 2019-11-12 |  TXN  |     117.093|       0.000|       0.000|     118.934|  Yes   |   1,144.397|   Long   | 0.163|
+| 11 | 2020-02-25 | 2020-06-03 | TEAM  |     144.483|       0.000|       0.000|     183.267|  Yes   |   1,204.837|   Long   | 0.003|
+| 12 | 2020-02-25 | 2020-06-03 | LSCC  |      17.888|       0.000|       0.000|      26.321|  Yes   |   1,312.212|   Long   | 0.078|
+| 13 | 2020-02-25 | 2020-06-03 | GPRO  |       3.678|       0.000|       0.000|       4.739|  Yes   |   1,377.409|   Long   | 0.008|
+| 14 | 2020-02-25 | 2020-06-03 | TTMI  |      13.293|       0.000|       0.000|      11.614|   No   |   1,347.479|   Long   | 0.013|
+| 15 | 2020-02-25 | 2020-06-03 |  XRX  |      36.512|       0.000|       0.000|      17.925|   No   |   1,229.794|   Long   | 0.052|
+| 16 | 2020-10-30 | 2021-02-05 | COMM  |       8.904|       0.000|       0.000|      15.180|  Yes   |   1,402.245|   Long   | 0.004|
+| 17 | 2020-10-30 | 2021-02-05 | AAPL  |     108.875|       0.000|       0.000|     136.905|  Yes   |   1,464.577|   Long   | 0.015|
+| 18 | 2020-10-30 | 2021-02-05 | AKAM  |      95.190|       0.000|       0.000|     114.665|  Yes   |   1,513.934|   Long   | 0.070|
+| 19 | 2020-10-30 | 2021-02-05 |  GEN  |      20.572|       0.000|       0.000|      21.054|  Yes   |   1,518.704|   Long   | 0.002|
+| 20 | 2020-10-30 | 2021-02-05 |  AMD  |      75.307|       0.000|       0.000|      87.864|  Yes   |   1,558.727|   Long   | 0.017|
+| 21 | 2021-09-20 | 2021-11-01 |  STX  |      83.052|       0.000|       0.000|      91.819|  Yes   |   1,590.676|   Long   | 0.102|
+| 22 | 2021-09-20 | 2021-11-01 | ERIC  |      10.981|       0.000|       0.000|      10.837|   No   |   1,585.580|   Long   | 0.001|
+| 23 | 2021-09-20 | 2021-11-01 | FTNT  |      59.415|       0.000|       0.000|      64.785|  Yes   |   1,612.754|   Long   | 0.005|
+| 24 | 2021-09-20 | 2021-11-01 | LRCX  |      59.002|       0.000|       0.000|      57.262|   No   |   1,602.560|   Long   | 0.012|
+| 25 | 2021-09-20 | 2021-11-01 | AVGO  |      49.493|       0.000|       0.000|      52.790|  Yes   |   1,622.333|   Long   | 0.013|
+| 26 | 2022-01-17 | 2022-04-26 | VNET  |       9.200|       0.000|       0.000|       5.201|   No   |   1,480.136|   Long   | 0.010|
+| 27 | 2022-01-17 | 2022-04-26 | FTNT  |      61.802|       0.000|       0.000|      61.153|   No   |   1,475.724|   Long   | 0.112|
+| 28 | 2022-01-17 | 2022-04-26 |  WIX  |     132.132|       0.000|       0.000|      75.456|   No   |   1,334.839|   Long   | 0.672|
+| 29 | 2022-01-17 | 2022-04-26 | GPRO  |      10.022|       0.000|       0.000|       8.663|   No   |   1,289.762|   Long   | 0.012|
+| 30 | 2022-01-17 | 2022-04-26 |  XRX  |      23.536|       0.000|       0.000|      17.431|   No   |   1,204.512|   Long   | 0.026|
+| 31 | 2022-06-16 | 2022-09-23 | SSNC  |      55.330|       0.000|       0.000|      49.460|   No   |   1,177.901|   Long   | 0.110|
+| 32 | 2022-06-16 | 2022-09-23 |  XRX  |      15.525|       0.000|       0.000|      14.305|   No   |   1,157.943|   Long   | 0.015|
+| 33 | 2022-06-16 | 2022-09-23 | NTAP  |      63.345|       0.000|       0.000|      63.363|   No   |   1,157.012|   Long   | 0.055|
+| 34 | 2022-06-16 | 2022-09-23 | KLAC  |     311.258|       0.000|       0.000|     307.150|   No   |   1,152.824|   Long   | 0.858|
+| 35 | 2022-06-16 | 2022-09-23 | MRVL  |      45.087|       0.000|       0.000|      43.252|   No   |   1,142.006|   Long   | 0.047|
+| 36 | 2022-09-29 | 2023-01-06 | MSFT  |     237.609|       0.000|       0.000|     224.890|   No   |   1,128.775|   Long   | 0.109|
+| 37 | 2022-09-29 | 2023-01-06 | FLEX  |      12.728|       0.000|       0.000|      16.771|  Yes   |   1,200.364|   Long   | 0.008|
+| 38 | 2022-09-29 | 2023-01-06 | TSLA  |     268.278|       0.000|       0.000|     113.026|   No   |   1,067.155|   Long   | 0.068|
+| 39 | 2022-09-29 | 2023-01-06 |  STX  |      54.490|       0.000|       0.000|      55.848|  Yes   |   1,071.861|   Long   | 0.110|
+| 40 | 2022-09-29 | 2023-01-06 | COMM  |       9.317|       0.000|       0.000|       7.629|   No   |   1,029.394|   Long   | 0.017|
+| 41 | 2023-08-17 | 2023-11-16 | COMM  |       3.695|       0.000|       0.000|       1.689|   No   |     916.166|   Long   | 0.015|
+| 42 | 2023-08-17 | 2023-11-16 | ERIC  |       4.892|       0.000|       0.000|       4.838|   No   |     912.900|   Long   | 0.002|
+| 43 | 2023-08-17 | 2023-11-16 |  WDC  |      40.305|       0.000|       0.000|      45.986|  Yes   |     940.931|   Long   | 0.015|
+| 44 | 2023-08-17 | 2023-11-16 | EXTR  |      27.751|       0.000|       0.000|      16.416|   No   |     855.806|   Long   | 0.011|
+| 45 | 2023-08-17 | 2023-11-16 | FTNT  |      57.528|       0.000|       0.000|      50.396|   No   |     829.230|   Long   | 0.118|
+| 46 | 2024-08-05 | 2024-09-26 |  GEN  |      24.639|       0.000|       0.000|      27.146|  Yes   |     845.115|   Long   | 0.009|
+| 47 | 2024-08-05 | 2024-09-26 | PAYX  |     124.783|       0.000|       0.000|     132.984|  Yes   |     855.022|   Long   | 0.083|
+| 48 | 2024-08-05 | 2024-09-26 | FSLR  |     207.240|       0.000|       0.000|     255.431|  Yes   |     892.614|   Long   | 0.150|
+| 49 | 2024-08-05 | 2024-09-26 | LRCX  |      77.067|       0.000|       0.000|      84.740|  Yes   |     908.132|   Long   | 0.027|
+| 50 | 2024-08-05 | 2024-09-26 | SMCI  |      60.950|       0.000|       0.000|      40.229|   No   |     850.685|   Long   | 0.070|
+
+Final trading capital is:850.68463848497
+Highest Capital: 1622.3325524631
+Max Drawdown :-0.4888658254656
+Win percentage is: 0.5
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 850.68463848497
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.5
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.4888658254656
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1622.3325524631
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 | LRCX  |      18.832|       0.000|       0.000|      20.680|  Yes   |   1,018.626|   Long   | 0.002|
+| 2  | 2019-05-13 | 2019-08-20 |  HPQ  |      18.275|       0.000|       0.000|      18.900|  Yes   |   1,024.464|   Long   | 0.005|
+| 3  | 2019-05-13 | 2019-08-20 | AMAT  |      39.100|       0.000|       0.000|      46.729|  Yes   |   1,062.495|   Long   | 0.010|
+| 4  | 2019-05-13 | 2019-08-20 |  STX  |      44.106|       0.000|       0.000|      46.294|  Yes   |   1,071.432|   Long   | 0.066|
+| 5  | 2019-05-13 | 2019-08-20 |  GEN  |      19.153|       0.000|       0.000|      23.751|  Yes   |   1,118.478|   Long   | 0.013|
+| 6  | 2020-02-27 | 2020-06-05 |  RUN  |      20.315|       0.000|       0.000|      18.662|   No   |   1,099.237|   Long   | 0.045|
+| 7  | 2020-02-27 | 2020-06-05 |  STX  |      48.433|       0.000|       0.000|      54.298|  Yes   |   1,125.367|   Long   | 0.073|
+| 8  | 2020-02-27 | 2020-06-05 |  BB   |       5.144|       0.000|       0.000|       5.461|  Yes   |   1,138.172|   Long   | 0.004|
+| 9  | 2020-02-27 | 2020-06-05 | HIMX  |       4.199|       0.000|       0.000|       3.308|   No   |   1,089.613|   Long   | 0.009|
+| 10 | 2020-02-27 | 2020-06-05 | LPSN  |      26.809|       0.000|       0.000|      34.951|  Yes   |   1,157.347|   Long   | 0.309|
+| 11 | 2020-10-30 | 2020-12-08 | MRVL  |      37.518|       0.000|       0.000|      43.655|  Yes   |   1,194.221|   Long   | 0.008|
+| 12 | 2020-10-30 | 2020-12-08 |  NOK  |       3.371|       0.000|       0.000|       4.219|  Yes   |   1,251.434|   Long   | 0.001|
+| 13 | 2020-10-30 | 2020-12-08 | COMM  |       8.907|       0.000|       0.000|      12.915|  Yes   |   1,354.683|   Long   | 0.007|
+| 14 | 2020-10-30 | 2020-12-08 |  WDC  |      37.750|       0.000|       0.000|      52.390|  Yes   |   1,443.492|   Long   | 0.020|
+| 15 | 2020-10-30 | 2020-12-08 | FTNT  |      22.102|       0.000|       0.000|      26.307|  Yes   |   1,486.601|   Long   | 0.032|
+| 16 | 2021-02-25 | 2021-06-04 | MRVL  |      46.585|       0.000|       0.000|      48.681|  Yes   |   1,498.987|   Long   | 0.025|
+| 17 | 2021-02-25 | 2021-06-04 |  AVT  |      37.430|       0.000|       0.000|      43.918|  Yes   |   1,549.662|   Long   | 0.100|
+| 18 | 2021-02-25 | 2021-06-04 |  ON   |      37.791|       0.000|       0.000|      38.192|  Yes   |   1,551.816|   Long   | 0.051|
+| 19 | 2021-02-25 | 2021-06-04 |  HPQ  |      28.192|       0.000|       0.000|      30.619|  Yes   |   1,576.421|   Long   | 0.002|
+| 20 | 2021-02-25 | 2021-06-04 | INFN  |       9.441|       0.000|       0.000|      10.232|  Yes   |   1,600.367|   Long   | 0.021|
+| 21 | 2021-09-20 | 2021-11-01 |  NOK  |       5.351|       0.000|       0.000|       5.689|  Yes   |   1,619.563|   Long   | 0.001|
+| 22 | 2021-09-20 | 2021-11-01 | AMKR  |      25.943|       0.000|       0.000|      22.833|   No   |   1,580.129|   Long   | 0.043|
+| 23 | 2021-09-20 | 2021-11-01 | TTMI  |      12.803|       0.000|       0.000|      13.457|  Yes   |   1,595.501|   Long   | 0.013|
+| 24 | 2021-09-20 | 2021-11-01 | COMM  |      13.878|       0.000|       0.000|      11.211|   No   |   1,532.896|   Long   | 0.018|
+| 25 | 2021-09-20 | 2021-11-01 | GPRO  |       9.417|       0.000|       0.000|       8.778|   No   |   1,510.184|   Long   | 0.007|
+| 26 | 2022-01-13 | 2022-04-22 | COMM  |      10.733|       0.000|       0.000|       6.390|   No   |   1,386.721|   Long   | 0.023|
+| 27 | 2022-01-13 | 2022-04-22 |  HPQ  |      38.708|       0.000|       0.000|      36.770|   No   |   1,370.591|   Long   | 0.008|
+| 28 | 2022-01-13 | 2022-04-22 | SABR  |       9.533|       0.000|       0.000|      10.727|  Yes   |   1,407.456|   Long   | 0.013|
+| 29 | 2022-01-13 | 2022-04-22 | HIMX  |      12.704|       0.000|       0.000|       8.724|   No   |   1,311.653|   Long   | 0.024|
+| 30 | 2022-01-13 | 2022-04-22 | VIAV  |      17.015|       0.000|       0.000|      14.848|   No   |   1,272.144|   Long   | 0.025|
+| 31 | 2022-04-22 | 2022-07-29 | HIMX  |       8.753|       0.000|       0.000|       7.157|   No   |   1,224.742|   Long   | 0.003|
+| 32 | 2022-04-22 | 2022-07-29 | COMM  |       6.405|       0.000|       0.000|       9.012|  Yes   |   1,327.389|   Long   | 0.005|
+| 33 | 2022-04-22 | 2022-07-29 | SMCI  |       4.240|       0.000|       0.000|       5.396|  Yes   |   1,395.744|   Long   | 0.000|
+| 34 | 2022-04-22 | 2022-07-29 |  AAL  |      20.187|       0.000|       0.000|      13.708|   No   |   1,313.049|   Long   | 0.007|
+| 35 | 2022-04-22 | 2022-07-29 | LRCX  |      46.325|       0.000|       0.000|      50.011|  Yes   |   1,332.299|   Long   | 0.015|
+| 36 | 2022-09-01 | 2022-12-09 | PLAB  |      15.984|       0.000|       0.000|      18.232|  Yes   |   1,369.252|   Long   | 0.204|
+| 37 | 2022-09-01 | 2022-12-09 | NVDA  |      13.944|       0.000|       0.000|      16.997|  Yes   |   1,426.619|   Long   | 0.004|
+| 38 | 2022-09-01 | 2022-12-09 | INFN  |       5.124|       0.000|       0.000|       6.925|  Yes   |   1,519.508|   Long   | 0.014|
+| 39 | 2022-09-01 | 2022-12-09 | SMTC  |      33.748|       0.000|       0.000|      29.297|   No   |   1,483.264|   Long   | 0.098|
+| 40 | 2022-09-01 | 2022-12-09 |  BB   |       5.760|       0.000|       0.000|       4.392|   No   |   1,418.960|   Long   | 0.000|
+| 41 | 2023-08-17 | 2023-11-15 | AAOI  |      12.992|       0.000|       0.000|      12.651|   No   |   1,410.481|   Long   | 0.062|
+| 42 | 2023-08-17 | 2023-11-15 |  HPQ  |      30.973|       0.000|       0.000|      28.460|   No   |   1,386.448|   Long   | 0.013|
+| 43 | 2023-08-17 | 2023-11-15 | GPRO  |       3.688|       0.000|       0.000|       3.578|   No   |   1,376.987|   Long   | 0.008|
+| 44 | 2023-08-17 | 2023-11-15 | VIAV  |      10.160|       0.000|       0.000|       8.241|   No   |   1,322.265|   Long   | 0.020|
+| 45 | 2023-08-17 | 2023-11-15 | TSEM  |      30.548|       0.000|       0.000|      27.135|   No   |   1,289.482|   Long   | 0.068|
+| 46 | 2024-08-05 | 2024-11-01 | INFN  |       5.764|       0.000|       0.000|       6.714|  Yes   |   1,331.036|   Long   | 0.004|
+| 47 | 2024-08-05 | 2024-11-01 | LSCC  |      44.566|       0.000|       0.000|      52.237|  Yes   |   1,374.569|   Long   | 0.146|
+| 48 | 2024-08-05 | 2024-11-01 | EXTR  |      12.646|       0.000|       0.000|      15.087|  Yes   |   1,423.446|   Long   | 0.026|
+| 49 | 2024-08-05 | 2024-11-01 | FLEX  |      28.238|       0.000|       0.000|      35.423|  Yes   |   1,488.181|   Long   | 0.048|
+| 50 | 2024-08-05 | 2024-11-01 | VIAV  |       7.320|       0.000|       0.000|       9.839|  Yes   |   1,576.202|   Long   | 0.020|
+
+Final trading capital is:1576.2021161663
+Highest Capital: 1600.3674116801
+Max Drawdown :-0.20509283895305
+Win percentage is: 0.64
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1576.2021161663
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.64
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.20509283895305
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1600.3674116801
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 |  ON   |      19.611|       0.000|       0.000|      18.147|   No   |     984.066|   Long   | 0.011|
+| 2  | 2019-05-13 | 2019-08-20 | MCHP  |      41.842|       0.000|       0.000|      44.491|  Yes   |     995.737|   Long   | 0.032|
+| 3  | 2019-05-13 | 2019-08-20 |  STX  |      44.093|       0.000|       0.000|      46.310|  Yes   |   1,004.805|   Long   | 0.053|
+| 4  | 2019-05-13 | 2019-08-20 | ERIC  |       9.059|       0.000|       0.000|       8.348|   No   |     988.090|   Long   | 0.009|
+| 5  | 2019-05-13 | 2019-08-20 | GPRO  |       6.641|       0.000|       0.000|       4.057|   No   |     909.132|   Long   | 0.011|
+| 6  | 2020-02-27 | 2020-06-05 | FLEX  |       8.583|       0.000|       0.000|       8.838|  Yes   |     913.535|   Long   | 0.003|
+| 7  | 2020-02-27 | 2020-06-05 | AVGO  |      27.404|       0.000|       0.000|      31.694|  Yes   |     940.999|   Long   | 0.004|
+| 8  | 2020-02-27 | 2020-06-05 |  BB   |       5.141|       0.000|       0.000|       5.466|  Yes   |     951.502|   Long   | 0.001|
+| 9  | 2020-02-27 | 2020-06-05 | SMCI  |       2.583|       0.000|       0.000|       2.859|  Yes   |     969.933|   Long   | 0.003|
+| 10 | 2020-02-27 | 2020-06-05 | GPRO  |       3.677|       0.000|       0.000|       4.855|  Yes   |   1,027.304|   Long   | 0.007|
+| 11 | 2020-10-30 | 2020-12-08 | GPRO  |       5.953|       0.000|       0.000|       8.742|  Yes   |   1,122.779|   Long   | 0.013|
+| 12 | 2020-10-30 | 2020-12-08 | FLEX  |      10.677|       0.000|       0.000|      12.519|  Yes   |   1,157.291|   Long   | 0.017|
+| 13 | 2020-10-30 | 2020-12-08 |  GEN  |      20.571|       0.000|       0.000|      19.277|   No   |   1,143.375|   Long   | 0.001|
+| 14 | 2020-10-30 | 2020-12-08 |  HPQ  |      17.973|       0.000|       0.000|      23.185|  Yes   |   1,201.999|   Long   | 0.013|
+| 15 | 2020-10-30 | 2020-12-08 | LRCX  |      34.220|       0.000|       0.000|      49.363|  Yes   |   1,291.946|   Long   | 0.010|
+| 16 | 2021-02-25 | 2021-06-04 | GPRO  |       7.469|       0.000|       0.000|      11.023|  Yes   |   1,414.201|   Long   | 0.019|
+| 17 | 2021-02-25 | 2021-06-04 | CSIQ  |      45.636|       0.000|       0.000|      38.796|   No   |   1,374.461|   Long   | 0.016|
+| 18 | 2021-02-25 | 2021-06-04 | FTNT  |      33.604|       0.000|       0.000|      44.348|  Yes   |   1,456.083|   Long   | 0.004|
+| 19 | 2021-02-25 | 2021-06-04 | SSYS  |      34.401|       0.000|       0.000|      22.923|   No   |   1,368.292|   Long   | 0.231|
+| 20 | 2021-02-25 | 2021-06-04 |  XRX  |      25.364|       0.000|       0.000|      24.178|   No   |   1,355.205|   Long   | 0.014|
+| 21 | 2021-09-20 | 2021-11-01 | AMKR  |      25.931|       0.000|       0.000|      22.831|   No   |   1,321.762|   Long   | 0.031|
+| 22 | 2021-09-20 | 2021-11-01 | COMM  |      13.877|       0.000|       0.000|      11.201|   No   |   1,268.439|   Long   | 0.017|
+| 23 | 2021-09-20 | 2021-11-01 | SABR  |      11.253|       0.000|       0.000|      10.794|   No   |   1,256.374|   Long   | 0.003|
+| 24 | 2021-09-20 | 2021-11-01 | HIMX  |      10.297|       0.000|       0.000|      11.048|  Yes   |   1,275.180|   Long   | 0.017|
+| 25 | 2021-09-20 | 2021-11-01 |  ON   |      47.710|       0.000|       0.000|      54.990|  Yes   |   1,315.570|   Long   | 0.040|
+| 26 | 2022-01-13 | 2022-04-22 | FLEX  |      13.604|       0.000|       0.000|      12.456|   No   |   1,292.336|   Long   | 0.014|
+| 27 | 2022-01-13 | 2022-04-22 |  GEN  |      26.612|       0.000|       0.000|      25.490|   No   |   1,280.231|   Long   | 0.012|
+| 28 | 2022-01-13 | 2022-04-22 | VNET  |       9.005|       0.000|       0.000|       5.486|   No   |   1,176.244|   Long   | 0.015|
+| 29 | 2022-01-13 | 2022-04-22 | VIAV  |      16.997|       0.000|       0.000|      14.849|   No   |   1,141.974|   Long   | 0.007|
+| 30 | 2022-01-13 | 2022-04-22 | ERIC  |      11.360|       0.000|       0.000|       8.530|   No   |   1,075.407|   Long   | 0.000|
+| 31 | 2022-04-22 | 2022-07-29 |  AAL  |      20.191|       0.000|       0.000|      13.706|   No   |   1,005.288|   Long   | 0.011|
+| 32 | 2022-04-22 | 2022-07-29 | ERIC  |       8.534|       0.000|       0.000|       7.534|   No   |     979.062|   Long   | 0.004|
+| 33 | 2022-04-22 | 2022-07-29 | LRCX  |      46.327|       0.000|       0.000|      50.031|  Yes   |     995.266|   Long   | 0.017|
+| 34 | 2022-04-22 | 2022-07-29 | INFN  |       7.731|       0.000|       0.000|       6.549|   No   |     961.340|   Long   | 0.011|
+| 35 | 2022-04-22 | 2022-07-29 | HIMX  |       8.764|       0.000|       0.000|       7.154|   No   |     920.752|   Long   | 0.014|
+| 36 | 2022-09-01 | 2022-12-09 | FLEX  |      13.104|       0.000|       0.000|      16.753|  Yes   |     971.078|   Long   | 0.014|
+| 37 | 2022-09-01 | 2022-12-09 | COMM  |      12.033|       0.000|       0.000|       7.759|   No   |     904.542|   Long   | 0.023|
+| 38 | 2022-09-01 | 2022-12-09 |  HPQ  |      28.178|       0.000|       0.000|      28.198|   No   |     903.678|   Long   | 0.008|
+| 39 | 2022-09-01 | 2022-12-09 |  RUN  |      32.156|       0.000|       0.000|      28.603|   No   |     882.302|   Long   | 0.046|
+| 40 | 2022-09-01 | 2022-12-09 | PLAB  |      15.949|       0.000|       0.000|      18.235|  Yes   |     907.983|   Long   | 0.169|
+| 41 | 2023-08-17 | 2023-11-15 | ERIC  |       4.893|       0.000|       0.000|       4.867|   No   |     906.040|   Long   | 0.003|
+| 42 | 2023-08-17 | 2023-11-15 |  GEN  |      20.171|       0.000|       0.000|      19.734|   No   |     901.105|   Long   | 0.011|
+| 43 | 2023-08-17 | 2023-11-15 | TSEM  |      30.522|       0.000|       0.000|      27.174|   No   |     880.158|   Long   | 0.042|
+| 44 | 2023-08-17 | 2023-11-15 | INTC  |      32.594|       0.000|       0.000|      40.608|  Yes   |     923.825|   Long   | 0.014|
+| 45 | 2023-08-17 | 2023-11-15 | FLEX  |      19.221|       0.000|       0.000|      20.186|  Yes   |     931.949|   Long   | 0.001|
+| 46 | 2024-08-05 | 2024-11-01 | FCEL  |       0.490|       0.000|       0.000|       0.350|   No   |     876.616|   Long   | 0.000|
+| 47 | 2024-08-05 | 2024-11-01 | LSCC  |      44.430|       0.000|       0.000|      52.228|  Yes   |     908.341|   Long   | 0.010|
+| 48 | 2024-08-05 | 2024-11-01 |  BB   |       2.160|       0.000|       0.000|       2.288|  Yes   |     918.416|   Long   | 0.000|
+| 49 | 2024-08-05 | 2024-11-01 | TRMB  |      49.938|       0.000|       0.000|      61.210|  Yes   |     959.586|   Long   | 0.118|
+| 50 | 2024-08-05 | 2024-11-01 | INFN  |       5.764|       0.000|       0.000|       6.713|  Yes   |     989.308|   Long   | 0.004|
+
+Final trading capital is:989.30816313937
+Highest Capital: 1355.205339544
+Max Drawdown :-0.33000309356689
+Win percentage is: 0.48
+Average fee: 1.017305215577
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1764.7963302113
+Standart Deviation of final trading capital: 526.61983476606
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.564
+Standart Deviation of win percentage: 0.051224993899463
+
+Average of max drawdown: -0.22328495828456
+Standart Deviation of max drawdown: 0.076035031205178
+
+Average of highest capital: 1758.7681512798
+Standart Deviation of highest capital: 249.4282092162
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 4
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 | MRVL  |      22.145|       0.000|       0.000|      24.917|  Yes   |   1,024.046|   Long   | 0.005|
+| 2  | 2019-05-13 | 2019-08-20 | AAPL  |      46.434|       0.000|       0.000|      52.576|  Yes   |   1,049.506|   Long   | 0.004|
+| 3  | 2019-05-13 | 2019-08-20 | LRCX  |      18.835|       0.000|       0.000|      20.679|  Yes   |   1,068.094|   Long   | 0.005|
+| 4  | 2019-05-13 | 2019-08-20 |  ADI  |     104.234|       0.000|       0.000|     110.098|  Yes   |   1,078.348|   Long   | 0.004|
+| 5  | 2019-05-13 | 2019-08-20 | AMAT  |      39.127|       0.000|       0.000|      46.702|  Yes   |   1,116.102|   Long   | 0.037|
+| 6  | 2020-02-27 | 2020-06-05 |  HPQ  |      21.896|       0.000|       0.000|      17.399|   No   |   1,069.227|   Long   | 0.016|
+| 7  | 2020-02-27 | 2020-06-05 | ADBE  |     337.937|       0.000|       0.000|     392.394|  Yes   |   1,104.243|   Long   | 0.417|
+| 8  | 2020-02-27 | 2020-06-05 | GOOG  |      65.905|       0.000|       0.000|      71.912|  Yes   |   1,123.591|   Long   | 0.005|
+| 9  | 2020-02-27 | 2020-06-05 | MSFT  |     158.266|       0.000|       0.000|     187.176|  Yes   |   1,163.388|   Long   | 0.086|
+| 10 | 2020-02-27 | 2020-06-05 | AMZN  |      94.223|       0.000|       0.000|     124.134|  Yes   |   1,233.259|   Long   | 0.013|
+| 11 | 2020-10-30 | 2020-12-08 | INTC  |      44.292|       0.000|       0.000|      50.671|  Yes   |   1,267.790|   Long   | 0.012|
+| 12 | 2020-10-30 | 2020-12-08 | NXPI  |     135.153|       0.000|       0.000|     166.138|  Yes   |   1,323.351|   Long   | 0.033|
+| 13 | 2020-10-30 | 2020-12-08 |  HPQ  |      17.965|       0.000|       0.000|      23.173|  Yes   |   1,393.873|   Long   | 0.005|
+| 14 | 2020-10-30 | 2020-12-08 | NVDA  |      12.531|       0.000|       0.000|      13.350|  Yes   |   1,408.999|   Long   | 0.001|
+| 15 | 2020-10-30 | 2020-12-08 |  STX  |      47.879|       0.000|       0.000|      63.851|  Yes   |   1,490.379|   Long   | 0.059|
+| 16 | 2021-02-25 | 2021-06-04 | GOOGL |     100.800|       0.000|       0.000|     119.672|  Yes   |   1,545.186|   Long   | 0.000|
+| 17 | 2021-02-25 | 2021-06-04 | CDNS  |     138.199|       0.000|       0.000|     126.544|   No   |   1,519.014|   Long   | 0.179|
+| 18 | 2021-02-25 | 2021-06-04 | CTSH  |      73.445|       0.000|       0.000|      71.480|   No   |   1,510.031|   Long   | 0.065|
+| 19 | 2021-02-25 | 2021-06-04 |  ADI  |     156.090|       0.000|       0.000|     165.463|  Yes   |   1,526.960|   Long   | 0.270|
+| 20 | 2021-02-25 | 2021-06-04 | CSCO  |      45.531|       0.000|       0.000|      54.063|  Yes   |   1,581.828|   Long   | 0.011|
+| 21 | 2021-09-20 | 2021-11-01 |  GEN  |      25.251|       0.000|       0.000|      25.348|  Yes   |   1,582.052|   Long   | 0.021|
+| 22 | 2021-09-20 | 2021-11-01 |  NOK  |       5.350|       0.000|       0.000|       5.690|  Yes   |   1,601.113|   Long   | 0.000|
+| 23 | 2021-09-20 | 2021-11-01 | TTMI  |      12.796|       0.000|       0.000|      13.447|  Yes   |   1,616.196|   Long   | 0.006|
+| 24 | 2021-09-20 | 2021-11-01 | INTC  |      52.993|       0.000|       0.000|      49.540|   No   |   1,594.575|   Long   | 0.013|
+| 25 | 2021-09-20 | 2021-11-01 | FLEX  |      13.409|       0.000|       0.000|      13.309|   No   |   1,591.212|   Long   | 0.009|
+| 26 | 2022-01-13 | 2022-04-22 | VIAV  |      17.009|       0.000|       0.000|      14.839|   No   |   1,549.557|   Long   | 0.019|
+| 27 | 2022-01-13 | 2022-04-22 | KLAC  |     421.916|       0.000|       0.000|     323.097|   No   |   1,473.942|   Long   | 0.436|
+| 28 | 2022-01-13 | 2022-04-22 | AMAT  |     157.198|       0.000|       0.000|     112.768|   No   |   1,382.986|   Long   | 0.018|
+| 29 | 2022-01-13 | 2022-04-22 | CTSH  |      87.219|       0.000|       0.000|      83.140|   No   |   1,367.098|   Long   | 0.019|
+| 30 | 2022-01-13 | 2022-04-22 | AMZN  |     161.224|       0.000|       0.000|     144.279|   No   |   1,332.645|   Long   | 0.014|
+| 31 | 2022-04-22 | 2022-07-29 | AMZN  |     144.370|       0.000|       0.000|     134.882|   No   |   1,314.127|   Long   | 0.020|
+| 32 | 2022-04-22 | 2022-07-29 | NXPI  |     170.982|       0.000|       0.000|     183.879|  Yes   |   1,333.260|   Long   | 0.232|
+| 33 | 2022-04-22 | 2022-07-29 |  WDC  |      49.498|       0.000|       0.000|      49.075|   No   |   1,329.978|   Long   | 0.038|
+| 34 | 2022-04-22 | 2022-07-29 | PANW  |     190.841|       0.000|       0.000|     166.125|   No   |   1,294.403|   Long   | 0.311|
+| 35 | 2022-04-22 | 2022-07-29 |  NOK  |       5.140|       0.000|       0.000|       5.178|  Yes   |   1,295.376|   Long   | 0.000|
+| 36 | 2022-09-01 | 2022-12-09 | FSLR  |     128.176|       0.000|       0.000|     150.807|  Yes   |   1,340.238|   Long   | 0.336|
+| 37 | 2022-09-01 | 2022-12-09 | HIMX  |       6.028|       0.000|       0.000|       7.110|  Yes   |   1,385.799|   Long   | 0.008|
+| 38 | 2022-09-01 | 2022-12-09 | LRCX  |      43.207|       0.000|       0.000|      45.008|  Yes   |   1,395.600|   Long   | 0.007|
+| 39 | 2022-09-01 | 2022-12-09 | PANW  |     181.912|       0.000|       0.000|     158.872|   No   |   1,361.753|   Long   | 0.192|
+| 40 | 2022-09-01 | 2022-12-09 | INTC  |      31.763|       0.000|       0.000|      28.231|   No   |   1,331.944|   Long   | 0.003|
+| 41 | 2023-08-17 | 2023-11-15 |  MU   |      63.608|       0.000|       0.000|      77.084|  Yes   |   1,387.426|   Long   | 0.048|
+| 42 | 2023-08-17 | 2023-11-15 | AVGO  |      82.717|       0.000|       0.000|      97.527|  Yes   |   1,434.125|   Long   | 0.007|
+| 43 | 2023-08-17 | 2023-11-15 |  BB   |       4.363|       0.000|       0.000|       3.663|   No   |   1,390.328|   Long   | 0.003|
+| 44 | 2023-08-17 | 2023-11-15 |  GEN  |      20.185|       0.000|       0.000|      19.753|   No   |   1,383.624|   Long   | 0.025|
+| 45 | 2023-08-17 | 2023-11-15 | ERIC  |       4.892|       0.000|       0.000|       4.868|   No   |   1,381.332|   Long   | 0.002|
+| 46 | 2024-08-05 | 2024-11-01 | FTNT  |      55.419|       0.000|       0.000|      79.084|  Yes   |   1,498.366|   Long   | 0.029|
+| 47 | 2024-08-05 | 2024-11-01 | CTSH  |      71.775|       0.000|       0.000|      74.547|  Yes   |   1,508.041|   Long   | 0.045|
+| 48 | 2024-08-05 | 2024-11-01 |  ADP  |     258.437|       0.000|       0.000|     287.933|  Yes   |   1,538.608|   Long   | 0.297|
+| 49 | 2024-08-05 | 2024-11-01 | TRMB  |      49.842|       0.000|       0.000|      61.151|  Yes   |   1,600.323|   Long   | 0.022|
+| 50 | 2024-08-05 | 2024-11-01 | EXTR  |      12.654|       0.000|       0.000|      15.032|  Yes   |   1,651.385|   Long   | 0.034|
+
+Final trading capital is:1651.3854978097
+Highest Capital: 1591.2115162362
+Max Drawdown :-0.18591845237826
+Win percentage is: 0.64
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1651.3854978097
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.64
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.18591845237826
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1591.2115162362
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 | CYBR  |     121.650|       0.000|       0.000|     115.810|   No   |     989.367|   Long   | 0.410|
+| 2  | 2019-05-13 | 2019-08-20 |  NOK  |       4.822|       0.000|       0.000|       5.148|  Yes   |   1,001.892|   Long   | 0.002|
+| 3  | 2019-05-13 | 2019-08-20 | MRVL  |      22.147|       0.000|       0.000|      24.901|  Yes   |   1,025.775|   Long   | 0.007|
+| 4  | 2019-05-13 | 2019-08-20 | PAYX  |      83.597|       0.000|       0.000|      81.909|   No   |   1,020.735|   Long   | 0.037|
+| 5  | 2019-05-13 | 2019-08-20 | ERIC  |       9.055|       0.000|       0.000|       8.349|   No   |   1,004.129|   Long   | 0.005|
+| 6  | 2020-02-27 | 2020-06-05 | CTSH  |      62.397|       0.000|       0.000|      57.737|   No   |     988.112|   Long   | 0.077|
+| 7  | 2020-02-27 | 2020-06-05 | SSNC  |      55.667|       0.000|       0.000|      60.673|  Yes   |   1,005.220|   Long   | 0.147|
+| 8  | 2020-02-27 | 2020-06-05 | AVGO  |      27.405|       0.000|       0.000|      31.707|  Yes   |   1,035.752|   Long   | 0.005|
+| 9  | 2020-02-27 | 2020-06-05 | WDAY  |     171.607|       0.000|       0.000|     178.509|  Yes   |   1,042.850|   Long   | 0.407|
+| 10 | 2020-02-27 | 2020-06-05 |  NOK  |       3.962|       0.000|       0.000|       4.458|  Yes   |   1,067.011|   Long   | 0.002|
+| 11 | 2020-10-30 | 2020-12-08 | INTC  |      44.313|       0.000|       0.000|      50.682|  Yes   |   1,096.704|   Long   | 0.033|
+| 12 | 2020-10-30 | 2020-12-08 | CDNS  |     109.397|       0.000|       0.000|     118.324|  Yes   |   1,113.122|   Long   | 0.027|
+| 13 | 2020-10-30 | 2020-12-08 |  ADP  |     158.188|       0.000|       0.000|     174.414|  Yes   |   1,134.043|   Long   | 0.228|
+| 14 | 2020-10-30 | 2020-12-08 | MSFT  |     202.478|       0.000|       0.000|     215.963|  Yes   |   1,147.256|   Long   | 0.008|
+| 15 | 2020-10-30 | 2020-12-08 |  AMD  |      75.296|       0.000|       0.000|      92.915|  Yes   |   1,196.195|   Long   | 0.006|
+| 16 | 2021-02-25 | 2021-06-04 | QCOM  |     135.609|       0.000|       0.000|     134.327|   No   |   1,192.933|   Long   | 0.079|
+| 17 | 2021-02-25 | 2021-06-04 |%5EGSPC|   3,829.405|       0.000|       0.000|   4,229.889|  Yes   |   1,216.953|   Long   | 0.065|
+| 18 | 2021-02-25 | 2021-06-04 |  ADI  |     155.966|       0.000|       0.000|     165.533|  Yes   |   1,230.642|   Long   | 0.146|
+| 19 | 2021-02-25 | 2021-06-04 | MSFT  |     229.023|       0.000|       0.000|     250.753|  Yes   |   1,252.344|   Long   | 0.033|
+| 20 | 2021-02-25 | 2021-06-04 | AVGO  |      45.734|       0.000|       0.000|      47.496|  Yes   |   1,260.567|   Long   | 0.014|
+| 21 | 2021-09-20 | 2021-11-01 | CSCO  |      55.897|       0.000|       0.000|      56.097|   No   |   1,260.470|   Long   | 0.007|
+| 22 | 2021-09-20 | 2021-11-01 | ERIC  |      10.986|       0.000|       0.000|      10.837|   No   |   1,256.057|   Long   | 0.006|
+| 23 | 2021-09-20 | 2021-11-01 | TTMI  |      12.802|       0.000|       0.000|      13.428|  Yes   |   1,267.388|   Long   | 0.012|
+| 24 | 2021-09-20 | 2021-11-01 |  STX  |      83.042|       0.000|       0.000|      91.798|  Yes   |   1,293.003|   Long   | 0.092|
+| 25 | 2021-09-20 | 2021-11-01 |%5EGSPC|   4,357.749|       0.000|       0.000|   4,613.629|  Yes   |   1,306.807|   Long   | 0.019|
+| 26 | 2022-01-13 | 2022-04-22 | CSCO  |      61.516|       0.000|       0.000|      51.352|   No   |   1,262.613|   Long   | 0.016|
+| 27 | 2022-01-13 | 2022-04-22 |%5EGSPC|   4,659.075|       0.000|       0.000|   4,271.696|   No   |   1,239.882|   Long   | 0.045|
+| 28 | 2022-01-13 | 2022-04-22 | ERIC  |      11.360|       0.000|       0.000|       8.522|   No   |   1,173.578|   Long   | 0.000|
+| 29 | 2022-01-13 | 2022-04-22 | AMAT  |     157.367|       0.000|       0.000|     112.696|   No   |   1,098.299|   Long   | 0.187|
+| 30 | 2022-01-13 | 2022-04-22 | MCHP  |      83.742|       0.000|       0.000|      66.041|   No   |   1,042.021|   Long   | 0.052|
+| 31 | 2022-04-22 | 2022-07-29 | MSFT  |     274.048|       0.000|       0.000|     280.739|  Yes   |   1,046.110|   Long   | 0.018|
+| 32 | 2022-04-22 | 2022-07-29 | AAPL  |     161.809|       0.000|       0.000|     162.508|   No   |   1,046.010|   Long   | 0.019|
+| 33 | 2022-04-22 | 2022-07-29 |%5EGSPC|   4,271.782|       0.000|       0.000|   4,130.253|   No   |   1,038.105|   Long   | 0.002|
+| 34 | 2022-04-22 | 2022-07-29 | GOOG  |     119.650|       0.000|       0.000|     116.605|   No   |   1,031.799|   Long   | 0.040|
+| 35 | 2022-04-22 | 2022-07-29 | INTC  |      46.548|       0.000|       0.000|      36.304|   No   |     984.927|   Long   | 0.008|
+| 36 | 2022-09-01 | 2022-12-09 |  GEN  |      22.582|       0.000|       0.000|      22.668|   No   |     984.679|   Long   | 0.002|
+| 37 | 2022-09-01 | 2022-12-09 |  ADI  |     150.783|       0.000|       0.000|     168.642|  Yes   |   1,007.024|   Long   | 0.093|
+| 38 | 2022-09-01 | 2022-12-09 |  NOK  |       4.982|       0.000|       0.000|       4.890|   No   |   1,002.394|   Long   | 0.002|
+| 39 | 2022-09-01 | 2022-12-09 | CSCO  |      45.297|       0.000|       0.000|      48.450|  Yes   |   1,015.107|   Long   | 0.007|
+| 40 | 2022-09-01 | 2022-12-09 | NXPI  |     164.604|       0.000|       0.000|     169.551|  Yes   |   1,020.035|   Long   | 0.204|
+| 41 | 2023-08-17 | 2023-11-15 | MCHP  |      79.179|       0.000|       0.000|      82.453|  Yes   |   1,027.480|   Long   | 0.079|
+| 42 | 2023-08-17 | 2023-11-15 | ERIC  |       4.892|       0.000|       0.000|       4.867|   No   |   1,025.443|   Long   | 0.002|
+| 43 | 2023-08-17 | 2023-11-15 | CSCO  |      54.746|       0.000|       0.000|      53.273|   No   |   1,018.954|   Long   | 0.016|
+| 44 | 2023-08-17 | 2023-11-15 |  NOK  |       3.770|       0.000|       0.000|       3.588|   No   |   1,008.105|   Long   | 0.000|
+| 45 | 2023-08-17 | 2023-11-15 |  TXN  |     165.766|       0.000|       0.000|     151.782|   No   |     989.895|   Long   | 0.006|
+| 46 | 2024-08-05 | 2024-11-01 | GOOGL |     159.305|       0.000|       0.000|     171.284|  Yes   |   1,003.787|   Long   | 0.055|
+| 47 | 2024-08-05 | 2024-11-01 | CSCO  |      44.760|       0.000|       0.000|      55.498|  Yes   |   1,050.302|   Long   | 0.020|
+| 48 | 2024-08-05 | 2024-11-01 |  GEN  |      24.655|       0.000|       0.000|      28.250|  Yes   |   1,078.193|   Long   | 0.025|
+| 49 | 2024-08-05 | 2024-11-01 | ADBE  |     510.148|       0.000|       0.000|     482.548|   No   |   1,066.465|   Long   | 0.828|
+| 50 | 2024-08-05 | 2024-11-01 | NTAP  |     115.622|       0.000|       0.000|     116.275|  Yes   |   1,066.584|   Long   | 0.012|
+
+Final trading capital is:1066.5840676385
+Highest Capital: 1306.8070213331
+Max Drawdown :-0.24631048579329
+Win percentage is: 0.54
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1667.5890174469
+Standart Deviation of final trading capital: 378.85881929992
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.636
+Standart Deviation of win percentage: 0.063749509802037
+
+Average of max drawdown: -0.20087303712236
+Standart Deviation of max drawdown: 0.027445956926805
+
+Average of highest capital: 1672.2074415564
+Standart Deviation of highest capital: 229.82644923568
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 5
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-08-20 |%5EGSPC|   2,811.924|       0.000|       0.000|   2,900.477|  Yes   |   1,005.299|   Long   | 0.054|
+| 2  | 2019-05-13 | 2019-08-20 | NXPI  |      93.151|       0.000|       0.000|     102.730|  Yes   |   1,024.872|   Long   | 0.031|
+| 3  | 2019-05-13 | 2019-08-20 |  HPQ  |      18.281|       0.000|       0.000|      18.895|  Yes   |   1,030.603|   Long   | 0.011|
+| 4  | 2019-05-13 | 2019-08-20 | AMAT  |      39.124|       0.000|       0.000|      46.704|  Yes   |   1,068.382|   Long   | 0.034|
+| 5  | 2019-05-13 | 2019-08-20 | INTC  |      44.783|       0.000|       0.000|      46.586|  Yes   |   1,075.439|   Long   | 0.023|
+| 6  | 2020-02-27 | 2020-06-05 |  STX  |      48.413|       0.000|       0.000|      54.336|  Yes   |   1,100.786|   Long   | 0.053|
+| 7  | 2020-02-27 | 2020-06-05 |  XRX  |      33.870|       0.000|       0.000|      18.432|   No   |   1,001.630|   Long   | 0.040|
+| 8  | 2020-02-27 | 2020-06-05 | PAYX  |      78.933|       0.000|       0.000|      79.938|  Yes   |   1,003.369|   Long   | 0.033|
+| 9  | 2020-02-27 | 2020-06-05 |  ON   |      17.570|       0.000|       0.000|      20.160|  Yes   |   1,034.119|   Long   | 0.030|
+| 10 | 2020-02-27 | 2020-06-05 | QRVO  |      94.960|       0.000|       0.000|     115.616|  Yes   |   1,079.985|   Long   | 0.160|
+| 11 | 2020-10-30 | 2020-12-08 |  STX  |      47.863|       0.000|       0.000|      63.849|  Yes   |   1,151.190|   Long   | 0.043|
+| 12 | 2020-10-30 | 2020-12-08 | TTMI  |      11.879|       0.000|       0.000|      13.535|  Yes   |   1,180.323|   Long   | 0.009|
+| 13 | 2020-10-30 | 2020-12-08 |  GEN  |      20.580|       0.000|       0.000|      19.286|   No   |   1,165.731|   Long   | 0.010|
+| 14 | 2020-10-30 | 2020-12-08 | SMCI  |       2.275|       0.000|       0.000|       3.089|  Yes   |   1,242.190|   Long   | 0.005|
+| 15 | 2020-10-30 | 2020-12-08 | CDNS  |     109.582|       0.000|       0.000|     118.288|  Yes   |   1,258.383|   Long   | 0.212|
+| 16 | 2021-02-25 | 2021-06-04 | ADBE  |     459.814|       0.000|       0.000|     504.260|  Yes   |   1,281.745|   Long   | 0.654|
+| 17 | 2021-02-25 | 2021-06-04 |  MU   |      88.137|       0.000|       0.000|      83.716|   No   |   1,268.117|   Long   | 0.017|
+| 18 | 2021-02-25 | 2021-06-04 | AAPL  |     121.010|       0.000|       0.000|     125.871|  Yes   |   1,277.230|   Long   | 0.020|
+| 19 | 2021-02-25 | 2021-06-04 | FLEX  |      13.429|       0.000|       0.000|      14.273|  Yes   |   1,292.072|   Long   | 0.019|
+| 20 | 2021-02-25 | 2021-06-04 | SMCI  |       3.256|       0.000|       0.000|       3.667|  Yes   |   1,322.915|   Long   | 0.006|
+| 21 | 2021-09-20 | 2021-11-01 | PANW  |     158.305|       0.000|       0.000|     169.388|  Yes   |   1,340.459|   Long   | 0.175|
+| 22 | 2021-09-20 | 2021-11-01 | NXPI  |     202.921|       0.000|       0.000|     204.970|  Yes   |   1,342.132|   Long   | 0.141|
+| 23 | 2021-09-20 | 2021-11-01 | CTSH  |      75.070|       0.000|       0.000|      77.978|  Yes   |   1,351.386|   Long   | 0.010|
+| 24 | 2021-09-20 | 2021-11-01 |  TXN  |     192.694|       0.000|       0.000|     187.263|   No   |   1,342.925|   Long   | 0.104|
+| 25 | 2021-09-20 | 2021-11-01 |  WDC  |      56.625|       0.000|       0.000|      54.156|   No   |   1,330.388|   Long   | 0.005|
+| 26 | 2022-01-13 | 2022-04-22 | MCHP  |      83.778|       0.000|       0.000|      66.043|   No   |   1,273.001|   Long   | 0.088|
+| 27 | 2022-01-13 | 2022-04-22 | MSFT  |     304.805|       0.000|       0.000|     273.994|   No   |   1,245.105|   Long   | 0.005|
+| 28 | 2022-01-13 | 2022-04-22 |  HPQ  |      38.707|       0.000|       0.000|      36.773|   No   |   1,230.805|   Long   | 0.007|
+| 29 | 2022-01-13 | 2022-04-22 | MRVL  |      78.702|       0.000|       0.000|      58.335|   No   |   1,160.902|   Long   | 0.052|
+| 30 | 2022-01-13 | 2022-04-22 | VIAV  |      17.011|       0.000|       0.000|      14.853|   No   |   1,126.105|   Long   | 0.021|
+| 31 | 2022-04-22 | 2022-07-29 | GOOG  |     119.620|       0.000|       0.000|     116.576|   No   |   1,119.374|   Long   | 0.010|
+| 32 | 2022-04-22 | 2022-07-29 | AAPL  |     161.818|       0.000|       0.000|     162.477|   No   |   1,119.291|   Long   | 0.028|
+| 33 | 2022-04-22 | 2022-07-29 |  ON   |      51.859|       0.000|       0.000|      66.717|  Yes   |   1,182.917|   Long   | 0.079|
+| 34 | 2022-04-22 | 2022-07-29 | MSFT  |     274.117|       0.000|       0.000|     280.655|  Yes   |   1,187.290|   Long   | 0.087|
+| 35 | 2022-04-22 | 2022-07-29 | VIAV  |      14.863|       0.000|       0.000|      14.799|   No   |   1,185.327|   Long   | 0.003|
+| 36 | 2022-09-01 | 2022-12-09 | TEAM  |     235.778|       0.000|       0.000|     137.304|   No   |   1,085.169|   Long   | 0.348|
+| 37 | 2022-09-01 | 2022-12-09 | AMZN  |     127.843|       0.000|       0.000|      89.064|   No   |   1,012.245|   Long   | 0.023|
+| 38 | 2022-09-01 | 2022-12-09 |  NOK  |       4.981|       0.000|       0.000|       4.889|   No   |   1,006.885|   Long   | 0.001|
+| 39 | 2022-09-01 | 2022-12-09 |  TXN  |     166.178|       0.000|       0.000|     174.096|  Yes   |   1,017.183|   Long   | 0.018|
+| 40 | 2022-09-01 | 2022-12-09 | MCHP  |      65.011|       0.000|       0.000|      75.833|  Yes   |   1,055.695|   Long   | 0.081|
+| 41 | 2023-08-17 | 2023-11-15 | NVDA  |      43.341|       0.000|       0.000|      48.884|  Yes   |   1,081.700|   Long   | 0.001|
+| 42 | 2023-08-17 | 2023-11-15 |  MU   |      63.598|       0.000|       0.000|      77.114|  Yes   |   1,125.597|   Long   | 0.038|
+| 43 | 2023-08-17 | 2023-11-15 | ERIC  |       4.890|       0.000|       0.000|       4.867|   No   |   1,123.606|   Long   | 0.000|
+| 44 | 2023-08-17 | 2023-11-15 | PANW  |     207.799|       0.000|       0.000|     255.932|  Yes   |   1,171.567|   Long   | 0.229|
+| 45 | 2023-08-17 | 2023-11-15 | AVGO  |      82.741|       0.000|       0.000|      97.516|  Yes   |   1,208.284|   Long   | 0.031|
+| 46 | 2024-08-05 | 2024-11-01 | EXTR  |      12.650|       0.000|       0.000|      15.038|  Yes   |   1,253.001|   Long   | 0.030|
+| 47 | 2024-08-05 | 2024-11-01 | CTSH  |      71.833|       0.000|       0.000|      74.538|  Yes   |   1,261.115|   Long   | 0.103|
+| 48 | 2024-08-05 | 2024-11-01 | ADSK  |     226.088|       0.000|       0.000|     286.349|  Yes   |   1,324.631|   Long   | 0.368|
+| 49 | 2024-08-05 | 2024-11-01 | AAPL  |     209.287|       0.000|       0.000|     222.184|  Yes   |   1,338.525|   Long   | 0.017|
+| 50 | 2024-08-05 | 2024-11-01 | GOOGL |     159.344|       0.000|       0.000|     171.290|  Yes   |   1,355.652|   Long   | 0.094|
+
+Final trading capital is:1355.6523738708
+Highest Capital: 1330.3883615118
+Max Drawdown :-0.20647586214406
+Win percentage is: 0.66
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1355.6523738708
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.66
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.20647586214406
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1330.3883615118
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-12-23 | VIAV  |      13.140|       0.000|       0.000|      15.218|  Yes   |   1,030.688|   Long   | 0.020|
+| 2  | 2019-05-13 | 2019-12-23 | SABR  |      19.977|       0.000|       0.000|      22.740|  Yes   |   1,057.358|   Long   | 0.007|
+| 3  | 2019-05-13 | 2019-12-23 | TSLA  |      15.135|       0.000|       0.000|      27.949|  Yes   |   1,225.752|   Long   | 0.005|
+| 4  | 2019-05-13 | 2019-12-25 | TEAM  |     121.139|       0.000|       0.000|     121.590|   No   |   1,225.500|   Long   | 0.359|
+| 5  | 2019-05-13 | 2020-03-06 | CSCO  |      51.307|       0.000|       0.000|      39.657|   No   |   1,179.082|   Long   | 0.007|
+| 6  | 2020-02-27 | 2020-08-31 | WDAY  |     171.392|       0.000|       0.000|     239.053|  Yes   |   1,274.950|   Long   | 0.192|
+| 7  | 2020-02-27 | 2020-08-31 |  TER  |      58.480|       0.000|       0.000|      84.846|  Yes   |   1,384.589|   Long   | 0.070|
+| 8  | 2020-02-27 | 2020-08-31 | ADSK  |     181.015|       0.000|       0.000|     245.174|  Yes   |   1,470.638|   Long   | 0.365|
+| 9  | 2020-02-27 | 2020-08-31 | NTAP  |      46.894|       0.000|       0.000|      47.334|  Yes   |   1,471.934|   Long   | 0.024|
+| 10 | 2020-02-27 | 2020-08-31 | CDNS  |      65.992|       0.000|       0.000|     110.870|  Yes   |   1,638.001|   Long   | 0.152|
+| 11 | 2020-10-30 | 2020-12-08 | AMZN  |     151.830|       0.000|       0.000|     158.835|  Yes   |   1,652.118|   Long   | 0.020|
+| 12 | 2020-10-30 | 2020-12-08 | TTMI  |      11.886|       0.000|       0.000|      13.550|  Yes   |   1,697.028|   Long   | 0.016|
+| 13 | 2020-10-30 | 2020-12-08 | QCOM  |     123.364|       0.000|       0.000|     158.670|  Yes   |   1,789.788|   Long   | 0.004|
+| 14 | 2020-10-30 | 2020-12-08 | MRVL  |      37.528|       0.000|       0.000|      43.642|  Yes   |   1,842.183|   Long   | 0.018|
+| 15 | 2020-10-30 | 2021-08-25 |  GEN  |      20.575|       0.000|       0.000|      26.686|  Yes   |   1,938.512|   Long   | 0.005|
+| 16 | 2021-02-25 | 2021-09-07 |  ADP  |     175.741|       0.000|       0.000|     202.194|  Yes   |   1,993.037|   Long   | 0.211|
+| 17 | 2021-02-25 | 2021-09-07 |  ADI  |     155.937|       0.000|       0.000|     163.180|  Yes   |   2,009.163|   Long   | 0.117|
+| 18 | 2021-02-25 | 2021-09-07 | NTAP  |      61.217|       0.000|       0.000|      89.951|  Yes   |   2,181.118|   Long   | 0.007|
+| 19 | 2021-02-25 | 2021-09-07 | NXPI  |     178.606|       0.000|       0.000|     212.843|  Yes   |   2,250.778|   Long   | 0.086|
+| 20 | 2021-09-20 | 2021-11-01 | PANW  |     158.258|       0.000|       0.000|     169.381|  Yes   |   2,281.444|   Long   | 0.128|
+| 21 | 2021-09-20 | 2021-11-01 | FSLR  |      95.786|       0.000|       0.000|     121.036|  Yes   |   2,399.229|   Long   | 0.096|
+| 22 | 2021-09-20 | 2021-11-01 | WDAY  |     267.276|       0.000|       0.000|     287.518|  Yes   |   2,432.332|   Long   | 0.086|
+| 23 | 2021-09-20 | 2021-11-03 | ERIC  |      10.985|       0.000|       0.000|      10.986|   No   |   2,431.372|   Long   | 0.005|
+| 24 | 2021-02-25 | 2021-12-21 | INTC  |      60.415|       0.000|       0.000|      50.764|   No   |   2,371.499|   Long   | 0.015|
+| 25 | 2021-09-20 | 2022-07-15 | COMM  |      13.869|       0.000|       0.000|       6.446|   No   |   2,129.416|   Long   | 0.009|
+| 26 | 2022-01-13 | 2022-11-08 | TRMB  |      75.960|       0.000|       0.000|      54.638|   No   |   1,995.247|   Long   | 0.020|
+| 27 | 2022-01-13 | 2022-11-08 | KLAC  |     421.899|       0.000|       0.000|     341.843|   No   |   1,904.159|   Long   | 0.419|
+| 28 | 2022-01-13 | 2022-11-08 | SABR  |       9.530|       0.000|       0.000|       4.801|   No   |   1,667.585|   Long   | 0.010|
+| 29 | 2022-01-13 | 2022-11-08 |  ON   |      64.735|       0.000|       0.000|      67.080|  Yes   |   1,683.793|   Long   | 0.095|
+| 30 | 2022-01-13 | 2022-11-08 |  GEN  |      26.618|       0.000|       0.000|      21.580|   No   |   1,592.968|   Long   | 0.018|
+| 31 | 2022-01-17 | 2022-11-11 | AMZN  |     158.925|       0.000|       0.000|     100.772|   No   |   1,418.410|   Long   | 0.005|
+| 32 | 2022-01-17 | 2022-11-11 | ADBE  |     514.094|       0.000|       0.000|     340.808|   No   |   1,257.303|   Long   | 0.754|
+| 33 | 2022-01-17 | 2022-11-11 | INTC  |      54.773|       0.000|       0.000|      30.424|   No   |   1,045.404|   Long   | 0.013|
+| 34 | 2022-01-17 | 2022-11-11 | MSFT  |     302.747|       0.000|       0.000|     247.002|   No   |     957.042|   Long   | 0.097|
+| 35 | 2022-01-17 | 2022-11-11 | GPRO  |      10.024|       0.000|       0.000|       5.707|   No   |     751.491|   Long   | 0.014|
+| 36 | 2022-01-20 | 2022-11-15 |  HPQ  |      36.115|       0.000|       0.000|      30.550|   No   |     677.401|   Long   | 0.005|
+| 37 | 2022-01-20 | 2022-11-15 |  MU   |      85.135|       0.000|       0.000|      63.051|   No   |     553.270|   Long   | 0.065|
+| 38 | 2022-01-20 | 2022-11-15 | NTAP  |      87.952|       0.000|       0.000|      73.825|   No   |     475.957|   Long   | 0.152|
+| 39 | 2022-01-20 | 2022-11-15 |  NOK  |       5.630|       0.000|       0.000|       4.798|   No   |     404.821|   Long   | 0.000|
+| 40 | 2022-01-20 | 2022-11-15 | FLEX  |      12.560|       0.000|       0.000|      15.110|  Yes   |     500.239|   Long   | 0.020|
+| 41 | 2022-01-24 | 2022-11-18 | NXPI  |     203.155|       0.000|       0.000|     171.649|   No   |     425.654|   Long   | 0.085|
+| 42 | 2022-01-24 | 2022-11-18 | QCOM  |     170.175|       0.000|       0.000|     123.704|   No   |     295.053|   Long   | 0.105|
+| 43 | 2022-01-24 | 2022-11-18 | CDNS  |     151.696|       0.000|       0.000|     164.609|  Yes   |     334.438|   Long   | 0.036|
+| 44 | 2022-01-24 | 2022-11-18 |  XRX  |      20.984|       0.000|       0.000|      15.260|   No   |     204.035|   Long   | 0.004|
+| 45 | 2022-01-24 | 2022-11-18 |  STX  |      97.294|       0.000|       0.000|      54.563|   No   |      -5.559|   Long   | 0.134|
+| 46 | 2022-01-26 | 2022-11-21 | INTU  |     508.148|       0.000|       0.000|     374.775|   No   |    -131.212|   Long   | 0.668|
+| 47 | 2022-01-26 | 2022-11-21 | VIAV  |      16.000|       0.000|       0.000|      11.128|   No   |    -276.814|   Long   | 0.020|
+| 48 | 2022-01-26 | 2022-11-21 | ERIC  |      11.825|       0.000|       0.000|       6.057|   No   |    -509.265|   Long   | 0.005|
+| 49 | 2022-01-26 | 2022-11-21 |  WDC  |      54.596|       0.000|       0.000|      35.910|   No   |    -672.646|   Long   | 0.016|
+| 50 | 2022-01-26 | 2022-11-21 |  TXN  |     178.507|       0.000|       0.000|     172.373|   No   |    -689.960|   Long   | 0.177|
+| 51 | 2022-04-22 | 2023-02-15 | AMAT  |     112.843|       0.000|       0.000|     119.436|  Yes   |    -663.240|   Long   | 0.043|
+| 52 | 2022-04-22 | 2023-02-15 |%5EGSPC|   4,271.873|       0.000|       0.000|   4,147.579|   No   |    -678.040|   Long   | 0.093|
+| 53 | 2022-04-22 | 2023-02-15 | CTSH  |      83.257|       0.000|       0.000|      67.084|   No   |    -771.287|   Long   | 0.097|
+| 54 | 2022-04-22 | 2023-02-15 |  BB   |       6.061|       0.000|       0.000|       4.370|   No   |    -904.653|   Long   | 0.001|
+| 55 | 2022-04-22 | 2023-02-15 | AAPL  |     161.811|       0.000|       0.000|     155.310|   No   |    -924.712|   Long   | 0.021|
+| 56 | 2022-09-01 | 2023-06-27 | LRCX  |      43.238|       0.000|       0.000|      64.903|  Yes   |    -712.127|   Long   | 0.038|
+| 57 | 2022-09-01 | 2023-06-27 | TEAM  |     235.950|       0.000|       0.000|     161.555|   No   |    -847.703|   Long   | 0.520|
+| 58 | 2022-09-01 | 2023-06-27 | TSLA  |     277.218|       0.000|       0.000|     250.177|   No   |    -890.255|   Long   | 0.058|
+| 59 | 2022-09-01 | 2023-06-27 | PANW  |     181.918|       0.000|       0.000|     251.515|  Yes   |    -728.145|   Long   | 0.198|
+| 60 | 2022-09-01 | 2023-06-27 | MCHP  |      64.975|       0.000|       0.000|      86.740|  Yes   |    -586.387|   Long   | 0.045|
+| 61 | 2022-09-05 | 2023-06-30 | WDAY  |     160.359|       0.000|       0.000|     225.672|  Yes   |    -413.430|   Long   | 0.459|
+| 62 | 2022-09-05 | 2023-06-30 |  ADP  |     238.459|       0.000|       0.000|     219.711|   No   |    -447.958|   Long   | 0.319|
+| 63 | 2022-09-05 | 2023-06-30 |  ADI  |     148.359|       0.000|       0.000|     194.740|  Yes   |    -315.698|   Long   | 0.129|
+| 64 | 2022-09-05 | 2023-06-30 | FSLR  |     127.944|       0.000|       0.000|     189.874|  Yes   |    -109.998|   Long   | 0.344|
+| 65 | 2022-09-05 | 2023-06-30 | FTNT  |      49.662|       0.000|       0.000|      75.524|  Yes   |     110.836|   Long   | 0.012|
+| 66 | 2022-09-30 | 2023-07-26 |  AMD  |      63.374|       0.000|       0.000|     110.058|  Yes   |     423.626|   Long   | 0.014|
+| 67 | 2022-09-30 | 2023-07-26 | EXLS  |      29.510|       0.000|       0.000|      32.840|  Yes   |     470.748|   Long   | 0.040|
+| 68 | 2022-09-30 | 2023-07-26 | EXTR  |      13.087|       0.000|       0.000|      27.021|  Yes   |     923.792|   Long   | 0.017|
+| 69 | 2022-09-30 | 2023-07-26 | ENTG  |      83.289|       0.000|       0.000|     104.201|  Yes   |   1,030.072|   Long   | 0.269|
+| 70 | 2022-09-30 | 2023-07-26 | PAYX  |     112.278|       0.000|       0.000|     127.660|  Yes   |   1,087.453|   Long   | 0.068|
+| 71 | 2023-08-17 | 2023-11-15 |  ADI  |     175.691|       0.000|       0.000|     180.730|  Yes   |   1,092.698|   Long   | 0.201|
+| 72 | 2023-08-17 | 2023-11-15 |  MU   |      63.602|       0.000|       0.000|      77.133|  Yes   |   1,137.999|   Long   | 0.042|
+| 73 | 2023-08-17 | 2023-11-15 | NVDA  |      43.345|       0.000|       0.000|      48.885|  Yes   |   1,164.798|   Long   | 0.005|
+| 74 | 2023-08-17 | 2024-01-24 |  TXN  |     165.822|       0.000|       0.000|     170.049|  Yes   |   1,169.344|   Long   | 0.062|
+| 75 | 2023-08-17 | 2024-05-21 | FSLR  |     183.515|       0.000|       0.000|     211.931|  Yes   |   1,202.034|   Long   | 0.075|
+| 76 | 2024-08-05 | 2024-11-01 | PANW  |     294.366|       0.000|       0.000|     362.489|  Yes   |   1,256.704|   Long   | 0.186|
+| 77 | 2024-08-05 | 2024-11-01 |  GEN  |      24.643|       0.000|       0.000|      28.252|  Yes   |   1,290.931|   Long   | 0.013|
+| 78 | 2024-08-05 | 2024-11-01 | AKAM  |      91.420|       0.000|       0.000|     100.451|  Yes   |   1,313.708|   Long   | 0.100|
+| 79 | 2024-08-05 | 2024-11-01 | CTSH  |      71.809|       0.000|       0.000|      74.562|  Yes   |   1,321.934|   Long   | 0.079|
+| 80 | 2024-08-05 | 2024-11-01 | GOOGL |     159.287|       0.000|       0.000|     171.281|  Yes   |   1,339.040|   Long   | 0.037|
+
+Final trading capital is:1339.0398677555
+Highest Capital: 2371.4990310772
+Max Drawdown :-0.54144928580175
+Win percentage is: 0.575
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 2568.2399283921
+Standart Deviation of final trading capital: 1080.0472537307
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.64233333333333
+Standart Deviation of win percentage: 0.071543304679365
+
+Average of max drawdown: -0.23484871458415
+Standart Deviation of max drawdown: 0.19013537383048
+
+Average of highest capital: 2544.922478312
+Standart Deviation of highest capital: 617.25868401444
+
+
+Amount of simulations where final trading capital is high gain: 3
+Amount of simulations where final trading capital is medium gain: 5
+Amount of simulations where final trading capital is minimum gain: 5
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2019-05-13 | 2019-12-23 | VIAV  |      13.133|       0.000|       0.000|      15.222|  Yes   |   1,030.840|   Long   | 0.013|
+| 2  | 2019-05-13 | 2019-12-23 | CTSH  |      56.922|       0.000|       0.000|      62.625|  Yes   |   1,049.890|   Long   | 0.042|
+| 3  | 2019-05-13 | 2019-12-23 |  XRX  |      31.226|       0.000|       0.000|      37.335|  Yes   |   1,088.080|   Long   | 0.046|
+| 4  | 2019-05-13 | 2019-12-25 | AMZN  |      91.144|       0.000|       0.000|      93.427|  Yes   |   1,092.093|   Long   | 0.014|
+| 5  | 2019-05-13 | 2020-06-15 |  BB   |       8.362|       0.000|       0.000|       4.989|   No   |   1,010.410|   Long   | 0.002|
+| 6  | 2020-02-27 | 2020-08-31 | LRCX  |      28.582|       0.000|       0.000|      33.619|  Yes   |   1,047.923|   Long   | 0.012|
+| 7  | 2020-02-27 | 2020-08-31 | QCOM  |      75.943|       0.000|       0.000|     119.023|  Yes   |   1,170.829|   Long   | 0.003|
+| 8  | 2020-02-27 | 2020-08-31 |  TXN  |     113.229|       0.000|       0.000|     142.078|  Yes   |   1,225.526|   Long   | 0.099|
+| 9  | 2020-02-27 | 2020-08-31 | SWKS  |      97.580|       0.000|       0.000|     144.821|  Yes   |   1,330.290|   Long   | 0.020|
+| 10 | 2020-10-30 | 2020-12-08 |%5EGSPC|   3,270.045|       0.000|       0.000|   3,702.242|  Yes   |   1,364.456|   Long   | 0.085|
+| 11 | 2020-10-30 | 2020-12-08 | MRVL  |      37.535|       0.000|       0.000|      43.648|  Yes   |   1,406.815|   Long   | 0.025|
+| 12 | 2020-10-30 | 2020-12-08 |  XRX  |      17.397|       0.000|       0.000|      22.821|  Yes   |   1,488.853|   Long   | 0.017|
+| 13 | 2020-10-30 | 2020-12-08 | INTC  |      44.297|       0.000|       0.000|      50.680|  Yes   |   1,526.209|   Long   | 0.017|
+| 14 | 2020-10-30 | 2020-12-08 | SMCI  |       2.272|       0.000|       0.000|       3.085|  Yes   |   1,620.505|   Long   | 0.002|
+| 15 | 2021-02-25 | 2021-09-07 | NXPI  |     178.856|       0.000|       0.000|     212.583|  Yes   |   1,680.738|   Long   | 0.336|
+| 16 | 2021-02-25 | 2021-09-07 |  TXN  |     170.585|       0.000|       0.000|     189.364|  Yes   |   1,715.429|   Long   | 0.055|
+| 17 | 2021-02-25 | 2021-09-07 | MSFT  |     229.041|       0.000|       0.000|     300.139|  Yes   |   1,815.056|   Long   | 0.051|
+| 18 | 2021-02-25 | 2021-09-07 | AVGO  |      45.736|       0.000|       0.000|      49.654|  Yes   |   1,841.832|   Long   | 0.016|
+| 19 | 2021-02-25 | 2021-11-01 |  HPQ  |      28.209|       0.000|       0.000|      31.230|  Yes   |   1,875.566|   Long   | 0.019|
+| 20 | 2021-09-20 | 2021-11-01 | CTSH  |      75.112|       0.000|       0.000|      77.946|  Yes   |   1,888.474|   Long   | 0.052|
+| 21 | 2021-09-20 | 2021-11-01 | WDAY  |     267.226|       0.000|       0.000|     287.519|  Yes   |   1,915.452|   Long   | 0.036|
+| 22 | 2021-09-20 | 2022-01-03 | INTC  |      52.990|       0.000|       0.000|      53.199|  Yes   |   1,915.910|   Long   | 0.010|
+| 23 | 2021-09-20 | 2022-10-24 | COMM  |      13.876|       0.000|       0.000|      12.348|   No   |   1,874.293|   Long   | 0.016|
+| 24 | 2022-01-13 | 2023-02-16 | KLAC  |     421.693|       0.000|       0.000|     392.430|   No   |   1,846.689|   Long   | 0.213|
+| 25 | 2022-01-13 | 2023-02-16 | MSFT  |     304.838|       0.000|       0.000|     262.128|   No   |   1,791.996|   Long   | 0.038|
+| 26 | 2022-01-13 | 2023-02-16 | LRCX  |      68.690|       0.000|       0.000|      50.112|   No   |   1,687.347|   Long   | 0.010|
+| 27 | 2022-01-13 | 2023-02-16 | AMAT  |     157.374|       0.000|       0.000|     115.328|   No   |   1,583.848|   Long   | 0.194|
+| 28 | 2023-08-17 | 2023-11-15 |  WDC  |      40.326|       0.000|       0.000|      45.988|  Yes   |   1,627.363|   Long   | 0.036|
+| 29 | 2023-08-17 | 2023-11-17 | ERIC  |       4.891|       0.000|       0.000|       4.916|  Yes   |   1,627.966|   Long   | 0.001|
+| 30 | 2023-08-17 | 2023-12-14 |  TXN  |     165.806|       0.000|       0.000|     168.631|  Yes   |   1,632.365|   Long   | 0.046|
+| 31 | 2023-08-17 | 2024-01-22 | VIAV  |      10.142|       0.000|       0.000|      10.160|   No   |   1,631.949|   Long   | 0.002|
+| 32 | 2023-08-17 | 2024-09-19 |  ON   |      90.053|       0.000|       0.000|      73.245|   No   |   1,571.808|   Long   | 0.023|
+| 33 | 2024-08-05 | 2024-11-01 | ADSK  |     225.839|       0.000|       0.000|     286.539|  Yes   |   1,658.581|   Long   | 0.119|
+| 34 | 2024-08-05 | 2024-11-01 |  HPQ  |      32.777|       0.000|       0.000|      36.401|  Yes   |   1,693.691|   Long   | 0.027|
+| 35 | 2024-08-05 | 2024-11-01 |  ADI  |     200.681|       0.000|       0.000|     225.264|  Yes   |   1,732.697|   Long   | 0.121|
+| 36 | 2024-08-05 | 2024-11-01 |  GEN  |      24.635|       0.000|       0.000|      28.224|  Yes   |   1,779.259|   Long   | 0.005|
+
+Final trading capital is:1779.2587151577
+Highest Capital: 1915.9101724158
+Max Drawdown :-0.17331840409712
+Win percentage is: 0.77777777777778
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 2109.0943685469
+Standart Deviation of final trading capital: 305.29428191043
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.80698412698413
+Standart Deviation of win percentage: 0.041268009727368
+
+Average of max drawdown: -0.18173384298155
+Standart Deviation of max drawdown: 0.073690970765424
+
+Average of highest capital: 2272.0101027506
+Standart Deviation of highest capital: 424.71751856452
+
+
+Amount of simulations where final trading capital is high gain: 3
+Amount of simulations where final trading capital is medium gain: 5
+Amount of simulations where final trading capital is minimum gain: 5
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2021-10-04 | 2022-11-07 |6770.T |   1,160.039|       0.000|       0.000|   1,248.667|  Yes   |   1,014.281|   Long   | 0.039|
+| 2  | 2021-10-04 | 2022-11-07 |7751.T |   2,641.008|       0.000|       0.000|   3,180.181|  Yes   |   1,054.119|   Long   | 0.508|
+| 3  | 2021-10-04 | 2022-11-07 |5214.T |   2,619.355|       0.000|       0.000|   2,448.461|   No   |   1,040.029|   Long   | 8.355|
+| 4  | 2021-10-04 | 2022-11-07 |6920.T |  24,050.492|       0.000|       0.000|  21,532.662|   No   |   1,018.047|   Long   |50.492|
+| 5  | 2021-10-04 | 2022-11-07 |6702.T |   1,985.474|       0.000|       0.000|   1,752.377|   No   |     993.555|   Long   | 0.974|
+| 6  | 2022-12-29 | 2024-01-22 |6762.T |     859.258|       0.000|       0.000|   1,494.272|  Yes   |   1,139.452|   Long   | 0.258|
+| 7  | 2022-12-29 | 2024-01-22 |3436.T |   1,758.543|       0.000|       0.000|   2,469.530|  Yes   |   1,218.863|   Long   | 1.543|
+| 8  | 2022-12-29 | 2024-01-22 |6702.T |   1,781.337|       0.000|       0.000|   2,049.808|  Yes   |   1,247.825|   Long   | 0.837|
+| 9  | 2022-12-29 | 2024-01-22 |6758.T |   2,023.801|       0.000|       0.000|   2,959.118|  Yes   |   1,338.697|   Long   | 0.801|
+| 10 | 2022-12-29 | 2024-01-22 |9613.T |   1,945.376|       0.000|       0.000|   2,158.797|  Yes   |   1,359.513|   Long   | 1.376|
+| 11 | 2024-08-02 | 2024-12-23 |9501.T |     675.234|       0.000|       0.000|     452.612|   No   |   1,268.863|   Long   | 0.034|
+| 12 | 2024-08-02 | 2024-12-23 |8306.T |   1,516.566|       0.000|       0.000|   1,799.333|  Yes   |   1,318.579|   Long   | 0.566|
+| 13 | 2024-08-02 | 2024-12-24 |6965.T |   2,097.826|       0.000|       0.000|   1,744.203|   No   |   1,271.640|   Long   | 4.826|
+| 14 | 2024-08-02 | 2024-12-24 |4307.T |   4,550.113|       0.000|       0.000|   4,683.968|  Yes   |   1,278.639|   Long   | 0.113|
+| 15 | 2024-08-02 | 2024-12-24 |4684.T |   4,500.551|       0.000|       0.000|   4,698.321|  Yes   |   1,289.589|   Long   | 0.551|
+
+Final trading capital is:1289.5885732972
+Highest Capital: 1359.5128159411
+Max Drawdown :-0.0064446849448903
+Win percentage is: 0.66666666666667
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1289.5885732972
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.66666666666667
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.0064446849448903
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1359.5128159411
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2021-10-04 | 2022-11-07 |6981.T |   3,019.048|       0.000|       0.000|   2,375.191|   No   |     956.304|   Long   | 3.048|
+| 2  | 2021-10-04 | 2022-11-07 |6857.T |   2,355.542|       0.000|       0.000|   1,940.838|   No   |     920.085|   Long   | 0.542|
+| 3  | 2021-10-04 | 2022-11-07 |9432.T |     124.164|       0.000|       0.000|     160.152|  Yes   |     977.056|   Long   | 0.004|
+| 4  | 2021-10-04 | 2022-11-07 |6762.T |     750.403|       0.000|       0.000|     968.026|  Yes   |   1,034.088|   Long   | 0.403|
+| 5  | 2021-10-04 | 2022-11-07 |5214.T |   2,619.614|       0.000|       0.000|   2,448.931|   No   |   1,020.014|   Long   | 8.614|
+| 6  | 2022-12-29 | 2024-01-22 |8306.T |     881.639|       0.000|       0.000|   1,307.951|  Yes   |   1,117.674|   Long   | 0.139|
+| 7  | 2022-12-29 | 2024-01-22 |6857.T |   2,111.928|       0.000|       0.000|   5,989.689|  Yes   |   1,491.591|   Long   | 1.928|
+| 8  | 2022-12-29 | 2024-01-22 |7751.T |   2,856.234|       0.000|       0.000|   3,767.244|  Yes   |   1,555.675|   Long   | 0.734|
+| 9  | 2022-12-29 | 2024-01-22 |6723.T |   1,186.037|       0.000|       0.000|   2,637.240|  Yes   |   1,804.401|   Long   | 0.537|
+| 10 | 2022-12-29 | 2024-01-22 |6981.T |   2,202.506|       0.000|       0.000|   3,049.909|  Yes   |   1,881.932|   Long   | 1.176|
+| 11 | 2024-08-02 | 2024-12-23 |6702.T |   2,401.996|       0.000|       0.000|   2,808.908|  Yes   |   1,944.734|   Long   | 1.496|
+| 12 | 2024-08-02 | 2024-12-24 |6981.T |   2,990.781|       0.000|       0.000|   2,478.610|   No   |   1,879.228|   Long   | 2.281|
+| 13 | 2024-08-02 | 2024-12-24 |6753.T |     836.225|       0.000|       0.000|     978.670|  Yes   |   1,942.376|   Long   | 0.425|
+| 14 | 2024-08-02 | 2024-12-24 |6479.T |   3,188.466|       0.000|       0.000|   2,522.134|   No   |   1,862.533|   Long   | 7.466|
+| 15 | 2024-08-02 | 2024-12-24 |9434.T |     187.935|       0.000|       0.000|     197.484|  Yes   |   1,880.661|   Long   | 0.035|
+
+Final trading capital is:1880.6605250467
+Highest Capital: 1881.9318363445
+Max Drawdown :0
+Win percentage is: 0.66666666666667
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1880.6605250467
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.66666666666667
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1881.9318363445
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2021-10-04 | 2022-11-07 |8035.T |  15,724.535|       0.000|       0.000|  13,119.326|   No   |     965.848|   Long   | 7.865|
+| 2  | 2021-10-04 | 2022-11-07 |6981.T |   3,016.142|       0.000|       0.000|   2,375.521|   No   |     922.366|   Long   | 0.142|
+| 3  | 2021-10-04 | 2022-11-07 |8306.T |     632.301|       0.000|       0.000|     703.780|  Yes   |     943.979|   Long   | 0.101|
+| 4  | 2021-10-04 | 2022-11-07 |6857.T |   2,357.486|       0.000|       0.000|   1,941.637|   No   |     907.663|   Long   | 2.486|
+| 5  | 2021-10-04 | 2022-11-07 |6758.T |   2,395.141|       0.000|       0.000|   2,168.574|   No   |     887.735|   Long   | 1.141|
+| 6  | 2022-12-29 | 2024-01-22 |6762.T |     859.537|       0.000|       0.000|   1,493.695|  Yes   |   1,017.809|   Long   | 0.537|
+| 7  | 2022-12-29 | 2024-01-22 |6723.T |   1,186.210|       0.000|       0.000|   2,637.253|  Yes   |   1,234.126|   Long   | 0.710|
+| 8  | 2022-12-29 | 2024-01-22 |6857.T |   2,112.263|       0.000|       0.000|   5,986.473|  Yes   |   1,559.123|   Long   | 2.263|
+| 9  | 2022-12-29 | 2024-01-22 |6752.T |   1,120.089|       0.000|       0.000|   1,405.949|  Yes   |   1,603.439|   Long   | 0.089|
+| 10 | 2022-12-29 | 2024-01-22 |9613.T |   1,945.599|       0.000|       0.000|   2,159.898|  Yes   |   1,622.011|   Long   | 1.599|
+| 11 | 2024-08-02 | 2024-12-23 |9501.T |     675.604|       0.000|       0.000|     452.502|   No   |   1,513.821|   Long   | 0.404|
+| 12 | 2024-08-02 | 2024-12-24 |9434.T |     187.928|       0.000|       0.000|     197.489|  Yes   |   1,529.328|   Long   | 0.028|
+| 13 | 2024-08-02 | 2024-12-24 |7201.T |     442.337|       0.000|       0.000|     443.863|  Yes   |   1,529.447|   Long   | 0.237|
+| 14 | 2024-08-02 | 2024-12-24 |6479.T |   3,186.947|       0.000|       0.000|   2,520.413|   No   |   1,460.473|   Long   | 5.947|
+| 15 | 2024-08-02 | 2024-12-24 |6965.T |   2,098.197|       0.000|       0.000|   1,742.964|   No   |   1,404.414|   Long   | 5.197|
+
+Final trading capital is:1404.4138300646
+Highest Capital: 1622.0109842026
+Max Drawdown :-0.11226486727732
+Win percentage is: 0.53333333333333
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1366.4736569125
+Standart Deviation of final trading capital: 193.7956868913
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.66666666666667
+Standart Deviation of win percentage: 0.073029674334022
+
+Average of max drawdown: -0.074763936602641
+Standart Deviation of max drawdown: 0.051103419440068
+
+Average of highest capital: 1384.079057371
+Standart Deviation of highest capital: 189.18030835373
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 5
+Amount of simulations where final trading capital is lower than initial investment: 0

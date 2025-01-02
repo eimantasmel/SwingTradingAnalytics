@@ -5,8 +5,11 @@ namespace App\Constants;
 class BaseConstants 
 {
     public const NASDAQ_2000_TICKER = '%5EIXIC';
+    public const SMP500_TICKER = '%5EGSPC';
+
     public const CHINESE_MARKET_TICKER = '000300.SS';
-    public const CRYPTO_MARKET_TICKER = 'C20-USD';
+    public const JAPANESE_MARKET_TICKER = '%5EN225';
+    public const CRYPTO_MARKET_TICKER = 'BTC';
 
     public const AMOUNT_OF_TRADES = 'Amount of Trades';
     public const FINAL_TRADING_CAPITAL = 'Final Trading Capital';
@@ -28,6 +31,7 @@ class BaseConstants
     public const TRADE_RISK_REWARD = 'Trade Risk Reward';
     public const IS_WINNER = 'Is Winner';
     public const TRADING_CAPITAL = 'Trading Capital';
+    public const FAKE_TRADE = 'Fake Trade';
 
 
     public const AVERAGE_RISK_REWARD_RATIO = "Average Risk Reward Ratio";

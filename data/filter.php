@@ -1,35 +1,42 @@
 <?php
 // File paths
-$inputFile = __DIR__ . '/stocks.txt';
-$outputFile = __DIR__ . '/output.txt';
+$inputFile = 'stocks.txt';
+$outputFile = 'filtered_stocks.txt';
 
-// Check if input file exists
+// Open the input file for reading
 if (!file_exists($inputFile)) {
-    die("Input file 'stocks.txt' not found.\n");
+    die("Input file does not exist.\n");
 }
 
-// Read the input file content into an array
-$lines = file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-if ($lines === false) {
-    die("Failed to read input file.\n");
-}
+$inputData = file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
+// Array to store tickers
 $tickers = [];
 
-// Process each line to extract the second column
-foreach ($lines as $line) {
-    $columns = explode("\t", trim($line)); // Split line into columns
-    if (isset($columns[1])) {
-        $tickers[] = $columns[1] . '.SS'; // Append '.SS' to the second column
+// Process each line of the input file
+foreach ($inputData as $line) {
+    // Split the line by tabs or spaces and extract the second column (ticker)
+    $columns = preg_split('/\s+/', $line);
+    if (isset($columns[1]) && is_numeric($columns[1])) {
+        $tickers[] = $columns[1] . '.T'; // Append ".T" to the ticker
     }
 }
 
-// Shuffle the tickers array
+// Shuffle the tickers
 shuffle($tickers);
 
-// Write the shuffled tickers to the output file
-if (file_put_contents($outputFile, implode(PHP_EOL, $tickers) . PHP_EOL) === false) {
-    die("Failed to write to output file.\n");
+// Open the output file for writing
+$outputData = fopen($outputFile, 'w');
+if (!$outputData) {
+    die("Could not open output file for writing.\n");
 }
 
-echo "Processed and shuffled successfully. Results saved in 'output.txt'.\n";
+// Write the shuffled tickers to the output file
+foreach ($tickers as $ticker) {
+    fwrite($outputData, $ticker . PHP_EOL);
+}
+
+// Close the output file
+fclose($outputData);
+
+echo "Shuffled tickers with '.T' suffix have been successfully written to $outputFile.\n";

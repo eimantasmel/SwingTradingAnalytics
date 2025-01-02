@@ -171,7 +171,7 @@ class EscapeMatrixStrategy implements SwingTradingStrategyInterface
                 continue;
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
+            echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
             if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $position))
             {
                 $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);

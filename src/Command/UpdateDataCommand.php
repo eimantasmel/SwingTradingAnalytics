@@ -20,7 +20,7 @@ use App\Constants\BaseConstants;
 )]
 class UpdateDataCommand extends Command
 {
-    private const OLDER_DATE_START = 2017;  // in order to update only prices to the most current it's better to choose the last year then it will bring data much quicker
+    private const OLDER_DATE_START = 2016;  // in order to update only prices to the most current it's better to choose the last year then it will bring data much quicker
 
     private $yahooWebScrapService;
     private $entityManager;
@@ -60,8 +60,9 @@ class UpdateDataCommand extends Command
 
         $index = 0;
         $targetReached = false;
-        foreach ($securities as $security) {
 
+        foreach ($securities as $security) {
+            
             /** @var Security $security */
             $olderDateYear = self::OLDER_DATE_START;
             /** Check does the candlestick with the older date exist */

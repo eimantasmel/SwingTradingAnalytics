@@ -10,7 +10,7 @@ use InvalidArgumentException;
 
 class TechnicalIndicatorsService
 {
-    private const SCALING_CONSTANT = 500;
+    private const SCALING_CONSTANT = 100;
     private const TAX_PER_SHARE = 0.005;
 
     private MarketIndexInterface $marketIndex;
@@ -35,15 +35,38 @@ class TechnicalIndicatorsService
         return 'neutral';
     }
 
-    public function calculateSpread(array $candlesticks)
+    /** You only need to provide all parameters if you will mark $pesimisticSpread = false */
+    public function calculateSpread(array $candlesticks, bool $pesimisticSpread = true, $unfortunateSpreadProbability = 0, $position = "Long")
     {
+ 
         $atr = $this->calculateATR($candlesticks);
         $averageVolume = $this->getAverageCandleStickVolume($candlesticks);
 
         if(!$averageVolume)
             return 0;
 
-        return $this->mathService->randomFloat(0, (self::SCALING_CONSTANT/$averageVolume**0.5) * $atr);
+        $spread =  $this->mathService->randomFloat(0, (self::SCALING_CONSTANT/$averageVolume**0.5) * $atr);
+        
+
+        if(!$pesimisticSpread) 
+        {
+            if($position == 'Long')
+            {
+                // Decide with 55% probability to multiply by -1
+                if (rand(1, 100) > $unfortunateSpreadProbability * 100) {
+                    $spread *= -1;
+                }
+            }
+            else 
+            {
+                // Decide with 55% probability to multiply by -1
+                if (rand(1, 100) <= $unfortunateSpreadProbability * 100) {
+                    $spread *= -1;
+                }
+            }
+        }
+
+        return $spread;
     }
 
     public function calculateATR(array $candleSticks, $period = 14)
@@ -322,5 +345,204 @@ class TechnicalIndicatorsService
         }
 
         return $lowestPrice;
+    }
+
+    public function calculateZScore($candleSticks, $smaLength, $sma) : float
+    {
+        $lastCandleSticks = array_slice($candleSticks, -$smaLength);
+        $prices = $this->extractPricesFromCandleSticks($lastCandleSticks);
+
+
+
+        $stDev = $this->mathService->calculateStandardDeviation($prices);
+
+        $lastPrice = $prices[count($prices) - 1];
+
+        return ($lastPrice - $sma) / $stDev;
+    }
+
+    public function findSwingLow(array $candleSticks, $highLength = 5) : float
+    {
+        $lastCandleSticks = array_slice($candleSticks, -$highLength);
+        $prices = $this->extractLowestPricesFromCandleSticks($lastCandleSticks);
+
+
+        return min($prices);
+    }
+
+    public function findSwingHigh(array $candleSticks, $highLength = 5) : float
+    {
+        $lastCandleSticks = array_slice($candleSticks, -$highLength);
+        $prices = $this->extractHighestPricesFromCandleSticks($lastCandleSticks);
+
+
+        return max($prices);
+    }
+
+    public function isCandleStickHammer(CandleStick $candleStick, float $atr14, float $minBodyPercentage = 0.7) : bool
+    {
+        $openPrice = $candleStick->getOpenPrice();
+        $closePrice = $candleStick->getClosePrice();
+        $highestPrice = $candleStick->getHighestPrice();
+        $lowestPrice = $candleStick->getLowestPrice();
+
+        $body = abs($closePrice - $openPrice);
+
+        if($body < $atr14 * $minBodyPercentage)
+            return false;
+
+
+        $lowerStick = min($openPrice, $closePrice) - $lowestPrice;
+        $upperStick = $highestPrice - max($openPrice, $closePrice);
+
+        if($body <= $upperStick)
+            return false;
+
+        if($lowerStick < 3 * $body)
+            return false;
+
+
+        if($lowerStick < 3 * $upperStick)
+            return false;
+    
+
+        return true;
+    }
+
+    public function isCandleStickHangingMan(CandleStick $candleStick, float $atr14, float $minBodyPercentage = 0.7) : bool
+    {
+        $openPrice = $candleStick->getOpenPrice();
+        $closePrice = $candleStick->getClosePrice();
+        $highestPrice = $candleStick->getHighestPrice();
+        $lowestPrice = $candleStick->getLowestPrice();
+
+        $body = abs($closePrice - $openPrice);
+
+        if($body < $atr14 * $minBodyPercentage)
+            return false;
+
+
+        $lowerStick = min($openPrice, $closePrice) - $lowestPrice;
+        $upperStick = $highestPrice - max($openPrice, $closePrice);
+
+        if($body <= $lowerStick)
+            return false;
+
+        if($upperStick < 3 * $body)
+            return false;
+
+
+        if($upperStick < 3 * $lowerStick)
+            return false;
+    
+
+        return true;
+    }
+
+    public function isBullishEngulfingPattern(array $candleSticks) : bool
+    {
+        $atr14 = $this->calculateATR($candleSticks);
+
+        $firstCandleStick = $candleSticks[count($candleSticks) - 2];
+        $secondCandleSticks = $candleSticks[count($candleSticks) - 1];
+
+        $body1 = abs($secondCandleSticks->getClosePrice() - $secondCandleSticks->getOpenPrice());
+
+        if($body1 <= $atr14)
+            return false;
+
+        if($firstCandleStick->getClosePrice() > $firstCandleStick->getOpenPrice())
+            return false;
+
+        if($secondCandleSticks->getClosePrice() < $secondCandleSticks->getOpenPrice())
+            return false;
+
+        if($firstCandleStick->getClosePrice() < $secondCandleSticks->getOpenPrice())
+            return false;
+
+        if($firstCandleStick->getOpenPrice() > $secondCandleSticks->getClosePrice())
+            return false;
+
+        return true;
+    }
+
+    public function isBearishEngulfingPattern(array $candleSticks) : bool
+    {
+        $atr14 = $this->calculateATR($candleSticks);
+
+        $firstCandleStick = $candleSticks[count($candleSticks) - 2];
+        $secondCandleSticks = $candleSticks[count($candleSticks) - 1];
+
+        $body1 = abs($secondCandleSticks->getClosePrice() - $secondCandleSticks->getOpenPrice());
+
+        if($body1 <= $atr14)
+            return false;
+
+        if($firstCandleStick->getClosePrice() < $firstCandleStick->getOpenPrice())
+            return false;
+
+        if($secondCandleSticks->getClosePrice() > $secondCandleSticks->getOpenPrice())
+            return false;
+
+        if($firstCandleStick->getOpenPrice() < $secondCandleSticks->getClosePrice())
+            return false;
+
+        if($firstCandleStick->getClosePrice() > $secondCandleSticks->getOpenPrice())
+            return false;
+
+        return true;
+    }
+
+
+    private function extractPricesFromCandleSticks($candleSticks)
+    {
+        $prices = [];
+        foreach ($candleSticks as $candleStick) {
+            $prices[] = $candleStick->getClosePrice();
+        }
+
+        return $prices;
+    }
+
+    private function extractLowestPricesFromCandleSticks($candleSticks)
+    {
+        $prices = [];
+        foreach ($candleSticks as $candleStick) {
+            $prices[] = $candleStick->getLowestPrice();
+        }
+
+        return $prices;
+    }
+
+    private function extractHighestPricesFromCandleSticks($candleSticks)
+    {
+        $prices = [];
+        foreach ($candleSticks as $candleStick) {
+            $prices[] = $candleStick->getHighestPrice();
+        }
+
+        return $prices;
+    }
+
+    public function getLowestPrice(array $candleSticks)
+    {
+        $lowestPrice = (float)$candleSticks[0]->getLowestPrice();
+        foreach ($candleSticks as $candleStick) {
+            if((float)$candleStick->getLowestPrice() < $lowestPrice)
+                $lowestPrice = (float)$candleStick->getLowestPrice();
+        }
+
+        return (float)$lowestPrice;
+    }
+
+    public function getHighestPrice(array $candleSticks)
+    {
+        $highestPrice = (float)$candleSticks[0]->getHighestPrice();
+        foreach ($candleSticks as $candleStick) {
+            if((float)$candleStick->getHighestPrice() > $highestPrice)
+                $highestPrice = (float)$candleStick->getHighestPrice();
+        }
+
+        return (float)$highestPrice;
     }
 }

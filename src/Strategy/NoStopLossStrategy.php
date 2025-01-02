@@ -98,7 +98,12 @@ class NoStopLossStrategy implements SwingTradingStrategyInterface
             }
             
             // TODO: later i will test this right now there's problem with speed performance.
-            // $industry = $this->industryAnalysisService->getTopTrendingIndustry($startDate);
+
+            echo "Processing: \r\n"; 
+
+            $industry = $this->industryAnalysisService->getTopTrendingIndustry($startDate);
+
+            echo "Industry: " . $industry . "\r\n"; 
 
                         
             $tradingCapital = $this->processPyramidingTrades($startDate, $tradingCapital);
@@ -192,7 +197,7 @@ class NoStopLossStrategy implements SwingTradingStrategyInterface
                 continue;
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
+            echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
             if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $position))
             {
                 $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);

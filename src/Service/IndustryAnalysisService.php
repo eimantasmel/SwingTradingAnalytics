@@ -12,7 +12,7 @@ use DateTime;
 /** Works too slowly something is wrong.  */
 class IndustryAnalysisService
 {
-    private const MIN_AMOUNT_OF_STOCKS_INDUSTRY_HAS = 5;
+    private const MIN_AMOUNT_OF_STOCKS_INDUSTRY_HAS = 3;
 
     private $entityManager;
     private array $stocks;
@@ -33,7 +33,7 @@ class IndustryAnalysisService
         return $this->getHighestIndustry($industries);
     }
 
-    public function getLastTrendingIndustry(DateTime $date) : string 
+    public function getBottomTrendingIndustry(DateTime $date) : string 
     {
         $industries = $this->getIndustriesWithCAGR($date);
 
@@ -48,9 +48,8 @@ class IndustryAnalysisService
             $earliestDate->modify('-1 month');
 
             /** @var Security $stock */
-            /** TODO: This one lasts way longer compared to second one.*/
-            $initialCandleStick = $stock->getCandleStickByDate($earliestDate);
             $finalCandleStick = $stock->getCandleStickByDate($date);
+            $initialCandleStick = $stock->getCandleStickByDate($earliestDate);
 
             $cagr = ((float)$finalCandleStick->getClosePrice() / (float)($initialCandleStick->getClosePrice())) - 1;
             $industry = Industries::findClosestIndustry($stock->getIndustry());
@@ -76,7 +75,7 @@ class IndustryAnalysisService
     private function getHighestIndustry($data) : string
     {
         $highestCAGR = 0;
-        $trendingIndustry = null;
+        $trendingIndustry = "No Industry";
 
         foreach ($data as $key => $industryData) {
             if($industryData['cagr'] > $highestCAGR && $industryData['amount'] > self::MIN_AMOUNT_OF_STOCKS_INDUSTRY_HAS)
@@ -86,13 +85,19 @@ class IndustryAnalysisService
             }
         }
 
+        // echo "Highest CAGR: " . $highestCAGR . "\r\n";
+
+        if($highestCAGR <= 0)
+            $trendingIndustry = "No Industry";
+
+
         return $trendingIndustry;
     }
 
     private function getLowestIndustry($data) : string
     {
         $lowestCAGR = PHP_INT_MAX;
-        $trendingIndustry = null;
+        $trendingIndustry = "No Industry";
 
         foreach ($data as $key => $industryData) {
             if($industryData['cagr'] < $lowestCAGR && $industryData['amount'] > self::MIN_AMOUNT_OF_STOCKS_INDUSTRY_HAS)
@@ -101,6 +106,11 @@ class IndustryAnalysisService
                 $lowestCAGR = $industryData['cagr'];
             }
         }
+
+        // echo "Lowest  CAGR: " . $lowestCagr . "\r\n";
+
+        if($lowestCAGR >= 0)
+            $trendingIndustry = "No Industry";
 
         return $trendingIndustry;
     }

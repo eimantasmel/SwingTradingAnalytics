@@ -24,8 +24,12 @@ services:
     # please note that last definitions always *replace* previous ones
 
     App\Interface\MarketIndexInterface: '@App\Service\Nasdaq2000IndexService'
-    # App\Interface\MarketIndexInterface: '@App\Service\ChineseMarketIndexService'
+    # App\Interface\MarketIndexInterface: '@App\Service\SMP500IndexService'
 
-    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\NoStopLossStrategy'
+    # App\Interface\MarketIndexInterface: '@App\Service\ChineseMarketIndexService'
+    # App\Interface\MarketIndexInterface: '@App\Service\JapaneseMarketIndexService'
+
+
+    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\ZScoreSMA200Strategy'
 
 

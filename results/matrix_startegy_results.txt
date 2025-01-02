@@ -118,3 +118,64 @@ Amount of simulations where final trading capital is high gain: 0
 Amount of simulations where final trading capital is medium gain: 1
 Amount of simulations where final trading capital is minimum gain: 2
 Amount of simulations where final trading capital is lower than initial investment: 3
+
++----------------------------------------------------------------------------------------------------------------------------------+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-03-16 | 2023-04-18 | GOOGL |     100.471|      83.340|       0.000|     104.296|  Yes   |   1,044.054|   Long   | 0.151|
+| 2  | 2023-03-28 | 2023-04-18 | GOOG  |     101.439|      83.450|       0.000|     105.105|  Yes   |   1,083.992|   Long   | 0.079|
+| 3  | 2023-03-24 | 2023-04-26 |  EA   |     119.460|     108.530|       0.000|     124.665|  Yes   |   1,182.136|   Long   | 0.430|
+| 4  | 2023-04-26 | 2023-04-28 |  KDP  |      35.539|      32.440|       0.000|      32.350|   No   |     934.727|   Long   | 0.039|
+| 5  | 2023-04-21 | 2023-05-04 |  RUN  |      21.259|      16.690|       0.000|      16.537|   No   |     703.657|   Long   | 0.119|
+| 6  | 2023-05-01 | 2023-05-08 | PENN  |      30.568|      25.490|       0.000|      25.485|   No   |     514.123|   Long   | 0.038|
+| 7  | 2023-03-09 | 2023-05-18 |  TXN  |     172.893|     202.260|       0.000|     169.899|  Yes   |     533.903|  Short   |-0.547|
+| 8  | 2023-05-05 | 2023-06-20 | ENTG  |      78.877|      61.750|       0.000|     106.387|  Yes   |     760.372|   Long   | 0.107|
+| 9  | 2023-05-18 | 2023-06-23 | EXPE  |      98.306|      82.390|       0.000|     104.265|  Yes   |     799.444|   Long   | 0.036|
+| 10 | 2023-03-14 | 2023-06-26 | TSLA  |     183.450|     101.810|       0.000|     240.844|  Yes   |     939.375|   Long   | 0.190|
+| 11 | 2023-05-09 | 2023-07-18 |  HON  |     197.240|     166.630|       0.000|     204.929|  Yes   |     964.297|   Long   | 0.110|
+| 12 | 2023-06-23 | 2023-07-25 | MTCH  |      41.486|      30.730|       0.000|      44.006|  Yes   |   1,001.628|   Long   | 0.246|
+| 13 | 2023-06-27 | 2023-08-08 | FITB  |      26.291|      22.110|       0.000|      27.941|  Yes   |   1,076.793|   Long   | 0.111|
+| 14 | 2023-07-25 | 2023-08-17 |  WBA  |      30.743|      28.140|       0.000|      28.090|   No   |     867.389|   Long   | 0.053|
+| 15 | 2023-07-18 | 2023-08-23 |  APA  |      37.919|      15.550|       0.000|      42.374|  Yes   |     904.861|   Long   | 0.039|
+| 16 | 2023-06-20 | 2023-09-08 | ETSY  |      96.606|      67.010|       0.000|      66.986|   No   |     749.494|   Long   | 0.416|
+| 17 | 2023-08-29 | 2023-10-05 |  KDP  |      33.946|      30.700|       0.000|      30.639|   No   |     561.452|   Long   | 0.046|
+| 18 | 2023-09-01 | 2024-01-03 | ZION  |      36.545|      18.260|       0.000|      41.907|  Yes   |     613.829|   Long   | 0.105|
+| 19 | 2023-04-18 | 2024-01-11 | NDAQ  |      55.643|      46.770|       0.000|      56.334|  Yes   |     629.756|   Long   | 0.033|
+| 20 | 2023-10-11 | 2024-01-23 | GILD  |      76.971|      57.190|       0.000|      79.126|  Yes   |     641.000|   Long   | 0.011|
+| 21 | 2024-01-23 | 2024-04-05 | CSIQ  |      24.127|      17.820|       0.000|      17.632|   No   |     506.135|   Long   | 0.087|
+| 22 | 2023-09-11 | 2024-04-17 | GLPI  |      49.086|      41.810|       0.000|      41.397|   No   |     338.329|   Long   | 0.366|
+| 23 | 2024-01-11 | 2024-05-08 | MTCH  |      37.851|      27.850|       0.000|      27.645|   No   |     206.035|   Long   | 0.211|
+| 24 | 2024-01-03 | 2024-05-23 |  CPB  |      43.526|      37.940|       0.000|      45.627|  Yes   |     251.676|   Long   | 0.056|
+| 25 | 2023-03-20 | 2024-11-01 |  EXC  |      41.887|      30.630|       0.000|      38.150|   No   |     183.883|   Long   | 0.067|
+| 26 | 2023-08-08 | 2024-11-01 | SBUX  |     100.994|      69.960|       0.000|      98.870|   No   |     168.004|   Long   | 0.294|
+
+Final trading capital is:168.00395323538
+Highest Capital: 1182.1356285019
+Max Drawdown :-0.56508934652585
+Win percentage is: 0.57692307692308
+Average fee: 1
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1586.4397784087
+Standart Deviation of final trading capital: 780.45971116367
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.74205128205128
+Standart Deviation of win percentage: 0.088022500014483
+
+Average of max drawdown: -0.4103173020634
+Standart Deviation of max drawdown: 0.13124478321442
+
+Average of highest capital: 1854.9140963983
+Standart Deviation of highest capital: 538.10314333566
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 4
+Amount of simulations where final trading capital is lower than initial investment: 1
