@@ -1,0 +1,37 @@
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-02-27 | 2024-02-28 | CTMX  |       2.251|       2.389|       2.111|       2.382|   No   |     901.908|  Short   | 0.001|
+| 2  | 2024-05-13 | 2024-05-14 | NVAX  |      13.118|      14.232|      11.988|      14.260|   No   |     799.203|  Short   | 0.008|
+| 3  | 2024-05-16 | 2024-05-21 | NVAX  |      14.412|      16.055|      12.745|      15.687|  Yes   |     810.539|  Short   | 0.012|
+| 4  | 2024-05-27 | 2024-09-03 | INSM  |      48.243|      51.410|      44.710|      73.374|   No   |     488.535|  Short   | 0.183|
+
+Final trading capital is:488.53469926364
+Highest Capital: 1000
+Max Drawdown :-0.20079699498796
+Win percentage is: 0.25
+Average fee: 1.6477900552486
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 488.53469926364
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.25
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.20079699498796
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1

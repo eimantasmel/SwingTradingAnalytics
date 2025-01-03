@@ -78,7 +78,9 @@ php bin/console app:nasdaq-2000-analysis
 
 ## What do you need to know about the databases.
 You can select wanted database in the .env file.
+
 ![Databases in .env](https://s3.amazonaws.com/i.snag.gy/sCIlKX.jpg)
+
 When you will select Database then you will need select the corresponding service for your database in services.yaml file.
 ![Databases in .env](https://s3.amazonaws.com/i.snag.gy/5XL8dh.jpg)
 

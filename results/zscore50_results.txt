@@ -1107,3 +1107,5 @@ Amount of simulations where final trading capital is high gain: 1
 Amount of simulations where final trading capital is medium gain: 1
 Amount of simulations where final trading capital is minimum gain: 3
 Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2

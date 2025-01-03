@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candlestick Chart</title>
+    {# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script> #}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}   
+    {% endblock %}
+</head>
+<body>
+    <h1>[{{ticker}}]Candlestick Chart</h1>
+    <div style="width:1000px">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const candlestickData = {{ candlestickData|json_encode|raw }};
+        const ticker = "{{ ticker }}";  // Extract the ticker from the template variable
+
+        const formattedData = candlestickData.map(item => ({
+            x: new Date(item.date).valueOf(),
+            o: item.open,
+            h: item.high,
+            l: item.low,
+            c: item.close,
+        }));
+
+        // Initialize the chart
+        const ctx = document.getElementById('chart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'candlestick',
+            data: {
+                datasets: [{
+                    label: `Candlestick Chart - ${ticker}`,
+                    data: formattedData,
+                }]
+            },
+        });
+    });
+    </script>
+</body>
+</html>

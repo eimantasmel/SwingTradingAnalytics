@@ -38,7 +38,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
     private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
     private const AMOUNT_OF_TREND_DAYS = 100;
 
-    private const DIP_LENGTH = 5;
+    private const DIP_LENGTH = 10;
 
     private const PYRAMIDING_TRADES_AMOUNT = 6;
 
@@ -270,8 +270,12 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
         $zScore = $this->technicalIndicatorsService->calculateZScore($lastCandleSticks, 200, $sma200);
         $previousCandleSticks = array_slice($lastCandleSticks, 0, count($lastCandleSticks) - self::DIP_LENGTH);
 
-        $previousZScore = $this->technicalIndicatorsService->calculateZScore($lastCandleSticks, 200, $sma200);
+        $previousZScore = $this->technicalIndicatorsService->calculateZScore($previousCandleSticks, 200, $sma200);
 
+        $previousCandleSticks = array_slice($lastCandleSticks, 0, count($lastCandleSticks) - self::DIP_LENGTH);
+        $previousPrices = $this->extractClosingPricesFromCandlesticks($previousCandleSticks);
+        $previoussma200 = $this->technicalIndicatorsService->calculateSMA($previousPrices, 200);
+        $previousZScore = $this->technicalIndicatorsService->calculateZScore($previousCandleSticks, 200, $previoussma200); 
 
         $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
 
@@ -281,7 +285,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
 
         if(
             $zScore <= self::Z_SCORE_LOWER       // 100% percent more than average atr.
-            // && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
+            && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
             && $previousZScore > 0
           )
         {
@@ -296,7 +300,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
 
         if(
             $zScore >= self::Z_SCORE_UPPER       // 100% percent more than average atr.
-            // && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
+            && $atr14 / $closePrice >= self::MIN_ATR_PERCENTAGE
             && $previousZScore < 0
           )
         {
@@ -735,7 +739,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $openPrice - $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
         
-                return ($openPrice - $spread) * $sharesAmount;
+                return $profit + ($openPrice - $spread) * $sharesAmount;
             }
 
             if($openPrice > $stopLoss && $position == "Short")
@@ -745,7 +749,7 @@ class ZScoreSMA200Strategy implements SwingTradingStrategyInterface
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $openPrice - $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
         
-                return ($openPrice - $spread) * $sharesAmount;
+                return $profit + ($openPrice - $spread) * $sharesAmount;
             }
 
             if($openPrice > $target && $position == "Long")

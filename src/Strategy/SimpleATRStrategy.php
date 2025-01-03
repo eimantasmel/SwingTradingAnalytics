@@ -700,7 +700,7 @@ class SimpleATRStrategy implements SwingTradingStrategyInterface
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $openPrice - $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
         
-                return ($openPrice - $spread) * $sharesAmount;
+                return $profit + ($openPrice - $spread) * $sharesAmount;
             }
 
             if($openPrice > $stopLoss && $position == "Short")
@@ -710,7 +710,7 @@ class SimpleATRStrategy implements SwingTradingStrategyInterface
                 $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $openPrice - $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
         
-                return ($openPrice - $spread) * $sharesAmount;
+                return $profit + ($openPrice - $spread) * $sharesAmount;
             }
 
             if($openPrice > $target && $position == "Long")
