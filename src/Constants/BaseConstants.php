@@ -9,12 +9,14 @@ class BaseConstants
 
     public const CHINESE_MARKET_TICKER = '000300.SS';
     public const JAPANESE_MARKET_TICKER = '%5EN225';
-    public const CRYPTO_MARKET_TICKER = 'BTC';
+    public const CRYPTO_MARKET_TICKER = 'CRPTMARKET';
 
     public const AMOUNT_OF_TRADES = 'Amount of Trades';
     public const FINAL_TRADING_CAPITAL = 'Final Trading Capital';
     public const HIGHEST_CAPITAL = 'Highest Capital';
     public const MAX_DRAWDOWN = 'Max Drawdown';
+
+    public const BASE_CRYPTOS = ['BTC', 'ETH', 'SOL', 'XRP'];
 
 
     public const TRADES_INFORMATION = 'Trades Information';

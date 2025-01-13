@@ -1,0 +1,1086 @@
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-06-21 | 2023-12-29 |  LPT  |       4.371|       0.000|       8.740|       8.195|  Yes   |   1,174.017|   Long   | 0.001|
+| 2  | 2023-06-21 | 2024-03-07 |  FIS  |       0.290|       0.000|       0.579|       0.758|  Yes   |   1,495.705|   Long   | 0.000|
+| 3  | 2023-12-29 | 2024-03-26 |  CHO  |       0.019|       0.000|       0.037|       0.042|  Yes   |   1,786.127|   Long   | 0.000|
+| 4  | 2023-06-21 | 2025-01-02 | PLOT  |       0.007|       0.000|       0.013|       0.005|   No   |   1,742.206|   Long   | 0.000|
+| 5  | 2023-06-21 | 2025-01-03 |  ATM  |       2.358|       0.000|       4.713|       2.122|   No   |   1,721.225|   Long   | 0.001|
+| 6  | 2023-06-21 | 2025-01-04 |  DFI  |       0.364|       0.000|       0.727|       0.032|   No   |   1,536.832|   Long   | 0.000|
+| 7  | 2024-03-07 | 2025-01-05 |  BTM  |       0.013|       0.000|       0.025|       0.004|   No   |   1,327.793|   Long   | 0.000|
+| 8  | 2024-03-26 | 2025-01-05 | AURY  |       0.860|       0.000|       1.719|       0.226|   No   |   1,062.077|   Long   | 0.000|
+
+Final trading capital is:1062.077052072
+Highest Capital: 1786.126827528
+Max Drawdown :0
+Win percentage is: 0.375
+Average fee: 1.9343635149311
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1062.077052072
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.375
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1786.126827528
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-06-21 | 2024-02-24 |  SC   |       0.003|       0.000|       0.015|       0.012|  Yes   |   1,316.812|   Long   | 0.000|
+| 2  | 2023-06-21 | 2024-12-04 |  XYO  |       0.004|       0.000|       0.018|       0.026|  Yes   |   1,968.122|   Long   | 0.000|
+| 3  | 2023-06-21 | 2025-01-02 | PLOT  |       0.007|       0.000|       0.034|       0.005|   No   |   1,945.580|   Long   | 0.000|
+| 4  | 2024-02-26 | 2025-01-02 |  XRP  |       0.551|       0.000|       2.757|       2.411|  Yes   |   2,388.385|   Long   | 0.000|
+| 5  | 2023-06-21 | 2025-01-03 |  CHO  |       0.162|       0.000|       0.807|       0.020|   No   |   2,299.567|   Long   | 0.000|
+| 6  | 2023-06-21 | 2025-01-07 |  OXT  |       0.056|       0.000|       0.278|       0.123|  Yes   |   2,420.111|   Long   | 0.000|
+| 7  | 2023-06-21 | 2025-01-07 | MARSH |       0.103|       0.000|       0.514|       0.099|   No   |   2,415.331|   Long   | 0.001|
+| 8  | 2023-06-21 | 2025-01-07 |  WTC  |       0.162|       0.000|       0.809|       0.034|   No   |   2,335.180|   Long   | 0.000|
+| 9  | 2023-06-21 | 2025-01-07 | AAVE  |      55.081|       0.000|     275.400|     308.045|  Yes   |   2,793.447|   Long   | 0.001|
+| 10 | 2023-06-21 | 2025-01-07 |  GO   |       0.007|       0.000|       0.035|       0.001|   No   |   2,711.248|   Long   | 0.000|
+| 11 | 2023-06-21 | 2025-01-07 |  KLV  |       0.003|       0.000|       0.016|       0.005|  Yes   |   2,754.878|   Long   | 0.000|
+
+Final trading capital is:2754.8778139985
+Highest Capital: 1316.8115318543
+Max Drawdown :0
+Win percentage is: 0.54545454545455
+Average fee: 1.0193054518605
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 2754.8778139985
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.54545454545455
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1316.8115318543
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+Iteration number: 6
+Iteration number: 7
+Iteration number: 8
+Iteration number: 9
+Iteration number: 10
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-06-21 | 2024-03-23 |  FYN  |       0.029|       0.000|       0.145|       0.139|  Yes   |   1,379.511|   Long   | 0.000|
+| 2  | 2023-06-21 | 2025-01-02 |  DKA  |       0.026|       0.000|       0.128|       0.024|   No   |   1,371.949|   Long   | 0.000|
+| 3  | 2023-06-21 | 2025-01-02 | FLOW  |       0.553|       0.000|       2.766|       0.740|  Yes   |   1,404.711|   Long   | 0.000|
+| 4  | 2023-06-21 | 2025-01-03 |  MOB  |       0.615|       0.000|       3.068|       0.458|   No   |   1,378.172|   Long   | 0.001|
+| 5  | 2023-06-21 | 2025-01-04 |  DIA  |       0.246|       0.000|       1.231|       0.785|  Yes   |   1,595.959|   Long   | 0.000|
+| 6  | 2023-06-21 | 2025-01-05 |  DAD  |       0.014|       0.000|       0.068|       0.003|   No   |   1,520.351|   Long   | 0.000|
+| 7  | 2024-03-25 | 2025-01-05 | AURY  |       0.908|       0.000|       4.534|       0.225|   No   |   1,415.539|   Long   | 0.001|
+| 8  | 2023-06-21 | 2025-01-06 |  BOA  |       0.014|       0.000|       0.070|       0.014|   No   |   1,411.578|   Long   | 0.000|
+| 9  | 2023-06-21 | 2025-01-06 |PUNDIX |       0.353|       0.000|       1.766|       0.506|  Yes   |   1,453.946|   Long   | 0.000|
+| 10 | 2023-06-21 | 2025-01-07 |  ASD  |       0.058|       0.000|       0.291|       0.045|   No   |   1,430.397|   Long   | 0.000|
+| 11 | 2023-06-21 | 2025-01-07 | SCRT  |       0.347|       0.000|       1.736|       0.463|  Yes   |   1,462.669|   Long   | 0.000|
+
+Final trading capital is:1462.6686195484
+Highest Capital: 1379.5110245149
+Max Drawdown :0
+Win percentage is: 0.45454545454545
+Average fee: 1.0005469071814
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 10
+Average of final trading capital: 1667.7728718101
+Standart Deviation of final trading capital: 481.11975165313
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.54317016317016
+Standart Deviation of win percentage: 0.17531560736145
+
+Average of max drawdown: -0.0058298603204856
+Standart Deviation of max drawdown: 0.017489580961457
+
+Average of highest capital: 1576.6514838571
+Standart Deviation of highest capital: 368.37916556799
+
+
+Amount of simulations where final trading capital is high gain: 3
+Amount of simulations where final trading capital is medium gain: 8
+Amount of simulations where final trading capital is minimum gain: 9
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-11-16 | 2023-12-17 |  MAP  |       0.008|       0.000|       0.040|       0.041|  Yes   |   1,413.479|   Long   | 0.000|
+| 2  | 2023-11-16 | 2024-03-12 | LAMB  |       0.001|       0.000|       0.007|       0.012|  Yes   |   2,191.009|   Long   | 0.000|
+| 3  | 2023-11-16 | 2024-04-11 | SUKU  |       0.041|       0.000|       0.204|       0.247|  Yes   |   2,693.807|   Long   | 0.000|
+| 4  | 2023-11-16 | 2025-01-02 | NEST  |       0.004|       0.000|       0.019|       0.001|   No   |   2,620.930|   Long   | 0.000|
+| 5  | 2023-11-16 | 2025-01-03 |  MOB  |       0.567|       0.000|       2.830|       0.456|   No   |   2,600.394|   Long   | 0.001|
+| 6  | 2023-11-16 | 2025-01-04 |KRIPTO |       0.000|       0.000|       0.001|       0.000|   No   |   2,558.073|   Long   | 0.000|
+| 7  | 2023-11-16 | 2025-01-05 | ASTRA |       0.005|       0.000|       0.025|       0.004|   No   |   2,533.829|   Long   | 0.000|
+| 8  | 2023-11-16 | 2025-01-05 |  OAS  |       0.056|       0.000|       0.279|       0.034|   No   |   2,493.993|   Long   | 0.000|
+| 9  | 2024-03-12 | 2025-01-05 |  BTS  |       0.005|       0.000|       0.026|       0.002|   No   |   2,346.091|   Long   | 0.000|
+| 10 | 2024-04-11 | 2025-01-05 |  PET  |       0.107|       0.000|       0.537|       0.031|   No   |   2,150.690|   Long   | 0.000|
+| 11 | 2023-11-16 | 2025-01-07 |  ASD  |       0.051|       0.000|       0.256|       0.045|   No   |   2,137.903|   Long   | 0.000|
+| 12 | 2023-11-16 | 2025-01-07 |  HI   |       0.001|       0.000|       0.004|       0.000|   No   |   2,064.751|   Long   | 0.000|
+| 13 | 2023-12-18 | 2025-01-07 |  USK  |       1.006|       0.000|       5.017|       0.971|   No   |   2,058.821|   Long   | 0.002|
+
+Final trading capital is:2058.8208403409
+Highest Capital: 2693.8065485963
+Max Drawdown :0
+Win percentage is: 0.23076923076923
+Average fee: 1.2237269558295
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1864.7617824766
+Standart Deviation of final trading capital: 447.12806381797
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.29300699300699
+Standart Deviation of win percentage: 0.085307520047612
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 2312.2988611784
+Standart Deviation of highest capital: 538.80732586067
+
+
+Amount of simulations where final trading capital is high gain: 2
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 5
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 1
+Iteration number: 1
+Iteration number: 1
+Iteration number: 1
+Iteration number: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+MINIMUM ATR IS 10 PERCENT AND MIN VOLUME IS 1M
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-11-29 | 2024-04-11 |  AGI  |       0.027|       0.000|       0.133|       0.304|  Yes   |   2,046.695|   Long   | 0.000|
+| 2  | 2023-11-29 | 2025-01-02 | NEST  |       0.004|       0.000|       0.019|       0.001|   No   |   1,974.382|   Long   | 0.000|
+| 3  | 2024-04-11 | 2025-01-02 | LHINU |       0.000|       0.000|       0.000|       0.000|   No   |   1,765.973|   Long   | 0.000|
+| 4  | 2023-11-29 | 2025-01-03 |  SRM  |       0.050|       0.000|       0.250|       0.032|   No   |   1,728.955|   Long   | 0.000|
+| 5  | 2023-11-29 | 2025-01-03 | WLKN  |       0.006|       0.000|       0.029|       0.002|   No   |   1,669.565|   Long   | 0.000|
+| 6  | 2024-01-16 | 2025-01-03 |  MOB  |       0.358|       0.000|       1.791|       0.456|  Yes   |   1,695.849|   Long   | 0.000|
+| 7  | 2024-01-16 | 2025-01-04 | GOLC  |       0.107|       0.000|       0.529|       0.015|   No   |   1,608.552|   Long   | 0.001|
+| 8  | 2023-11-29 | 2025-01-05 | NFAI  |       0.089|       0.000|       0.442|       0.009|   No   |   1,516.961|   Long   | 0.001|
+| 9  | 2023-11-29 | 2025-01-05 |  BTS  |       0.006|       0.000|       0.029|       0.002|   No   |   1,445.787|   Long   | 0.000|
+| 10 | 2023-11-29 | 2025-01-05 | ASTRA |       0.006|       0.000|       0.028|       0.004|   No   |   1,411.533|   Long   | 0.000|
+| 11 | 2023-11-29 | 2025-01-07 |  WTC  |       0.043|       0.000|       0.213|       0.034|   No   |   1,389.392|   Long   | 0.000|
+
+Final trading capital is:1389.3917250593
+Highest Capital: 2046.6953776407
+Max Drawdown :0
+Win percentage is: 0.18181818181818
+Average fee: 1.1001357964874
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 652.7455911617
+Standart Deviation of final trading capital: 400.04542937561
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.15636363636364
+Standart Deviation of win percentage: 0.10080666382276
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1209.3390755281
+Standart Deviation of highest capital: 418.67815105628
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 4
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-16 | 2024-04-11 |  PXP  |       0.008|       0.000|       0.041|       0.097|  Yes   |   2,089.589|   Long   | 0.000|
+| 2  | 2024-01-16 | 2024-12-09 |  TEL  |       0.001|       0.000|       0.007|       0.006|  Yes   |   2,457.013|   Long   | 0.000|
+| 3  | 2024-01-16 | 2025-01-03 |  DEL  |       0.013|       0.000|       0.065|       0.001|   No   |   2,362.834|   Long   | 0.000|
+| 4  | 2024-04-11 | 2025-01-03 |  O3   |       0.042|       0.000|       0.208|       0.009|   No   |   2,195.100|   Long   | 0.000|
+| 5  | 2024-01-16 | 2025-01-04 | GOLC  |       0.107|       0.000|       0.529|       0.016|   No   |   2,107.621|   Long   | 0.001|
+| 6  | 2024-01-16 | 2025-01-05 |SAUBER |       0.528|       0.000|       2.638|       0.431|   No   |   2,088.266|   Long   | 0.000|
+| 7  | 2024-01-16 | 2025-01-05 |  BAX  |       0.000|       0.000|       0.001|       0.000|   No   |   2,066.526|   Long   | 0.000|
+| 8  | 2024-01-16 | 2025-01-06 |  SFL  |       0.003|       0.000|       0.015|       0.002|   No   |   2,031.019|   Long   | 0.000|
+| 9  | 2024-01-16 | 2025-01-07 | SQUAD |       0.003|       0.000|       0.015|       0.000|   No   |   1,936.736|   Long   | 0.000|
+| 10 | 2024-01-16 | 2025-01-07 |  SX   |       0.144|       0.000|       0.711|       0.072|   No   |   1,884.953|   Long   | 0.002|
+| 11 | 2024-01-16 | 2025-01-07 | ELMO  |       0.004|       0.000|       0.021|       0.002|   No   |   1,822.933|   Long   | 0.000|
+
+Final trading capital is:1822.9334611356
+Highest Capital: 2089.5893636848
+Max Drawdown :0
+Win percentage is: 0.18181818181818
+Average fee: 1.1096461119144
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1453.3723333375
+Standart Deviation of final trading capital: 446.29247805442
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.25212121212121
+Standart Deviation of win percentage: 0.12745153384819
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1564.4710044265
+Standart Deviation of highest capital: 371.24342226207
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 3
+Amount of simulations where final trading capital is minimum gain: 4
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-16 | 2024-04-30 | HGPT  |       0.008|       0.000|       0.038|       0.056|  Yes   |   1,634.823|   Long   | 0.000|
+| 2  | 2024-01-16 | 2025-01-02 |  DKA  |       0.036|       0.000|       0.178|       0.024|   No   |   1,600.714|   Long   | 0.000|
+| 3  | 2024-01-16 | 2025-01-03 | UNIX  |       0.030|       0.000|       0.150|       0.002|   No   |   1,503.875|   Long   | 0.000|
+| 4  | 2024-01-16 | 2025-01-03 |  ZCX  |       0.106|       0.000|       0.531|       0.120|  Yes   |   1,515.557|   Long   | 0.000|
+| 5  | 2024-01-16 | 2025-01-03 | FUSE  |       0.073|       0.000|       0.364|       0.029|   No   |   1,454.610|   Long   | 0.000|
+| 6  | 2024-01-16 | 2025-01-05 | XRPH  |       0.024|       0.000|       0.118|       0.168|  Yes   |   2,066.270|   Long   | 0.000|
+| 7  | 2024-01-16 | 2025-01-05 | SUSD  |       0.995|       0.000|       4.973|       0.963|   No   |   2,062.121|   Long   | 0.000|
+| 8  | 2024-01-16 | 2025-01-05 |  OAS  |       0.103|       0.000|       0.515|       0.034|   No   |   1,994.380|   Long   | 0.000|
+| 9  | 2024-01-16 | 2025-01-06 | KONO  |       0.042|       0.000|       0.209|       0.008|   No   |   1,913.115|   Long   | 0.000|
+| 10 | 2024-04-30 | 2025-01-06 |  RWN  |       0.253|       0.000|       1.235|       0.014|   No   |   1,752.824|   Long   | 0.006|
+| 11 | 2024-01-16 | 2025-01-07 |  SHR  |       0.002|       0.000|       0.009|       0.005|  Yes   |   1,916.499|   Long   | 0.000|
+
+Final trading capital is:1916.4986259772
+Highest Capital: 1634.8231261666
+Max Drawdown :0
+Win percentage is: 0.36363636363636
+Average fee: 1.066094234721
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 24756498.443455
+Standart Deviation of final trading capital: 49509318.734295
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.36155511155511
+Standart Deviation of win percentage: 0.16130281428642
+
+Average of max drawdown: -19.094938307461
+Standart Deviation of max drawdown: 38.164575698017
+
+Average of highest capital: 1895.6550971703
+Standart Deviation of highest capital: 232.19600506781
+
+
+Amount of simulations where final trading capital is high gain: 2
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 5
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-10-27 | 2025-01-02 |  KDG  |       0.000|       0.000|       0.002|       0.000|   No   |     978.349|   Long   | 0.000|
+| 2  | 2023-10-27 | 2025-01-02 |  XEC  |       0.000|       0.000|       0.000|       0.000|  Yes   |   1,006.840|   Long   | 0.000|
+| 3  | 2023-10-27 | 2025-01-04 | LABS  |       0.000|       0.000|       0.002|       0.000|   No   |     945.940|   Long   | 0.000|
+| 4  | 2023-10-27 | 2025-01-04 | AGLD  |       0.778|       0.000|       3.878|       2.781|  Yes   |   1,203.213|   Long   | 0.002|
+| 5  | 2023-10-27 | 2025-01-05 | STRAX |       0.816|       0.000|       4.068|       0.083|   No   |   1,112.150|   Long   | 0.003|
+| 6  | 2023-10-27 | 2025-01-05 |  DHT  |       0.093|       0.000|       0.459|       0.082|   No   |   1,099.966|   Long   | 0.001|
+| 7  | 2023-10-27 | 2025-01-05 |METANO |       0.000|       0.000|       0.002|       0.000|   No   |     883.709|   Long   | 0.000|
+| 8  | 2023-10-27 | 2025-01-06 |  CHR  |       0.115|       0.000|       0.574|       0.264|  Yes   |   1,012.603|   Long   | 0.000|
+| 9  | 2023-10-27 | 2025-01-07 |  NIM  |       0.001|       0.000|       0.005|       0.002|  Yes   |   1,057.167|   Long   | 0.000|
+| 10 | 2023-10-27 | 2025-01-07 |  DGB  |       0.007|       0.000|       0.035|       0.015|  Yes   |   1,162.411|   Long   | 0.000|
+
+Final trading capital is:1162.4111608099
+Highest Capital: 1000
+Max Drawdown :0
+Win percentage is: 0.5
+Average fee: 1.0036671680117
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 838.57947495989
+Standart Deviation of final trading capital: 223.21626872123
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.38
+Standart Deviation of win percentage: 0.074833147735479
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 2
+Amount of simulations where final trading capital is lower than initial investment: 3
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-11-09 | 2023-12-17 |  XED  |       0.054|       0.000|       0.105|       0.076|  Yes   |   1,039.949|   Long   | 0.001|
+| 2  | 2023-11-09 | 2023-12-18 |  PIP  |       0.071|       0.000|       0.142|       0.123|  Yes   |   1,111.701|   Long   | 0.000|
+| 3  | 2023-11-09 | 2023-12-23 | ROSX  |       0.012|       0.000|       0.024|       0.014|  Yes   |   1,132.426|   Long   | 0.000|
+| 4  | 2023-11-09 | 2024-02-12 |  ASM  |       0.024|       0.000|       0.047|       0.082|  Yes   |   1,378.297|   Long   | 0.000|
+| 5  | 2024-01-16 | 2024-03-23 | RITE  |       0.021|       0.000|       0.040|       0.028|  Yes   |   1,421.176|   Long   | 0.001|
+| 6  | 2023-11-09 | 2024-04-01 | UBXS  |       0.046|       0.000|       0.091|       0.349|  Yes   |   2,088.880|   Long   | 0.000|
+| 7  | 2023-11-09 | 2024-04-30 |  NWC  |       0.073|       0.000|       0.146|       0.104|  Yes   |   2,129.131|   Long   | 0.000|
+| 8  | 2023-11-09 | 2024-06-11 |  WIN  |       0.000|       0.000|       0.000|       0.000|  Yes   |   2,164.020|   Long   | 0.000|
+| 9  | 2024-02-12 | 2024-06-17 | AIOZ  |       0.147|       0.000|       0.294|       0.546|  Yes   |   2,536.658|   Long   | 0.000|
+| 10 | 2024-01-16 | 2025-01-02 |  BTT  |       0.000|       0.000|       0.000|       0.000|   No   |   2,535.526|   Long   | 0.000|
+| 11 | 2024-04-01 | 2025-01-02 |SCOTTY |       0.007|       0.000|       0.013|       0.001|   No   |   2,343.771|   Long   | 0.000|
+| 12 | 2023-11-09 | 2025-01-03 |ZEDXION|       0.153|       0.000|       0.307|       0.401|  Yes   |   2,504.162|   Long   | 0.000|
+| 13 | 2024-04-30 | 2025-01-03 |  QTO  |       0.207|       0.000|       0.414|       0.106|   No   |   2,398.305|   Long   | 0.000|
+| 14 | 2024-06-17 | 2025-01-03 | BEFE  |       0.000|       0.000|       0.000|       0.000|   No   |   2,154.287|   Long   | 0.000|
+| 15 | 2023-11-09 | 2025-01-04 | BSCS  |       0.011|       0.000|       0.022|       0.004|   No   |   2,093.076|   Long   | 0.000|
+| 16 | 2024-01-16 | 2025-01-04 | NXRA  |       0.150|       0.000|       0.298|       0.049|   No   |   2,014.924|   Long   | 0.001|
+| 17 | 2024-03-25 | 2025-01-06 |  MOC  |       0.132|       0.000|       0.262|       0.097|   No   |   1,975.752|   Long   | 0.000|
+| 18 | 2024-06-11 | 2025-01-07 |  KOM  |       0.002|       0.000|       0.005|       0.001|   No   |   1,876.402|   Long   | 0.000|
+| 19 | 2023-11-09 | 2025-01-08 | DAFI  |       0.005|       0.000|       0.010|       0.001|   No   |   1,793.513|   Long   | 0.000|
+
+Final trading capital is:1793.5132760807
+Highest Capital: 2536.6583935452
+Max Drawdown :0
+Win percentage is: 0.52631578947368
+Average fee: 1.3336794489006
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1290.3156085553
+Standart Deviation of final trading capital: 397.59634228654
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.44625506072874
+Standart Deviation of win percentage: 0.050704511871586
+
+Average of max drawdown: -0.016025649118495
+Standart Deviation of max drawdown: 0.020570850108603
+
+Average of highest capital: 1913.1407062075
+Standart Deviation of highest capital: 361.53103531763
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 3
+Amount of simulations where final trading capital is minimum gain: 3
+Amount of simulations where final trading capital is lower than initial investment: 2
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-16 | 2024-03-08 |  ENG  |       0.004|       0.000|       0.007|       0.011|  Yes   |   1,217.843|   Long   | 0.000|
+| 2  | 2024-01-16 | 2024-03-16 | HEART |       0.011|       0.000|       0.023|       0.030|  Yes   |   1,383.314|   Long   | 0.000|
+| 3  | 2024-01-16 | 2024-04-12 |  EVZ  |       0.007|       0.000|       0.014|       0.010|  Yes   |   1,414.401|   Long   | 0.000|
+| 4  | 2024-01-16 | 2024-07-31 |  SG   |       0.036|       0.000|       0.071|       0.080|  Yes   |   1,536.009|   Long   | 0.000|
+| 5  | 2024-01-16 | 2025-01-03 | MEME  |       0.031|       0.000|       0.054|       0.011|   No   |   1,463.520|   Long   | 0.003|
+| 6  | 2024-01-16 | 2025-01-03 | GHUB  |       0.066|       0.000|       0.128|       0.022|   No   |   1,394.716|   Long   | 0.002|
+| 7  | 2024-01-16 | 2025-01-04 |  REP  |       0.877|       0.000|       1.751|       0.582|   No   |   1,360.034|   Long   | 0.001|
+| 8  | 2024-01-16 | 2025-01-05 |  HPY  |       0.001|       0.000|       0.001|       0.001|   No   |   1,349.117|   Long   | 0.000|
+| 9  | 2024-01-16 | 2025-01-05 | LIFE  |       0.000|       0.000|       0.000|       0.000|   No   |   1,321.125|   Long   | 0.000|
+| 10 | 2024-03-08 | 2025-01-05 | ASTRA |       0.004|       0.000|       0.008|       0.004|   No   |   1,315.871|   Long   | 0.000|
+| 11 | 2024-04-12 | 2025-01-05 | SPRT  |       0.000|       0.000|       0.001|       0.000|   No   |   1,176.136|   Long   | 0.000|
+| 12 | 2024-07-31 | 2025-01-05 |  SIX  |       0.024|       0.000|       0.047|       0.029|  Yes   |   1,208.311|   Long   | 0.000|
+| 13 | 2024-01-16 | 2025-01-06 | QTCON |       0.002|       0.000|       0.003|       0.001|   No   |   1,198.567|   Long   | 0.000|
+| 14 | 2024-03-18 | 2025-01-08 | DAFI  |       0.004|       0.000|       0.008|       0.001|   No   |   1,086.021|   Long   | 0.000|
+
+Final trading capital is:1086.0210787454
+Highest Capital: 1536.0090871784
+Max Drawdown :0
+Win percentage is: 0.35714285714286
+Average fee: 1.1333966068338
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 836.61612893848
+Standart Deviation of final trading capital: 735.50945018056
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.48633053221289
+Standart Deviation of win percentage: 0.080392918139262
+
+Average of max drawdown: -0.011199901573723
+Standart Deviation of max drawdown: 0.018355555067278
+
+Average of highest capital: 1624.7693214188
+Standart Deviation of highest capital: 518.06319932211
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 3
+Amount of simulations where final trading capital is lower than initial investment: 2
+Iteration number: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-16 | 2024-07-01 | HGPT  |       0.008|       0.000|       0.038|       0.038|  Yes   |   1,402.620|   Long   | 0.000|
+| 2  | 2024-01-16 | 2025-01-02 |  OHO  |       0.000|       0.000|       0.002|       0.001|  Yes   |   1,547.783|   Long   | 0.000|
+| 3  | 2024-01-16 | 2025-01-03 |  DEL  |       0.013|       0.000|       0.065|       0.001|   No   |   1,454.151|   Long   | 0.000|
+| 4  | 2024-01-16 | 2025-01-03 |  VOW  |       0.513|       0.000|       2.565|       0.090|   No   |   1,370.676|   Long   | 0.000|
+| 5  | 2024-01-16 | 2025-01-03 |  MOB  |       0.359|       0.000|       1.791|       0.456|  Yes   |   1,396.673|   Long   | 0.001|
+| 6  | 2024-01-16 | 2025-01-03 |  EVZ  |       0.007|       0.000|       0.036|       0.005|   No   |   1,358.493|   Long   | 0.000|
+| 7  | 2024-01-16 | 2025-01-04 | GOLC  |       0.107|       0.000|       0.529|       0.015|   No   |   1,270.887|   Long   | 0.001|
+| 8  | 2024-07-01 | 2025-01-04 |WWDOGE |       0.124|       0.000|       0.618|       0.351|  Yes   |   1,527.710|   Long   | 0.000|
+| 9  | 2024-01-16 | 2025-01-07 | WHEE  |       0.032|       0.000|       0.155|      -0.008|   No   |   1,399.365|   Long   | 0.001|
+| 10 | 2024-01-16 | 2025-01-07 |  SX   |       0.144|       0.000|       0.711|       0.075|   No   |   1,349.491|   Long   | 0.002|
+| 11 | 2024-01-16 | 2025-01-07 |  USK  |       0.994|       0.000|       4.962|       0.969|   No   |   1,345.956|   Long   | 0.002|
+
+Final trading capital is:1345.9563769481
+Highest Capital: 1402.6202841548
+Max Drawdown :0
+Win percentage is: 0.36363636363636
+Average fee: 1.0434238449681
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1821.3875382127
+Standart Deviation of final trading capital: 956.98282928777
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.36909090909091
+Standart Deviation of win percentage: 0.1122832571842
+
+Average of max drawdown: -0.00058397468568843
+Standart Deviation of max drawdown: 0.0011679493713769
+
+Average of highest capital: 1905.9425934395
+Standart Deviation of highest capital: 1006.4247704282
+
+
+Amount of simulations where final trading capital is high gain: 2
+Amount of simulations where final trading capital is medium gain: 4
+Amount of simulations where final trading capital is minimum gain: 4
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-16 | 2024-04-13 | FRTS  |       0.000|       0.000|       0.000|       0.000|  Yes   |   1,073.717|   Long   | 0.000|
+| 2  | 2024-01-16 | 2024-05-14 |SAUBER |       0.529|       0.000|       2.638|       0.532|   No   |   1,073.312|   Long   | 0.001|
+| 3  | 2024-01-16 | 2024-05-14 | EXRD  |       0.046|       0.000|       0.229|       0.043|   No   |   1,066.316|   Long   | 0.000|
+| 4  | 2024-01-16 | 2024-05-14 | OUSD  |       0.998|       0.000|       4.987|       0.997|   No   |   1,065.270|   Long   | 0.000|
+| 5  | 2024-01-16 | 2024-05-14 |  BTS  |       0.004|       0.000|       0.020|       0.003|   No   |   1,042.184|   Long   | 0.000|
+| 6  | 2024-01-16 | 2024-05-14 |  MXC  |       0.008|       0.000|       0.040|       0.014|  Yes   |   1,112.069|   Long   | 0.000|
+| 7  | 2024-01-16 | 2024-05-14 | SUSD  |       0.995|       0.000|       4.973|       0.982|   No   |   1,109.811|   Long   | 0.000|
+| 8  | 2024-01-16 | 2024-05-14 | TUSD  |       0.990|       0.000|       4.949|       0.999|   No   |   1,109.767|   Long   | 0.000|
+| 9  | 2024-01-16 | 2024-05-14 |  XTP  |       0.004|       0.000|       0.021|       0.001|   No   |   1,035.342|   Long   | 0.000|
+| 10 | 2024-01-16 | 2024-05-14 | QTCON |       0.002|       0.000|       0.008|       0.002|  Yes   |   1,036.708|   Long   | 0.000|
+| 11 | 2024-04-15 | 2024-08-12 | TABOO |       0.002|       0.000|       0.010|       0.000|   No   |     942.407|   Long   | 0.000|
+| 12 | 2024-05-14 | 2024-09-10 | MKUSD |       0.991|       0.000|       4.956|       0.998|   No   |     942.146|   Long   | 0.000|
+| 13 | 2024-05-14 | 2024-09-10 |  DAV  |       0.001|       0.000|       0.003|       0.000|   No   |     911.744|   Long   | 0.000|
+| 14 | 2024-05-14 | 2024-09-10 |  MV   |       0.028|       0.000|       0.139|       0.010|   No   |     844.286|   Long   | 0.000|
+| 15 | 2024-05-14 | 2024-09-10 | GHUB  |       0.064|       0.000|       0.317|       0.038|   No   |     800.733|   Long   | 0.001|
+| 16 | 2024-05-14 | 2024-09-10 | LAYER |       0.065|       0.000|       0.325|       0.033|   No   |     748.158|   Long   | 0.000|
+| 17 | 2024-05-14 | 2024-09-10 |  MBL  |       0.005|       0.000|       0.023|       0.003|   No   |     701.211|   Long   | 0.000|
+| 18 | 2024-05-14 | 2024-09-10 | MENGO |       0.529|       0.000|       2.640|       0.341|   No   |     663.301|   Long   | 0.001|
+| 19 | 2024-05-14 | 2024-09-10 |BSCPAD |       0.096|       0.000|       0.476|       0.049|   No   |     610.980|   Long   | 0.001|
+| 20 | 2024-05-14 | 2024-09-10 |  OXT  |       0.092|       0.000|       0.461|       0.072|   No   |     586.631|   Long   | 0.000|
+| 21 | 2024-08-23 | 2024-12-20 |  ERG  |       0.829|       0.000|       4.146|       1.796|  Yes   |     695.518|   Long   | 0.000|
+| 22 | 2024-09-24 | 2025-01-02 |  BTT  |       0.000|       0.000|       0.000|       0.000|   No   |     694.932|   Long   | 0.000|
+| 23 | 2024-09-24 | 2025-01-02 | MOOV  |       0.002|       0.000|       0.010|       0.002|   No   |     688.684|   Long   | 0.000|
+| 24 | 2024-09-24 | 2025-01-03 |  KTC  |       0.159|       0.000|       0.791|       0.153|   No   |     685.968|   Long   | 0.001|
+| 25 | 2024-09-24 | 2025-01-03 | SHFT  |       0.003|       0.000|       0.016|       0.001|   No   |     641.073|   Long   | 0.000|
+| 26 | 2024-09-24 | 2025-01-05 |SOLAMA |       0.015|       0.000|       0.075|       0.009|   No   |     617.445|   Long   | 0.000|
+| 27 | 2024-09-24 | 2025-01-05 |  XED  |       0.025|       0.000|       0.127|       0.020|   No   |     604.026|   Long   | 0.000|
+| 28 | 2024-09-24 | 2025-01-05 |SAUBER |       0.471|       0.000|       2.357|       0.431|   No   |     598.380|   Long   | 0.000|
+| 29 | 2024-09-24 | 2025-01-06 | KIMBO |       0.000|       0.000|       0.001|       0.000|   No   |     597.519|   Long   | 0.000|
+| 30 | 2024-09-24 | 2025-01-07 | MAZI  |       0.001|       0.000|       0.003|      -0.001|   No   |     443.483|   Long   | 0.000|
+
+Final trading capital is:443.48292540553
+Highest Capital: 1073.7171033267
+Max Drawdown :-0.45364451346436
+Win percentage is: 0.13333333333333
+Average fee: 0.88969367197171
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 725.44979439955
+Standart Deviation of final trading capital: 293.42525273243
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.29161290322581
+Standart Deviation of win percentage: 0.091002052554867
+
+Average of max drawdown: -0.46120090762884
+Standart Deviation of max drawdown: 0.10251301572561
+
+Average of highest capital: 1407.9784944369
+Standart Deviation of highest capital: 204.46819017756
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 4
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-19 | 2024-02-01 | NFAI  |       0.008|       0.000|       0.036|       0.087|  Yes   |   3,207.492|   Long   | 0.001|
+| 2  | 2024-01-26 | 2024-02-08 |  OIN  |       0.011|       0.000|       0.050|       0.011|  Yes   |   3,217.473|   Long   | 0.000|
+| 3  | 2024-01-30 | 2024-02-12 |  COL  |       0.012|       0.000|       0.052|       0.010|   No   |   3,171.551|   Long   | 0.002|
+| 4  | 2024-01-30 | 2024-02-12 | BCOIN |       0.051|       0.000|       0.254|       0.020|   No   |   3,045.922|   Long   | 0.001|
+| 5  | 2024-02-05 | 2024-02-18 |WWDOGE |       0.086|       0.000|       0.393|       0.076|   No   |   2,958.622|   Long   | 0.007|
+| 6  | 2024-02-09 | 2024-02-22 |  FIO  |       0.047|       0.000|       0.235|       0.035|   No   |   2,783.772|   Long   | 0.000|
+| 7  | 2024-02-19 | 2024-03-03 |FAKEAI |       0.004|       0.000|       0.017|       0.013|  Yes   |   4,442.386|   Long   | 0.000|
+| 8  | 2024-02-19 | 2024-03-03 | SEOR  |       0.006|       0.000|       0.027|       0.002|   No   |   4,092.075|   Long   | 0.000|
+| 9  | 2024-02-23 | 2024-03-07 |  PNG  |       0.273|       0.000|       1.352|       0.387|  Yes   |   4,321.384|   Long   | 0.003|
+| 10 | 2024-02-23 | 2024-03-07 | CNTM  |       0.007|       0.000|       0.037|       0.009|  Yes   |   4,414.308|   Long   | 0.000|
+| 11 | 2024-02-26 | 2024-03-10 | IDIA  |       0.085|       0.000|       0.416|       0.148|  Yes   |   4,831.531|   Long   | 0.002|
+| 12 | 2024-03-04 | 2024-03-17 |  BTT  |       0.000|       0.000|       0.000|       0.000|   No   |   4,412.007|   Long   | 0.000|
+| 13 | 2024-03-04 | 2024-03-17 |  OXY  |       0.113|       0.000|       0.560|       0.076|   No   |   4,131.588|   Long   | 0.001|
+| 14 | 2024-03-07 | 2024-03-20 | BCOIN |       0.085|       0.000|       0.420|       0.094|  Yes   |   4,222.069|   Long   | 0.001|
+| 15 | 2024-03-07 | 2024-03-20 |WASSIE |       0.000|       0.000|       0.000|       0.000|   No   |   3,925.740|   Long   | 0.000|
+| 16 | 2024-03-11 | 2024-03-24 | RACA  |       0.001|       0.000|       0.003|       0.000|   No   |   3,508.374|   Long   | 0.000|
+| 17 | 2024-03-18 | 2024-03-31 | BNANA |       0.106|       0.000|       0.495|      -0.001|   No   |   2,609.207|   Long   | 0.006|
+| 18 | 2024-03-18 | 2024-03-31 |  BVT  |       0.023|       0.000|       0.115|       0.053|  Yes   |   3,692.960|   Long   | 0.000|
+| 19 | 2024-03-22 | 2024-04-04 |  MDI  |       0.590|       0.000|       2.938|       0.397|   No   |   3,427.932|   Long   | 0.002|
+| 20 | 2024-03-22 | 2024-04-04 |  XCV  |       0.007|       0.000|       0.034|       0.004|   No   |   3,072.158|   Long   | 0.000|
+| 21 | 2024-03-29 | 2024-04-11 |  MOB  |       0.203|       0.000|       1.011|       0.094|   No   |   2,688.352|   Long   | 0.001|
+| 22 | 2024-04-01 | 2024-04-14 |  OXY  |       0.079|       0.000|       0.353|       0.004|   No   |   1,898.732|   Long   | 0.008|
+| 23 | 2024-04-01 | 2024-04-14 | BNANA |       0.026|       0.000|       0.063|       0.000|   No   |     337.211|   Long   | 0.014|
+| 24 | 2024-04-04 | 2024-04-17 |  FIN  |       0.002|       0.000|       0.009|       0.001|   No   |     -74.010|   Long   | 0.000|
+| 25 | 2024-04-08 | 2024-04-21 |  BTT  |       0.000|       0.000|       0.000|       0.000|   No   |    -388.396|   Long   | 0.000|
+| 26 | 2024-04-15 | 2024-04-28 |  ABL  |       0.005|       0.000|       0.025|       0.001|   No   |    -441.754|   Long   | 0.000|
+
+Final trading capital is:-441.75429479639
+Highest Capital: 4831.5307018828
+Max Drawdown :-1.0153181375752
+Win percentage is: 0.30769230769231
+Average fee: 6.5870802802921
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: -441.75429479639
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.30769230769231
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -1.0153181375752
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 4831.5307018828
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-11-29 | 2023-11-30 | CHEX  |       0.062|       0.000|       0.288|       0.056|   No   |     977.919|   Long   | 0.004|
+| 2  | 2023-11-29 | 2023-11-30 | XRPH  |       0.031|       0.000|       0.154|       0.027|   No   |     950.777|   Long   | 0.000|
+| 3  | 2023-11-29 | 2023-11-30 | AIOZ  |       0.158|       0.000|       0.786|       0.151|   No   |     939.346|   Long   | 0.001|
+| 4  | 2023-11-29 | 2023-11-30 | ROCKI |       0.007|       0.000|       0.037|       0.007|   No   |     923.921|   Long   | 0.000|
+| 5  | 2024-01-26 | 2024-01-27 |  OIN  |       0.010|       0.000|       0.050|       0.007|   No   |     866.767|   Long   | 0.000|
+| 6  | 2024-01-30 | 2024-01-31 | BCOIN |       0.051|       0.000|       0.254|       0.030|   No   |     792.800|   Long   | 0.001|
+| 7  | 2024-01-30 | 2024-01-31 |  COL  |       0.014|       0.000|       0.052|       0.015|  Yes   |     810.430|   Long   | 0.003|
+| 8  | 2024-02-05 | 2024-02-06 | BNANA |       0.045|       0.000|       0.212|       0.051|  Yes   |     832.137|   Long   | 0.003|
+| 9  | 2024-02-05 | 2024-02-06 |WWDOGE |       0.085|       0.000|       0.393|       0.022|   No   |     701.631|   Long   | 0.006|
+| 10 | 2024-02-09 | 2024-02-10 |  FIO  |       0.047|       0.000|       0.235|       0.039|   No   |     674.550|   Long   | 0.000|
+| 11 | 2024-02-09 | 2024-02-10 |WWDOGE |       0.082|       0.000|       0.407|       0.028|   No   |     579.420|   Long   | 0.001|
+| 12 | 2024-02-16 | 2024-02-17 |SPONGE |       0.000|       0.000|       0.001|       0.000|  Yes   |     660.998|   Long   | 0.000|
+| 13 | 2024-02-19 | 2024-02-20 | SEOR  |       0.006|       0.000|       0.027|       0.004|   No   |     614.291|   Long   | 0.000|
+| 14 | 2024-02-19 | 2024-02-20 |FAKEAI |       0.004|       0.000|       0.017|       0.004|  Yes   |     627.375|   Long   | 0.000|
+| 15 | 2024-02-22 | 2024-02-23 | SPUME |       0.002|       0.000|       0.011|       0.001|   No   |     573.227|   Long   | 0.000|
+| 16 | 2024-02-22 | 2024-02-23 |  PNG  |       0.136|       0.000|       0.676|       0.270|  Yes   |     696.565|   Long   | 0.001|
+| 17 | 2024-02-22 | 2024-02-23 | CNTM  |       0.004|       0.000|       0.021|       0.007|  Yes   |     787.760|   Long   | 0.000|
+| 18 | 2024-02-22 | 2024-02-23 |SCOTTY |       0.004|       0.000|       0.021|       0.004|   No   |     782.349|   Long   | 0.000|
+| 19 | 2024-02-26 | 2024-02-27 | IDIA  |       0.084|       0.000|       0.416|       0.095|  Yes   |     802.537|   Long   | 0.001|
+| 20 | 2024-02-28 | 2024-02-29 | CNTM  |       0.009|       0.000|       0.043|       0.006|   No   |     742.548|   Long   | 0.000|
+| 21 | 2024-02-28 | 2024-02-29 | AART  |       0.002|       0.000|       0.012|       0.003|  Yes   |     794.946|   Long   | 0.000|
+| 22 | 2024-03-04 | 2024-03-05 | NALS  |       0.267|       0.000|       1.327|       0.200|   No   |     753.183|   Long   | 0.002|
+| 23 | 2024-03-04 | 2024-03-05 |SCOTTY |       0.006|       0.000|       0.032|       0.007|  Yes   |     773.159|   Long   | 0.000|
+| 24 | 2024-03-04 | 2024-03-05 | SHIB  |       0.000|       0.000|       0.000|       0.000|   No   |     771.538|   Long   | 0.000|
+| 25 | 2024-03-04 | 2024-03-05 |  BTT  |       0.000|       0.000|       0.000|       0.000|   No   |     769.631|   Long   | 0.000|
+| 26 | 2024-03-04 | 2024-03-05 |  OXY  |       0.114|       0.000|       0.560|       0.006|   No   |     615.488|   Long   | 0.002|
+| 27 | 2024-03-06 | 2024-03-07 |  FIS  |       0.859|       0.000|       4.291|       0.757|   No   |     599.821|   Long   | 0.001|
+| 28 | 2024-03-06 | 2024-03-07 | PEEL  |       0.028|       0.000|       0.136|       0.032|  Yes   |     619.705|   Long   | 0.000|
+| 29 | 2024-03-06 | 2024-03-07 | HEART |       0.046|       0.000|       0.223|       0.049|  Yes   |     628.340|   Long   | 0.001|
+| 30 | 2024-03-06 | 2024-03-07 |  QRL  |       0.404|       0.000|       1.978|       0.390|   No   |     622.699|   Long   | 0.008|
+| 31 | 2024-03-06 | 2024-03-07 |SCOTTY |       0.012|       0.000|       0.057|       0.011|   No   |     617.017|   Long   | 0.000|
+| 32 | 2024-03-11 | 2024-03-12 | RACA  |       0.001|       0.000|       0.003|       0.001|   No   |     590.647|   Long   | 0.000|
+| 33 | 2024-03-11 | 2024-03-12 | ROCKI |       0.042|       0.000|       0.206|       0.085|  Yes   |     717.302|   Long   | 0.001|
+| 34 | 2024-03-11 | 2024-03-12 |  ENG  |       0.016|       0.000|       0.076|       0.015|   No   |     709.203|   Long   | 0.001|
+| 35 | 2024-03-14 | 2024-03-15 |  BLY  |       0.016|       0.000|       0.078|       0.013|   No   |     685.626|   Long   | 0.000|
+| 36 | 2024-03-14 | 2024-03-15 | ELMO  |       0.020|       0.000|       0.100|       0.017|   No   |     658.040|   Long   | 0.000|
+| 37 | 2024-03-14 | 2024-03-15 | PLUG  |       0.000|       0.000|       0.001|       0.000|  Yes   |     669.857|   Long   | 0.000|
+| 38 | 2024-03-18 | 2024-03-19 |  CHO  |       0.053|       0.000|       0.263|       0.056|  Yes   |     676.775|   Long   | 0.000|
+| 39 | 2024-03-18 | 2024-03-19 |  BVT  |       0.023|       0.000|       0.115|       0.035|  Yes   |     745.789|   Long   | 0.000|
+| 40 | 2024-03-18 | 2024-03-19 | BNANA |       0.101|       0.000|       0.495|       0.067|   No   |     698.170|   Long   | 0.002|
+| 41 | 2024-03-22 | 2024-03-23 |  XCV  |       0.007|       0.000|       0.034|       0.010|  Yes   |     754.739|   Long   | 0.000|
+| 42 | 2024-03-22 | 2024-03-23 |  MDI  |       0.591|       0.000|       2.938|       0.535|   No   |     740.153|   Long   | 0.004|
+| 43 | 2024-03-25 | 2024-03-26 | POLYX |       0.623|       0.000|       3.114|       0.605|   No   |     734.590|   Long   | 0.000|
+| 44 | 2024-03-25 | 2024-03-26 | MPLX  |       0.293|       0.000|       1.454|       0.347|  Yes   |     760.385|   Long   | 0.002|
+| 45 | 2024-03-25 | 2024-03-26 |  OGV  |       0.012|       0.000|       0.057|       0.012|  Yes   |     766.588|   Long   | 0.000|
+| 46 | 2024-03-27 | 2024-03-28 | TANK  |       0.012|       0.000|       0.059|       0.006|   No   |     684.903|   Long   | 0.000|
+| 47 | 2024-03-27 | 2024-03-28 |  BCT  |       0.994|       0.000|       4.894|       1.127|  Yes   |     704.829|   Long   | 0.015|
+| 48 | 2024-03-27 | 2024-03-28 | BNANA |       0.457|       0.000|       2.208|       0.272|   No   |     638.992|   Long   | 0.016|
+| 49 | 2024-03-27 | 2024-03-28 | WECO  |       0.001|       0.000|       0.003|       0.001|  Yes   |     643.988|   Long   | 0.000|
+| 50 | 2024-03-29 | 2024-03-30 |  MOB  |       0.204|       0.000|       1.011|       0.085|   No   |     567.506|   Long   | 0.001|
+| 51 | 2024-03-29 | 2024-03-30 | BFHT  |       0.013|       0.000|       0.066|       0.012|   No   |     547.301|   Long   | 0.000|
+| 52 | 2024-03-29 | 2024-03-30 |  VOW  |       0.556|       0.000|       2.775|       0.455|   No   |     522.849|   Long   | 0.001|
+| 53 | 2024-03-29 | 2024-03-30 | QMALL |       0.104|       0.000|       0.512|       0.086|   No   |     498.956|   Long   | 0.002|
+| 54 | 2024-03-29 | 2024-03-30 | OBSR  |       0.004|       0.000|       0.020|       0.003|   No   |     475.436|   Long   | 0.000|
+| 55 | 2024-04-04 | 2024-04-05 | TSUKA |       0.048|       0.000|       0.237|       0.037|   No   |     452.665|   Long   | 0.000|
+| 56 | 2024-04-04 | 2024-04-05 |  DVP  |       0.001|       0.000|       0.003|       0.000|   No   |     418.760|   Long   | 0.000|
+| 57 | 2024-04-04 | 2024-04-05 |  FIN  |       0.002|       0.000|       0.009|       0.001|   No   |     378.908|   Long   | 0.000|
+| 58 | 2024-04-08 | 2024-04-09 |  BTT  |       0.000|       0.000|       0.000|       0.000|   No   |     377.782|   Long   | 0.000|
+| 59 | 2024-04-08 | 2024-04-09 |  MOB  |       0.100|       0.000|       0.493|       0.093|   No   |     371.584|   Long   | 0.001|
+| 60 | 2024-04-08 | 2024-04-09 | FRTS  |       0.000|       0.000|       0.000|       0.000|  Yes   |     398.336|   Long   | 0.000|
+| 61 | 2024-04-08 | 2024-04-09 | BNANA |       0.012|       0.000|       0.020|       0.002|   No   |     195.453|   Long   | 0.008|
+| 62 | 2024-04-11 | 2024-04-12 |  DYP  |       0.639|       0.000|       3.190|       0.501|   No   |     186.557|   Long   | 0.002|
+| 63 | 2024-04-15 | 2024-04-16 |  ABL  |       0.006|       0.000|       0.025|       0.004|   No   |     174.273|   Long   | 0.001|
+| 64 | 2024-04-22 | 2024-04-23 |  COL  |       0.009|       0.000|       0.045|       0.009|   No   |     172.833|   Long   | 0.000|
+| 65 | 2024-04-22 | 2024-04-23 | MOOV  |       0.008|       0.000|       0.040|       0.012|  Yes   |     187.646|   Long   | 0.000|
+| 66 | 2024-05-13 | 2024-05-14 | SUDO  |       0.202|       0.000|       1.010|       0.177|   No   |     182.544|   Long   | 0.000|
+| 67 | 2024-05-20 | 2024-05-21 | VEMP  |       0.009|       0.000|       0.045|       0.008|   No   |     178.045|   Long   | 0.000|
+| 68 | 2024-05-22 | 2024-05-23 |  MDI  |       0.058|       0.000|       0.279|       0.049|   No   |     171.505|   Long   | 0.003|
+| 69 | 2024-06-03 | 2024-06-04 | JULD  |       0.004|       0.000|       0.022|       0.004|   No   |     166.294|   Long   | 0.000|
+| 70 | 2024-06-10 | 2024-06-11 | TITA  |       0.005|       0.000|       0.026|       0.005|   No   |     162.212|   Long   | 0.000|
+| 71 | 2024-06-10 | 2024-06-11 | REV3L |       0.020|       0.000|       0.098|       0.015|   No   |     153.153|   Long   | 0.000|
+| 72 | 2024-06-10 | 2024-06-11 | MRHB  |       0.002|       0.000|       0.012|       0.002|   No   |     142.933|   Long   | 0.000|
+| 73 | 2024-06-10 | 2024-06-11 |  MQL  |       0.000|       0.000|       0.001|       0.000|   No   |     126.815|   Long   | 0.000|
+| 74 | 2024-06-17 | 2024-06-18 |  KWS  |       0.000|       0.000|       0.001|       0.000|  Yes   |     137.226|   Long   | 0.000|
+| 75 | 2024-06-17 | 2024-06-18 |  OXY  |       0.043|       0.000|       0.204|       0.039|   No   |     134.126|   Long   | 0.002|
+| 76 | 2024-06-17 | 2024-06-18 | MRHB  |       0.005|       0.000|       0.024|       0.006|  Yes   |     141.645|   Long   | 0.000|
+| 77 | 2024-06-24 | 2024-06-25 | MDUS  |       0.003|       0.000|       0.016|       0.005|  Yes   |     159.530|   Long   | 0.000|
+| 78 | 2024-06-26 | 2024-06-27 | HAWK  |       0.002|       0.000|       0.008|       0.001|   No   |     150.615|   Long   | 0.000|
+| 79 | 2024-06-26 | 2024-06-27 |  OXY  |       0.038|       0.000|       0.183|       0.006|   No   |     122.461|   Long   | 0.001|
+| 80 | 2024-06-28 | 2024-06-29 |GTCOIN |       0.000|       0.000|       0.001|       0.000|   No   |     112.822|   Long   | 0.000|
+| 81 | 2024-07-01 | 2024-07-02 | XODEX |       0.000|       0.000|       0.002|       0.001|  Yes   |     124.572|   Long   | 0.000|
+| 82 | 2024-07-15 | 2024-07-16 |  COQ  |       0.000|       0.000|       0.000|       0.000|   No   |     124.044|   Long   | 0.000|
+| 83 | 2024-07-15 | 2024-07-16 |  KOK  |       0.001|       0.000|       0.007|       0.001|   No   |     109.272|   Long   | 0.000|
+| 84 | 2024-07-15 | 2024-07-16 |GTCOIN |       0.001|       0.000|       0.005|       0.000|   No   |      84.164|   Long   | 0.000|
+| 85 | 2024-07-18 | 2024-07-19 | PAYS  |       0.014|       0.000|       0.070|       0.013|   No   |      82.147|   Long   | 0.000|
+| 86 | 2024-07-30 | 2024-07-31 | POPK  |       0.003|       0.000|       0.013|       0.001|   No   |      74.342|   Long   | 0.000|
+| 87 | 2024-08-23 | 2024-08-24 |  XNL  |       0.021|       0.000|       0.100|       0.011|   No   |      67.439|   Long   | 0.001|
+| 88 | 2024-08-23 | 2024-08-24 |  COQ  |       0.000|       0.000|       0.000|       0.000|   No   |      67.257|   Long   | 0.000|
+| 89 | 2024-09-24 | 2024-09-25 |  CLH  |       0.002|       0.000|       0.008|       0.001|   No   |      62.400|   Long   | 0.000|
+| 90 | 2024-09-24 | 2024-09-25 |  COQ  |       0.000|       0.000|       0.000|       0.000|   No   |      55.463|   Long   | 0.000|
+| 91 | 2024-09-27 | 2024-09-28 |  KOK  |       0.001|       0.000|       0.005|       0.001|   No   |      52.167|   Long   | 0.000|
+| 92 | 2024-09-27 | 2024-09-28 |  VLX  |       0.012|       0.000|       0.061|       0.013|  Yes   |      52.643|   Long   | 0.000|
+| 93 | 2024-10-14 | 2024-10-15 |  COQ  |       0.000|       0.000|       0.000|       0.000|   No   |      47.184|   Long   | 0.000|
+| 94 | 2024-10-14 | 2024-10-15 |  RMV  |       0.011|       0.000|       0.055|       0.007|   No   |      42.995|   Long   | 0.000|
+| 95 | 2024-10-14 | 2024-10-15 | PERC  |       0.602|       0.000|       2.990|       0.654|  Yes   |      43.800|   Long   | 0.004|
+| 96 | 2024-10-18 | 2024-10-19 | DORKL |       0.001|       0.000|       0.003|       0.001|   No   |      42.281|   Long   | 0.000|
+
+Final trading capital is:42.280663470427
+Highest Capital: 1000
+Max Drawdown :-0.95619963069699
+Win percentage is: 0.29166666666667
+Average fee: 0.99755717037954
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 42.280663470427
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.29166666666667
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.95619963069699
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-22 | 2024-03-29 | BNANA |       0.025|       0.000|       0.115|       0.003|   No   |   1,905.356|   Long   | 0.002|
+| 2  | 2024-01-22 | 2024-03-29 |  SHR  |       0.002|       0.000|       0.008|       0.004|  Yes   |   2,079.097|   Long   | 0.000|
+| 3  | 2024-01-22 | 2024-05-09 |  CHO  |       0.013|       0.000|       0.062|       0.065|  Yes   |   2,498.044|   Long   | 0.000|
+| 4  | 2024-01-16 | 2025-01-02 | NEST  |       0.003|       0.000|       0.017|       0.001|   No   |   2,427.924|   Long   | 0.000|
+| 5  | 2024-01-22 | 2025-01-02 |  OHO  |       0.000|       0.000|       0.002|       0.001|  Yes   |   2,597.707|   Long   | 0.000|
+| 6  | 2024-01-16 | 2025-01-04 | OCTO  |       0.426|       0.000|       1.958|       0.324|   No   |   2,570.606|   Long   | 0.034|
+| 7  | 2024-01-16 | 2025-01-04 |  REP  |       0.876|       0.000|       4.378|       0.586|   No   |   2,536.496|   Long   | 0.001|
+| 8  | 2024-01-22 | 2025-01-04 |  XCV  |       0.002|       0.000|       0.011|       0.001|   No   |   2,464.917|   Long   | 0.000|
+| 9  | 2024-01-22 | 2025-01-04 |  00   |       0.069|       0.000|       0.345|       0.042|   No   |   2,424.301|   Long   | 0.000|
+| 10 | 2024-01-16 | 2025-01-05 |SAUBER |       0.528|       0.000|       2.638|       0.432|   No   |   2,405.151|   Long   | 0.000|
+| 11 | 2024-01-16 | 2025-01-05 | X2Y2  |       0.015|       0.000|       0.073|       0.005|   No   |   2,337.846|   Long   | 0.000|
+| 12 | 2024-01-16 | 2025-01-05 |  MXC  |       0.008|       0.000|       0.040|       0.005|   No   |   2,298.200|   Long   | 0.000|
+| 13 | 2024-01-16 | 2025-01-05 |  DAD  |       0.009|       0.000|       0.043|       0.004|   No   |   2,241.732|   Long   | 0.000|
+| 14 | 2024-01-22 | 2025-01-05 | BEND  |       0.004|       0.000|       0.019|       0.000|   No   |   2,151.528|   Long   | 0.000|
+| 15 | 2024-01-22 | 2025-01-05 |  GOZ  |       0.668|       0.000|       3.323|       0.460|   No   |   2,119.268|   Long   | 0.003|
+| 16 | 2024-03-29 | 2025-01-05 | USDC  |       1.000|       0.000|       4.999|       1.000|   No   |   2,118.278|   Long   | 0.000|
+| 17 | 2024-03-29 | 2025-01-05 |  BTS  |       0.004|       0.000|       0.020|       0.002|   No   |   2,056.533|   Long   | 0.000|
+| 18 | 2024-05-09 | 2025-01-05 |  OXY  |       0.011|       0.000|       0.046|       0.004|   No   |   1,956.061|   Long   | 0.002|
+| 19 | 2024-01-16 | 2025-01-06 | CRPT  |       0.046|       0.000|       0.228|      -0.026|   No   |   1,796.922|   Long   | 0.000|
+| 20 | 2024-01-16 | 2025-01-07 |  NPT  |       0.354|       0.000|       1.761|       0.173|   No   |   1,744.395|   Long   | 0.002|
+| 21 | 2024-01-16 | 2025-01-07 |  XTP  |       0.004|       0.000|       0.021|       0.001|   No   |   1,674.023|   Long   | 0.000|
+| 22 | 2024-01-22 | 2025-01-07 |  ASD  |       0.049|       0.000|       0.246|       0.045|   No   |   1,664.782|   Long   | 0.000|
+| 23 | 2024-01-22 | 2025-01-10 | ATOZ  |       0.028|       0.000|       0.138|       0.037|  Yes   |   1,695.974|   Long   | 0.000|
+
+Final trading capital is:1695.9735227558
+Highest Capital: 2498.0440425671
+Max Drawdown :0
+Win percentage is: 0.17391304347826
+Average fee: 1.0360111280387
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 3035.5355523004
+Standart Deviation of final trading capital: 1496.1382115674
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.33441775615689
+Standart Deviation of win percentage: 0.12773039602343
+
+Average of max drawdown: -0.002186082173441
+Standart Deviation of max drawdown: 0.0037022362347599
+
+Average of highest capital: 3429.7977200768
+Standart Deviation of highest capital: 1365.1586196522
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 3
+Amount of simulations where final trading capital is minimum gain: 3
+Amount of simulations where final trading capital is lower than initial investment: 2
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-16 | 2025-01-02 | LHINU |       0.000|       0.000|       0.000|       0.000|   No   |   1,898.848|   Long   | 0.000|
+| 2  | 2024-01-22 | 2025-01-02 |  TT   |       0.004|       0.000|       0.022|       0.004|   No   |   1,880.257|   Long   | 0.000|
+| 3  | 2024-01-16 | 2025-01-03 | OOKI  |       0.002|       0.000|       0.011|       0.000|   No   |   1,784.165|   Long   | 0.000|
+| 4  | 2024-01-22 | 2025-01-03 | IDEX  |       0.049|       0.000|       0.244|       0.067|  Yes   |   1,819.218|   Long   | 0.000|
+| 5  | 2024-01-22 | 2025-01-03 |  MV   |       0.039|       0.000|       0.193|       0.013|   No   |   1,751.643|   Long   | 0.000|
+| 6  | 2024-01-16 | 2025-01-04 | OUSD  |       0.998|       0.000|       4.987|       0.997|   No   |   1,750.636|   Long   | 0.000|
+| 7  | 2024-01-16 | 2025-01-04 |  DFI  |       0.144|       0.000|       0.721|       0.032|   No   |   1,672.098|   Long   | 0.000|
+| 8  | 2024-01-16 | 2025-01-04 | GOLC  |       0.107|       0.000|       0.529|       0.015|   No   |   1,584.721|   Long   | 0.001|
+| 9  | 2024-01-22 | 2025-01-04 |  LAT  |       0.008|       0.000|       0.041|       0.010|  Yes   |   1,605.713|   Long   | 0.000|
+| 10 | 2024-01-16 | 2025-01-05 | SUSD  |       0.995|       0.000|       4.973|       0.963|   No   |   1,601.564|   Long   | 0.000|
+| 11 | 2024-01-16 | 2025-01-05 |  XLM  |       0.119|       0.000|       0.593|       0.437|  Yes   |   1,869.088|   Long   | 0.000|
+| 12 | 2024-01-16 | 2025-01-05 |  OAX  |       0.160|       0.000|       0.797|       0.033|   No   |   1,788.388|   Long   | 0.000|
+| 13 | 2024-01-22 | 2025-01-05 | POLYX |       0.154|       0.000|       0.771|       0.292|  Yes   |   1,876.742|   Long   | 0.000|
+| 14 | 2024-01-22 | 2025-01-05 |  CVC  |       0.092|       0.000|       0.458|       0.198|  Yes   |   1,991.605|   Long   | 0.000|
+| 15 | 2024-01-22 | 2025-01-06 |PUNDIX |       0.420|       0.000|       2.101|       0.506|  Yes   |   2,011.012|   Long   | 0.000|
+| 16 | 2024-01-16 | 2025-01-07 |  XVG  |       0.004|       0.000|       0.018|       0.015|  Yes   |   2,323.867|   Long   | 0.000|
+| 17 | 2024-01-22 | 2025-01-07 |  ASD  |       0.049|       0.000|       0.246|       0.045|   No   |   2,314.899|   Long   | 0.000|
+| 18 | 2024-01-22 | 2025-01-07 | IOST  |       0.008|       0.000|       0.041|       0.008|   No   |   2,305.703|   Long   | 0.000|
+| 19 | 2024-01-22 | 2025-01-07 | LEVER |       0.001|       0.000|       0.007|       0.002|  Yes   |   2,349.349|   Long   | 0.000|
+| 20 | 2024-01-16 | 2025-01-10 |  RLB  |       0.131|       0.000|       0.656|       0.092|   No   |   2,318.003|   Long   | 0.000|
+
+Final trading capital is:2318.003469548
+Highest Capital: 2000
+Max Drawdown :0
+Win percentage is: 0.4
+Average fee: 1.0016150127969
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 2881.7317687489
+Standart Deviation of final trading capital: 803.81002753168
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.51402597402597
+Standart Deviation of win percentage: 0.16063245252869
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 2471.5944916994
+Standart Deviation of highest capital: 706.47212688704
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 3
+Amount of simulations where final trading capital is minimum gain: 4
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-23 | 2024-02-23 |  NBS  |       0.000|       0.000|       0.001|      -0.005|   No   |  -1,799.683|   Long   | 0.000|
+| 2  | 2024-01-23 | 2024-02-27 | CNTM  |       0.001|       0.000|       0.004|       0.003|  Yes   |  -1,527.464|   Long   | 0.000|
+| 3  | 2024-01-23 | 2024-03-05 |  OXY  |       0.015|       0.000|       0.074|       0.012|   No   |  -1,549.106|   Long   | 0.000|
+| 4  | 2024-01-29 | 2024-03-15 | AART  |       0.001|       0.000|       0.004|       0.002|  Yes   |  -1,395.664|   Long   | 0.000|
+| 5  | 2024-01-29 | 2024-03-29 | BNANA |       0.024|       0.000|       0.111|      -0.015|   No   |  -1,572.588|   Long   | 0.002|
+| 6  | 2024-01-29 | 2024-11-25 |  ENG  |       0.005|       0.000|       0.023|       0.011|  Yes   |  -1,432.109|   Long   | 0.000|
+| 7  | 2024-01-29 | 2025-01-02 | SWASH |       0.011|       0.000|       0.055|       0.006|   No   |  -1,482.023|   Long   | 0.000|
+| 8  | 2024-01-29 | 2025-01-02 |  SYL  |       0.000|       0.000|       0.002|       0.000|   No   |  -1,504.649|   Long   | 0.000|
+| 9  | 2024-01-23 | 2025-01-03 | GHUB  |       0.060|       0.000|       0.295|       0.022|   No   |  -1,569.036|   Long   | 0.001|
+| 10 | 2024-01-29 | 2025-01-03 |PICKLE |       0.805|       0.000|       4.000|       1.094|  Yes   |  -1,533.891|   Long   | 0.005|
+| 11 | 2024-01-29 | 2025-01-03 | XACT  |       0.208|       0.000|       1.031|       0.005|   No   |  -1,633.380|   Long   | 0.002|
+| 12 | 2024-01-23 | 2025-01-04 | LABS  |       0.000|       0.000|       0.002|       0.000|   No   |  -1,695.122|   Long   | 0.000|
+| 13 | 2024-01-23 | 2025-01-04 | TRACE |       0.009|       0.000|       0.043|       0.001|   No   |  -1,791.339|   Long   | 0.000|
+| 14 | 2024-01-23 | 2025-01-05 | LAYER |       0.046|       0.000|       0.231|       0.034|   No   |  -1,819.948|   Long   | 0.000|
+| 15 | 2024-01-23 | 2025-01-05 |  AZY  |       0.006|       0.000|       0.030|       0.001|   No   |  -1,911.706|   Long   | 0.000|
+| 16 | 2024-01-29 | 2025-01-05 | SONNE |       0.070|       0.000|       0.348|       0.002|   No   |  -2,011.462|   Long   | 0.001|
+| 17 | 2024-01-29 | 2025-01-05 | WOOP  |       0.004|       0.000|       0.022|       0.002|   No   |  -2,075.717|   Long   | 0.000|
+| 18 | 2024-01-29 | 2025-01-05 |  LIS  |       0.010|       0.000|       0.049|       0.001|   No   |  -2,173.175|   Long   | 0.000|
+| 19 | 2024-01-23 | 2025-01-07 | WHEE  |       0.026|       0.000|       0.126|      -0.015|   No   |  -2,337.930|   Long   | 0.001|
+| 20 | 2024-01-23 | 2025-01-09 | SAITO |       0.007|       0.000|       0.034|       0.003|   No   |  -2,388.213|   Long   | 0.000|
+
+Final trading capital is:-2388.2134686896
+Highest Capital: 2000
+Max Drawdown :-1.8998417084179
+Win percentage is: 0.2
+Average fee: 1.0177074191589
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 1125.1130043765
+Standart Deviation of final trading capital: 1933.2436432649
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.28215384615385
+Standart Deviation of win percentage: 0.12099625892794
+
+Average of max drawdown: -0.41428540577956
+Standart Deviation of max drawdown: 0.74431176178732
+
+Average of highest capital: 2921.9537117604
+Standart Deviation of highest capital: 876.37452405767
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 4
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2024-01-22 | 2024-02-23 |  NBS  |       0.000|       0.000|       0.001|      -0.006|   No   |  -1,879.599|   Long   | 0.000|
+| 2  | 2024-01-22 | 2024-03-10 |  ENG  |       0.003|       0.000|       0.016|       0.008|  Yes   |  -1,754.523|   Long   | 0.000|
+| 3  | 2024-01-22 | 2024-03-26 |  COL  |       0.022|       0.000|       0.032|       0.015|   No   |  -1,863.818|   Long   | 0.016|
+| 4  | 2024-01-16 | 2024-04-13 | FRTS  |       0.000|       0.000|       0.000|       0.000|  Yes   |  -1,774.640|   Long   | 0.000|
+| 5  | 2024-01-16 | 2024-09-08 |  SG   |       0.036|       0.000|       0.179|       0.019|   No   |  -1,822.110|   Long   | 0.000|
+| 6  | 2024-01-16 | 2025-01-05 | HEART |       0.011|       0.000|       0.057|       0.037|  Yes   |  -1,600.879|   Long   | 0.000|
+| 7  | 2024-01-16 | 2025-01-05 |  SMR  |       0.034|       0.000|       0.168|       0.002|   No   |  -1,696.634|   Long   | 0.000|
+| 8  | 2024-01-16 | 2025-01-05 |  BAX  |       0.000|       0.000|       0.001|       0.000|   No   |  -1,717.347|   Long   | 0.000|
+| 9  | 2024-01-16 | 2025-01-05 |  HPY  |       0.001|       0.000|       0.003|       0.001|   No   |  -1,725.713|   Long   | 0.000|
+| 10 | 2024-01-22 | 2025-01-05 |  SRK  |       0.000|       0.000|       0.001|       0.000|   No   |  -1,783.792|   Long   | 0.000|
+| 11 | 2024-01-22 | 2025-01-05 | LAYER |       0.051|       0.000|       0.252|       0.034|   No   |  -1,818.306|   Long   | 0.000|
+| 12 | 2024-01-16 | 2025-01-06 | QTCON |       0.002|       0.000|       0.008|       0.001|   No   |  -1,828.112|   Long   | 0.000|
+| 13 | 2024-01-16 | 2025-01-07 |  MNW  |       1.117|       0.000|       5.582|       0.325|   No   |  -1,900.075|   Long   | 0.000|
+| 14 | 2024-01-16 | 2025-01-07 |  HI   |       0.001|       0.000|       0.004|       0.000|   No   |  -1,977.530|   Long   | 0.000|
+| 15 | 2024-01-22 | 2025-01-07 |  XTP  |       0.004|       0.000|       0.019|       0.001|   No   |  -2,047.334|   Long   | 0.000|
+| 16 | 2024-01-22 | 2025-01-07 |  SNC  |       0.030|       0.000|       0.151|       0.041|  Yes   |  -2,012.201|   Long   | 0.000|
+| 17 | 2024-01-22 | 2025-01-07 | EGAME |       0.000|       0.000|       0.000|       0.000|   No   |  -2,097.050|   Long   | 0.000|
+| 18 | 2024-01-22 | 2025-01-09 |  FSN  |       0.166|       0.000|       0.825|       0.032|   No   |  -2,179.348|   Long   | 0.001|
+| 19 | 2024-01-16 | 2025-01-10 | FOLD  |      11.749|       0.000|      58.233|       1.427|   No   |  -2,268.972|   Long   | 0.102|
+| 20 | 2024-01-22 | 2025-01-10 |  VCF  |       0.579|       0.000|       2.894|       0.373|   No   |  -2,305.635|   Long   | 0.000|
+
+Final trading capital is:-2305.634622482
+Highest Capital: 2000
+Max Drawdown :-1.9397994392342
+Win percentage is: 0.2
+Average fee: 1.1272730078177
+Average risk reward: 0
+
+
+General Information about the all iterations:
+Number of iterations: 5
+Average of final trading capital: 4291.3492781436
+Standart Deviation of final trading capital: 6033.1748132451
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.25483513293858
+Standart Deviation of win percentage: 0.065486863790415
+
+Average of max drawdown: -0.39631495615123
+Standart Deviation of max drawdown: 0.77187070734167
+
+Average of highest capital: 6175.3998148721
+Standart Deviation of highest capital: 5873.6954830205
+
+
+Amount of simulations where final trading capital is high gain: 2
+Amount of simulations where final trading capital is medium gain: 2
+Amount of simulations where final trading capital is minimum gain: 3
+Amount of simulations where final trading capital is lower than initial investment: 2

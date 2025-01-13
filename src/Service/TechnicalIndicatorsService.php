@@ -79,6 +79,10 @@ class TechnicalIndicatorsService
                                 abs($lastCandleSticks[$i]->getHighestPrice() - $lastCandleSticks[$i - 1]->getClosePrice()), 
                                 abs($lastCandleSticks[$i]->getLowestPrice() - $lastCandleSticks[$i - 1]->getClosePrice()));
         }
+
+        if(!count($trueRanges))
+            return 0;
+
         return array_sum($trueRanges) / count($trueRanges);
     }
 
@@ -545,4 +549,45 @@ class TechnicalIndicatorsService
 
         return (float)$highestPrice;
     }
+
+    public function calculateChoppinessIndex($candlesticks, $period = 14) 
+    {
+        // Ensure the array has enough candlesticks for the given period
+        if (count($candlesticks) < $period) {
+            throw new \Exception('Not enough candlesticks for calculation');
+        }
+
+        // Arrays to store the highest and lowest prices over the period
+        $highs = [];
+        $lows = [];
+        $ranges = [];
+
+        $lastCandles = array_slice($candlesticks, -$period);
+
+        foreach ($lastCandles as $candlestick) {
+            $highs[] = $candlestick->getHighestPrice();
+            $lows[] = $candlestick->getLowestPrice();
+            $ranges[] = $candlestick->getHighestPrice() - $candlestick->getLowestPrice();
+        }
+
+        // Calculate the sum of the ranges over the period
+        $sumRange = array_sum($ranges);
+
+        // Calculate the highest high and lowest low over the period
+        $highestHigh = max($highs);
+        $lowestLow = min($lows);
+
+        // Calculate the Choppiness Index (CHOP)
+        $rangeValue = $highestHigh - $lowestLow;
+        
+        // Ensure the range value is not zero to avoid division by zero error
+        if ($rangeValue == 0) {
+            throw new \Exception('Range value cannot be zero');
+        }
+
+        $choppiness = 100 * log($sumRange / $rangeValue) / log($period);
+
+        return $choppiness;
+    }
+
 }

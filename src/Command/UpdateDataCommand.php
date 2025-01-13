@@ -12,7 +12,8 @@ use App\Entity\Security;
 use App\Entity\CandleStick;
 use DateTime;
 use Symfony\Component\Dotenv\Dotenv;
-use App\Constants\BaseConstants;
+use App\Interface\MarketIndexInterface;
+
 
 #[AsCommand(
     name: 'app:update-data',
@@ -24,13 +25,17 @@ class UpdateDataCommand extends Command
 
     private $yahooWebScrapService;
     private $entityManager;
+    private MarketIndexInterface $marketIndexInterface;
+
 
     
     public function __construct(YahooWebScrapService $yahooWebScrapService,
-                                EntityManagerInterface $entityManager)
+                                EntityManagerInterface $entityManager,
+                                MarketIndexInterface $marketIndexInterface)
     {
         parent::__construct();
         $this->yahooWebScrapService = $yahooWebScrapService;   
+        $this->marketIndexInterface = $marketIndexInterface;   
         $this->entityManager = $entityManager;
     }
 
@@ -39,8 +44,8 @@ class UpdateDataCommand extends Command
         $dotenv = new Dotenv();
         $dotenv->load(dirname(__DIR__, 2).'/.env');
 
- 
         $this->updateSecuritiesData($output);
+        $this->marketIndexInterface->updateMarketData();
 
         return Command::SUCCESS;    
     }

@@ -109,10 +109,10 @@ class FetchDataCommand extends Command
                 $this->entityManager->persist($candleStick);
             }
 
-            sleep(5);
-            $data = $this->yahooWebScrapService->getStockData($security->getTicker());
-            $security->setIndustry($data['industry']);
-            $security->setSector($data['sector']);
+            // sleep(5);
+            // $data = $this->yahooWebScrapService->getStockData($security->getTicker());
+            // $security->setIndustry($data['industry']);
+            // $security->setSector($data['sector']);
 
             $this->entityManager->persist($security);
 

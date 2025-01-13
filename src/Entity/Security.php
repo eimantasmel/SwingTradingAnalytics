@@ -165,6 +165,24 @@ class Security
         return null;
     }
 
+    public function getExactCandleStickByDate(DateTime $searchDate) : ?CandleStick
+    {
+        $candleSticks = $this->getCandleSticks();
+        foreach ($candleSticks as $candleStick) {
+            $date = $candleStick->getDate();
+            if($searchDate->diff($date)->days == 0)
+            {
+                return $candleStick;
+            }
+
+            if($date > $searchDate)
+                return null;
+
+        }
+
+        return null;
+    }
+
     public function getLastNCandleSticks(DateTime $tradingDate, $amountOfCandleSticks) : array
     {
         $lastCandleSticks = [];
