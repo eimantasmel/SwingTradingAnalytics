@@ -33,6 +33,7 @@ services:
 
 
 
-    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\ShitCoinVolumeStrategy'
+    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\AllTimeHighStrategy'
+    
 
 

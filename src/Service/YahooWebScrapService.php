@@ -12,11 +12,11 @@ class YahooWebScrapService
     private const YAHOO_URL = "https://finance.yahoo.com/quote";
     private const MAXIMUM_AMOUNT_TO_THE_NEAREST_DATE = 10;
 
-    private const OPEN_PRICE_COLUMN = 3;
-    private const HIGH_PRICE_COLUMN = 4;
-    private const LOW_PRICE_COLUMN = 5;
-    private const CLOSE_PRICE_COLUMN = 6;
-    private const VOLUME_COLUMN = 8;
+    private const OPEN_PRICE_COLUMN = 1;
+    private const HIGH_PRICE_COLUMN = 2;
+    private const LOW_PRICE_COLUMN = 3;
+    private const CLOSE_PRICE_COLUMN = 4;
+    private const VOLUME_COLUMN = 6;
 
 
 
@@ -107,6 +107,8 @@ class YahooWebScrapService
         }
         return $this->getClosestNextPrice($xpath, $date, $column);
     }
+
+
     
     private function findRowByDate(DOMXPath $xpath, string $date): ?DOMNode
     {
@@ -118,6 +120,8 @@ class YahooWebScrapService
 
         return $row->length > 0 ? $row->item(0) : null;
     }
+
+
     
     private function getClosestNextPrice(DOMXPath $xpath, string $date, int $column): float
     {
@@ -133,9 +137,17 @@ class YahooWebScrapService
     
     private function extractColumnFromRow(DOMNode $row, int $column): float
     {
-        if(!isset(explode(' ', $row->nodeValue)[$column]))
-            return 0;
-        $priceOfStock = explode(' ', $row->nodeValue)[$column]; // Adjust this if necessary
+        /** @var DOMElement $row */
+        $columns = $row->getElementsByTagName('td');
+
+        // Check if the requested column exists
+        if ($columns->length <= $column) {
+            return 0.0; // Return 0 if the column index is out of bounds
+        }
+    
+        // Extract and clean the value of the specified column
+        $priceOfStock = trim($columns->item($column)->nodeValue);
+    
         return  (float) str_replace(',', '', $priceOfStock);
     }
     

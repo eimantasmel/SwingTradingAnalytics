@@ -8,7 +8,7 @@ use App\Entity\CandleStick;
 use App\Interface\SwingTradingStrategyInterface;
 use App\Constants\BaseConstants;
 use App\Service\TechnicalIndicatorsService;
-use Doctrine\ORM\EntityManagerInterface;f
+use Doctrine\ORM\EntityManagerInterface;
 use App\Interface\MarketIndexInterface;
 use App\Service\IndustryAnalysisService;
 
@@ -17,15 +17,13 @@ use DateTime;
 /**
  * 
  */
-class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
+class AllTimeHighStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 720;
-    private const AMOUNT_OF_NEXT_CANDLESTICKS = 2;
+    private const AMOUNT_OF_NEXT_CANDLESTICKS = 50;      // N -1 NEXT TRADING DAYS AMOUNT
     private const MIN_VOLUME = 100_000;
-    private const MAX_VOLUME = 500_000;
-
 
 
     private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
@@ -33,6 +31,8 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
     private const VOLUME_RAISE_RATE = 10;
 
     private const MAX_AMOUNT_TRADES_PER_DAY = 10;
+
+    private const NUMBER_OF_BEARISH_CANDLESTICS = 2;
 
     private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
 
@@ -127,6 +127,7 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
 
             $closePriceMarket = $lastMarketCandleStick->getClosePrice();
 
+            //TODO CHECK WHETHER SMA10 > SMA20 AND CLOSEPRICE IS MORE THAN SMA200
             
             if(($closePriceMarket < $sma200Market) 
                 || $sma20Market > $sma10Market
@@ -257,11 +258,13 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
 
         $closePrice = $lastCandleStick->getClosePrice();
         $openPrice = $lastCandleStick->getOpenPrice();
+        $highestPrice = $lastCandleStick->getHighestPrice();
+
 
 
 
         $volume = $lastCandleStick->getVolume();
-        if($volume < self::MIN_VOLUME || $volume > self::MAX_VOLUME || !$closePrice)
+        if($volume < self::MIN_VOLUME  || !$closePrice)
             return false;
 
 
@@ -274,15 +277,17 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 10);
         // $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
 
-        if($previousVolume * self::VOLUME_RAISE_RATE < $volume
+        $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
+
+
+        if($highestPrice == $this->technicalIndicatorsService->getHighestPrice($lastCandleSticks)
             && $closePrice > $sma200
-            && $sma20 > $sma200
-            && $sma10 > $sma20
+            && $closePrice > $openPrice
+            && $atr14 / $closePrice > 0.01
           )
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
-            $target = $closePrice * (1 + self::TARGET_PERCENTAGE);
-            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
 
             return true;
         }
@@ -307,12 +312,16 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         $target = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
         $stopLoss = null;
         $lastClosePrice = null;
+        $previousCandleStick;
+
+        $bearishCandlesticks = 0;
 
         foreach ($nextCandleSticks as $candleStick) {
 
             if($candleStick->getDate() == $tradingDate)
             {
                 $enterPrice = $candleStick->getClosePrice();
+                $previousCandleStick = $candleStick;
                 continue;
             }
 
@@ -331,7 +340,7 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
             }
             $spread = 0;
           
-            if($stopLoss && $closePrice < $stopLoss)
+            if($closePrice < $previousCandleStick->getClosePrice() && ++$bearishCandlesticks == self::NUMBER_OF_BEARISH_CANDLESTICS)
             {
                 $exitDate = $candleStick->getDate()->format('Y-m-d');
                 $closePrice = $candleStick->getClosePrice();
@@ -341,15 +350,8 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         
                 return ($closePrice - $spread) * $sharesAmount;
             }
-
-            if($closePrice > $target)
-            {
-                $stopLoss = 0.5 * $closePrice;
-                // $target = $closePrice * (1 + self::TARGET_PERCENTAGE);
-                $target = $closePrice * 2;
-            }
-
             $lastClosePrice = $closePrice;
+            $previousCandleStick = $candleStick;
         }
 
         $exitDate = $candleStick->getDate()->format('Y-m-d');

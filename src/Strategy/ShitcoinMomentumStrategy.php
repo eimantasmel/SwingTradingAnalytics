@@ -101,7 +101,7 @@ class ShitcoinMomentumStrategy implements SwingTradingStrategyInterface
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
 
-        $randomDateInterval = (int)mt_rand(1, 9);
+        $randomDateInterval = (int)mt_rand(1, 100);
         $startDate->modify("+{$randomDateInterval} days");
 
         while($startDate < $endDate)
@@ -124,30 +124,28 @@ class ShitcoinMomentumStrategy implements SwingTradingStrategyInterface
                 continue;
             }
 
-            $oneMonthEarlierDate = clone $startDate;
-            $oneMonthEarlierDate->modify("-3 month");
-
             $marketIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndexInterface->getTicker()]);
             $lastMarketIndexCandleSticks = $marketIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
             $lastMarketCandleStick = $this->getLastCandleStick($lastMarketIndexCandleSticks);
     
             $marketIndexPrices = $this->extractClosingPricesFromCandlesticks($lastMarketIndexCandleSticks);
             $sma200Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 200);
-            $closePriceMarket = $lastMarketCandleStick->getClosePrice();
-            /** --------------------------BASICALLY THE SAME CALCULATION AS ABOVE BUT WITH ONE MONTH EARLIER DATA----------------------- */
-            $lastMarketIndexCandleSticks2 = $marketIndex->getLastNCandleSticks($oneMonthEarlierDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            $lastMarketCandleStick2 = $this->getLastCandleStick($lastMarketIndexCandleSticks2);
+            $sma20Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 20);
+            $sma10Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 10);
 
-            $marketIndexPrices2 = $this->extractClosingPricesFromCandlesticks($lastMarketIndexCandleSticks2);
-            $sma200Market2 = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices2, 200);
-            $closePriceMarket2 = $lastMarketCandleStick2->getClosePrice();
+
+            $closePriceMarket = $lastMarketCandleStick->getClosePrice();
 
             
-            if(($closePriceMarket < $sma200Market) || ($closePriceMarket2 < $sma200Market2))
+            if(($closePriceMarket < $sma200Market) 
+                || $sma20Market > $sma10Market
+                || $sma200Market > $sma10Market
+                || $sma200Market > $sma20Market)
             {
                 $startDate->modify('+1 day');
                 continue;
             }
+
 
             $this->simulateTrades($startDate, $securities);
 

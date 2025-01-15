@@ -106,6 +106,8 @@ class MontecarloSimulationService
         echo "Average fee: " . $this->calculateAverageFeeTax($results[BaseConstants::TRADES_INFORMATION][0]). "\r\n";
         echo "Average risk reward: " . $this->calculateAverageRiskRewardRatio($results[BaseConstants::TRADES_INFORMATION][0]). "\r\n";
 
+        $this->analyzeShortAndLongWinPercentage($results[BaseConstants::TRADES_INFORMATION][0]);
+
         echo "\r\n";
         echo "\r\n";
 
@@ -246,5 +248,47 @@ class MontecarloSimulationService
         echo "Amount of simulations where final trading capital is minimum gain: " . $amountOfMinimumGainCapital . "\r\n";
         echo "Amount of simulations where final trading capital is lower than initial investment: " . $amountOfLossCapitals . "\r\n";
 
+    }
+
+    private function analyzeShortAndLongWinPercentage(array $tradesInformation) : void
+    {
+        $longWinAmount = 0;
+        $shortWinAmount = 0;
+
+        $longPositionsAmount = 0;
+        $shortPositionsAmount = 0;
+
+        foreach ($tradesInformation as $tradeInformation) {
+
+                        
+            if($tradeInformation[BaseConstants::TRADE_POSITION] == "Long")
+                $longPositionsAmount++;
+
+            if($tradeInformation[BaseConstants::TRADE_POSITION] == "Short")
+                $shortPositionsAmount++;
+
+            if($tradeInformation[BaseConstants::TRADE_POSITION] == "Long" && $tradeInformation[BaseConstants::IS_WINNER] )
+                $longWinAmount++;
+
+            if($tradeInformation[BaseConstants::TRADE_POSITION] == "Short" && $tradeInformation[BaseConstants::IS_WINNER] )
+                $shortWinAmount++;
+        }
+
+        if(!$longPositionsAmount)
+        {
+            echo "There's no long positions"  . "\r\n";
+        }
+        else
+        {
+            echo "Long positions win percentage: " . $longWinAmount / $longPositionsAmount . "\r\n";
+        }
+        if(!$shortPositionsAmount)
+        {
+            echo "There's no short positions"  . "\r\n";
+        }
+        else
+        {
+            echo "Short positions win percentage: " . $shortWinAmount / $shortPositionsAmount . "\r\n";
+        }
     }
 }
