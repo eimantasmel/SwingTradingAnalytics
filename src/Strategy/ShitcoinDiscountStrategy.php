@@ -17,28 +17,18 @@ use DateTime;
 /**
  * 
  */
-class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
+class ShitcoinDiscountStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
 
-    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 720;
-    private const AMOUNT_OF_NEXT_CANDLESTICKS = 2;
-    private const MIN_VOLUME = 100_000;
-    private const MAX_VOLUME = 500_000;
-
-
-
-    private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
-
-    private const VOLUME_RAISE_RATE = 10;
-
-    private const MAX_AMOUNT_TRADES_PER_DAY = 10;
+    private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 350;
+    private const AMOUNT_OF_NEXT_CANDLESTICKS = 400;
+    private const MIN_VOLUME = 2_000_000;
+    private const DROP_PERCENTAGE = 0.5;
+    private const MAX_AMOUNT_TRADES_PER_DAY = 5;
 
     private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
-
-    private const TARGET_PERCENTAGE = 4;    // 100 percent is default 
-
-    private const PYRAMIDING_TRADES_AMOUNT = 10;
+    private const PYRAMIDING_TRADES_AMOUNT = 5;
 
     private array $trade_information = [];
     private array $results = [];
@@ -92,9 +82,6 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
 
-        $randomDateInterval = (int)mt_rand(1, 100);
-        $startDate->modify("+{$randomDateInterval} days");
-
         while($startDate < $endDate)
         {
             // It's skips weekends because in our database there's only few cryptos.
@@ -115,34 +102,32 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
                 continue;
             }
 
-            $marketIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndexInterface->getTicker()]);
-            $lastMarketIndexCandleSticks = $marketIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
-            $lastMarketCandleStick = $this->getLastCandleStick($lastMarketIndexCandleSticks);
+            // $marketIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndexInterface->getTicker()]);
+            // $lastMarketIndexCandleSticks = $marketIndex->getLastNCandleSticks($startDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            // $lastMarketCandleStick = $this->getLastCandleStick($lastMarketIndexCandleSticks);
     
-            $marketIndexPrices = $this->extractClosingPricesFromCandlesticks($lastMarketIndexCandleSticks);
-            $sma200Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 200);
-            $sma20Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 20);
-            $sma10Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 10);
+            // $marketIndexPrices = $this->extractClosingPricesFromCandlesticks($lastMarketIndexCandleSticks);
+            // $sma200Market = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 200);
 
-
-            $closePriceMarket = $lastMarketCandleStick->getClosePrice();
-
+            // $closePriceMarket = $lastMarketCandleStick->getClosePrice();
             
-            if(($closePriceMarket < $sma200Market) 
-                || $sma20Market > $sma10Market
-                || $sma200Market > $sma10Market
-                || $sma200Market > $sma20Market)
-            {
-                $startDate->modify('+1 day');
-                continue;
-            }
+
+            // if($sma200Market <= $closePriceMarket)
+            // {
+            //     $startDate->modify('+1 day');
+            //     continue;
+            // }
 
             $position = 'Long';
             
+
+
             $tradingCapital = $this->getTradingCapitalAfterDay($startDate, $securities, $tradingCapital, $position);
 
             $randomDateInterval = (int)mt_rand(2, 4);
             $startDate->modify("+{$randomDateInterval} days");
+            // $startDate->modify("+1 day");
+
 
             if($tradingCapital > $this->highestCapitalValue)
             {
@@ -171,9 +156,13 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         shuffle($securities);
         $tradesCounter = 0;
         foreach ($securities as $security) {
+            $check = $security->getExactCandleStickByDate($tradingDate);
+
             if($security->getTicker() == $this->marketIndexInterface->getTicker()
-                || !$this->isTradeable($security->getTicker())
-                )
+            || !$this->isTradeable($security->getTicker())
+            || $security->getIsForex()
+            || !$check
+            || $security->getIsCrypto())
                 continue;
 
             $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
@@ -185,10 +174,8 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
                 
                 $sharesAmount = $this->getSharesAmount($tradingCapital, $enterPrice);
 
-                // $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
-                // $spread = $this->trade_information[BaseConstants::TRADE_POSITION] == "Long" ? $spread : -1 * $spread;
-                $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks, false, self::UNFORTUNATE_SPREAD_PROBABILITY, $position);
-                $spread = 0;
+                $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
+                $spread = $this->trade_information[BaseConstants::TRADE_POSITION] == "Long" ? $spread : -1 * $spread;
 
                 $enterPrice += $spread;
                 $tradeCapital = $this->getTradeCapital($tradingCapital, $enterPrice, $sharesAmount);
@@ -202,8 +189,7 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
                 $tradingCapitalAfterTrade = $this->getProfit($security, 
                                                             $sharesAmount, 
                                                             $tradingDate, 
-                                                            $position
-                                                            );
+                                                            $position);
 
 
                 if($this->trade_information[BaseConstants::TRADE_POSITION] == 'Long')
@@ -253,43 +239,32 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
             return false;
 
         $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
-        $previousCandleStick = $lastCandleSticks[count($lastCandleSticks) - 2];
-
         $closePrice = $lastCandleStick->getClosePrice();
-        $openPrice = $lastCandleStick->getOpenPrice();
-
-
-
         $volume = $lastCandleStick->getVolume();
-        if($volume < self::MIN_VOLUME || $volume > self::MAX_VOLUME || !$closePrice)
+        $averageVolume = $this->technicalIndicatorsService->getAverageCandleStickVolume(array_slice($lastCandleSticks, -30));
+
+        $veryFirstCandleSticks = $security->getFirstCandleStick();
+
+        if($averageVolume < self::MIN_VOLUME || !$closePrice || !$veryFirstCandleSticks->getOpenPrice())
             return false;
 
-
-        // $averageVolume = $this->technicalIndicatorsService->getAverageCandleStickVolume(array_slice($lastCandleSticks, -30));
-        $previousVolume = $previousCandleStick->getVolume();
-
+        $highestPrice = $this->technicalIndicatorsService->getHighestPrice($lastCandleSticks);
         $prices = $this->extractClosingPricesFromCandlesticks($lastCandleSticks);
         $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
-        $sma20 = $this->technicalIndicatorsService->calculateSMA($prices, 20);
-        $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 10);
-        // $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
 
-        if($previousVolume * self::VOLUME_RAISE_RATE < $volume
-            && $closePrice > $sma200
-            && $sma20 > $sma200
-            && $sma10 > $sma20
+        if(($closePrice / $highestPrice - 1) <= -1 * self::DROP_PERCENTAGE
+            && $closePrice < $sma200
+            && $veryFirstCandleSticks->getOpenPrice() * 2 < $closePrice
           )
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
-            $target = $closePrice * (1 + self::TARGET_PERCENTAGE);
-            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $highestPrice);
 
             return true;
         }
 
         return false;
     }
-
 
     private function getLastCandleStick(array $lastCandleSticks)
     {
@@ -303,16 +278,11 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, 0);
 
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
-        $enterPrice = 0;
         $target = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
-        $stopLoss = null;
-        $lastClosePrice = null;
-
         foreach ($nextCandleSticks as $candleStick) {
 
             if($candleStick->getDate() == $tradingDate)
             {
-                $enterPrice = $candleStick->getClosePrice();
                 continue;
             }
 
@@ -321,17 +291,17 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
             $exitDate = $candleStick->getDate();
 
 
+            $marketIndex = $this->entityManager->getRepository(Security::class)->findOneBy(['ticker' => $this->marketIndexInterface->getTicker()]);
+            $lastMarketIndexCandleSticks = $marketIndex->getLastNCandleSticks($exitDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
+            $marketIndexPrices = $this->extractClosingPricesFromCandlesticks($lastMarketIndexCandleSticks);
+            $lastMarketCandleStick = $this->getLastCandleStick($lastMarketIndexCandleSticks);
+            $marketIndexsma200 = $this->technicalIndicatorsService->calculateSMA($marketIndexPrices, 200);
+
             $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
-            if(!$last10CandleSticks)
-                $spread = 0.01 * $closePrice;
-            else{
-                  // $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
-                  // $spread = $position == "Long" ? $spread : -1 * $spread;
-                  $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks, false, self::UNFORTUNATE_SPREAD_PROBABILITY, $position);
-            }
-            $spread = 0;
-          
-            if($stopLoss && $closePrice < $stopLoss)
+            $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
+            $spread = $position == "Long" ? $spread : -1 * $spread;
+
+            if($closePrice > $target && $marketIndexsma200 > $lastMarketCandleStick->getClosePrice())
             {
                 $exitDate = $candleStick->getDate()->format('Y-m-d');
                 $closePrice = $candleStick->getClosePrice();
@@ -341,24 +311,15 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
         
                 return ($closePrice - $spread) * $sharesAmount;
             }
-
-            if($closePrice > $target)
-            {
-                $stopLoss = 0.5 * $closePrice;
-                // $target = $closePrice * (1 + self::TARGET_PERCENTAGE);
-                $target = $closePrice * 2;
-            }
-
-            $lastClosePrice = $closePrice;
         }
 
         $exitDate = $candleStick->getDate()->format('Y-m-d');
-        // $closePrice = $candleStick->getClosePrice();
+        $closePrice = $candleStick->getClosePrice();
         $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
-        $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $lastClosePrice - $spread);
+        $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
         $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
 
-        return ($lastClosePrice - $spread) * $sharesAmount;
+        return ($closePrice - $spread) * $sharesAmount;
     }
 
     private function getTradeCapital($tradingCapital, $enterPrice, $sharesAmount)
@@ -475,7 +436,6 @@ class ShitCoinVolumeStrategy implements SwingTradingStrategyInterface
             $last10CandleSticks = $security->getLastNCandleSticks($exitDate, 10);
             $spread = $this->technicalIndicatorsService->calculateSpread($last10CandleSticks);
             $spread = $position == "Long" ? $spread : -1 * $spread;
-            $spread = 0;
 
             if($position == "Long")
             {

@@ -16,7 +16,7 @@ class BaseConstants
     public const HIGHEST_CAPITAL = 'Highest Capital';
     public const MAX_DRAWDOWN = 'Max Drawdown';
 
-    public const BASE_CRYPTOS = ['BTC', 'ETH', 'SOL', 'XRP'];
+    public const BASE_CRYPTOS = ['BTC', 'ETH', 'SOL', 'XRP', 'BNB', 'LTC'];
 
 
     public const TRADES_INFORMATION = 'Trades Information';

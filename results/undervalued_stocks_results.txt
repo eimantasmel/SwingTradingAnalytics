@@ -1,0 +1,49 @@
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2022-05-20 | 2023-06-23 | ETSY  |      78.460|       0.000|     307.750|      88.874|  Yes   |   1,025.586|   Long   | 0.120|
+| 2  | 2022-05-20 | 2023-06-23 |  WIX  |      68.075|       0.000|     309.000|      77.296|  Yes   |   1,051.967|   Long   | 0.725|
+| 3  | 2022-05-20 | 2023-06-23 | MTCH  |      76.717|       0.000|     182.000|      41.196|   No   |     958.343|   Long   | 0.017|
+| 4  | 2022-05-20 | 2023-06-23 | NVAX  |      53.685|       0.000|     277.800|       6.694|   No   |     781.413|   Long   | 0.265|
+| 5  | 2022-05-20 | 2023-06-23 | FIVE  |     118.434|       0.000|     237.860|     198.367|  Yes   |     916.422|   Long   | 0.894|
+| 6  | 2023-10-25 | 2024-11-01 | ETSY  |      63.077|       0.000|     149.910|      52.685|   No   |     885.169|   Long   | 0.117|
+| 7  | 2023-10-25 | 2024-11-01 | ILMN  |     111.155|       0.000|     242.090|     149.644|  Yes   |     947.819|   Long   | 0.325|
+| 8  | 2023-10-25 | 2024-11-01 | SEDG  |      81.284|       0.000|     345.800|      17.680|   No   |     802.971|   Long   | 0.244|
+| 9  | 2023-10-30 | 2024-11-01 | ALGN  |     187.008|       0.000|     413.200|     208.446|  Yes   |     823.012|   Long   | 0.268|
+
+KEY CONSIDERATION PRICE BEFORE 2021 BOOM SO 2020 SHOULD BE ABOVE 50
+
+Final trading capital is:823.01238496598
+Highest Capital: 1000
+Max Drawdown :-0.083578368677218
+Win percentage is: 0.55555555555556
+Average fee: 1
+Average risk reward: 0
+Long positions win percentage: 0.55555555555556
+There's no short positions
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 823.01238496598
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.55555555555556
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.083578368677218
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1

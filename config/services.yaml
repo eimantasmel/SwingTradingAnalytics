@@ -33,7 +33,7 @@ services:
 
 
 
-    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\AllTimeHighStrategy'
+    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\CryptoShortWithLeverageStrategy'
     
 
 

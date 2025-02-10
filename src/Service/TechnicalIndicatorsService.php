@@ -590,4 +590,32 @@ class TechnicalIndicatorsService
         return $choppiness;
     }
 
+    public function findTheHighestGrowth($candlesticks, $period = 30) : float
+    {
+        // Ensure the array has enough candlesticks for the given period
+        if (count($candlesticks) < $period) {
+            throw new \Exception('Not enough candlesticks for calculation');
+        }
+
+        // Arrays to store the highest and lowest prices over the period
+        $highs = [];
+        $lows = [];
+        $ranges = [];
+
+        $lastCandles = array_slice($candlesticks, -$period);
+
+        $highestGrowth = 0;
+        foreach ($lastCandles as $candle) {
+            /** @var CandleStick $candle */
+            $openPrice = $candle->getOpenPrice();
+            $closePrice = $candle->getClosePrice();
+
+            $growth = abs(($closePrice / $openPrice) - 1);
+
+            if($growth > $highestGrowth)
+                $highestGrowth = $growth;
+        }
+
+        return $highestGrowth;
+    }
 }

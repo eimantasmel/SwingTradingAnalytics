@@ -1,0 +1,49 @@
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2022-12-01 | 2024-01-04 |  DPR  |       0.008|       0.000|       0.148|       0.015|  Yes   |   1,196.982|   Long   | 0.000|
+| 2  | 2022-12-01 | 2024-01-04 |  CHR  |       0.116|       0.000|       0.966|       0.258|  Yes   |   1,440.501|   Long   | 0.000|
+| 3  | 2022-12-01 | 2024-01-04 |  FTT  |       1.291|       0.000|      53.193|       2.895|  Yes   |   1,687.987|   Long   | 0.001|
+| 4  | 2022-12-01 | 2024-01-04 |  FET  |       0.062|       0.000|       0.643|       0.725|  Yes   |   3,817.337|   Long   | 0.000|
+| 5  | 2022-12-01 | 2024-01-04 |  DGB  |       0.008|       0.000|       0.043|       0.009|  Yes   |   3,845.829|   Long   | 0.000|
+| 6  | 2024-01-15 | 2025-01-06 | XTUSD |       1.000|       0.000|      42.638|       1.000|   No   |   3,842.329|   Long   | 0.000|
+| 7  | 2024-02-06 | 2025-01-06 | QTCON |       0.002|       0.000|       0.027|       0.001|   No   |   3,764.524|   Long   | 0.000|
+| 8  | 2024-01-08 | 2025-01-07 | SQUAD |       0.003|       0.000|       0.063|       0.000|   No   |   3,040.790|   Long   | 0.000|
+| 9  | 2024-02-02 | 2025-01-07 |WCANTO |       0.213|       0.000|     965.383|       0.023|   No   |   2,347.933|   Long   | 0.000|
+| 10 | 2024-04-12 | 2025-01-07 | STARL |       0.000|       0.000|       0.000|       0.000|   No   |   1,824.053|   Long   | 0.000|
+
+Final trading capital is:1824.052582503
+Highest Capital: 3845.8291990282
+Max Drawdown :0
+Win percentage is: 0.5
+Average fee: 4.3703985037433
+Average risk reward: 0
+Long positions win percentage: 0.5
+There's no short positions
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1824.052582503
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.5
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 3845.8291990282
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1

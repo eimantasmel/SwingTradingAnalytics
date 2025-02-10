@@ -270,7 +270,7 @@ class MacdStrategy implements SwingTradingStrategyInterface
 
 
         $latestMacdData = $this->technicalIndicatorsService->calculateMACD($prices);
-        $oneDayEarlierMacdData = $this->technicalIndicatorsService->calculateMACD(array_slice($prices, 0, count($prices) - 1));
+        $oneDayEarlierMacdData = $this->technicalIndicatorsService->calculateMACD(array_slice($prices, 0, -1));
 
         $nDaysEarlierMacdData = $this->technicalIndicatorsService->calculateMACD(array_slice($prices, 0, count($prices) - self::EARLIER_MACD_DAYS_AMOUNT));
 

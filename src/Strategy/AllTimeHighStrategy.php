@@ -25,12 +25,13 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 50;      // N -1 NEXT TRADING DAYS AMOUNT
     private const MIN_VOLUME = 100_000;
 
+    private const TARGET = 2;
 
     private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
 
-    private const VOLUME_RAISE_RATE = 10;
+    private const MAX_AMOUNT_TRADES_PER_DAY = 5;
 
-    private const MAX_AMOUNT_TRADES_PER_DAY = 10;
+    private const SECOND_HIGHEST_GROTH_REDUCTION_RATE = 3;
 
     private const NUMBER_OF_BEARISH_CANDLESTICS = 2;
 
@@ -38,7 +39,7 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
 
     private const TARGET_PERCENTAGE = 4;    // 100 percent is default 
 
-    private const PYRAMIDING_TRADES_AMOUNT = 10;
+    private const PYRAMIDING_TRADES_AMOUNT = 5;
 
     private array $trade_information = [];
     private array $results = [];
@@ -93,7 +94,7 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
         $endDate = new DateTime($endDate);
 
         $randomDateInterval = (int)mt_rand(1, 100);
-        $startDate->modify("+{$randomDateInterval} days");
+        // $startDate->modify("+{$randomDateInterval} days");
 
         while($startDate < $endDate)
         {
@@ -258,6 +259,7 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
 
         $closePrice = $lastCandleStick->getClosePrice();
         $openPrice = $lastCandleStick->getOpenPrice();
+        $openPrice = $lastCandleStick->getOpenPrice();
         $highestPrice = $lastCandleStick->getHighestPrice();
 
 
@@ -275,19 +277,25 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
         $sma200 = $this->technicalIndicatorsService->calculateSMA($prices, 200);
         $sma20 = $this->technicalIndicatorsService->calculateSMA($prices, 20);
         $sma10 = $this->technicalIndicatorsService->calculateSMA($prices, 10);
-        // $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
 
         $atr14 = $this->technicalIndicatorsService->calculateATR($lastCandleSticks, 14);
+
+        $growth = ($closePrice / $openPrice) - 1;
+        $earlierCandleSticks = array_slice($lastCandleSticks, 0, -1);
 
 
         if($highestPrice == $this->technicalIndicatorsService->getHighestPrice($lastCandleSticks)
             && $closePrice > $sma200
             && $closePrice > $openPrice
-            && $atr14 / $closePrice > 0.01
+            && $growth >  0.2
+            // && $growth == $this->technicalIndicatorsService->findTheHighestGrowth($lastCandleSticks, 30)
+            && ($highestPrice / $openPrice) - 1 < 0.2  // TODO: it might find only few trades because of this condition
+            // && abs($previousCandleStick->getClosePrice / $previousCandlestick->getOpenPrice - 1) < 0.1
+            // && $this->technicalIndicatorsService->findTheHighestGrowth($earlierCandleSticks, 30) * self::SECOND_HIGHEST_GROTH_REDUCTION_RATE < $growth
           )
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
-            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $closePrice * self::TARGET);
 
             return true;
         }
@@ -312,7 +320,7 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
         $target = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
         $stopLoss = null;
         $lastClosePrice = null;
-        $previousCandleStick;
+        $previousCandleStick = null;
 
         $bearishCandlesticks = 0;
 
@@ -340,7 +348,7 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
             }
             $spread = 0;
           
-            if($closePrice < $previousCandleStick->getClosePrice() && ++$bearishCandlesticks == self::NUMBER_OF_BEARISH_CANDLESTICS)
+            if($closePrice > $taget)
             {
                 $exitDate = $candleStick->getDate()->format('Y-m-d');
                 $closePrice = $candleStick->getClosePrice();
@@ -350,6 +358,22 @@ class AllTimeHighStrategy implements SwingTradingStrategyInterface
         
                 return ($closePrice - $spread) * $sharesAmount;
             }
+
+            /* OLD STUFF*/
+            // if($closePrice < $previousCandleStick->getClosePrice() && ++$bearishCandlesticks == self::NUMBER_OF_BEARISH_CANDLESTICS)
+            // {
+            //     $exitDate = $candleStick->getDate()->format('Y-m-d');
+            //     $closePrice = $candleStick->getClosePrice();
+            //     $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+            //     $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $closePrice - $spread);
+            //     $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+        
+            //     return ($closePrice - $spread) * $sharesAmount;
+            // }
+
+            // if($closePrice > $previousCandleStick->getClosePrice())
+            //     $bearishCandlesticks = 0;
+            
             $lastClosePrice = $closePrice;
             $previousCandleStick = $candleStick;
         }

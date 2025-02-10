@@ -90,6 +90,7 @@ class CryptoMarketIndexService implements MarketIndexInterface
         {
             $sumOfCagr = 0;
             $validCryptosCount = 0;
+            $totalVolume = 0;
             foreach ($securities as $crypto) {
                 /** @var Security $crypto */
                 $candleStick = $crypto->getExactCandleStickByDate($date);
@@ -105,6 +106,7 @@ class CryptoMarketIndexService implements MarketIndexInterface
                 {
                     $sumOfCagr += ($closePrice / $openPrice) - 1;
                     $validCryptosCount++;
+                    $totalVolume += $candleStick->getVolume();
                 }
             }
             $candleStick = $marketIndex->getExactCandleStickByDate($date);
@@ -118,6 +120,8 @@ class CryptoMarketIndexService implements MarketIndexInterface
                 $candleStick->setOpenPrice($previousPrice);
                 $candleStick->setLowestPrice(min($previousPrice, $closePrice));
                 $candleStick->setHighestPrice(max($previousPrice, $closePrice));
+                $candleStick->setVolume($totalVolume);
+
 
 
                 $candleDate = clone $date;
@@ -135,6 +139,8 @@ class CryptoMarketIndexService implements MarketIndexInterface
                 $candleStick->setLowestPrice($previousPrice);
                 $candleStick->setHighestPrice($previousPrice);
                 $candleStick->setOpenPrice($previousPrice);
+                $candleStick->setVolume($totalVolume);
+
 
                 $candleDate = clone $date;
                 $candleStick->setDate($candleDate);
@@ -282,53 +288,4 @@ class CryptoMarketIndexService implements MarketIndexInterface
     {
         return BaseConstants::CRYPTO_MARKET_TICKER;
     }
-
-    // public function updateMarketData()
-    // {
-    //     $lastCandleStick = $this->nasdaq2000Data->getLastCandleStick();
-    //     $lastYear = $lastCandleStick->getDate()->format("Y");
-    //     $date = new DateTime();
-
-    //     if($lastCandleStick->getDate()->diff($date)->days == 0)
-    //     {
-    //         return ;
-    //     }
-
-    //     $data = $this
-    //                 ->yahooWebScrapService
-    //                 ->getStockDataByDatesByOlderDates(BaseConstants::CRYPTO_MARKET_TICKER, $lastYear);
-
- 
-    //     if(!$data['Open Price'][0])
-    //     {
-    //         echo "Something went wrong with retrieving nasdaq data \r\n";
-    //         return null;
-    //     }
-
-    //     $index = 0;
-    //     for ($i=0; $i < count($data['Volume']); $i++) { 
-    //         $date = new DateTime(($data['Dates'][$i]));
-
-    //         if($this->nasdaq2000Data->isDateExist($date) || !$data['Close Price'][$i])
-    //             continue;
-
-    //         $candleStick = new CandleStick();
-    //         $candleStick->setVolume($data['Volume'][$i]);
-    //         $candleStick->setOpenPrice($data['Open Price'][$i]);
-    //         $candleStick->setHighestPrice($data['High Price'][$i]);
-    //         $candleStick->setLowestPrice($data['Low Price'][$i]);
-    //         $candleStick->setClosePrice($data['Close Price'][$i]);
-    //         $candleStick->setDate($date);
-
-    //         $this->nasdaq2000Data->addCandleStick($candleStick);
-    //         $this->entityManager->persist($candleStick);
-
-    //         if($index++ % 5 == 0)
-    //         {
-    //             $this->entityManager->flush();
-    //         }
-    //     }
-
-    //     $this->entityManager->flush();
-    // }
 }

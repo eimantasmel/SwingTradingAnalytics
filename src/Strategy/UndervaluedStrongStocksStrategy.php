@@ -22,7 +22,7 @@ class UndervaluedStrongStocksStrategy implements SwingTradingStrategyInterface
     private const MIN_AMOUNT_OF_MONEY = 20;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 350;
-    private const AMOUNT_OF_NEXT_CANDLESTICKS = 400;
+    private const AMOUNT_OF_NEXT_CANDLESTICKS = 800;
     private const MIN_VOLUME = 1_500_000;
     private const MIN_PRICE = 50;
     private const DROP_PERCENTAGE = 0.5;
@@ -245,10 +245,10 @@ class UndervaluedStrongStocksStrategy implements SwingTradingStrategyInterface
 
         $highestPrice = $this->technicalIndicatorsService->getHighestPrice($lastCandleSticks);
 
-        if($closePrice < self::DROP_PERCENTAGE * $highestPrice)
+       if(($closePrice / $highestPrice - 1) <= -1 * self::DROP_PERCENTAGE) 
         {
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
-            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $highestPrice);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $closePrice * 2);
 
             return true;
         }

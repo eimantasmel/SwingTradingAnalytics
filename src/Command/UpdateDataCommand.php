@@ -44,7 +44,7 @@ class UpdateDataCommand extends Command
         $dotenv = new Dotenv();
         $dotenv->load(dirname(__DIR__, 2).'/.env');
 
-        $this->updateSecuritiesData($output);
+        $this->updateSecuritiesData($output);    # TODO: uncomment this at later
         $this->marketIndexInterface->updateMarketData();
 
         return Command::SUCCESS;    
