@@ -17,24 +17,26 @@ use App\Repository\CandleStickRepository;
 /**
  * 
  */
-class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
+class MemecoinShortStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
     private const MIN_AMOUNT_OF_CANDLESTICKS = 10;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 720;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 60;      // N -1 NEXT TRADING DAYS AMOUNT
-    private const MIN_VOLUME = 500_000;
+    private const MIN_VOLUME = 1_000_000;
 
     private const CAPITAL_RISK = 0.1;
     private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
 
     private const LEVERAGE = 1;
     private const RISK_REWARD = 0.5;
-    private const GROWTH_PERCENTAGE = 1;        //  100 percent growth per candle
+    private const GROWTH_PERCENTAGE = .8;
 
     private const PYRAMIDING_TRADES_AMOUNT = 10;
     private const MAX_AMOUNT_TRADES_PER_DAY = 1;
+
+    private const TRADES_REVISION_AMOUNT = 30;
     
     private array $trade_information = [];
     private array $results = [];
@@ -91,7 +93,13 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
 
-        $spikedCandleSticks = $this->candleStickRepository->getCandleSticksWithHugeGrowthSpike($startDate, $endDate);
+        $spikedCandleSticks = $this->candleStickRepository->getCandleSticksWithHugeGrowthSpike($startDate, $endDate, self::GROWTH_PERCENTAGE);
+        $riskCapital = self::CAPITAL_RISK * $tradingCapital;
+        $riskCapital = 0.05 * $tradingCapital;
+        // $riskCapital = 0.2 * $tradingCapital;
+
+
+        $lastTradesAmount = $this->results[BaseConstants::AMOUNT_OF_TRADES];
 
         foreach($spikedCandleSticks as $candleStick)
         {
@@ -99,6 +107,23 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
 
             if($random > 1)
                 continue;
+
+            if($this->results[BaseConstants::AMOUNT_OF_TRADES] % self::TRADES_REVISION_AMOUNT == 0 
+                && $lastTradesAmount != $this->results[BaseConstants::AMOUNT_OF_TRADES]
+              )
+            {
+                // $riskCapital += max(0.01 * $tradingCapital, 50);
+                // $riskCapital = 0.05 * $tradingCapital;
+
+                $riskCapital += 50;
+                // $riskCapital += 150;
+
+
+                $lastTradesAmount = $this->results[BaseConstants::AMOUNT_OF_TRADES];
+
+                // $tradingCapital += 400;
+                // $riskCapital = 0.2 * $tradingCapital;
+            }
 
             $tradingCapital = $this->processPyramidingTrades($candleStick->getDate(), $tradingCapital);
 
@@ -109,7 +134,7 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
 
             $position = 'Short';
             
-            $tradingCapital = $this->getTradingCapitalAfterDay($candleStick, $tradingCapital, $position);
+            $tradingCapital = $this->getTradingCapitalAfterDay($candleStick, $tradingCapital, $position, $riskCapital);
 
             if($tradingCapital > $this->highestCapitalValue)
             {
@@ -133,7 +158,7 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
         return $this->results;
     }
 
-    private function getTradingCapitalAfterDay(CandleStick $candleStick, float $tradingCapital, string $position)
+    private function getTradingCapitalAfterDay(CandleStick $candleStick, float $tradingCapital, string $position, float $riskCapital)
     {
         $tradesCounter = 0;
         $security = $candleStick->getSecurity();
@@ -150,7 +175,7 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
         {
             $enterPrice = $this->trade_information[BaseConstants::TRADE_ENTER_PRICE];     // I'm do this because 
             $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
-            $sharesAmount = $this->getSharesAmount($tradingCapital, $stopLoss, $enterPrice);
+            $sharesAmount = $this->getSharesAmount($riskCapital, $stopLoss, $enterPrice);
 
             // $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
             // $spread = $this->trade_information[BaseConstants::TRADE_POSITION] == "Long" ? $spread : -1 * $spread;
@@ -214,35 +239,48 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
         if(count($lastCandleSticks) < self::MIN_AMOUNT_OF_CANDLESTICKS)    
             return false;
 
-
-
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
 
         if(count($nextCandleSticks) < 5)    
             return false;
 
+        // TODO: debug and find out why i'm getting such enourmus results.
 
         $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
-
-
-        $closePrice = $nextCandleSticks[1]->getClosePrice() - 0.01 * $nextCandleSticks[1]->getClosePrice();
-
         $volume = $lastCandleStick->getVolume();
         // $averageVolume = $this->technicalIndicatorsService->getAverageCandleStickVolume(array_slice($lastCandleSticks, -30));
-        if($volume < self::MIN_VOLUME  || !$closePrice || !$lastCandleStick->getOpenPrice())
+        if($volume < self::MIN_VOLUME)
             return false;
 
-        if(
-            $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 >= 1
-            && $nextCandleSticks[1]->getClosePrice() / $nextCandleSticks[1]->getOpenPrice() - 1 <= -0.1
-            && $nextCandleSticks[1]->getClosePrice() / $nextCandleSticks[1]->getOpenPrice() - 1 > -0.4
+        // if(
+        //     $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 >= self::GROWTH_PERCENTAGE
+        //     && ($nextCandleSticks[0]->getHighestPrice() - $nextCandleSticks[0]->getClosePrice() ) / ($nextCandleSticks[0]->getClosePrice() - $nextCandleSticks[0]->getOpenPrice()) > 0.3
+        //   )
+        // {
+        //     $closePrice = $nextCandleSticks[1]->getClosePrice() - 0.01 * $nextCandleSticks[1]->getClosePrice(); # this imitates a spread
+        //     $stopLoss = (1 + 1/self::LEVERAGE) * $closePrice;
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $nextCandleSticks[1]->getDate()->format('Y-m-d'));
 
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $closePrice);
+
+
+        //     return true;
+        // }
+
+        
+        if(
+            $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 >= self::GROWTH_PERCENTAGE
+            &&  $nextCandleSticks[1]->getClosePrice() / $nextCandleSticks[1]->getOpenPrice() - 1 <= -0.1
+            &&  $nextCandleSticks[1]->getClosePrice() / $nextCandleSticks[1]->getOpenPrice() - 1 >= -0.4
           )
         {
+            $closePrice = $nextCandleSticks[1]->getClosePrice() - 0.01 * $nextCandleSticks[1]->getClosePrice(); # this imitates a spread
             $stopLoss = (1 + 1/self::LEVERAGE) * $closePrice;
-            $target = $closePrice - self::RISK_REWARD * abs($stopLoss - $closePrice);
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
-            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
             $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
             $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $nextCandleSticks[1]->getDate()->format('Y-m-d'));
 
@@ -251,6 +289,44 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
 
             return true;
         }
+
+        if(
+            $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 >= self::GROWTH_PERCENTAGE
+            &&  $nextCandleSticks[2]->getClosePrice() / $nextCandleSticks[2]->getOpenPrice() - 1 <= -0.1
+            &&  $nextCandleSticks[2]->getClosePrice() / $nextCandleSticks[2]->getOpenPrice() - 1 >= -0.4
+          )
+        {
+            $closePrice = $nextCandleSticks[2]->getClosePrice() - 0.01 * $nextCandleSticks[2]->getClosePrice(); # this imitates a spread
+            $stopLoss = (1 + 1/self::LEVERAGE) * $closePrice;
+            $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
+            $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+            $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $nextCandleSticks[2]->getDate()->format('Y-m-d'));
+
+            $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $closePrice);
+
+
+            return true;
+        }
+
+
+        // if(
+        //     $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 >= self::GROWTH_PERCENTAGE
+        //     && $nextCandleSticks[1]->getClosePrice() / $nextCandleSticks[1]->getOpenPrice() - 1 <= -0.1
+        //     && $nextCandleSticks[1]->getClosePrice() / $nextCandleSticks[1]->getOpenPrice() - 1 > -0.4
+        //   )
+        // {
+        //     $closePrice = $nextCandleSticks[1]->getClosePrice() - 0.01 * $nextCandleSticks[1]->getClosePrice(); # this imitates a spread
+        //     $stopLoss = (1 + 1/self::LEVERAGE) * $closePrice;
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $nextCandleSticks[1]->getDate()->format('Y-m-d'));
+
+        //     $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $closePrice);
+
+        //     return true;
+        // }
 
 
         return false;
@@ -268,8 +344,8 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
 
         $tradingDate = new DateTime($this->trade_information[BaseConstants::TRADE_DATE]);
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
-        $target = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
         $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
+        $enterPrice = $this->trade_information[BaseConstants::TRADE_ENTER_PRICE];
 
         $lastClosePrice = null;
 
@@ -300,17 +376,19 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
         
                 return ($stopLoss + $spread) * $sharesAmount;
             }
-          
-            if($lowestPrice <= $target)
+
+            if($lowestPrice <= 0.6 * $enterPrice)
             {
                 $exitDate = $candleStick->getDate()->format('Y-m-d');
-                $closePrice = $candleStick->getClosePrice();
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $target + $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE,  0.6 * $enterPrice + $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
         
-                return ($target + $spread) * $sharesAmount;
+                return (0.6 * $enterPrice + $spread) * $sharesAmount;
             }
+          
+            if($closePrice < 0.8 * $enterPrice)
+                break;
         }
 
         $exitDate = $candleStick->getDate()->format('Y-m-d');
@@ -327,12 +405,11 @@ class CryptoShortWithLeverageStrategy implements SwingTradingStrategyInterface
         if($enterPrice * $sharesAmount > $tradingCapital * 3)   // i will replace this at later point.
             return false;
 
-        return $sharesAmount * $enterPrice * self::LEVERAGE;
+        return $sharesAmount * $enterPrice;
     }
 
-    private function getSharesAmount($tradingCapital, $stopLoss, $enterPrice) : float
+    private function getSharesAmount($riskCapital, $stopLoss, $enterPrice) : float
     {
-        $riskCapital = $tradingCapital * self::CAPITAL_RISK;
         $sharesAmount = (float)($riskCapital / (abs($enterPrice - $stopLoss)));
 
         return $sharesAmount * self::LEVERAGE;

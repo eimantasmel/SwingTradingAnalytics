@@ -33,7 +33,7 @@ class MeanReversionStrategy2 implements SwingTradingStrategyInterface
 
     private const MIN_AMOUNT_OF_CANDLESTICKS = 200;
 
-    private const PYRAMIDING_TRADES_AMOUNT = 3;
+    private const PYRAMIDING_TRADES_AMOUNT = 1;
 
     private const MIN_PRICE = 1;
 

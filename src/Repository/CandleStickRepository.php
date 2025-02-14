@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\CandleStick;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,28 +22,35 @@ class CandleStickRepository extends ServiceEntityRepository
         parent::__construct($registry, CandleStick::class);
     }
 
-//    /**
-//     * @return CandleStick[] Returns an array of CandleStick objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    // public function getCandleSticksWithHugeGrowthSpike(DateTime $startDate, DateTime $endDate, float $growthPercentage = 1, float $minVolume = 600000)
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->where('(c.closePrice / c.openPrice) - 1 >= :growthPercentage')
+    //         ->andWhere('c.volume > :minVolume')
+    //         ->setParameter('growthPercentage', $growthPercentage)
+    //         ->setParameter('minVolume', $minVolume)
+    //         ->orderBy('c.date', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
-//    public function findOneBySomeField($value): ?CandleStick
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getCandleSticksWithHugeGrowthSpike(
+        DateTime $startDate, 
+        DateTime $endDate, 
+        float $growthPercentage = 1, 
+        float $minVolume = 600000
+    ) {
+        return $this->createQueryBuilder('c')
+            ->where('(c.closePrice / c.openPrice) - 1 >= :growthPercentage')
+            ->andWhere('c.volume > :minVolume')
+            ->andWhere('c.date BETWEEN :startDate AND :endDate')
+            ->setParameter('growthPercentage', $growthPercentage)
+            ->setParameter('minVolume', $minVolume)
+            ->setParameter('startDate', $startDate->format('Y-m-d'))
+            ->setParameter('endDate', $endDate->format('Y-m-d'))
+            ->orderBy('c.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    
 }

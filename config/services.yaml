@@ -33,7 +33,7 @@ services:
 
 
 
-    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\CryptoShortWithLeverageStrategy'
+    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\Memecoin2shortStrategy'
     
 
 
