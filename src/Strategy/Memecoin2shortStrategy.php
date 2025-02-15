@@ -23,7 +23,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
     private const MIN_AMOUNT_OF_CANDLESTICKS = 10;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 720;
-    private const AMOUNT_OF_NEXT_CANDLESTICKS = 60;      // N -1 NEXT TRADING DAYS AMOUNT
+    private const AMOUNT_OF_NEXT_CANDLESTICKS = 20;      // N -1 NEXT TRADING DAYS AMOUNT
     private const MIN_VOLUME = 1_000_000;
 
     private const CAPITAL_RISK = 0.07;
@@ -51,6 +51,16 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
     private CandleStickRepository $candleStickRepository;
 
     private float $riskCapital = 0;
+    private int $lossStreak = 0;
+    private int $winStreak = 0;
+    private float $lastTradingCapital = 0;
+    private float $lastCapitalRisk = 0.1;
+    private const MIN_WIN_STREAK = 3;
+    private const MIN_LOSS_STREAK = 2;
+    private const CAPITAL_CHANGE = 0.025;
+    private const MAX_CAPITAL_CHANGE = 0.2;
+    private const MIN_CAPITAL_CHANGE = 0.03;
+
 
     public function __construct(TechnicalIndicatorsService $technicalIndicatorsService,
                                 EntityManagerInterface $entityManager,
@@ -97,7 +107,8 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
 
         $spikedCandleSticks = $this->candleStickRepository->getCandleSticksWithHugeGrowthSpike($startDate, $endDate, self::GROWTH_PERCENTAGE);
         $this->riskCapital = self::CAPITAL_RISK * $tradingCapital;
-        // $riskCapital = 0.2 * $tradingCapital;
+        $this->lastTradingCapital = $tradingCapital;
+        $this->lastCapitalRisk = self::CAPITAL_RISK;
 
 
         $lastTradesAmount = $this->results[BaseConstants::AMOUNT_OF_TRADES];
@@ -115,6 +126,8 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
             {
                 $lastTradesAmount = $this->results[BaseConstants::AMOUNT_OF_TRADES];
                 $this->riskCapital = self::CAPITAL_RISK * $tradingCapital;
+                $this->lastTradingCapital = $tradingCapital;
+                $this->lastCapitalRisk = self::CAPITAL_RISK;
             }
 
             $tradingCapital = $this->processPyramidingTrades($candleStick->getDate(), $tradingCapital);
@@ -403,6 +416,36 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
 
         foreach ($this->lastTradesInformation as $key => $tradeInformation) {
             if (strtotime($tradeInformation[BaseConstants::EXIT_DATE]) <= strtotime($date->format('Y-m-d')) || $finishAll) {
+
+                if($tradeInformation[BaseConstants::TRADING_CAPITAL] > 0)
+                {
+                    $this->winStreak++;
+                    $this->lossStreak = 0;
+                }
+                else
+                {
+                    $this->lossStreak++;
+                    $this->winStreak = 0;
+                }
+
+                if($this->winStreak >= self::MIN_WIN_STREAK && $this->lastCapitalRisk < self::MAX_CAPITAL_CHANGE)
+                {
+                    $this->lastCapitalRisk += self::CAPITAL_CHANGE;
+                    $this->riskCapital = $this->lastCapitalRisk * $this->lastTradingCapital;
+                }
+
+                if($this->lossStreak >= self::MIN_LOSS_STREAK && $this->lastCapitalRisk > self::MIN_CAPITAL_CHANGE)
+                {
+                    $this->lastCapitalRisk -= self::CAPITAL_CHANGE;
+                    $this->riskCapital = $this->lastCapitalRisk * $this->lastTradingCapital;
+                }
+
+                if($this->winStreak < self::MIN_WIN_STREAK && $this->lossStreak < self::MIN_LOSS_STREAK)
+                {
+                    $this->riskCapital = self::CAPITAL_RISK * $this->lastTradingCapital;
+                    $this->lastCapitalRisk = self::CAPITAL_RISK;
+                }
+
                 $tradingCapital += $tradeInformation[BaseConstants::TRADING_CAPITAL];
                 $this->updateResultTradingInformation($tradingCapital, $tradeInformation);
                 unset($this->lastTradesInformation[$key]); // Remove element
