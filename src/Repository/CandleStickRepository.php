@@ -52,5 +52,43 @@ class CandleStickRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
     
+    public function getCandleSticksWithHugeDropSpike(
+        DateTime $startDate, 
+        DateTime $endDate, 
+        float $growthPercentage = 1, 
+        float $minVolume = 600000
+    ) {
+        return $this->createQueryBuilder('c')
+            ->where('(c.closePrice / c.openPrice) - 1 <= -1 * :growthPercentage')
+            ->andWhere('c.volume > :minVolume')
+            ->andWhere('c.date BETWEEN :startDate AND :endDate')
+            ->setParameter('growthPercentage', $growthPercentage)
+            ->setParameter('minVolume', $minVolume)
+            ->setParameter('startDate', $startDate->format('Y-m-d'))
+            ->setParameter('endDate', $endDate->format('Y-m-d'))
+            ->orderBy('c.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getCandleSticksWithHugeGrowthOrDropSpike(
+        DateTime $startDate, 
+        DateTime $endDate, 
+        float $growthPercentage = 1, 
+        float $minVolume = 600000
+    ) {
+        return $this->createQueryBuilder('c')
+            ->where('(c.closePrice / c.openPrice) - 1 >= :growthPercentage OR (c.closePrice / c.openPrice) - 1 <= -1 * :growthPercentage')
+            ->andWhere('c.volume > :minVolume')
+            ->andWhere('c.date BETWEEN :startDate AND :endDate')
+            ->setParameter('growthPercentage', $growthPercentage)
+            ->setParameter('minVolume', $minVolume)
+            ->setParameter('startDate', $startDate->format('Y-m-d'))
+            ->setParameter('endDate', $endDate->format('Y-m-d'))
+            ->orderBy('c.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

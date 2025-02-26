@@ -33,10 +33,12 @@ class MontecarloSimulationCommand extends Command
         $dotenv->load(dirname(__DIR__, 2) . '/.env');
 
         //At the end long not trading gap because your capital is almost 0
-        $simulationAmount = 10;
+        $simulationAmount = 1;
         // // $startDate = '2024-01-01';
-        $startDate = '2021-12-01';
-        $endDate =  '2024-12-03';   
+        // $startDate = '2021-12-01';
+
+        $startDate = '2021-06-21';
+        $endDate =  '2024-10-21';   
         $initialTradingCapital = 1000;   
 
         // $simulationAmount = 1;

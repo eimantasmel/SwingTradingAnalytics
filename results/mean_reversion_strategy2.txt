@@ -927,3 +927,261 @@ Amount of simulations where final trading capital is lower than initial investme
 
 
 +----------------------------------------------------------------------------------------------------------------------------------+
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-12-07 | 2024-01-01 | NDAQ  |      53.989|       0.000|      55.128|      56.976|  Yes   |   1,063.911|   Long   | 0.019|
+
+Final trading capital is:1063.9105182224
+Highest Capital: 1000
+Max Drawdown :0
+Win percentage is: 1
+Average fee: 1
+Average risk reward: 0.056049657216972
+Long positions win percentage: 1
+There's no short positions
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 1063.9105182224
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0.056049657216972
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 1
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: 0
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1000
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-10-23 | 2024-01-05 | CTSH  |      65.047|       0.000|      66.185|      72.707|  Yes   |   1,218.144|   Long   | 0.027|
+| 2  | 2024-01-05 | 2024-01-11 |   Z   |      53.798|       0.000|      55.678|      52.054|   No   |   1,171.166|   Long   | 0.088|
+| 3  | 2024-01-11 | 2024-01-18 |  KHC  |      37.588|       0.000|      38.188|      36.949|   No   |   1,158.171|   Long   | 0.008|
+| 4  | 2024-01-18 | 2024-03-11 | ESPR  |       2.151|       0.000|       2.578|       2.118|   No   |   1,157.525|   Long   | 0.001|
+| 5  | 2024-03-11 | 2024-06-18 | ADAP  |       1.546|       0.000|       1.823|       0.880|   No   |   1,149.516|   Long   | 0.006|
+| 6  | 2024-06-18 | 2024-07-09 |  GEN  |      23.589|       0.000|      24.205|      24.124|  Yes   |   1,156.565|   Long   | 0.029|
+| 7  | 2024-07-09 | 2024-10-16 | MSFT  |     459.612|       0.000|     467.373|     416.120|   No   |   1,015.689|   Long   | 0.072|
+| 8  | 2024-10-16 | 2024-11-01 | CPRT  |      54.569|       0.000|      55.528|      51.720|   No   |     950.996|   Long   | 0.029|
+
+Final trading capital is:950.99584846749
+Highest Capital: 1218.1443884759
+Max Drawdown :-0.16619967908678
+Win percentage is: 0.25
+Average fee: 0.80453986430356
+Average risk reward: 0.071752246533521
+Long positions win percentage: 0.25
+There's no short positions
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 950.99584846749
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0.071752246533521
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.25
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.16619967908678
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 1218.1443884759
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 0
+Amount of simulations where final trading capital is medium gain: 0
+Amount of simulations where final trading capital is minimum gain: 0
+Amount of simulations where final trading capital is lower than initial investment: 1
+Iteration number: 1
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-10-23 | 2023-10-26 |  MAT  |      19.830|       0.000|      20.428|      19.068|   No   |     989.492|   Long   | 0.000|
+| 2  | 2023-10-23 | 2023-11-28 | FAST  |      57.444|       0.000|      58.538|      60.127|  Yes   |   1,051.546|   Long   | 0.064|
+| 3  | 2023-11-06 | 2023-12-11 |  LSK  |       1.049|       0.000|       1.155|       1.148|  Yes   |   1,052.431|   Long   | 0.000|
+| 4  | 2023-10-23 | 2024-01-01 |  STX  |      65.356|       0.000|      67.003|      83.641|  Yes   |   1,579.227|   Long   | 0.106|
+| 5  | 2023-12-01 | 2024-01-01 | INTC  |      43.746|       0.000|      44.828|      47.971|  Yes   |   1,657.201|   Long   | 0.006|
+| 6  | 2023-10-23 | 2024-01-05 | CTSH  |      65.032|       0.000|      66.185|      72.730|  Yes   |   1,876.357|   Long   | 0.012|
+| 7  | 2023-12-11 | 2024-01-08 | ATOM  |       9.862|       0.000|      10.704|       9.030|   No   |   1,865.637|   Long   | 0.001|
+| 8  | 2024-01-05 | 2024-01-15 |  RUN  |      16.167|       0.000|      17.718|      14.329|   No   |   1,823.485|   Long   | 0.007|
+| 9  | 2024-01-01 | 2024-01-29 | AAPL  |     185.650|       0.000|     189.448|     190.509|  Yes   |   1,916.490|   Long   | 0.010|
+| 10 | 2023-10-23 | 2024-01-30 | AMGN  |     273.154|       0.000|     278.678|     314.620|  Yes   |   2,154.963|   Long   | 0.094|
+| 11 | 2024-01-08 | 2024-02-07 | EXEL  |      22.541|       0.000|      23.880|      21.089|   No   |   2,118.994|   Long   | 0.001|
+| 12 | 2024-01-29 | 2024-03-04 |  AAL  |      14.950|       0.000|      15.748|      14.986|   No   |   2,118.816|   Long   | 0.010|
+| 13 | 2024-01-15 | 2024-03-11 | AMZN  |     153.189|       0.000|     156.193|     172.203|  Yes   |   2,769.647|   Long   | 0.029|
+| 14 | 2024-01-01 | 2024-03-14 |  CG   |      40.009|       0.000|      41.018|      45.111|  Yes   |   2,909.592|   Long   | 0.019|
+| 15 | 2024-03-11 | 2024-03-15 |  WDC  |      62.132|       0.000|      64.270|      59.828|   No   |   2,740.074|   Long   | 0.082|
+| 16 | 2024-03-04 | 2024-03-18 | QRTEA |       1.316|       0.000|       1.538|       1.099|   No   |   2,735.123|   Long   | 0.006|
+| 17 | 2024-03-15 | 2024-04-02 |  ADP  |     242.256|       0.000|     245.340|     240.513|   No   |   2,700.552|   Long   | 0.166|
+| 18 | 2024-03-18 | 2024-04-02 | HRTX  |       2.972|       0.000|       3.320|       2.547|   No   |   2,687.740|   Long   | 0.012|
+| 19 | 2024-04-02 | 2024-04-12 | INFN  |       5.882|       0.000|       6.523|       4.881|   No   |   2,658.153|   Long   | 0.012|
+| 20 | 2024-01-31 | 2024-05-09 |  VLY  |       9.631|       0.000|      10.150|       7.750|   No   |   2,612.292|   Long   | 0.011|
+| 21 | 2024-02-07 | 2024-05-16 | AMGN  |     296.123|       0.000|     308.380|     312.470|  Yes   |   2,787.916|   Long   | 0.253|
+| 22 | 2024-04-02 | 2024-05-21 |  AAL  |      14.404|       0.000|      14.900|      14.164|   No   |   2,779.378|   Long   | 0.004|
+| 23 | 2024-04-12 | 2024-05-27 | NDAQ  |      61.572|       0.000|      63.148|      60.878|   No   |   2,730.374|   Long   | 0.052|
+| 24 | 2024-03-15 | 2024-06-22 |  ZEC  |      31.443|       0.000|      35.083|      20.030|   No   |   2,273.201|   Long   | 0.003|
+| 25 | 2024-05-27 | 2024-07-02 | EBAY  |      52.906|       0.000|      54.313|      52.233|   No   |   2,233.164|   Long   | 0.006|
+| 26 | 2024-06-24 | 2024-07-04 |  XMR  |     159.048|       0.000|     169.005|     156.126|   No   |   2,119.673|   Long   | 0.028|
+| 27 | 2024-07-08 | 2024-07-15 |   M   |      18.951|       0.000|      20.218|      17.911|   No   |   2,107.889|   Long   | 0.021|
+| 28 | 2024-05-16 | 2024-07-23 | INFN  |       5.325|       0.000|       5.785|       5.950|  Yes   |   2,125.284|   Long   | 0.015|
+| 29 | 2024-07-02 | 2024-07-30 | INCY  |      59.075|       0.000|      60.683|      65.860|  Yes   |   2,494.516|   Long   | 0.055|
+| 30 | 2024-05-09 | 2024-08-05 | VTRS  |      11.222|       0.000|      11.578|      11.568|  Yes   |   2,503.674|   Long   | 0.002|
+| 31 | 2024-07-23 | 2024-08-06 | MCRB  |       1.132|       0.000|       1.308|       0.913|   No   |   2,501.465|   Long   | 0.002|
+| 32 | 2024-05-21 | 2024-08-28 | HTHT  |      37.875|       0.000|      39.630|      28.710|   No   |   2,090.434|   Long   | 0.115|
+| 33 | 2024-07-30 | 2024-09-02 |  AZN  |      77.946|       0.000|      79.933|      86.033|  Yes   |   2,228.218|   Long   | 0.046|
+| 34 | 2024-08-05 | 2024-09-10 |  NOK  |       3.731|       0.000|       3.830|       4.204|  Yes   |   2,233.184|   Long   | 0.001|
+| 35 | 2024-07-15 | 2024-10-01 | ROST  |     148.151|       0.000|     150.735|     148.353|  Yes   |   2,237.870|   Long   | 0.071|
+| 36 | 2024-09-10 | 2024-10-03 | HBAN  |      14.299|       0.000|      14.828|      14.118|   No   |   2,234.933|   Long   | 0.009|
+| 37 | 2024-08-07 | 2024-10-10 | INFN  |       5.696|       0.000|       5.863|       6.598|  Yes   |   2,244.640|   Long   | 0.006|
+| 38 | 2024-09-02 | 2024-10-15 | MOMO  |       6.397|       0.000|       6.678|       6.759|  Yes   |   2,247.697|   Long   | 0.007|
+| 39 | 2024-10-04 | 2024-10-22 | FAST  |      70.194|       0.000|      71.580|      76.268|  Yes   |   2,335.347|   Long   | 0.014|
+| 40 | 2024-10-01 | 2024-10-23 |  HPQ  |      34.779|       0.000|      35.990|      35.821|  Yes   |   2,346.706|   Long   | 0.019|
+| 41 | 2024-10-10 | 2024-10-24 | CTSH  |      74.527|       0.000|      75.975|      74.890|  Yes   |   2,351.172|   Long   | 0.027|
+| 42 | 2024-08-28 | 2024-10-27 |  ZEC  |      33.589|       0.000|      36.848|      33.761|  Yes   |   2,352.068|   Long   | 0.029|
+| 43 | 2024-10-15 | 2024-11-01 | TCOM  |      58.107|       0.000|      61.445|      65.190|  Yes   |   2,447.430|   Long   | 0.087|
+
+Final trading capital is:2447.4299594278
+Highest Capital: 2787.9164911467
+Max Drawdown :-0.25018046927088
+Win percentage is: 0.53488372093023
+Average fee: 0.90862339205636
+Average risk reward: 0.08465401030955
+Long positions win percentage: 0.53488372093023
+There's no short positions
+
+
+General Information about the all iterations:
+Number of iterations: 1
+Average of final trading capital: 2447.4299594278
+Standart Deviation of final trading capital: 0
+
+Average of risk reward ratio: 0.08465401030955
+Standart Deviation of risk reward ratio: 0
+
+Average of risk win percentage: 0.53488372093023
+Standart Deviation of win percentage: 0
+
+Average of max drawdown: -0.25018046927088
+Standart Deviation of max drawdown: 0
+
+Average of highest capital: 2787.9164911467
+Standart Deviation of highest capital: 0
+
+
+Amount of simulations where final trading capital is high gain: 1
+Amount of simulations where final trading capital is medium gain: 1
+Amount of simulations where final trading capital is minimum gain: 1
+Amount of simulations where final trading capital is lower than initial investment: 0
+Iteration number: 1
+Iteration number: 2
+Iteration number: 3
+Iteration number: 4
+Iteration number: 5
+Iteration number: 6
+Iteration number: 7
+Iteration number: 8
+Iteration number: 9
+Iteration number: 10
+
+
+| #  | Trade Date | Exit Date  |Ticker |Enter Price | Stop Loss  |Take Profit | Exit Price | Winner |  Capital   | Position |Spread|
++----------------------------------------------------------------------------------------------------------------------------------+
+| 1  | 2023-10-23 | 2023-10-26 |  MAT  |      19.863|       0.000|      20.428|      19.045|   No   |     988.791|   Long   | 0.033|
+| 2  | 2023-11-06 | 2023-11-16 | PANW  |     237.207|       0.000|     246.350|     239.779|  Yes   |   1,006.326|   Long   | 0.207|
+| 3  | 2023-10-23 | 2023-11-28 | FAST  |      57.441|       0.000|      58.538|      60.128|  Yes   |   1,068.474|   Long   | 0.061|
+| 4  | 2023-10-23 | 2023-12-01 | INTC  |      33.861|       0.000|      35.015|      43.024|  Yes   |   1,206.022|   Long   | 0.011|
+| 5  | 2023-11-16 | 2023-12-06 |  BKR  |      33.243|       0.000|      34.105|      32.633|   No   |   1,195.834|   Long   | 0.003|
+| 6  | 2023-12-04 | 2024-01-01 | INTC  |      42.353|       0.000|      43.770|      47.968|  Yes   |   1,312.293|   Long   | 0.003|
+| 7  | 2023-12-04 | 2024-01-01 | CDNS  |     263.538|       0.000|     271.953|     262.272|   No   |   1,301.957|   Long   | 0.058|
+| 8  | 2023-12-08 | 2024-01-03 |  HON  |     194.687|       0.000|     197.505|     205.433|  Yes   |   1,436.680|   Long   | 0.077|
+| 9  | 2023-10-23 | 2024-01-05 | CTSH  |      65.083|       0.000|      66.185|      72.690|  Yes   |   1,653.538|   Long   | 0.063|
+| 10 | 2024-01-01 | 2024-01-29 | AAPL  |     185.651|       0.000|     189.448|     190.526|  Yes   |   1,726.645|   Long   | 0.011|
+| 11 | 2024-01-08 | 2024-01-29 | DVAX  |      13.996|       0.000|      14.643|      13.016|   No   |   1,706.808|   Long   | 0.026|
+| 12 | 2023-10-23 | 2024-01-30 | AMGN  |     273.353|       0.000|     278.678|     314.620|  Yes   |   1,943.856|   Long   | 0.293|
+| 13 | 2024-01-29 | 2024-03-04 |  AAL  |      14.942|       0.000|      15.748|      14.987|   No   |   1,943.758|   Long   | 0.002|
+| 14 | 2024-01-31 | 2024-03-11 | AMZN  |     155.202|       0.000|     158.400|     172.261|  Yes   |   2,543.463|   Long   | 0.002|
+| 15 | 2024-01-01 | 2024-03-14 |  CG   |      39.999|       0.000|      41.018|      45.128|  Yes   |   2,653.762|   Long   | 0.009|
+| 16 | 2024-03-14 | 2024-03-26 |  CSX  |      37.043|       0.000|      37.658|      36.056|   No   |   2,611.155|   Long   | 0.013|
+| 17 | 2024-03-11 | 2024-03-29 | MNKD  |       4.624|       0.000|       4.993|       4.479|   No   |   2,606.301|   Long   | 0.014|
+| 18 | 2024-03-26 | 2024-04-10 |  CSX  |      36.133|       0.000|      36.855|      35.344|   No   |   2,573.035|   Long   | 0.003|
+| 19 | 2024-01-03 | 2024-04-11 |  RUN  |      18.450|       0.000|      19.810|      11.850|   No   |   2,455.763|   Long   | 0.010|
+| 20 | 2024-03-04 | 2024-04-15 | CYTK  |      67.784|       0.000|      73.975|      69.060|  Yes   |   2,531.755|   Long   | 0.104|
+| 21 | 2024-04-04 | 2024-04-15 |%5EGSPC|   5,147.264|       0.000|   5,207.055|   5,105.105|   No   |   2,508.985|   Long   | 0.054|
+| 22 | 2024-04-15 | 2024-04-25 | NWSA  |      24.290|       0.000|      24.820|      24.015|   No   |   2,498.858|   Long   | 0.010|
+| 23 | 2024-01-31 | 2024-05-09 | TMUS  |     161.351|       0.000|     164.925|     164.680|  Yes   |   2,603.346|   Long   | 0.121|
+| 24 | 2024-04-15 | 2024-05-10 | IOVA  |      11.907|       0.000|      12.828|      11.919|   No   |   2,602.674|   Long   | 0.017|
+| 25 | 2024-04-15 | 2024-05-15 | AMZN  |     183.649|       0.000|     188.000|     182.987|   No   |   2,581.826|   Long   | 0.029|
+| 26 | 2024-05-13 | 2024-05-23 | CYTK  |      58.010|       0.000|      62.723|      56.793|   No   |   2,505.414|   Long   | 0.120|
+| 27 | 2024-05-23 | 2024-07-17 |  AMD  |     160.436|       0.000|     167.448|     164.756|  Yes   |   2,615.155|   Long   | 0.006|
+| 28 | 2024-04-10 | 2024-07-18 |  XRX  |      16.905|       0.000|      17.440|      11.940|   No   |   2,460.411|   Long   | 0.015|
+| 29 | 2024-04-25 | 2024-07-18 | PANW  |     289.100|       0.000|     297.938|     322.526|  Yes   |   2,901.116|   Long   | 0.310|
+| 30 | 2024-05-16 | 2024-07-23 | INFN  |       5.323|       0.000|       5.785|       5.948|  Yes   |   2,917.149|   Long   | 0.013|
+| 31 | 2024-07-19 | 2024-08-01 | FAST  |      67.965|       0.000|      69.675|      68.525|  Yes   |   2,924.676|   Long   | 0.075|
+| 32 | 2024-07-19 | 2024-08-05 |  CSX  |      34.697|       0.000|      35.413|      33.202|   No   |   2,904.273|   Long   | 0.007|
+| 33 | 2024-05-09 | 2024-08-16 | ARDX  |       8.073|       0.000|       8.685|       5.850|   No   |   2,840.314|   Long   | 0.013|
+| 34 | 2024-08-01 | 2024-09-09 | CAKE  |      36.862|       0.000|      38.353|      37.174|  Yes   |   2,843.431|   Long   | 0.012|
+| 35 | 2024-07-23 | 2024-09-10 |  NOK  |       3.672|       0.000|       3.815|       4.204|  Yes   |   2,849.109|   Long   | 0.002|
+| 36 | 2024-08-05 | 2024-09-20 | GLPI  |      48.160|       0.000|      49.508|      50.592|  Yes   |   2,881.728|   Long   | 0.010|
+| 37 | 2024-07-17 | 2024-09-30 | AMZN  |     187.957|       0.000|     192.783|     185.485|   No   |   2,788.651|   Long   | 0.027|
+| 38 | 2024-09-20 | 2024-10-01 | MGNI  |      13.008|       0.000|      13.690|      12.075|   No   |   2,776.679|   Long   | 0.048|
+| 39 | 2024-09-11 | 2024-10-08 | MTCH  |      35.369|       0.000|      36.458|      36.405|  Yes   |   2,788.924|   Long   | 0.029|
+| 40 | 2024-10-02 | 2024-10-21 | CMCSA |      40.816|       0.000|      41.718|      40.551|   No   |   2,784.540|   Long   | 0.006|
+| 41 | 2024-08-16 | 2024-11-01 | SBUX  |      92.354|       0.000|      99.348|      98.870|  Yes   |   2,895.139|   Long   | 0.054|
+| 42 | 2024-09-09 | 2024-11-01 |  AZN  |      80.927|       0.000|      83.308|      71.420|   No   |   2,741.631|   Long   | 0.037|
+| 43 | 2024-09-30 | 2024-11-01 | SATS  |      24.949|       0.000|      27.780|      24.680|   No   |   2,737.409|   Long   | 0.129|
+| 44 | 2024-10-08 | 2024-11-01 | MLCO  |       8.034|       0.000|       8.585|       6.720|   No   |   2,721.861|   Long   | 0.024|
+
+Final trading capital is:2721.8609136814
+Highest Capital: 2924.6758036554
+Max Drawdown :-0.058371478334746
+Win percentage is: 0.47727272727273
+Average fee: 0.9844678248777
+Average risk reward: 0.072409913118342
+Long positions win percentage: 0.47727272727273
+There's no short positions
+
+
+General Information about the all iterations:
+Number of iterations: 10
+Average of final trading capital: -258.4678380952
+Standart Deviation of final trading capital: 8893.536862262
+
+Average of risk reward ratio: 0.11133331362355
+Standart Deviation of risk reward ratio: 0.028534347239443
+
+Average of risk win percentage: 0.51900119658232
+Standart Deviation of win percentage: 0.073535739720314
+
+Average of max drawdown: -0.40358905369742
+Standart Deviation of max drawdown: 0.47063551990472
+
+Average of highest capital: 3523.8149998614
+Standart Deviation of highest capital: 1086.9726423608
+
+
+Amount of simulations where final trading capital is high gain: 6
+Amount of simulations where final trading capital is medium gain: 7
+Amount of simulations where final trading capital is minimum gain: 7
+Amount of simulations where final trading capital is lower than initial investment: 3
+Iteration number: 1

@@ -23,17 +23,17 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # App\Interface\MarketIndexInterface: '@App\Service\Nasdaq2000IndexService'
+    App\Interface\MarketIndexInterface: '@App\Service\Nasdaq2000IndexService'
     # App\Interface\MarketIndexInterface: '@App\Service\SMP500IndexService'
 
     # App\Interface\MarketIndexInterface: '@App\Service\ChineseMarketIndexService'
     # App\Interface\MarketIndexInterface: '@App\Service\JapaneseMarketIndexService'
 
-    App\Interface\MarketIndexInterface: '@App\Service\CryptoMarketIndexService'
+    # App\Interface\MarketIndexInterface: '@App\Service\CryptoMarketIndexService'
 
 
 
-    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\Memecoin2shortStrategy'
+    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\StockBigMoveStrategy'
     
 
 

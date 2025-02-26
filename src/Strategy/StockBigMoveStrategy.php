@@ -17,23 +17,23 @@ use App\Repository\CandleStickRepository;
 /**
  * 
  */
-class Memecoin2shortStrategy implements SwingTradingStrategyInterface
+class StockBigMoveStrategy implements SwingTradingStrategyInterface
 {
     private const MIN_AMOUNT_OF_MONEY = 20;
     private const MIN_AMOUNT_OF_CANDLESTICKS = 10;
 
     private const AMOUNT_OF_PREVIOUS_CANDLESTICKS = 720;
     private const AMOUNT_OF_NEXT_CANDLESTICKS = 20;      // N -1 NEXT TRADING DAYS AMOUNT
-    private const MIN_VOLUME = 1_000_000;
+    private const MIN_VOLUME = 200_000;
 
-    private const CAPITAL_RISK = 0.07;
+    private const CAPITAL_RISK = 0.1;
     private const UNFORTUNATE_SPREAD_PROBABILITY = .55;
 
-    private const LEVERAGE = 2;
-    private const RISK_REWARD = 0.5;
-    private const GROWTH_PERCENTAGE = .8;
+    private const LEVERAGE = 1;
+    private const RISK_REWARD = 0.1;
+    private const GROWTH_PERCENTAGE = .4;
 
-    private const PYRAMIDING_TRADES_AMOUNT = 1;
+    private const PYRAMIDING_TRADES_AMOUNT = 3;
     private const MAX_AMOUNT_TRADES_PER_DAY = 1;
 
     private const TRADES_REVISION_AMOUNT = 30;
@@ -105,22 +105,23 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
 
-        $this->lastTradesInformation = [];
-
-        $spikedCandleSticks = $this->candleStickRepository->getCandleSticksWithHugeGrowthSpike($startDate, $endDate, self::GROWTH_PERCENTAGE);
+        $spikedCandleSticks = $this->candleStickRepository->getCandleSticksWithHugeGrowthOrDropSpike($startDate, $endDate, self::GROWTH_PERCENTAGE);
         $this->riskCapital = self::CAPITAL_RISK * $tradingCapital;
         $this->lastTradingCapital = $tradingCapital;
         $this->lastCapitalRisk = self::CAPITAL_RISK;
+
+
+        $this->lastTradesInformation = [];
 
 
         $lastTradesAmount = $this->results[BaseConstants::AMOUNT_OF_TRADES];
 
         foreach($spikedCandleSticks as $candleStick)
         {
-            $random = (int)mt_rand(1, 2);
+            // $random = (int)mt_rand(1, 2);
 
-            if($random > 1)
-                continue;
+            // if($random > 1)
+            //     continue;
 
             if($this->results[BaseConstants::AMOUNT_OF_TRADES] % self::TRADES_REVISION_AMOUNT == 0 
                 && $lastTradesAmount != $this->results[BaseConstants::AMOUNT_OF_TRADES]
@@ -139,10 +140,9 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
                 continue;
             }
 
-            $position = 'Short';
             $riskCapital = $this->riskCapital;
             
-            $tradingCapital = $this->getTradingCapitalAfterDay($candleStick, $tradingCapital, $position, $riskCapital);
+            $tradingCapital = $this->getTradingCapitalAfterDay($candleStick, $tradingCapital, $riskCapital);
 
             if($tradingCapital > $this->highestCapitalValue)
             {
@@ -166,7 +166,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
         return $this->results;
     }
 
-    private function getTradingCapitalAfterDay(CandleStick $candleStick, float $tradingCapital, string $position, float $riskCapital)
+    private function getTradingCapitalAfterDay(CandleStick $candleStick, float $tradingCapital, float $riskCapital)
     {
         $tradesCounter = 0;
         $security = $candleStick->getSecurity();
@@ -179,7 +179,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
 
         $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
         // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
-        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $position, $tradingDate))
+        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $tradingDate))
         {
             $enterPrice = $this->trade_information[BaseConstants::TRADE_ENTER_PRICE];     // I'm do this because 
             $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
@@ -187,6 +187,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
 
             // $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks);
             // $spread = $this->trade_information[BaseConstants::TRADE_POSITION] == "Long" ? $spread : -1 * $spread;
+            $position = $this->trade_information[BaseConstants::TRADE_POSITION];
             $spread = $this->technicalIndicatorsService->calculateSpread($lastCandleSticks, false, self::UNFORTUNATE_SPREAD_PROBABILITY, $position);
             $spread = 0;
 
@@ -208,7 +209,11 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
 
                                                             
     
-            $tradingCapital = $tradingCapital - $tradingCapitalAfterTrade + $tradeCapital;
+            if($position == 'Short')                                            
+                $tradingCapital = $tradingCapital - $tradingCapitalAfterTrade + $tradeCapital;
+            else                                         
+                $tradingCapital = $tradingCapital - $tradeCapital + $tradingCapitalAfterTrade;
+
 
             $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $enterPrice);
             $this->results[BaseConstants::AMOUNT_OF_TRADES]++;
@@ -217,7 +222,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
             $this->addTradingDataInformation(BaseConstants::TRADE_FEE, $taxFee);
             $this->addTradingDataInformation(BaseConstants::TRADE_SPREAD, $spread);
 
-            // $tradingCapital -= $taxFee;  # TODO: because mexc has no fees
+            $tradingCapital -= $taxFee; 
 
             $tradeIncome = $tradingCapital - $tradingCapitalBeforeTrade;
 
@@ -236,13 +241,12 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
             if(++$tradesCounter >= self::MAX_AMOUNT_TRADES_PER_DAY || $tradingCapital < self::MIN_AMOUNT_OF_MONEY)
                 return $tradingCapital;
 
-
         }
 
         return $tradingCapital;
     }
     
-    private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security, string $position, DateTime $tradingDate) : bool
+    private function isSecurityEligibleForTrading(array $lastCandleSticks, Security $security,  DateTime $tradingDate) : bool
     {
         if(count($lastCandleSticks) < self::MIN_AMOUNT_OF_CANDLESTICKS)    
             return false;
@@ -252,24 +256,41 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
         if(count($nextCandleSticks) < 5)    
             return false;
 
-        // TODO: debug and find out why i'm getting such enourmus results.
 
         $lastCandleStick = $this->getLastCandleStick($lastCandleSticks);
         $volume = $lastCandleStick->getVolume();
         // $averageVolume = $this->technicalIndicatorsService->getAverageCandleStickVolume(array_slice($lastCandleSticks, -30));
         if($volume < self::MIN_VOLUME)
             return false;
-
         
         if(
             $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 >= self::GROWTH_PERCENTAGE
           )
         {
             $closePrice = $nextCandleSticks[0]->getClosePrice() - 0.01 * $nextCandleSticks[0]->getClosePrice(); # this imitates a spread
-            $stopLoss = (1 + 1/self::LEVERAGE) * $closePrice;
+            $stopLoss = abs($nextCandleSticks[0]->getClosePrice() - $nextCandleSticks[0]->getOpenPrice()) + $closePrice;
+            $target = $closePrice - self::RISK_REWARD * abs($nextCandleSticks[0]->getClosePrice() - $nextCandleSticks[0]->getOpenPrice());
             $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Short");
-            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, 0);
             $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
+
+            $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $nextCandleSticks[0]->getDate()->format('Y-m-d'));
+
+            $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $closePrice);
+
+            return true;
+        }
+
+        if(
+            $nextCandleSticks[0]->getClosePrice() / $nextCandleSticks[0]->getOpenPrice() - 1 <= -1 * self::GROWTH_PERCENTAGE
+          )
+        {
+            $closePrice = $nextCandleSticks[0]->getClosePrice() + 0.01 * $nextCandleSticks[0]->getClosePrice(); # this imitates a spread
+            $stopLoss = $closePrice - abs($nextCandleSticks[0]->getClosePrice() - $nextCandleSticks[0]->getOpenPrice());
+            $target = self::RISK_REWARD * abs($nextCandleSticks[0]->getClosePrice() - $nextCandleSticks[0]->getOpenPrice()) + $closePrice;
+            $this->addTradingDataInformation(BaseConstants::TRADE_POSITION, "Long");
+            $this->addTradingDataInformation(BaseConstants::TRADE_STOP_LOSS_PRICE, $stopLoss);
+            $this->addTradingDataInformation(BaseConstants::TRADE_TAKE_PROFIT_PRICE, $target);
             $this->addTradingDataInformation(BaseConstants::TRADE_DATE, $nextCandleSticks[0]->getDate()->format('Y-m-d'));
 
             $this->addTradingDataInformation(BaseConstants::TRADE_ENTER_PRICE, $closePrice);
@@ -293,7 +314,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
         $tradingDate = new DateTime($this->trade_information[BaseConstants::TRADE_DATE]);
         $nextCandleSticks = $security->getNextNCandleSticks($tradingDate, self::AMOUNT_OF_NEXT_CANDLESTICKS);
         $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
-        $enterPrice = $this->trade_information[BaseConstants::TRADE_ENTER_PRICE];
+        $target = $this->trade_information[BaseConstants::TRADE_TAKE_PROFIT_PRICE];
 
         $lastClosePrice = null;
 
@@ -315,7 +336,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
             $spread = 0;
 
 
-            if($highestPrice >= $stopLoss)
+            if($highestPrice >= $stopLoss && $position == 'Short')
             {
                 $exitDate = $candleStick->getDate()->format('Y-m-d');
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
@@ -325,18 +346,35 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
                 return ($stopLoss + $spread) * $sharesAmount;
             }
 
-            if($lowestPrice <= 0.6 * $enterPrice)
+            if($lowestPrice <= $target && $position == 'Short')
             {
                 $exitDate = $candleStick->getDate()->format('Y-m-d');
                 $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
-                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE,  0.6 * $enterPrice + $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE,  $target + $spread);
                 $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
         
-                return (0.6 * $enterPrice + $spread) * $sharesAmount;
+                return ($target + $spread) * $sharesAmount;
             }
-          
-            if($closePrice < 0.8 * $enterPrice)
-                break;
+
+            if($lowestPrice <= $stopLoss && $position == 'Long')
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE, $stopLoss - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+        
+                return ($stopLoss - $spread) * $sharesAmount;
+            }
+
+            if($highestPrice >= $target && $position == 'Long')
+            {
+                $exitDate = $candleStick->getDate()->format('Y-m-d');
+                $this->addTradingDataInformation(BaseConstants::EXIT_DATE, $exitDate);
+                $this->addTradingDataInformation(BaseConstants::TRADE_EXIT_PRICE,  $target - $spread);
+                $this->addTradingDataInformation(BaseConstants::TRADE_RISK_REWARD, null);
+        
+                return ($target - $spread) * $sharesAmount;
+            }
         }
 
         $exitDate = $candleStick->getDate()->format('Y-m-d');
@@ -462,7 +500,7 @@ class Memecoin2shortStrategy implements SwingTradingStrategyInterface
         $lastCandleSticks = $security->getLastNCandleSticks($tradingDate, self::AMOUNT_OF_PREVIOUS_CANDLESTICKS);
         // echo "Date: " . $tradingDate->format('Y-m-d') . $security->getTicker() . "\n\r";
         // I will fix this later with position, because now Long position is hardcoded
-        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, "Long", $tradingDate))
+        if($this->isSecurityEligibleForTrading($lastCandleSticks, $security, $tradingDate))
         {
             $stopLoss = $this->trade_information[BaseConstants::TRADE_STOP_LOSS_PRICE];
             echo "Stop loss is: " . $stopLoss  . "\n\r";
