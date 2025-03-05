@@ -33,7 +33,7 @@ services:
 
 
 
-    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\StockBigMoveStrategy'
+    App\Interface\SwingTradingStrategyInterface: '@App\Strategy\SpyETFSARStrategy'
     
 
 

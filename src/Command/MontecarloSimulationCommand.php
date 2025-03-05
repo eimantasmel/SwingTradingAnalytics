@@ -37,7 +37,7 @@ class MontecarloSimulationCommand extends Command
         // // $startDate = '2024-01-01';
         // $startDate = '2021-12-01';
 
-        $startDate = '2021-06-21';
+        $startDate = '2022-06-21';
         $endDate =  '2024-10-21';   
         $initialTradingCapital = 1000;   
 

@@ -111,7 +111,7 @@ class TechnicalIndicatorsService
         return end($ema);  // Return the most recent EMA
     }
 
-    public function calculateMACD(array $prices): array
+    public function calculateMACD(array $prices): ?array
     {
         if (count($prices) < 26) {
             return null;
@@ -618,4 +618,65 @@ class TechnicalIndicatorsService
 
         return $highestGrowth;
     }
+
+    public function calculateSAR(array $candlesticks): float
+    {
+        if (count($candlesticks) < 3) {
+            throw new \InvalidArgumentException("At least three candlesticks are required to calculate SAR.");
+        }
+
+        $af = 0.02; // Initial acceleration factor
+        $maxAf = 0.2; // Maximum acceleration factor
+        $trend = null;
+        $prevSar = null;
+        $ep = null; // Extreme Point
+
+        // Initialize values using the first few candlesticks
+        $firstCandle = $candlesticks[0];
+        $prevCandle = $candlesticks[1];
+
+        // Determine initial trend based on the first two candlesticks
+        $trend = ($prevCandle->getClosePrice() > $prevCandle->getOpenPrice()) ? 'up' : 'down';
+        $ep = ($trend === 'up') ? $prevCandle->getHighestPrice() : $prevCandle->getLowestPrice();
+        $prevSar = ($trend === 'up') ? $prevCandle->getLowestPrice() : $prevCandle->getHighestPrice();
+
+        // Loop through the full candlestick array to track SAR over time
+        for ($i = 2; $i < count($candlesticks); $i++) {
+            $currentCandle = $candlesticks[$i];
+
+            // Compute SAR for the current period
+            $sar = $prevSar + $af * ($ep - $prevSar);
+
+            // Prevent SAR from exceeding limits
+            if ($trend === 'up') {
+                $sar = min($sar, $prevCandle->getLowestPrice());
+            } else {
+                $sar = max($sar, $prevCandle->getHighestPrice());
+            }
+
+            // Trend reversal check
+            if (($trend === 'up' && $currentCandle->getClosePrice() < $sar) ||
+                ($trend === 'down' && $currentCandle->getClosePrice() > $sar)) {
+                // Reverse trend and reset acceleration factor
+                $trend = ($trend === 'up') ? 'down' : 'up';
+                $af = 0.02;
+                $ep = ($trend === 'up') ? $currentCandle->getHighestPrice() : $currentCandle->getLowestPrice();
+                $sar = $ep;
+            } else {
+                // Update EP and AF if trend continues
+                if (($trend === 'up' && $currentCandle->getHighestPrice() > $ep) ||
+                    ($trend === 'down' && $currentCandle->getLowestPrice() < $ep)) {
+                    $ep = ($trend === 'up') ? $currentCandle->getHighestPrice() : $currentCandle->getLowestPrice();
+                    $af = min($af + 0.02, $maxAf);
+                }
+            }
+
+            // Prepare for next iteration
+            $prevSar = $sar;
+            $prevCandle = $currentCandle;
+        }
+
+        return $prevSar;
+    }
+
 }

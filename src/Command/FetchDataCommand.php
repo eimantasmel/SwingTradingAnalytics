@@ -50,8 +50,8 @@ class FetchDataCommand extends Command
         $cryptosTickers = file($this->cryptosFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  
         $forexTickers = file($this->forexFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);    
  
-        // $this->updateSecuritiesData($stocksTickers, $output);
-        $this->updateSecuritiesData($cryptosTickers, $output, true, false);
+        $this->updateSecuritiesData($stocksTickers, $output);
+        // $this->updateSecuritiesData($cryptosTickers, $output, true, false);
         // $this->updateSecuritiesData($forexTickers, $output, false, true);
 
         return Command::SUCCESS;    
